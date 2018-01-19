@@ -1,4 +1,4 @@
-# [Exchange Union](https://www.exchangeunion.com) - The first decentralized network, which enables instant and trustless trades between digital asset exchanges
+# [Exchange Union](https://www.exchangeunion.com) - The first decentralized network for instant and trustless trades between digital asset exchanges
 
 **Table of Contents**
 1. [Executive Summary](#1-executive-summary)  
