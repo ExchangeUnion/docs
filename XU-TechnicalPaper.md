@@ -236,7 +236,7 @@ Sidenote: The broadcasted orderbooks carry the fee amount of each order in a sep
 [TODO]
 Detailed market economy study, fee prediction with formulas and "you are killing arbitrage" argumentation needed!
 To be solved: Trades for pairs which are not locally available on ExchA, fees should only be charged by 
-ExchB, because the user couldn’t do the trade locally on ExchA and would have eave the platform anyways 
+ExchB, because the user couldn’t do the trade locally on ExchA and would have to leave the platform anyways 
 to do the trade. This can be avoided with XU. Difficult: How to prevent cheating - exchanges would just 
 go and list all pairs locally to always earn fees. Even if they had 0 local liquidity, that would work. 
 Minimum local local liquidity? Give up on this rule?
