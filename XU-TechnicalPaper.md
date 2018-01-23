@@ -130,7 +130,7 @@ Finally, our XU node implementation will be continuously monitoring orderbooks o
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
-![Screenshot](./visualization.png "Exchange Union System")
+![Screenshot](visualization.png "Exchange Union System")
 
 
 3.6. Sample Trade
