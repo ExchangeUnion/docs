@@ -44,7 +44,7 @@ This specification summarizes commonly agreed requirements for Exchange Union's 
 ## 2. Product Description
 Exchange Union connects digital asset exchanges and offers a value proposition which can be best described as a decentralized meta-exchange. Meta-exchange, because it targets todays centralized exchanges as phase one ‘users’. This is primarily because the trading user base and liquidity sits here and also handling and maintaining of Exchange Union’s technology, the XU node, is simply not expected to be suitable for personal mass usage in the near-term future. However, it is planned to further develop and simplify the technology to make it suitable for individual usage in the long-term. Simply put, Exchange Union’s vision is to offer individuals a choice:
 
-a) use a trusted and familiar exchange platform to take over complexity & responsibility **or**
+a) use a trusted and familiar exchange platform to take over complexity & responsibility *or*
 b) use Exchange Union directly with full responsibility & complexity
 
 For the foreseeable future, it is expected that the vast majority of users will belong to the first group of users, choosing not to handle a decentralized exchange’s general technical complexity which includes managing private keys, running and maintaining a XU node, as well as full nodes for each chain (SPV is generally possible, but might need some optimizations) and watching the main chain in regular intervals for illicitly broadcasted transactions. This user group will still choose to become clients of digital asset exchanges. Further, a strong USP of today’s digital asset exchanges are the localized FIAT on- and off-ramps, in concrete terms bank and credit card integration relationships, which most likely will never be realized by an individual. It can be concluded that **Exchange Union is not cannibalizing the business of digital asset exchange platforms**, but rather making such more attractive for users. Especially the upcoming wave of retail investors will heavily rely on ease-of-use & FIAT on-ramp services.
@@ -130,7 +130,7 @@ Finally, our XU node implementation will be continuously monitoring orderbooks o
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
-![Screenshot](visualization.png "Exchange Union System")
+![Screenshot](images/Exchange%20Union%20Nodes.png "Exchange Union System")
 
 
 3.6. Sample Trade
@@ -249,40 +249,46 @@ Minimum local local liquidity? Give up on this rule?
 --------------------------------------
 ```
 [TODO]
-This is the most sensitive part of our project: a new token always raises controversy - we crucially 
-need XUC to financially motivate stakeholders to participate & build exchange union and keep it up and running by providing services like order forwarding.
+This is the most sensitive part of our project: a new token always raises controversy - we crucially need XUC to financially motivate stakeholders to participate & build exchange union and keep it up and running by providing services, like order forwarding.
 ```
 
 Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe, a functioning monetary incentive system is the success factor for future Open-Source projects, maybe even the new decentralized economy as a whole. Bitcoin itself is the best example for a working monetary incentive to build and maintain an ecosystem. Exchange Union creates value and should be self-sustaining.
 
-Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some solutions for example ask exchanges to pay hardware or even monthly fees. From an exchanges point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and more importantly enable the exchanges to not only maintain full trading fee revenue but in almost all cases increase such, as described above. Additionally, different functionaries are rewarded with XUC as follows:
+Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some even ask exchanges to pay hardware or monthly fees. From an exchanges point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and more importantly enable the exchanges to not only maintain full trading fee revenue but in almost all cases increase such, as described above. Additionally, different functionaries are rewarded with XUC as follows:
 
 **Incentives for Developers**
 - Each pull-request to the Exchange Union github (https://github.com/ExchangeUnion) gets peer reviewed and a score by each reviewer. XUC is paid to the contributor based on that score.
 - When the pull-request makes it into the master-branch, another XUC amount gets paid to the developer
 - Reviewers get rewarded
 - Testers get rewarded, test-net time gets rewarded
-`[TODO] Details, how to automate all that?`
+`[TODO] Details, how to automate most of this?`
 
 **Incentives for Exchanges**
-- In order to have sufficient interest of exchanges joining the union in the beginning the idea is to reward exchanges with XUC for simply joining XU. These are to be distributed to their users ('airdrop'). Advantage: all users can start using XU right away, for free for a long while.
-- These XUC can only be used to pay for services on XU. Cannot be dumped on the market. `[TODO]  How? Via a legal contract?`
-- This also means end-users have to hold XUC in order to use XU. Compare Binance’s BNB business model, which gives discount on fees. With XUC, users can get access to new pairs and a better price. For this the XU node would have to check a particular users XUC balance.
+- In order to have sufficient interest of exchanges joining the union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Advantage: all users can start using XU right away, for free for a long while.
+- These XUC can only be used to pay for services on XU. Cannot be dumped. `[TODO]  How? Via a legal contract with Exchanges? Ideas needed.`
+- This also means *end-users have to hold XUC in order to use XU*. This is beneficial for exposure, since this is the only way end-users know about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. With XUC, users can get access to new pairs and a better price. For this the XU node would have to check a particular users XUC balance.
 
-**Incentives for Functionaries which provide services (running XU node)**
-- Reward for payment channel routing: we are essentially rewarding for running lightning/raiden hubs, exchanges commit funds for their own usage anyways and can earn an incentive with it if other people of the regular Lightning network use it. **We incentivize Lightning/Raiden adoption** and even [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
-- Orderbook relays get rewarded. `[TODO] Who pays? A user wouldn’t want to pay for relaying a limit order. Maybe someone locally fills it.`
+**Incentives for Functionaries which provide services (running a XU node)**
+- Orderbook relays get rewarded with XUC. `[TODO] Who pays? A user wouldn’t necessarily want to pay for relaying a limit order. Maybe someone locally fills it.`
+- Watchtower service gets rewarded with XUC: especially individuals in the future will be interested in this service - in order for payment channels to be secure, the main chain has to be watched for illicit transactions, as introduced in the beginning of chapter two. If someone is not sure to be able to be online in certain time intervals, this responsibility can be outsourced to someone else who charges a tiny fee for this service. 
+- **We support Lightning/Raiden adoption and growth** with above incentives also help to [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
 
 **Incentives for traders**
 - A user has X trading volume on Exchange Union, this user gets rewarded with XUC from his exchange platform
 - This is more a program of each individual exchange
 
-Each XU node by default opens a channel for XUC in order to be able to pay for channel routing and orderbook relays and also vice-versa receive XUC payments for these services. Also, we could use the XUC payment channel as some sort of emergency fallback if other channel’s volume is not sufficient.
+*By default, each XU node opens a XUC payment channel in order to be able to pay for orderbook relays and other services and also vice-versa receive XUC payments for these services.*
 
+`
+[TODO]
+Also, we could use the XUC payment channel as some sort of emergency fallback if other channel’s volume is not sufficient.
+`
 
 3.10. Business Model: XUC
 -------------------------
-Exchange Union’s business model is based on XUC being valuable, which not only makes the incentivisation work, but benefits all stakeholders. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem (& thus demand) grows. This makes XUC a meaningful incentive. The original idea was, that every transaction burns a small amount of XUC as fee, which is needed to prevent spam on a sidechain. However, payment channels don’t face the problem of spamming and thus don’t need a blockchain-like fee. Nevertheless, with an artificial burn-per-trade we burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper) in a more elegant way than just burning it at once. A ‘transparency’ section on the website informs about every new XUC release and purpose. Smart contracts will handle the burning.
+Exchange Union’s business model is based on XUC being valuable, which not only makes the incentivization work, but benefits all stakeholders. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem (& thus demand) grows. The original idea was, that every transaction burns a small amount of XUC as fee, which is needed to prevent spam on a sidechain, which was the originally proposed technological solution. However, payment channels don’t face the problem of spamming and thus don’t need a blockchain-like fee for transactions.
+
+Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper) in a more elegant way, slowly reducing the total supply to roughly 2 billion. A ‘transparency’ section on the website informs about every new XUC release and purpose. Smart contracts handle the burning.
 
 
 ## 4. How is XU different from ...
