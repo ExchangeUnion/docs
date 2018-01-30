@@ -34,37 +34,39 @@
 
 1.1. The Vision
 ---------------
-Exchange Union (XU) connects digital asset exchanges by forming **a decentralized exchange**, which enables **instant and trustless** trades between digital asset exchanges. Use cases are cross-exchange trading for access to new trading pairs, access to the best price and increased liquidity. Read the initial [White Paper](https://www.exchangeunion.com/how_it_works), which describes the idea on a use case level.
+Exchange Union (XU) connects digital asset exchanges by forming **a decentralized exchange**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://www.exchangeunion.com/how_it_works) which describes the idea and its use cases.
 
 1.2. Project Intro
 ------------------
-This specification summarizes commonly agreed requirements for Exchange Union's technology, the XU node, and thus should be referred to as “the bible” ;). Exchange Union’s technical implementation is challenging and can only be achieved with support of a greater developer community. The decision was made to open-source all documentation, the entire code base and make it a main objective to have a coordinating function for building a developer community, but also contribute open-source full-time developers. Strategic partnerships with relevant companies will be formed, the business model for funding the development is entirely based on the XUC token, which is already in circulation, doesn’t require an ICO or similar and is introduced in the chapters below.
+This specification summarizes commonly agreed technical requirements for Exchange Union and thus should be referred to as “the bible” ;). Exchange Union’s implementation is challenging and can only be achieved with support of a greater developer community. The decision was made to open-source all documentation and the entire code base and to prioritize building a developer community, while also engaging full-time open-source developers to contribute to the development effort. Strategic partnerships with relevant companies will be formed. The business model for funding development is based entirely on the XUC token, which is already in circulation and doesn’t require an ICO.
 
 
 ## 2. Product Description
-Exchange Union connects digital asset exchanges and offers a value proposition which can be best described as a decentralized meta-exchange. Meta-exchange, because it targets todays centralized exchanges as phase one ‘users’. This is primarily because the trading user base and liquidity sits here and also handling and maintaining of Exchange Union’s technology, the XU node, is simply not expected to be suitable for personal mass usage in the near-term future. However, it is planned to further develop and simplify the technology and make it suitable for individual usage in the long-term. Simply put, Exchange Union’s vision is to offer individuals a choice to either:
+Exchange Union connects digital asset exchanges by way of a decentralized meta-exchange. It targets today's centralized exchanges as phase one "users" because they hold the majority of the trading user base and liquidity. Furthermore, executing and maintaining Exchange Union’s technology, the XU node, is not expected to be suitable for personal or widespread usage in the near future. However, it is planned to further develop and simplify the technology and make it suitable for individual usage in the long-term. 
 
-A) use a trusted and familiar exchange platform to take over complexity & responsibility *or*
+Simply put, Exchange Union’s vision is to offer individuals a choice to either:
 
-B) use Exchange Union directly with full responsibility & complexity
+**A)** Use a trusted and familiar exchange platform to handle the technical complexity and demands of XU *or*
 
-For the foreseeable future, it is expected that the vast majority of users will choose option A, delegating the technical complexity and operational overhead of option B to an exchange. This complexity includes managing private keys, running and maintaining an XU node, as well as full nodes for each chain (SPV is generally possible, but might need some optimizations) and watching the main chain at regular intervals for illicitly broadcasted transactions. This user group will still choose to become clients of digital asset exchanges. Further, a strong USP of today’s digital asset exchanges are the localized FIAT on- and off-ramps, in concrete terms bank and credit card integration relationships, which most likely will never be realized by an individual. It can be concluded that **Exchange Union is not cannibalizing the business of digital asset exchange platforms**, but rather making such more attractive for users. Especially the upcoming wave of retail investors will heavily rely on ease-of-use & FIAT on-ramp services.
+**B)** Use Exchange Union directly with taking on full responsibility of maintaining an XU node
+
+For the foreseeable future, it is expected that the vast majority of users will choose option A, delegating the technical complexity and operational overhead of option B to an exchange. This complexity includes managing and securing private keys as well as running and maintaining an XU node, full nodes for each chain (light clients will be possible, but might need some optimizations), and Lightning Network and/or Raiden software to manage payment channels and routing. These users will remain clients of digital asset exchanges. Furthermore, a unique selling position of today’s digital asset exchanges are the banking relationships and integrations that enable deposits and withdrawals of fiat currency, which most likely will never be realized by individuals. It can be concluded that **Exchange Union is not cannibalizing the business of digital asset exchange platforms**, but rather making existing exchanges more versatile and attractive for users. New waves of retail investors in particular will rely heavily on easy-to-use interfaces and fiat currency deposit services.
 
 The advantages for users:
-- deep liquidity by ‘combining order books’ of all participating exchanges
-- access to virtually all trading pairs
-- access to the best price
-- all through one account and one familiar UI
+- Improved liquidity by combining order books of participating exchanges
+- Access to virtually all trading pairs
+- Access to the best price
+- All through one account and familiar UI
 
 The advantages for exchanges:
-- access to a larger user base, anybody can trade on any exchange (including individual users in future)
-- increased earnings through zero-fee-loss on outgoing trades, new incoming trades and sophisticated fee and reward model with XUC; in short: earnings can only go up, worst-case they stay the same
-- entire new product lines possible, which use exchange union directly (wallets, merchant services...)
-- robust, decentralized and censorship-resistant trading infrastructure
+- Access to a larger user base, anybody can trade on any exchange (eventually including individual users)
+- Increased earnings through zero-fee-loss on outgoing trades, new incoming trades, and sophisticated fee and reward model with XUC - earnings only stand to increase
+- Entire new product lines possible which use exchange union directly (wallets, merchant services, etc...)
+- Robust, decentralized, and censorship-resistant trading infrastructure
 
-Exchange Union doesn’t require trust between parties to exchange value. This allows virtually any exchange to join, no matter the size or reputation. Further, Exchange Union doesn’t need any intermediary currency to achieve the trustless transfer of different assets. Establishing transfer intermediaries has [shown not to be effective in practice](https://medium.com/kilrau/dont-trust-me-why-ripple-is-not-the-future-of-money-d10081db1aaa), as elaborated in this example with XRP.
+Exchange Union doesn’t require trust between parties to exchange value. This allows virtually any exchange to join no matter the size or reputation. Furthermore, Exchange Union doesn’t need an intermediary currency to achieve the trustless transfer of different assets. Establishing transfer intermediaries has shown not to be effective in practice, as elaborated in [this example with XRP](https://medium.com/kilrau/dont-trust-me-why-ripple-is-not-the-future-of-money-d10081db1aaa).
 
-As with existing decentralized exchanges, no single point of failure (SPOF) can cause a shut-down of Exchange Union, eliminating critical attack vectors and increasing censorship resistance. The main **difference to existing decentralized exchanges**, like [0x](https://0xproject.com), [etherdelta](https://etherdelta.com) or [altcoin.io](https://www.altcoin.io/) is, that **trading on Exchange Union is instant**, one of the major pain points of decentralized exchanges today, which execute trades ‘on-chain’. This is costly (in the case of bitcoin currently about $5) and slow (up to one hour) and thus not expected to reach mass adoption. Also with Exchange Union, trading works cross-chain, that means it is not limited to tokens of one specific chain, like e.g. above mentioned 0x and etherdelta are limited to ETH and ERC-20 tokens.
+As with existing decentralized exchanges, no single point of failure (SPOF) can cause a shutdown of Exchange Union, eliminating critical attack vectors and increasing censorship resistance. The main **difference from existing decentralized exchanges**, like [0x](https://0xproject.com), [etherdelta](https://etherdelta.com) or [altcoin.io](https://www.altcoin.io/) is that **trading on Exchange Union is instant**. Decentralized exchanges today execute trades on-chain. This is costly - transaction fees for bitcoin can exceed $5 - and the time it takes for a sufficient number of confirmations can be long and unpredictable. Exchange Union, trading works cross-chain, that means it is not limited to tokens of one specific chain, like e.g. above mentioned. Etherdelta and 0x mentioned above are also limited to ETH and ERC-20 tokens, whereas Exchange Union trades cross-chain and could theoretically expend to any cryptocurrency supporting payment channels and [hashed timelock contracts](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts).
 
 
 ## 3. Under the hood
