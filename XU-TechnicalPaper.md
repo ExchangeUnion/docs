@@ -98,38 +98,17 @@ Since Ethereum includes all ERC20 tokens, Exchange Union supports the vast major
 --------------------------
 Decentralized orderbook propagation is a key task for XU and a problem on existing decentralized exchanges where, to the best of our knowledge, this is mostly realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe, orderbook propagation has to occur in a decentralized manner to sustain the overall robustness and censorship resistance of the system. Ideally the propagation would happen directly within a default XUC (raiden) payment channel as payload of a microtransaction. This would have the advantage, that order relay fees are paid at the same time and only a successfully forwarded order would let the intermediate node redeem its earned fee. Also a default XUC payment channel is required anyways for our incentive system.
 
-```
-[TODO]
-- Details on how integration into XUC payment channel would look like (e.g. how does the routing HTLC ensure that only a successful order redeems the XUC fee - it's a multicast and doesn't have a target
-- How can we incentivize everyone to open the default XUC payment channel, if they don't want to forward and don't want to earn fees?
-```
+
 
 Firstly, there will be no complete global orderbook as such, containing all orders for each and every trading pair. Instead, orders will be propagated using matching payment channels only, therefore XU nodes only maintain relevant parts of the orderbook. This approach ensures a more efficient system. 
 
 Secondly, orderbooks should be shared with all XU members in the network with minimal latency. In addition, error conditions regarding orders should be propagated in a similar manner. Given that XU members will establish payment channels with each other via the XU node, a generic multicast messaging mechanism to update local orderbooks on XU nodes continuously seems to be most appropriate. Messaging mechanism may be similar to [issuing invoices](http://api.lightning.community/#addinvoice) and [subscribing to them](http://api.lightning.community/#subscribeinvoices) `[TODO] but a feasibility assessment is needed`. A generic pub/sub API where string data is the payload may abstract protocol details, therefore it *may be* beneficial to use [standardized message formats](https://www.onixs.biz/fix-dictionary/4.4/msgs_by_msg_type.html) like [FIX](https://en.wikipedia.org/wiki/Financial_Information_eXchange). If a XU member wants to fill an order, a payment route between Exchange A and Exchange B has to exist, which is ensured by the way orderbooks are propagated - XU nodes only receive order updates with an existing payment route.
 
-Finally, our XU node implementation will be continuously monitoring orderbooks on all subscribed chains and if an exchange behaves maliciously by either spamming orderbooks or not finalizing trades, it will be punished. Punishment options include temporary suspension in service or taking away deposited XUC (compare PoS) or simply increasing fees for this specific actor. `[TODO] Define.`
-
-```
-[TODO]
-- All order propagation multi-cast via XUC payment channel, since all XU nodes need to open XUC payment channel for incentive system to work. Or completely separate messaging system better?
-- New XU node coming online: ‘sync old orderbook for subscribed channels’ mechanism.
-```
-
+Finally, our XU node implementation will be continuously monitoring orderbooks on all subscribed chains and if an exchange behaves maliciously by either spamming orderbooks or not finalizing trades, it will be punished. Punishment options include temporary suspension in service or taking away deposited XUC (compare PoS) or simply increasing fees for this specific actor. 
 
 3.4. Security
 -------------
-```
-[TODO]
-- some words on general payment channel security with references
-- security inherited from underlying blockchains
-- we will use tested implementations from blockstream/lightning labs/brainbot and embed them in our node
-- some words on our development process and testing
-- private key handling - responsibility for funds is with exchanges, some best practices on how to deal 
-- secure automatic updating of nodes (!), default but optional
-- attack vectors: different attack scenarios, how our system will perform - compare this then to public blockchains
-- Byzantine Robust - “Forced Expiration Spam” is the only valid risk in terms of attack (Lightning paper 9.2). XU node will implement monitoring and counter-measure mechanism to identify and suspend spammers.
-```
+
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
@@ -152,7 +131,7 @@ Exceptions:
 - An exchange can choose to subscribe to the orderbook of particular exchanges only (e.g. through legal requirements)
 - Order is filled by another user who was faster than me: funds WITH error message come back and XU node starts looking for the next best order. We should use the ‘odd type’ messaging system as specified in the RFC. E.g. Type 17 for errors.
 - Exchange B goes offline: time-out message comes back and XU node starts looking for the next best order. Exchange B repeatedly doesn’t fill orders: punishment, see chapter 3.4. 
-- Trade volume for a particular asset exceeds (own) payment channel volume: XU node maintains a configurable threshold and automatically redeposits from an authorized hot wallet. (`[TODO] Details, sources needed.`)
+- Trade volume for a particular asset exceeds (own) payment channel volume: XU node maintains a configurable threshold and automatically redeposits from an authorized hot wallet.
 
 
 3.7. FIAT Tokenization / Stablecoin
@@ -182,7 +161,7 @@ A smart contract holding 200% of the underlying amount worth in BTS, 100% as col
 **Bad**
 - BUT The system only works because people BELIEVE the coin re-stabilizes and because it’s backed by Bitshares Company as lender of last resort which ensures that as sort-of central bank. Nothing in the protocol automatically ensures bitUSDs peg to be one USD. It could be 0.5 if whales in the market go rogue and short accordingly.
 - Requires exchanges to lockup minimum 200% of the FIAT trading volume
-- Emergency liquidation is untested (`[TODO] to be confirmed!`) and will run into issue if a huge asset like bitUSD suddenly has to get emergency liquidated.
+- Emergency liquidation is untested and will run into issue if a huge asset like bitUSD suddenly has to get emergency liquidated.
 
 
 3.7.3. The [MakerDAO](https://blog.makerdao.com/2017/06/05/introducing-sai/) way
@@ -219,8 +198,6 @@ A robust, price-stable cryptocurrency with an algorithmic central bank. It monit
 
 **Conclusion** For now MakerDAOs DAI seems promising and a thought-through model. Exchange Union’s goal is to utilize one solution to tokenize all FIAT and ideally hide the complexity from the exchange.
 
-`[TODO] a thorough analysis & comparison is needed, approach how to use it`
-
 
 3.8. Exchange Earnings
 ----------------------
@@ -237,23 +214,10 @@ Consequently the same is true for traders: they can only end up with better pric
 
 Sidenote: The broadcasted orderbooks carry the fee amount of each order in a separate fee field. Additional revenue streams for exchanges are introduced in the following.
 
-```
-[TODO]
-- Detailed market economy study, fee prediction with formulas and "you are killing arbitrage" argumentation needed!
-- To be solved: Trades for pairs which are not locally available on ExchA, fees should only be charged by 
-ExchB, because the user couldn’t do the trade locally on ExchA and would have to leave the platform anyways 
-to do the trade. This can be avoided with XU. Difficult: How to prevent cheating - exchanges would just 
-go and list all pairs locally to always earn fees. Even if they had 0 local liquidity, that would work. 
-Minimum local local liquidity? Give up on this rule?
-```
 
 
 3.9. Incentivisation - The Role of XUC
 --------------------------------------
-```
-[TODO]
-This is the most sensitive part of our project: a new token always raises controversy - we crucially need XUC to financially motivate stakeholders to participate & build exchange union and keep it up and running by providing services, like order forwarding.
-```
 
 Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe, a functioning monetary incentive system is the success factor for future Open-Source projects, maybe even the new decentralized economy as a whole. Bitcoin itself is the best example for a working monetary incentive to build and maintain an ecosystem. Exchange Union creates value and should be self-sustaining.
 
@@ -264,15 +228,15 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - When the pull-request makes it into the master-branch, another XUC amount gets paid to the developer
 - Reviewers get rewarded
 - Testers get rewarded, test-net time gets rewarded
-`[TODO] Details, how to automate most of this?`
+
 
 **Incentives for Exchanges**
 - In order to have sufficient interest of exchanges joining the union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Advantage: all users can start using XU right away, for free for a long while.
-- These XUC can only be used to pay for services on XU. Cannot be dumped. `[TODO]  How? Via a legal contract with Exchanges? Ideas needed.`
+- These XUC can only be used to pay for services on XU. Cannot be dumped. 
 - This also means *end-users have to hold XUC in order to use XU*. This is beneficial for exposure, since this is the only way end-users know about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. With XUC, users can get access to new pairs and a better price. For this the XU node would have to check a particular users XUC balance.
 
 **Incentives for Functionaries which provide services (running a XU node)**
-- Orderbook relays get rewarded with XUC. `[TODO] Who pays? A user wouldn’t necessarily want to pay for relaying a limit order. Maybe someone locally fills it.`
+- Orderbook relays get rewarded with XUC. 
 - Watchtower service gets rewarded with XUC: especially individuals in the future will be interested in this service - in order for payment channels to be secure, the main chain has to be watched for illicit transactions, as introduced in the beginning of chapter two. If someone is not sure to be able to be online in certain time intervals, this responsibility can be outsourced to someone else who charges a tiny fee for this service. 
 - **We support Lightning/Raiden adoption and growth** with above incentives also help to [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
 
@@ -281,11 +245,6 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - This is more a program of each individual exchange
 
 *By default, each XU node opens a XUC payment channel in order to be able to pay for orderbook relays and other services and also vice-versa receive XUC payments for these services.*
-
-`
-[TODO]
-Also, we could use the XUC payment channel as some sort of emergency fallback if other channel’s volume is not sufficient.
-`
 
 3.10. Business Model: XUC
 -------------------------
