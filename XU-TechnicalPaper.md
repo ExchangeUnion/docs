@@ -34,7 +34,7 @@
 
 1.1. The Vision
 ---------------
-Exchange Union (XU) connects digital asset exchanges by forming **a decentralized exchange**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://www.exchangeunion.com/how_it_works) which describes the idea and its use cases.
+Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://www.exchangeunion.com/how_it_works) which describes the idea and its use cases.
 
 1.2. Project Intro
 ------------------
@@ -104,7 +104,7 @@ Decentralized orderbook propagation is a key task for XU and a problem on existi
 
 Firstly, there will be no complete global orderbook as such, containing all orders for each and every trading pair. Instead, orders will be propagated using matching payment channels only, therefore XU nodes only maintain relevant parts of the orderbook. This approach ensures a more efficient system. 
 
-Secondly, orderbooks should be shared with all XU members in the network with minimal latency. In addition, error conditions regarding orders should be propagated in a similar manner. Given that XU members will establish payment channels with each other via the XU node, a generic multicast messaging mechanism to update local orderbooks on XU nodes continuously seems to be most appropriate. Messaging mechanism may be similar to [issuing invoices](http://api.lightning.community/#addinvoice) and [subscribing to them](http://api.lightning.community/#subscribeinvoices) `[TODO] but a feasibility assessment is needed`. A generic pub/sub API where string data is the payload may abstract protocol details, therefore it *may be* beneficial to use [standardized message formats](https://www.onixs.biz/fix-dictionary/4.4/msgs_by_msg_type.html) like [FIX](https://en.wikipedia.org/wiki/Financial_Information_eXchange). If a XU member wants to fill an order, a payment route between Exchange A and Exchange B has to exist, which is ensured by the way orderbooks are propagated - XU nodes only receive order updates with an existing payment route.
+Secondly, orderbooks should be shared with all XU members in the network with minimal latency. In addition, error conditions regarding orders should be propagated in a similar manner. Given that XU members will establish payment channels with each other via the XU node, a generic multicast messaging mechanism to update local orderbooks on XU nodes continuously seems to be most appropriate. Messaging mechanism may be similar to [issuing invoices](http://api.lightning.community/#addinvoice) and [subscribing to them](http://api.lightning.community/#subscribeinvoices). A generic pub/sub API where string data is the payload may abstract protocol details, therefore it *may be* beneficial to use [standardized message formats](https://www.onixs.biz/fix-dictionary/4.4/msgs_by_msg_type.html) like [FIX](https://en.wikipedia.org/wiki/Financial_Information_eXchange). If a XU member wants to fill an order, a payment route between Exchange A and Exchange B has to exist, which is ensured by the way orderbooks are propagated - XU nodes only receive order updates with an existing payment route.
 
 Finally, our XU node implementation will be continuously monitoring orderbooks on all subscribed chains and if an exchange behaves maliciously by either spamming orderbooks or not finalizing trades, it will be punished. Punishment options include temporary suspension in service or taking away deposited XUC (compare PoS) or simply increasing fees for this specific actor. 
 
@@ -149,7 +149,7 @@ Hold 1 USD in a “reserve bank account” for every USDT issued. And ideally be
 **Bad** History has shown that this is problematic for the following reasons:
 - Even if I’m 100% transparent, the bank could just cut ties with me, as [happened multiple times with Tether Limited](https://news.bitcoin.com/tether-coin-may-be-a-precarious-us-dollar-peg/). News go public, Markets panic
 - If I’m rather semi-transparent, like Tether Limited, people have to put trust and faith and Tether to really have those USD on their bank account. And to handle bank relationships. It essentially is simply not trustless.
-- We would have to act like a central bank and issue new USDX tokens to increase supply based on demand. This requires us to hold USDX somewhere under central control, which is a SPOF for hackers. [As happened with Tether](https://techcrunch.com/2017/11/20/tether-claims-a-hacker-stole-31m/)
+- We would have to act like a central bank and issue new USDX tokens to increase supply based on demand. This requires us to hold USDX somewhere under central control, which is a SPOF for hackers. [As happened with Tether.](https://techcrunch.com/2017/11/20/tether-claims-a-hacker-stole-31m/)
 
 
 3.7.2. The [BitShares](https://bitshares.org/technology/price-stable-cryptocurrencies/) way
