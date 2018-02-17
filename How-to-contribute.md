@@ -15,4 +15,4 @@ that you have picked-up and are working on the intended issue.
 
 <h2> Remember </h2>
 
-When submitting pull-request attach your <b>ether address</b> in the <b>commit message</b>. Once we have reviewed your request it will be scored which will determine the amount of XUC payout you are about to recieve. We care about the open source community and want to do our part in encouraging more people to do open source work.
+When submitting pull-request attach your <b>ether address</b> in the <b>commit message</b>. Once we have reviewed your request it will be scored which will determine the amount of XUC payout you will receive. We care about the open source community and want to do our part in encouraging more people to do open source work.
