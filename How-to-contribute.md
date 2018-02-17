@@ -2,7 +2,7 @@
 
 Thank you for considering to help in building Exchange Union! We welcome any contributions no matter how big or small - from typos to bug fixes, you will be awarded with XUC (Exchange Union's token) after carefully analyzing every pull request. 
 
-Github is our git version control service of choice, used to track issues, suggestions, feature request, documentations and is home to the source code which powers the Exchange Union. 
+Github is our git version control service of choice, used to track issues, suggestions, feature request, documentations and is home to the source code which powers Exchange Union. 
 
 If you'd like to contribute to the Exchange Union, please fork our repository, push your commits or fixes and send a pull
 request for us to review and merge into the main branch. If, however, you wish to submit substaintial changes or features -
