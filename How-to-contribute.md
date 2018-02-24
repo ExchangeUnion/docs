@@ -19,4 +19,4 @@ When submitting pull-request attach your <b>ether address</b> in the <b>commit m
 
 <h2> Working on your first pull request? </h2>
 
-Check out [this how to](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github/).
+Check out [this how-to](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github/).
