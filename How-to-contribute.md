@@ -18,4 +18,5 @@ that you have picked-up and are working on the intended issue.
 When submitting pull-request attach your <b>ether address</b> in the <b>commit message</b>. Once we have reviewed your request it will be scored which will determine the amount of XUC payout you will receive. We care about the open source community and want to do our part in encouraging more people to do open source work.
 
 <h2> Working on your first pull request? </h2>
-Check out [this how to](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
+
+Check out [this how to](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github/).
