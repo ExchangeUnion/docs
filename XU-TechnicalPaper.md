@@ -102,17 +102,17 @@ Payment channel atomic swap technology is fairly new and was just recently succe
 Since Ethereum includes all ERC20 tokens, Exchange Union supports the vast majority of today’s token market. [Other important chains](https://storeofvalue.github.io/posts/what-is-qtum-without-the-bullshit/) are expected to start developing Lightning/Raiden-style payment channel technology within the next months. Options how to support some in the short term, e.g. via [ERC20 wrapper](https://weth.io/) technology, can be explored.
 
 
-3.3. Decentralized Order Books (DOB)
+3.3. Decentralized Order Book (DOB)
 --------------------------
-The DOB is a key task for XU and an unresolved problem on existing decentralized exchanges where, to the best of our knowledge, the order book part is realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe, order book propagation and matching has to be decentralized to the best degree possible to sustain the overall robustness and censorship resistance of the network.
+The DOB is a key task for XU and an unresolved problem on existing decentralized exchanges where, to the best of our knowledge, the order book part is realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe order book propagation and matching has to be decentralized to the best degree possible to sustain the overall robustness and censorship resistance of the network.
 
 DOB's mainly face the following issues:
 
 **Latency**
-The speed of order updates is crucial to keep order information as accurate as possible and also minimize noise ('useless' traffic) on the network resulting from outdated order information. For example nodes requesting to fill orders, which are already filled. Since we target to on-board high volume exchanges, this network load is potentially huge, as well as the impact of resulting delays caused by these race conditions.
+The speed of order updates is crucial to keep order information as accurate as possible and also minimize noise ('useless' traffic) on the network resulting from outdated order information, such as nodes requesting to fill orders that are no longer available. Since we target to on-board high volume exchanges, this network load is potentially huge, as well as the impact of resulting delays.
 
 **Point of Execution**
-There is no central point of execution (order matching) in Exchange Union's open, decentralized system, which exposes several new attack vectors: For example a node exploiting network latency, could request multiple nodes to fill its order and trigger payments being sent. Even though the usage of atomic swaps prevents loss of funds (if I send A, you have to send B), it potentially leads to large sums of assets being locked up for a long time due to the time-lock used in atomic swaps in the case of a dispute. Large scale market manipulation with this technique could make it worth the effort and is unacceptable for exchanges.
+There is no central point of execution (order matching) in Exchange Union's open, decentralized system, which exposes several new attack vectors: For example a node exploiting network latency could request multiple nodes to fill its order and trigger swaps being executed. Even though the usage of atomic swaps prevents loss of funds (if I send A, you have to send B), it potentially leads to large sums of assets being locked up for some time due to the time-lock used in atomic swaps in the case of a dispute. Large scale market manipulation with this technique could make it worth the effort and is unacceptable for exchanges.
 
 **SPAM**
 Like any other decentralized system, Exchange Union's DOB faces SPAM attacks, in particular fake order information.
@@ -148,7 +148,7 @@ c) hard to control since in our case exchanges could always treat their local or
 Makers are earning XUC, takers are paying in XUC for filling orders. Makers set a price for each order in a specified fee field. We aim to establish a fee market where makers are competing with a combination of order quantity, price and XUC fee. A taker pays the full XUC fee via a default Raiden Channel to the maker. It's down to exchanges to take over the role of handling XUC payments and earnings for their users or integrate this as a business model for traders. 
 
 4. Punish malicious behavior
-Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments.
+Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments, for example if a XU node creates HTLCs in an atomic swap, but never releases the preimage to execute them.
 
 5. Privacy between two trading parties (not part of PoC)
 As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange is currently being explored, but is not a priority for the PoC for now.
