@@ -112,10 +112,10 @@ DOB's mainly face the following issues:
 The speed of order updates is crucial to keep order information as accurate as possible and also minimize noise ('useless' traffic) on the network resulting from outdated order information, such as nodes requesting to fill orders that are no longer available. Since we target to on-board high volume exchanges, this network load is potentially huge. The same goes for delays in order filling, resulting from continously failing orders because of outdated order information.
 
 **Point of Execution**
-There is no central point of execution (order matching) in Exchange Union's open, decentralized system, which exposes several new attack vectors: For example a node exploiting network latency could request multiple nodes to fill its order and trigger swaps being executed. Even though the usage of atomic swaps prevents loss of funds (if I send A, you have to send B), it potentially leads to large sums of assets being locked up for some time due to the time-lock used in atomic swaps in the case of a dispute. Large scale market manipulation with this technique could make it worth the effort and is unacceptable for exchanges.
+There is no central point of execution (order matching) in Exchange Union's open, decentralized system, which exposes several new attack vectors: For instance, a node exploiting network latency could request multiple nodes to fill its order and trigger the execution of swaps. Even though the usage of atomic swaps prevents loss of funds (if I send A, you have to send B), it can potentially lead to large amounts of assets being locked due to the time-lock used in atomic swaps to resolve disputes. Large scale market manipulation with this technique could make this a profitable endeavour, which is unacceptable for exchanges.
 
 **SPAM**
-Like any other decentralized system, Exchange Union's DOB faces SPAM attacks, in particular fake order information.
+Like any other decentralized system, Exchange Union's DOB faces DDoS attacks, in particular fake order information.
 
 XU's DOB protocol has the following goals:
 =============================================================
@@ -154,7 +154,7 @@ Also, there will be no complete global order book as such, containing all orders
 
 3.4. Security
 -------------
-
+*I am a sentence about security.*
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
@@ -341,7 +341,7 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
   - Alphapoint is a centralized commercial remarketer which requires fees
 - Users of Exchanges which are part of Exchange union directly swap assets with each other
   - Alphapoint does buy and sell on users behalf on another exchange, this is considered to become a legal issue in future
-- Alphapoint is limited to supported assets (atm only bitcoin?), Exchange Union supports all chains with a payment channel  implementation (Lightning, Raiden, Lumino)
+- Alphapoint is limited to supported assets (atm only bitcoin?), Exchange Union supports all chains with a payment channel  implementation (Lightning, Raiden, Trinity, Lumino)
 
 
 4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [0x](https://0xproject.com/)
