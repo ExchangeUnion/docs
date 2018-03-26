@@ -128,8 +128,8 @@ XU's DOB protocol has the following goals:
 Order matching systems ('trade engines') of major digital asset exchanges differentiate between two participants: the taker and the maker. A maker is someone who submits an order which can't be matched immediately and joins a pool of unmatched orders. A taker on the other hand issues an order which can immediately be matched with an existing (maker) order upon entering the pool. Makers, are sometimes also called 'liquidity providers' and play an important role in stabilizing markets and thus are rewarded with lower or 0% fees on centralized exchanges, which is why we chose a similar model for XU. In short, a taker -> pays the maker as an incentive to provide liquidity. Details below.
 
 Similarly, we have two types of participants in the XU's DOB for each trade:
-1. The Maker, the liquidity provider propagating a order, which joins a pool of unmatched orders. Usually in the form of a limit order.
-2. The Taker, the impatient buyer or seller filling above limit orders. Usually in the form of a market order.
+- The **Maker**, the liquidity provider propagating a order, which joins a pool of unmatched orders. Usually in the form of a limit order.
+- The **Taker**, the impatient buyer or seller filling above limit orders. Usually in the form of a market order.
 
 A description of how we realize above goals:
 
