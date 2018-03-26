@@ -140,8 +140,11 @@ For orders, the DOB protocol strictly follows the first come, first served princ
 There is one single point of execution for each order: the maker. The maker decides on which incoming order gets to fill the order. All orders contain payment information (e.g. a lightning invoice). Lightning implementations take care that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer, in our case the maker. Also lightning takes care that a taker has a payment channel path with sufficient volume for a specific order. Under no circumstances a loss of funds can occur.
 
 Sidenote: Transferring order execution authority to a third party, in particular to a decentralized consensus, was considered and deemed not feasible for the following reasons:
+
 a) consensus=slow
+
 b) hard to sell; an exchange won't let anyone else decide on who fills its users orders
+
 c) hard to control since in our case exchanges could always treat their local order book with priority and are essentially in control since they control the release of a preimage of an invoice.
 
 3. Reward liquidity providers
