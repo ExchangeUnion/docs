@@ -137,15 +137,7 @@ A description of how we realize above goals:
 For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, we require an open connection between two nodes on Internet Protocol level. From a XU network topology point of view we require a direct connection without intermediary hop with all nodes a node wants to receive order information from. Transport Layer design choices using socket connections and [efficient congestion control mechanisms](https://github.com/google/bbr) are currently in the works.
 
 2. Single point of execution 
-There is one single point of execution for each order: the maker. The maker decides on which incoming order gets to fill the order. All orders contain payment information (e.g. a lightning invoice). Lightning implementations take care that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer, in our case the maker. Also lightning takes care that a taker has a payment channel path with sufficient volume for a specific order. Under no circumstances a loss of funds can occur.
-
-Sidenote: Transferring order execution authority to a third party, in particular to a decentralized consensus, was considered and deemed not feasible for the following reasons:
-
-a) consensus=slow
-
-b) hard to sell; an exchange won't let anyone else decide on who fills its users orders
-
-c) hard to control since in our case exchanges could always treat their local order book with priority and are essentially in control since they control the release of a preimage of an invoice.
+There is one single point of execution for each order: the maker. The maker decides on which incoming order gets to fill the order. All orders contain payment information (e.g. a lightning invoice). Lightning implementations take care that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer, in our case the maker. Also lightning takes care that a taker has a payment channel path with sufficient volume for a specific order. Under no circumstances a loss of funds can occur. Sidenote: Transferring order execution authority to a third party, in particular to a decentralized consensus, was considered and deemed not feasible for the following reasons: a) consensus=slow b) hard to sell; an exchange won't let anyone else decide on who fills its users orders c) hard to control since in our case exchanges could always treat their local order book with priority and are essentially in control since they control the release of a preimage of an invoice.
 
 3. Reward liquidity providers
 Makers are earning XUC, takers are paying in XUC for filling orders. Makers set a price for each order in a specified fee field. We aim to establish a fee market where makers are competing with a combination of order quantity, price and XUC fee. A taker pays the full XUC fee via a default Raiden Channel to the maker. It's down to exchanges to take over the role of handling XUC payments and earnings for their users or integrate this as a business model for traders. 
