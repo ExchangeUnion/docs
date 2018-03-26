@@ -102,21 +102,59 @@ Payment channel atomic swap technology is fairly new and was just recently succe
 Since Ethereum includes all ERC20 tokens, Exchange Union supports the vast majority of today’s token market. [Other important chains](https://storeofvalue.github.io/posts/what-is-qtum-without-the-bullshit/) are expected to start developing Lightning/Raiden-style payment channel technology within the next months. Options how to support some in the short term, e.g. via [ERC20 wrapper](https://weth.io/) technology, can be explored.
 
 
-3.3. Decentralized Orderbooks
+3.3. Decentralized Order Book (DOB)
 --------------------------
-Decentralized orderbook propagation is a key task for XU and a problem on existing decentralized exchanges where, to the best of our knowledge, this is mostly realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe, orderbook propagation has to occur in a decentralized manner to sustain the overall robustness and censorship resistance of the system. Ideally the propagation would happen directly within a default XUC (raiden) payment channel as payload of a microtransaction. This would have the advantage, that order relay fees are paid at the same time and only a successfully forwarded order would let the intermediate node redeem its earned fee. Also a default XUC payment channel is required anyways for our incentive system.
+The DOB is a key task for XU and an unresolved problem on existing decentralized exchanges where, to the best of our knowledge, the order book part is realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe order book propagation and matching has to be decentralized to the best degree possible to sustain the overall robustness and censorship resistance of the network.
 
+DOB's mainly face the following issues:
 
+**Latency**
+The speed of order updates is crucial to keep order information as accurate as possible and also minimize noise ('useless' traffic) on the network resulting from outdated order information, such as nodes requesting to fill orders that are no longer available. Since we target to on-board high volume exchanges, this network load is potentially huge. The same goes for delays in order filling, resulting from continously failing orders because of outdated order information.
 
-Firstly, there will be no complete global orderbook as such, containing all orders for each and every trading pair. Instead, orders will be propagated using matching payment channels only, therefore XU nodes only maintain relevant parts of the orderbook. This approach ensures a more efficient system. 
+**Point of Execution**
+There is no central point of execution (order matching) in Exchange Union's open, decentralized system, which exposes several new attack vectors: For instance, a node exploiting network latency could request multiple nodes to fill its order and trigger the execution of swaps. Even though the usage of atomic swaps prevents loss of funds (if I send A, you have to send B), it can potentially lead to large amounts of assets being locked due to the time-lock used in atomic swaps to resolve disputes. Large scale market manipulation with this technique could make this a profitable endeavour, which is unacceptable for exchanges.
 
-Secondly, orderbooks should be shared with all XU members in the network with minimal latency. In addition, error conditions regarding orders should be propagated in a similar manner. Given that XU members will establish payment channels with each other via the XU node, a generic multicast messaging mechanism to update local orderbooks on XU nodes continuously seems to be most appropriate. Messaging mechanism may be similar to [issuing invoices](http://api.lightning.community/#addinvoice) and [subscribing to them](http://api.lightning.community/#subscribeinvoices). A generic pub/sub API where string data is the payload may abstract protocol details, therefore it *may be* beneficial to use [standardized message formats](https://www.onixs.biz/fix-dictionary/4.4/msgs_by_msg_type.html) like [FIX](https://en.wikipedia.org/wiki/Financial_Information_eXchange). If a XU member wants to fill an order, a payment route between Exchange A and Exchange B has to exist, which is ensured by the way orderbooks are propagated - XU nodes only receive order updates with an existing payment route.
+**SPAM**
+Like any other decentralized system, Exchange Union's DOB faces DDoS attacks, in particular fake order information.
 
-Finally, our XU node implementation will be continuously monitoring orderbooks on all subscribed chains and if an exchange behaves maliciously by either spamming orderbooks or not finalizing trades, it will be punished. Punishment options include temporary suspension in service or taking away deposited XUC (compare PoS) or simply increasing fees for this specific actor. 
+XU's DOB protocol has the following goals:
+=============================================================
+1. Minimize latency of order updates
+2. Single point of execution
+3. Reward liquidity providers
+4. Punish malicious behavior
+5. Privacy between two trading parties
+
+Order matching systems ('trade engines') of major digital asset exchanges differentiate between two participants: the taker and the maker. A maker is someone who submits an order which can't be matched immediately and joins a pool of unmatched orders. A taker on the other hand issues an order which can immediately be matched with an existing (maker) order upon entering the pool. Makers, are sometimes also called 'liquidity providers' and play an important role in stabilizing markets and thus are rewarded with lower or 0% fees on centralized exchanges, which is why we chose a similar model for XU. In short, a taker -> pays the maker as an incentive to provide liquidity. Details below.
+
+Similarly, we have two types of participants in the XU's DOB for each trade:
+- The **Maker**, the liquidity provider propagating a order, which joins a pool of unmatched orders. Usually in the form of a limit order.
+- The **Taker**, the impatient buyer or seller filling above limit orders. Usually in the form of a market order.
+
+A description of how we realize above goals:
+
+1. Minimize latency of order updates
+For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, we require an open connection between two nodes on Internet Protocol level. From a XU network topology point of view we require a direct connection without intermediary hop with all nodes a node wants to receive order information from. Transport Layer design choices using socket connections and [efficient congestion control mechanisms](https://github.com/google/bbr) are currently in the works.
+
+2. Single point of execution 
+There is one single point of execution for each order: the maker. The maker decides on which incoming order gets to fill the order. All orders contain payment information (e.g. a lightning invoice). Lightning implementations take care that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer, in our case the maker. Also lightning takes care that a taker has a payment channel path with sufficient volume for a specific order. Under no circumstances a loss of funds can occur. Sidenote: Transferring order execution authority to a third party, in particular to a decentralized consensus, was considered and deemed not feasible for the following reasons: a) consensus=slow b) hard to sell; an exchange won't let anyone else decide on who fills its users orders c) hard to control since in our case exchanges could always treat their local order book with priority and are essentially in control since they control the release of a preimage of an invoice.
+
+3. Reward liquidity providers
+Makers are earning XUC, takers are paying in XUC for filling orders. Makers set a price for each order in a specified fee field. We aim to establish a fee market where makers are competing with a combination of order quantity, price and XUC fee. A taker pays the full XUC fee via a default Raiden Channel to the maker. It's down to exchanges to take over the role of handling XUC payments and earnings for their users or integrate this as a business model for traders. 
+
+4. Punish malicious behavior
+Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments, for example if a makers XU node creates HTLCs for a payment, but never releases the preimage to execute them. This 
+
+5. Privacy between two trading parties (not part of PoC)
+As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange is currently being explored, but is not a priority for the PoC for now.
+ 
+It is evident, that the approach to enforce direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super-nodes' in a later phase, where entities running an XU node can choose to forward and receive order book information from this node. To become a supernode for a peer, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fibre connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange.
+
+Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XU nodes preferences, e.g. only specific trading pairs or only from specific peers. Therefore XU nodes only maintain relevant parts of the order book. This approach ensures a more efficient system. XU nodes constantly exchange order information with connected peers.
 
 3.4. Security
 -------------
-
+*I am a sentence about security.*
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
@@ -227,7 +265,7 @@ Sidenote: The broadcasted orderbooks carry the fee amount of each order in a sep
 3.9. Incentivisation - The Role of XUC
 --------------------------------------
 
-Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe, a functioning monetary incentive system is the success factor for future Open-Source projects, maybe even the new decentralized economy as a whole. Bitcoin itself is the best example for a working monetary incentive to build and maintain an ecosystem. Exchange Union creates value and should be self-sustaining.
+Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe a functioning monetary incentive system is the success factor for future Open-Source projects, maybe even the new decentralized economy as a whole. Bitcoin itself is the best example for a working monetary incentive to build and maintain an ecosystem. Exchange Union creates value and should be self-sustaining.
 
 Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some even ask exchanges to pay hardware or monthly fees. From an exchanges point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and more importantly enable the exchanges to not only maintain full trading fee revenue but in almost all cases increase such, as described above. Additionally, different functionaries are rewarded with XUC as follows:
 
@@ -303,7 +341,7 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
   - Alphapoint is a centralized commercial remarketer which requires fees
 - Users of Exchanges which are part of Exchange union directly swap assets with each other
   - Alphapoint does buy and sell on users behalf on another exchange, this is considered to become a legal issue in future
-- Alphapoint is limited to supported assets (atm only bitcoin?), Exchange Union supports all chains with a payment channel  implementation (Lightning, Raiden, Lumino)
+- Alphapoint is limited to supported assets (atm only bitcoin?), Exchange Union supports all chains with a payment channel  implementation (Lightning, Raiden, Trinity, Lumino)
 
 
 4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [0x](https://0xproject.com/)
