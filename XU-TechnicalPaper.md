@@ -8,7 +8,7 @@
 3. [Under the hood](#3-under-the-hood)  
   3.1. [Payment Channels](#31-payment-channels)  
   3.2. [Atomic Swaps](#32-atomic-swaps)  
-  3.3. [Decentralized Order book (DOB)](#33-decentralized-order-book-dob)  
+  3.3. [Decentralized Order book (DOB)](#33-decentralized-order-book-dob)
   3.4. [Security](#34-security)  
   3.5. [Visualization](#35-visualization-an-instant-decentralized-exchange)  
   3.6. [Sample Trade](#36-sample-trade)  
