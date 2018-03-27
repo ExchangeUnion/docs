@@ -267,7 +267,7 @@ Sidenote: The broadcasted orderbooks carry the fee amount of each order in a sep
 
 Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe a functioning monetary incentive system is the success factor for future Open-Source projects. Bitcoin itself is the best example for a system driven by monetary incentives to build and maintain an ecosystem. Similarly, we believe Exchange Union creates value and should be financially self-sustaining.
 
-Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some solutions even require exchanges to pay hardware or monthly fees. From an exchange's point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and more importantly enable the exchanges to increase revenue with trading fees, see above. Additionally, the different functionaries which are rewarded with XUC are as follows:
+Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some solutions even require exchanges to pay hardware or monthly fees. From an exchange's point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and, more importantly, will enable exchanges to increase revenue with trading fees as described above. Additionally, the different functionaries which are rewarded with XUC are as follows:
 
 **Incentives for Developers**
 - Each pull-request to the Exchange Union github (https://github.com/ExchangeUnion) gets peer reviewed and a score by each reviewer. XUC is paid to the contributor based on that score.
@@ -276,7 +276,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - Testers get rewarded, test-net time gets rewarded
 
 **Incentives for Exchanges**
-- As treated in chapter 3.3, the main use of XUC is to incentivize liquidity providers, which in particular targets 'large' exchanges
+- As discussed in chapter 3.3, the main use of XUC is to incentivize liquidity providers, which in particular targets 'large' exchanges
 - In order to further increase interest of exchanges joining Exchange Union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Depending on the business model of the exchange (exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU right away.
 - These XUC can only be used to pay for services on XU, like paying XUC to the maker. It cannot be sold on the market. 
 - If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. This is beneficial for exposure, since this might be the only way end-users learn about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. Similarly, with XUC, users can get access to new pairs and a better price. For this the XU node would have to check a particular users XUC balance.
