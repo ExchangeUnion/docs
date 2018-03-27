@@ -265,9 +265,9 @@ Sidenote: The broadcasted orderbooks carry the fee amount of each order in a sep
 3.9. Incentivisation - The Role of XUC
 --------------------------------------
 
-Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe a functioning monetary incentive system is the success factor for future Open-Source projects, maybe even the new decentralized economy as a whole. Bitcoin itself is the best example for a working monetary incentive to build and maintain an ecosystem. Exchange Union creates value and should be self-sustaining.
+Developers, exchanges and functionaries which contribute resources to the XU ecosystem are key for Exchange Union to get up and running, reach a ‘network-effect’ size and be successful in the long-term. We believe a functioning monetary incentive system is the success factor for future Open-Source projects. Bitcoin itself is the best example for a system driven by monetary incentives to build and maintain an ecosystem. Similarly, we believe Exchange Union creates value and should be financially self-sustaining.
 
-Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some even ask exchanges to pay hardware or monthly fees. From an exchanges point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and more importantly enable the exchanges to not only maintain full trading fee revenue but in almost all cases increase such, as described above. Additionally, different functionaries are rewarded with XUC as follows:
+Flawed incentivisation is believed to be the main reason why other solutions for connecting exchanges didn’t find adoption yet. Some solutions even require exchanges to pay hardware or monthly fees. From an exchange's point of view, this doesn’t add up without offering something in return, since the solutions essentially offer an easier way for user funds, and thus trading revenues, to leave the platform. Exchange Union will not charge any fees and more importantly enable the exchanges to increase revenue with trading fees, see above. Additionally, the different functionaries which are rewarded with XUC are as follows:
 
 **Incentives for Developers**
 - Each pull-request to the Exchange Union github (https://github.com/ExchangeUnion) gets peer reviewed and a score by each reviewer. XUC is paid to the contributor based on that score.
@@ -275,22 +275,22 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - Reviewers get rewarded
 - Testers get rewarded, test-net time gets rewarded
 
-
 **Incentives for Exchanges**
-- In order to have sufficient interest of exchanges joining the union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Advantage: all users can start using XU right away, for free for a long while.
-- These XUC can only be used to pay for services on XU. Cannot be dumped. 
-- This also means *end-users have to hold XUC in order to use XU*. This is beneficial for exposure, since this is the only way end-users know about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. With XUC, users can get access to new pairs and a better price. For this the XU node would have to check a particular users XUC balance.
+- As treated in chapter 3.3, the main use of XUC is to incentivize liquidity providers, which in particular targets 'large' exchanges
+- In order to further increase interest of exchanges joining Exchange Union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Depending on the business model of the exchange (exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU right away.
+- These XUC can only be used to pay for services on XU, like paying XUC to the maker. It cannot be sold on the market. 
+- If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. This is beneficial for exposure, since this might be the only way end-users learn about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. Similarly, with XUC, users can get access to new pairs and a better price. For this the XU node would have to check a particular users XUC balance.
 
 **Incentives for Functionaries which provide services (running a XU node)**
-- Orderbook relays get rewarded with XUC. 
+- Orderbook relays by supernodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a supernode which provides a faster connection, will pay 
 - Watchtower service gets rewarded with XUC: especially individuals in the future will be interested in this service - in order for payment channels to be secure, the main chain has to be watched for illicit transactions, as introduced in the beginning of chapter two. If someone is not sure to be able to be online in certain time intervals, this responsibility can be outsourced to someone else who charges a tiny fee for this service. 
 - **We support Lightning/Raiden adoption and growth** with above incentives also help to [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
 
 **Incentives for traders**
 - A user has X trading volume on Exchange Union, this user gets rewarded with XUC from his exchange platform
-- This is more a program of each individual exchange
+- This is a program of each individual exchange, details tbd
 
-*By default, each XU node opens a XUC payment channel in order to be able to pay for orderbook relays and other services and also vice-versa receive XUC payments for these services.*
+*By default, each XU node opens a XUC payment channel in order to be able to pay makers, for orderbook relays and other services and also receive XUC payments for these services.*
 
 3.10. Business Model: XUC
 -------------------------
