@@ -38,11 +38,11 @@ Exchange Union (XU) connects digital asset exchanges by forming **a decentralize
 
 1.2. Project Intro
 ------------------
-This specification summarizes commonly agreed technical requirements for Exchange Union and thus should be referred to as “the bible” ;). Exchange Union’s implementation is challenging and can only be achieved with support of a greater developer community. The decision was made to open-source all documentation and the entire code base and to prioritize building a developer community, while also engaging full-time open-source developers to contribute to the development effort. Strategic partnerships with relevant companies will be formed. The business model for funding development is based entirely on the XUC token, which is already in circulation and doesn’t require an ICO.
+This specification describes and summarizes commonly agreed technical requirements for Exchange Union and thus should be referred to as “the bible” ;). Exchange Union’s implementation is challenging and can only be achieved with support of a greater developer community. The decision was made to open-source all documentation and the entire code base and to prioritize building a developer community, while also engaging full-time open-source developers to contribute to the development effort. Strategic partnerships with relevant companies will be formed. The business model for funding development is based entirely on the XUC token, which is already in circulation and doesn’t require an ICO.
 
 
 ## 2. Product Description
-Exchange Union connects digital asset exchanges by way of a decentralized meta-exchange. It targets today's centralized exchanges as phase one "users" because they hold the majority of the trading user base and liquidity. Furthermore, executing and maintaining Exchange Union’s technology, the XU node, is not expected to be suitable for personal or widespread usage in the near future. However, it is planned to further develop and simplify the technology and make it suitable for individual usage in the long-term. 
+We also call Exchange Union a *decentralized meta-exchange*, since it targets today's centralized exchanges as "users". This is because the majority of users use and will use centralized exchanges for convenience and thus the liquidity is with centralized exchanges. Furthermore, executing and maintaining Exchange Union’s technology, the XU node, is not expected to be suitable for personal or widespread usage in the near future. However, it is planned to further develop and simplify the technology and make it suitable for individual usage in the long-term. 
 
 Simply put, Exchange Union’s vision is to offer individuals a choice to either:
 
@@ -71,7 +71,7 @@ As with existing decentralized exchanges, no single point of failure (SPOF) can 
 
 ## 3. Under the hood
 
-**Exchange Union is the first instant, decentralized exchange and also the first one supporting multiple chains**. This is realized via a novel technology combining ‘payment channels’ and ‘atomic swaps’. The XU Node exposes a simple API designed for digital asset exchanges and, together with the XU nodes of other exchanges, forms the decentralized network connecting the exchanges. The XU node software will be provided in form of a package, for example a Docker image, that contains Payment Channel Protocol daemons (e.g. lnd and raiden), and full-node daemons for all supported chains (bitcoind, geth etc.) and a XU manager that controls those daemons and exposes an API to the exchange. 
+**Exchange Union is the first instant, decentralized network of exchanges and also the first one supporting multiple chains**. This is realized via a novel technology combining ‘payment channels’ and ‘atomic swaps’. The XU Node exposes a simple API designed for digital asset exchanges and, together with the XU nodes of other exchanges, forms the decentralized network connecting the exchanges. The XU node software will be provided in form of a package, for example a Docker image, that contains Payment Channel Protocol daemons (e.g. lnd and raiden), and full-node daemons for all supported chains (bitcoind, geth etc.) and a XU manager that controls those daemons and exposes an API to the exchange. 
 
 
 3.1. Payment Channels
