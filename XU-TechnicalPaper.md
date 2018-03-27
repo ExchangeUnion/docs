@@ -27,7 +27,7 @@
   4.4. [Alphapoints ADLP](#44-alphapoints-adlp)  
   4.5. [Altcoin.io/Etherdelta/0x](#45-altcoinio--etherdelta--0x)  
   4.6. [RaidEX.io](#46-raidexio)  
-5. [Requirements](#5-requirements)
+5. [Requirements](#5-requirements-overview)
 
 
 ## 1. Executive Summary
