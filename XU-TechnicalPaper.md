@@ -289,7 +289,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - A user has X trading volume on Exchange Union, this user gets rewarded with XUC from his exchange platform
 - This is a program of each individual exchange, details tbd
 
-*By default, each XU opens a XUC payment channel in order to be able to pay makers, for orderbook relays and other services and also receive XUC payments for these services.*
+*By default, each XUD opens a XUC payment channel in order to be able to pay makers, for orderbook relays and other services and also receive XUC payments for these services.*
 
 3.10. Business Model: XUC
 -------------------------
