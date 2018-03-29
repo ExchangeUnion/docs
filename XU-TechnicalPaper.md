@@ -334,30 +334,31 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
 - Exchange Union builds on top of lightning & raiden, it’s actually using pure Lightning/Raiden with atomic swaps in the background and adds some features like orderbook propagation to build a fully functioning decentralized meta-exchange
 
 
-4.4. [Alphapoint’s ADLP](https://bravenewcoin.com/news/alphapoint-provides-liquidity-to-bitcoin-exchanges/)
+4.4. [Alphapoint’s Remarketer](https://www.alphapoint.com/remarketer.html)
 -----------------------------------------------------------------------------------------------------------
-- Exchange Union is a free, open-source Meta-Exchange - everyone can join, users will be able to use it directly in future
-  - Alphapoint is a centralized commercial remarketer which requires fees
-- Users of Exchanges which are part of Exchange union directly swap assets with each other
-  - Alphapoint does buy and sell on users behalf on another exchange, this is considered to become a legal issue in future
-- Alphapoint is limited to supported assets (atm only bitcoin?), Exchange Union supports all chains with a payment channel  implementation (Lightning, Raiden, Trinity, Lumino)
+- Exchange Union has the same goal of increasing liquidity for exchanges, but is fully decentralized, open-source & free to use.
+  - Alphapoint is a centralized commercial remarketer, requires fees and onboarding
+- Exchanges in Exchange Union swap assets directly with each other
+  - Alphapoint's software does buy and sell on exchange's behalf on another exchange. It requires multiple accounts and manual maintenance of balances
+- Exchange Union's infrastructure abstracts from different blockchains and supports all chains with a payment channel implementation
+  - Alphapoint is limited to supported exchanges and FIAT currencies (USD)
 
 
 4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [0x](https://0xproject.com/)
 ----------------------------------------------------------------------------------------------------------------
-- Exchange Union is a decentralized meta-exchange, targeting exchanges as ‘users’ first
-  - All of the above mentioned are end-user oriented
-- Exchange Union targets to have a decentralized orderbook propagation to not have a SPOF
-  - The above provide access and orderbooks via a centralized solution
+- Exchange Union is a decentralized network of exchanges, targeting today’s centralized exchanges as ‘users’ because liquidity currently is and will be here
+  - All of the above mentioned are end-user oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply too hard to use, too slow and too expensive for now
+- Exchange Union targets to have a decentralized orderbook propagation to avoid a SPOF
+  - All of the above provide access and orderbooks via a centralized solution or don’t touch orderbook information exchange between individuals
 - Exchange Union uses payment channels for atomic swaps - they are instant
-  - All of the above mentioned use on-chain swaps which are costly and take up to one hour to complete
+  - All of the above mentioned use on-chain swaps which are costly and take up to one hour to complete. Only Altcoin.io announced plans to ‘explore’ lightning. It’s still not live.
 - Exchange Union supports multiple chains
-  - Etherdelta/0x are limited to Ethereum-based assets
+  - Etherdelta/0x are limited to Ethereum-based assets (ERC20), altcoin.io promises BTC/ETH but is still not live.
 
 
 4.6. [RaidEX.io](https://www.raidex.io/)
 ----------------------------------------
-Brainbot, the company behind the Raiden network, seems to be the only company already working on a decentralized payment channel exchange. For now it’s unclear if RaidEX will target users directly or Exchanges first and if it’s limited to Ethereum/Raiden. Exchange Union will closely collaborate with brainbot.
+Brainbot, the company behind the Raiden network, seems to be the only company already working on a decentralized exchange based on payment channels. For now, it’s unclear if RaidEX will target users directly or Exchanges first, but it’s more likely to target individuals. Also, it will be limited to Ethereum-based assets on Raiden. Exchange Union will closely collaborate with brainbot.
 
 
 
