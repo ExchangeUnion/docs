@@ -315,7 +315,7 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
 
 4.2. [Blockstream’s Liquid](https://blockstream.com/liquid/)
 ------------------------------------------------------------
-- Exchange Union is a real decentralized exchange, exchange of assets happens ‘on Exchange Union’
+- Exchange Union is a decentralized exchange infrastructure, exchange of assets happens on Exchange Union
   - Liquid simply let’s users transfer bitcoin from Exchange A to B
 - Exchange Union is (network-latency) instant
   - Liquid is a sidechain with about 1 min, in future down to 10s block times. But never instant.
@@ -324,9 +324,9 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
 - Exchange Union is completely open source and free to use
   - Liquid requires exchanges paying a monthly fee (as of 2016: 2500 USD)
 - Exchange Union automates a trade
-  - Liquid asks users to handle of X, Q or H liquid addresses on both exchanges, manual triggering of transactions
-- Exchange User is more end-user trader oriented
-  - No multiple account setups on the different exchanges & multiple KYC needed
+  - Liquid asks users to handle of X, Q or H liquid addresses on both exchanges, need KYCd accounts on both exchanges, need to manually trigger transactions
+- Exchange Union benefits traders & exchanges, see [chapter 2](https://github.com/ExchangeUnion/Docs/blob/master/XU-TechnicalPaper.md#2-product-description)
+  - Liquid benefits traders
 
 
 4.3. [Lightning](http://lightning.engineering/) / [Raiden](https://raiden.network/)
