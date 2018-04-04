@@ -142,7 +142,7 @@ There is one single point of execution for each order: the maker. The maker deci
 Makers are earning XUC, takers are paying in XUC for filling orders. Makers set a price for each order in a specified fee field. We aim to establish a fee market where makers are competing with a combination of order quantity, price and XUC fee. A taker pays the full XUC fee via a default Raiden Channel to the maker. It's down to exchanges to take over the role of handling XUC payments and earnings for their users or integrate this as a business model for traders. 
 
 4. Punish malicious behavior
-Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments, for example if a makers XUD creates HTLCs for a payment, but never releases the preimage to execute them. This 
+Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments, for example if a makers XUD creates HTLCs for a payment, but never releases the preimage to execute them.
 
 5. Privacy between two trading parties (not part of PoC)
 As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange is currently being explored, but is not a priority for the PoC for now.
