@@ -281,7 +281,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. This is beneficial for exposure, since this might be the only way end-users learn about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. Similarly, with XUC, users can get access to new pairs and a better price. For this the XUD would have to check a particular users XUC balance.
 
 **Incentives for Functionaries which provide services (running a XUD)**
-- Orderbook relays by supernodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a supernode which provides a faster connection, will pay 
+- Orderbook relays by supernodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a supernode which provides a faster connection, will pay for this service.
 - Watchtower service gets rewarded with XUC: especially individuals in the future will be interested in this service - in order for payment channels to be secure, the main chain has to be watched for illicit transactions, as introduced in the beginning of chapter two. If someone is not sure to be able to be online in certain time intervals, this responsibility can be outsourced to someone else who charges a tiny fee for this service. 
 - **We support Lightning/Raiden adoption and growth** with above incentives also help to [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
 
