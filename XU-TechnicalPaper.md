@@ -41,7 +41,7 @@ This specification describes and summarizes commonly agreed technical requiremen
 
 
 ## 2. Product Description
-We also call Exchange Union a *decentralized meta-exchange*, since it targets today's centralized exchanges as "users". This is because the majority of users use and will use centralized exchanges for convenience and thus the liquidity is with centralized exchanges. Furthermore, executing and maintaining Exchange Union’s technology, XUD, short for **Exchange Union Daemon** is not expected to be suitable for personal or widespread usage in the near future. However, it is planned to further develop and simplify the technology and make it suitable for individual usage in the long-term. 
+Exchange Union can be described as a *decentralized meta-exchange*, because it targets today's centralized exchanges as "users". This is because the majority of users use and will use centralized exchanges for convenience and thus the liquidity is with centralized exchanges. Furthermore, executing and maintaining Exchange Union’s technology, XUD, short for **Exchange Union Daemon** is not expected to be suitable for personal or widespread usage in the near future. However, it is planned to further develop and simplify the technology and make it suitable for individual usage in the long-term. 
 
 Simply put, Exchange Union’s vision is to offer individuals a choice to either:
 
