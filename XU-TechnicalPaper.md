@@ -133,18 +133,23 @@ Analogical, we distinguish between two types of participants in the DOB for each
 A description of how we realize above goals:
 
 1. Minimize latency of order updates
+
 For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, we require an open connection between two nodes on Internet Protocol level. From a XU network topology point of view, we require a direct connection without intermediary hop with all nodes a node wants to receive order information from. Transport Layer design choices using socket connections and [efficient congestion control mechanisms](https://github.com/google/bbr) are currently in the works.
 
 2. Single point of execution 
+
 There is one single point of execution for each order: the maker. The maker decides on which incoming taker order gets to fill the order. All orders contain payment information (e.g. a lightning invoice). Lightning implementations take care that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer, in our case the maker. Also lightning takes care that a taker has a payment channel path with sufficient volume for a specific order. Under no circumstances a loss of funds can occur. Side note: Transferring order execution authority to a third party, in particular to a decentralized consensus, was considered and deemed not feasible for the following reasons: a) consensus=slow b) hard to sell; an exchange won't let anyone else decide on who fills its users orders c) hard to control since in our case exchanges could always treat their local order book with priority and are essentially in control since they control the release of a preimage of an invoice.
 
 3. Reward liquidity providers
+
 Makers are earning XUC, takers are paying for filling orders. Makers set a price for each order in a specified fee field, in XUC. We aim to establish a fee market where makers are competing with a combination of order quantity, price and XUC fee. A taker pays the full XUC fee via a default Raiden Channel to the maker. It's down to exchanges to take over the role of handling XUC payments and earnings for their users or integrate this as a business model for traders. 
 
 4. Punish malicious behavior
+
 Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments, for example if a makers XUD creates HTLCs for a payment, but never releases the preimage to execute them and thus locks up funds of other exchanges.
 
 5. Privacy between two trading parties (not part of PoC)
+
 As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange is currently being explored, but is not a priority for the PoC for now.
  
 It is evident, that the approach to enforce direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase, where entities running an XUD can choose to forward and receive order book information from these super nodes. To become a super node for a peer, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange.
