@@ -33,7 +33,7 @@
 
 1.1. The Vision
 ---------------
-Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://www.exchangeunion.com/how_it_works) which describes the idea and its use cases.
+Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://api.exchangeunion.com/pdf/en/ExchangeUnion-WhitePaper.pdf) which describes the idea and its use cases.
 
 1.2. Project Intro
 ------------------
@@ -77,7 +77,7 @@ As it is the case with existing decentralized exchanges, no single point of fail
 ---------------------
 The idea of payment channels is around for a while, even Satoshi Nakamoto already explored [*high-frequency transactions*](https://en.bitcoin.it/wiki/Payment_channels), then with bidirectional channels and the inception of the **Lightning Network** by Joseph Poon and Tadge Dryja, payment channels became more widely known. In short, payment channels enable instant, off-chain transfer of ownership of a digital token, like bitcoin, directly between two parties. Payment channels are opened and closed via one on-chain transactions each. Once a bidirectional payment channel is open, it uses unbroadcasted, fully valid signed transactions, which are sent back and forth between the two parties. These are held on each side of the channel, in our case on the exchange’s XUD, representing the balance of each party. These transactions will use a multi-signature address as their input (the funding address) and they will point at two different addresses for their output, each controlled by one party of the payment channel.
 
-Through their sophisticated setup, payment channels are trustless even though only the opening and closing transaction are included in the blockchain. This is because intermediary transactions are signed, thus valid and can be broadcast at any time by either party. Payment channels also allow secure, trustless routing of funds through intermediaries using a technology called [Hashed Timelock Contracts (HTLCs)](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts), thus a direct channel between two parties is not required and a path through other XUDs can be used. This is described in detail in the [Lightning White Paper](https://lightning.network/lightning-network-paper.pdf). This is useful since even a single payment channel to a well-connected XUD could be enough to reach the rest of the network. Setting up payment channels can be compared to the act of transferring coins into a sidechain - coins have to be committed to a payment channel via a native on-chain transaction.
+Through their sophisticated setup, payment channels are trustless even though only the opening and closing transaction are included in the underlying blockchain. This is because intermediary transactions are signed, thus valid and can be broadcast at any time by either party. Payment channels also allow secure, trustless routing of funds through intermediaries using a technology called [Hashed Timelock Contracts (HTLCs)](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts), thus a direct channel between two parties is not required and a path through other XUDs can be used. This is described in detail in the [Lightning White Paper](https://lightning.network/lightning-network-paper.pdf). This is useful since even a single payment channel to a well-connected XUD could be enough to reach the rest of the network. Setting up payment channels can be compared to the act of transferring coins into a sidechain - coins have to be committed to a payment channel via a native on-chain transaction.
 
 Each participating exchange runs its own XUD instance, which opens payment channels on each chain it chooses to support. This means, if an exchange wants to enable its users to trade bitcoin and litecoin through Exchange Union, it has to open a payment channel on the litecoin blockchain AND on the bitcoin blockchain to at least one other exchange in the union. Payment channels in XU are meant to be kept open long-term. Also, the current design doesn't encourage high volume transactions in one single channel and most implementations currently set upper limits as a 'training wheels restriction' (e.g. lnd's max. channel size is: 0.16777216 BTC). To achieve scalability, we will rely on multiple channels, which carry out partial transfers of one atomic payment as proposed in the [new AMP protocol by Laolu and Conner Fromknecht](https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/000993.html). This allows:
 - to elegantly get around channel volume restrictions
@@ -161,7 +161,7 @@ Also, there will be no complete global order book as such, containing all orders
 
 3.4. Security
 -------------
-*I am a sentence about security.*
+The Lightning Network and the Raiden Network take care of security of funds on the payment channel rails. This includes resolving disputes over balances on the underlying blockchain and disincentivizing malicious behavior by POS-style punishment (a dishonest party will lose all her funds to the honest party). It especially also includes security when routing payments through intermediary hops. Atomic Swaps bind two payments of a trade together, so that in no event one party can disappear after receiving the first part of the trade. Both payments in a trade have to complete successfully, for both payments to be valid and spendable. Exchange Union is secured against malicious order information in a similar POS-style punishment manner, to disincentivize market manipulation by sending out false order information.
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
@@ -352,7 +352,7 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
   - Alphapoint is limited to supported exchanges and FIAT currencies (USD)
 
 
-4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [0x](https://0xproject.com/)
+4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [AirSwap](https://airswap.io/)/ [0x](https://0xproject.com/)
 ----------------------------------------------------------------------------------------------------------------
 - Exchange Union is a decentralized network of exchanges, targeting today’s centralized exchanges as ‘users’ because liquidity currently is and will be here
   - All of the above mentioned are end-user oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply too hard to use, too slow and too expensive for now
