@@ -33,7 +33,7 @@
 
 1.1. The Vision
 ---------------
-Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://www.exchangeunion.com/how_it_works) which describes the idea and its use cases.
+Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://api.exchangeunion.com/pdf/en/ExchangeUnion-WhitePaper.pdf) which describes the idea and its use cases.
 
 1.2. Project Intro
 ------------------
