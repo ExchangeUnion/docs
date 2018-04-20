@@ -161,7 +161,7 @@ Also, there will be no complete global order book as such, containing all orders
 
 3.4. Security
 -------------
-The Lightning Network and the Raiden Network take care of security of funds on the payment channel rails, especially when routed through intermediary hops
+The Lightning Network and the Raiden Network take care of security of funds on the payment channel rails. This includes resolving disputes over balances on the underlying blockchain and disincentivizing malicious behavior by POS-style punishment (a dishonest party will lose all her funds to the honest party). It especially also includes security when routing payments through intermediary hops. Atomic Swaps bind two payments of a trade together, so that in no event one party can disappear after receiving the first part of the trade. Both payments in a trade have to complete successfully, for both payments to be valid and spendable. Exchange Union is secured against malicious order information in a similar POS-style punishment manner, to disincentivize market manipulation by sending out false order information.
 
 3.5. Visualization: An instant decentralized exchange
 -----------------------------------------------------
