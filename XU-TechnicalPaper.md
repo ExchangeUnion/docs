@@ -137,7 +137,13 @@ A description of how we realize above goals:
 
 1. Minimize latency of order updates
 
-For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, we require an open connection between two nodes on Internet Protocol level. From a XU network topology point of view, we require a direct connection without intermediary hop with all nodes a node wants to receive order information from. Transport Layer design choices using socket connections and [efficient congestion control mechanisms](https://github.com/google/bbr) are currently in the works.
+For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, we require a direct socket connection between two nodes on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional and can be routed through intermediary hops.
+
+![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "XUD DOB Full Mesh vs. Payment Channel Partial Mesh")
+
+It is evident, that the approach to enforce direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase, where entities running an XUD can choose to forward and receive order book information from these super nodes. To become a super node for a peer, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange.
+
+The network topology of the orderbook layer is compared to the Transport Layer design choices using socket connections and [efficient congestion control mechanisms](https://github.com/google/bbr) are currently in the works.
 
 2. Single point of execution 
 
@@ -154,10 +160,8 @@ Market makers are required to stake a certain amount of XUC in a smart contract 
 5. Privacy between two trading parties (not part of PoC)
 
 As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange is currently being explored, but is not a priority for the PoC for now.
- 
-It is evident, that the approach to enforce direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase, where entities running an XUD can choose to forward and receive order book information from these super nodes. To become a super node for a peer, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange.
 
-Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XUDs preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUDs only maintain relevant parts of the order book. This approach ensures a more efficient system. XUDs constantly exchange order information with connected peers.
+Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XUDs preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUDs only maintain relevant parts of the order book. XUDs constantly exchange order information and updates with connected peers.
 
 3.4. Security
 -------------
