@@ -137,13 +137,11 @@ A description of how we realize above goals:
 
 1. Minimize latency of order updates
 
-For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, we require a direct socket connection between two nodes on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional and can be routed through intermediary hops.
+For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, XUD requires a direct socket connection between two nodes on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional, payments can be routed through intermediary hops.
 
 ![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "XUD DOB Full Mesh vs. Payment Channel Partial Mesh")
 
-It is evident, that the approach to enforce direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase, where entities running an XUD can choose to forward and receive order book information from these super nodes. To become a super node for a peer, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange.
-
-The network topology of the orderbook layer is compared to the Transport Layer design choices using socket connections and [efficient congestion control mechanisms](https://github.com/google/bbr) are currently in the works.
+Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase. Individuals running XUD can choose to receive & forward order book information from these super nodes. To become a super node, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
 
 2. Single point of execution 
 
