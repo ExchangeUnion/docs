@@ -352,7 +352,7 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
   - Alphapoint is limited to supported exchanges and FIAT currencies (USD)
 
 
-4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [0x](https://0xproject.com/)
+4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [AirSwap](https://airswap.io/)/ [0x](https://0xproject.com/)
 ----------------------------------------------------------------------------------------------------------------
 - Exchange Union is a decentralized network of exchanges, targeting today’s centralized exchanges as ‘users’ because liquidity currently is and will be here
   - All of the above mentioned are end-user oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply too hard to use, too slow and too expensive for now
