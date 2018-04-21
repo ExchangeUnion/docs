@@ -14,12 +14,12 @@
   3.6. [Sample Trade](#36-sample-trade)  
   3.7. [Fiat Tokenization](#37-fiat-tokenization--stablecoin)  
     3.7.1. [The USDT Way](#371-the-usdt-way)  
-    3.7.2. [The Bitshares Way](#372-the-bitshares-way)  
+    3.7.2. [The Bitshares Way](#372the-bitshares-way)  
     3.7.3. [The MakerDAO Way](#373-the-makerdao-way)  
-    3.7.4. [The Basis (Basecoin) Way](#374-the-basis-(Basecoin)-way)  
+    3.7.4. [The Basis (Basecoin) Way](#374-the-basis-basecoin-way)  
   3.8. [Exchange Earnings](#38-exchange-earnings)  
   3.9. [Incentivisation: The Role of XUC](#39-incentivisation---the-role-of-xuc)  
-  3.10. [Business Model: XUC](#310-business-model--xuc)  
+  3.10. [Business Model: XUC](#310-business-model---xuc)  
 4. [How is XU different from](#4-how-is-xu-different-from-)  
   4.1. [Ripple/Stellar](#41-ripple--stellar)  
   4.2. [Blockstream's Liquid](#42-blockstreams-liquid)  
@@ -321,7 +321,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 
 *By default, each XUD opens a XUC payment channel to be able to pay makers, for order book relays and other services and also receive XUC payments for these services.*
 
-3.10. Business Model: XUC
+3.10. Business Model - XUC
 -------------------------
 Exchange Union’s business model is based on XUC being useful and thus valuable. As discussed above, the main usage of XUC within XU is as fee payment from taker to maker, the liquidity provider. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem & thus demand grows. The original proposal for Exchange Union used sidechains where every transaction would burn a small amount of XUC as a way to combat spam. However, the concern about spam transactions are mitigated to good extent by using payment channels.
 
