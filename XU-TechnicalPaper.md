@@ -10,22 +10,22 @@
   3.2. [Atomic Swaps](#32-atomic-swaps)  
   3.3. [Decentralized Order Book](#33-decentralized-order-book-dob)  
   3.4. [Security](#34-security)  
-  3.5. [Visualization: Instant, Decentralized Exchange](#35-visualization-an-instant-decentralized-exchange)  
+  3.5. [Visualization: Architecture](#35-visualization:-architecture)  
   3.6. [Sample Trade](#36-sample-trade)  
-  3.7. [Fiat Tokenization](#37-fiat-tokenization--stablecoin)  
+  3.7. [Fiat Tokenization](#37-fiat-tokenization-/-stablecoin)  
     3.7.1. [The USDT Way](#371-the-usdt-way)  
-    3.7.2. [The Bitshares Way](#372the-bitshares-way)  
+    3.7.2. [The Bitshares Way](#372-the-bitshares-way)  
     3.7.3. [The MakerDAO Way](#373-the-makerdao-way)  
-    3.7.4. [The Basecoin Way](#374-the-basecoin-way)  
+    3.7.4. [The Basis (Basecoin) Way](#374-the-basis-(Basecoin)-way)  
   3.8. [Exchange Earnings](#38-exchange-earnings)  
   3.9. [Incentivisation: The Role of XUC](#39-incentivisation---the-role-of-xuc)  
-  3.10. [Business Model: XUC](#310-business-model-xuc)  
+  3.10. [Business Model: XUC](#310-business-model:-xuc)  
 4. [How is XU different from](#4-how-is-xu-different-from-)  
-  4.1. [Ripple/Stellar](#41-ripple--stellar)  
+  4.1. [Ripple/Stellar](#41-ripple-/-stellar)  
   4.2. [Blockstream's Liquid](#42-blockstreams-liquid)  
-  4.3. [Lightning/Raiden](#43-lightning--raiden)  
-  4.4. [Alphapoints ADLP](#44-alphapoints-adlp)  
-  4.5. [Altcoin.io/Etherdelta/0x](#45-altcoinio--etherdelta--0x)  
+  4.3. [Lightning/Raiden](#43-lightning-/-raiden)  
+  4.4. [Alphapoints Remarketer](#44-alphapoint's-remarketer)  
+  4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoin.io-/-etherdelta-/-airswap-/-0x)  
   4.6. [RaidEX.io](#46-raidexio)  
 5. [Requirements](#5-requirements-overview)
 
@@ -141,7 +141,7 @@ For orders, the DOB protocol strictly follows the first come, first served princ
 
 ![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "XUD DOB Full Mesh vs. Payment Channel Partial Mesh")
 
-Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase. Individuals running XUD can choose to receive & forward order book information from these super nodes. To become a super node, it has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
+Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase. Individuals running XUD can choose to receive & forward order book information from these super nodes. To become a super node, one has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
 
 2. Single point of execution 
 
@@ -161,11 +161,31 @@ As it is the case on regular digital asset exchanges, a maker and a taker should
 
 Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XUDs preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUDs only maintain relevant parts of the order book. XUDs constantly exchange order information and updates with connected peers.
 
+
+[XUD Order book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
+=============================================================
+*`getOrders`*   
+get orders from the XUD orderbook, called by the exchange to display XU orders in it's UI
+
+*`getpairs`*    
+get the orderbook's available pairs
+
+*`placeOrder(pairId, price, quantity)`*   
+Place an order in XUD, which will first attempt to get matched with existing orders, else propagated to connected peers.
+```
+Example: "I want to place a limit order of buying 10 LTC for 20 ETC."
+placeOrder(LTC/ETC, 20, 10)
+
+Example: "I want to place a market order of buying 10 LTC for ETC."
+placeOrder(LTC/ETC, 0, 10)
+```
+
+
 3.4. Security
 -------------
 The Lightning Network and the Raiden Network take care of security of funds on the payment channel rails. This includes resolving disputes over balances on the underlying blockchain and disincentivizing malicious behavior by POS-style punishment (a dishonest party will lose all her funds to the honest party). It especially also includes security when routing payments through intermediary hops. Atomic Swaps bind two payments of a trade together, so that in no event one party can disappear after receiving the first part of the trade. Both payments in a trade have to complete successfully, for both payments to be valid and spendable. Exchange Union is secured against malicious order information in a similar POS-style punishment manner, to disincentivize market manipulation by sending out false order information.
 
-3.5. Visualization: An instant decentralized exchange
+3.5. Visualization: Architecture
 -----------------------------------------------------
 ![Screenshot](images/Exchange%20Union%20Nodes.png "Exchange Union System")
 
@@ -178,12 +198,12 @@ This is the basic flow of a trade via XU:
 
 3.6.2. `Exchange A` has successfully opened a payment channel to minimum one other XUD on Bitcoin and on UnicornCoin and uses a socket connection to its direct peers to send a limit order. This order, which is similar to a regular buy or sell request submitted in a cryptocurrency exchange, includes the amount of requested UnicornCoin with a price in BTC. Let’s assume `Exchange A` sends an **order for selling 100 UnicornCoin** with the requested price of **1 UnicornCoin = 0.1 BTC**. This order is published to all connected peers using a mechanism similar to ‘invoice adding’ and ‘subscription’ in the Lightning client.
 
-3.6.3. XU members on UnicornCoin update their orderbooks based on this new order.
+3.6.3. XU members on UnicornCoin update their order books based on this new order.
 
 3.6.4. If another XU member, `Exchange B`, wants to fill this 100 UnicornCoin order, the XUD takes care of the cross-chain atomic swap which means `Exchange A` gets **100 UnicornCoin** and `Exchange B` gets **10 BTC** on their payment channels on the respective chains. Behind the scenes, both parties create transactions on both chains to setup a trade which imposes time constraints i.e. if a trade is not successful both parties get their money back. Order filling is realized on a first-come-first-served basis.
 
 Exceptions:
-- An exchange can choose to subscribe to the orderbook of particular exchanges only (e.g. through legal requirements) via the exchange's public XUD ID.
+- An exchange can choose to subscribe to the order book of particular exchanges only (e.g. through legal requirements) via the exchange's public XUD ID.
 - Order is filled by another user who was faster: XUD starts looking for the next best order. We use the ‘odd type’ messaging system as specified in the RFC. E.g. Type 17 for errors.
 - Exchange B goes offline: time-out message comes back and XUD starts looking for the next best order. Exchange B repeatedly doesn’t fill orders: punishment, see chapter 3.4. 
 - Trade volume for a particular asset exceeds (own) payment channel volume: XUD maintains a configurable threshold and automatically redeposits from an authorized hot wallet.
@@ -205,7 +225,7 @@ Tether (the company) holds one USD in a “reserve bank account” for every USD
 - We would have to act like a central bank and issue new USDX tokens to increase supply based on demand. This requires us to hold USDX somewhere under central control, which is a SPOF for hackers. [As happened with Tether.](https://techcrunch.com/2017/11/20/tether-claims-a-hacker-stole-31m/)
 
 
-3.7.2. The [BitShares](https://bitshares.org/technology/price-stable-cryptocurrencies/) way
+3.7.2. The [BitShares](https://bitshares.org/technology/price-stable-cryptocurrencies/) Way
 -------------------------------------------------------------------------------------------
 A smart contract holding 200% of the underlying amount worth in BTS, 100% as collateral. E.g. One bitUSD contains 2 USD worth of BTS at creation.
 
@@ -235,7 +255,7 @@ DAI = Basically BitShares+: Collateral in Smart Contract (they call it Collatera
 - Why are MKR holders to decide on the sensitivity parameter? It should be just pre-set. Sounds a bit like a forced use and potentially could be manipulated
 
 
-3.7.4. The [Basecoin](http://www.getbasecoin.com/) way
+3.7.4. The [Basis](http://www.basis.io/) (Basecoin) Way
 ------------------------------------------------------
 A robust, price-stable cryptocurrency with an algorithmic central bank. It monitors USD or any other price (e.g. EUR or CPI) through external oracles, and smart contracts adjust the basecoin supply according to current market supply and demand (the basecoin system is aware of both) to keep the value close to the pegged asset. Basically what a central bank does. But the monetary policy gets handed over to a decentralized algorithm.
 
@@ -267,7 +287,7 @@ How this still benefits the trading individual: Trades only happen via XU, if:
 
 Consequently, the same is true for traders: they can only end up with better prices. If the price difference is not large enough to cover the fees kept by the exchanges, the trade won’t happen via XU. It is expected that through market forces (arbitrage) price levels keep adjusting and not all trades leave the exchange. Through the real-time nature of XU, market forces should be able to adjust prices much faster than currently.
 
-Side note: The broadcasted orderbooks carry the fee amount of each order in a separate fee field. Additional revenue streams for exchanges are introduced in the following.
+Additional revenue streams for exchanges are introduced in the following.
 
 
 
@@ -286,12 +306,12 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 
 **Incentives for Exchanges**
 - As discussed in chapter 3.3, the main use of XUC is to incentivize liquidity providers, which in particular targets 'large' exchanges
-- In order to further increase interest of exchanges joining Exchange Union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Depending on the business model of the exchange (exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU right away.
+- In order to further increase interest of exchanges joining Exchange Union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Depending on the business model of the exchange (exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU as takers right away.
 - These XUC can only be used to pay for services on XU, like paying XUC to the maker. It cannot be sold on the market to ensure market stability.
 - If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. This is beneficial for exposure, since this might be the only way end-users learn about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. Similarly, with XUC, users can get access to new pairs and a better price. For this the XUD would have to check a particular users XUC balance. Exchanges can offer a BNB-like incentive model to get better prices to their users.
 
 **Incentives for Functionaries which provide services (running a XUD)**
-- Orderbook relays by super nodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a super node which provides a faster connection, will pay for this service.
+- Order book relays by super nodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a super node which provides a faster connection, will pay for this service.
 - Watchtower service gets rewarded with XUC: especially individuals in the future will be interested in this service - in order for payment channels to be secure, the main chain has to be watched for illicit transactions, as introduced in the beginning of chapter two. If someone is not sure to be able to be online in certain time intervals, this responsibility can be outsourced to someone else who charges a tiny fee for this service. 
 - **We support Lightning/Raiden adoption and growth** with above incentives also help to [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
 
@@ -299,13 +319,15 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - A user has X trading volume on Exchange Union, this user gets rewarded with XUC from his exchange platform
 - This is a program of each individual exchange
 
-*By default, each XUD opens a XUC payment channel to be able to pay makers, for orderbook relays and other services and also receive XUC payments for these services.*
+*By default, each XUD opens a XUC payment channel to be able to pay makers, for order book relays and other services and also receive XUC payments for these services.*
 
 3.10. Business Model: XUC
 -------------------------
-Exchange Union’s business model is based on XUC being valuable, which not only makes the incentives work, but benefits all stakeholders. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem & thus demand grows. The original proposal for Exchange Union used sidechains where every transaction would burn a small amount of XUC as a way to combat spam. However, the concern about spam transactions are mitigated to good extent by using payment channels.
+Exchange Union’s business model is based on XUC being useful and thus valuable. As discussed above, the main usage of XUC within XU is as fee payment from taker to maker, the liquidity provider. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem & thus demand grows. The original proposal for Exchange Union used sidechains where every transaction would burn a small amount of XUC as a way to combat spam. However, the concern about spam transactions are mitigated to good extent by using payment channels.
 
 Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper), slowly reducing the total supply to roughly 2 billion. A ‘transparency’ section on [the website](https://www.exchangeunion.com/) informs about every new XUC release and purpose. Smart contracts handle the burning.
+
+The goal is to transform XU into a platform, where new products plug into XU to swap digital assets. Exchange Union will be developing a set of new products on top of XU with entirely new business models.
 
 
 ## 4. How is XU different from ...
@@ -341,7 +363,7 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
 
 4.3. [Lightning](http://lightning.engineering/) / [Raiden](https://raiden.network/)
 -----------------------------------------------------------------------------------
-- Exchange Union builds on top of lightning & raiden, it’s using pure Lightning/Raiden with atomic swaps in the background and adds some features like orderbook propagation to build a fully functioning decentralized meta-exchange
+- Exchange Union builds on top of lightning & raiden, it’s using pure Lightning/Raiden with atomic swaps in the background and adds some features like order book propagation to build a fully functioning decentralized meta-exchange
 
 
 4.4. [Alphapoint’s Remarketer](https://www.alphapoint.com/remarketer.html)
@@ -354,12 +376,12 @@ Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘
   - Alphapoint is limited to supported exchanges and FIAT currencies (USD)
 
 
-4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [AirSwap](https://airswap.io/)/ [0x](https://0xproject.com/)
+4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [AirSwap](https://airswap.io/) / [0x](https://0xproject.com/)
 ----------------------------------------------------------------------------------------------------------------
 - Exchange Union is a decentralized network of exchanges, targeting today’s centralized exchanges as ‘users’ because liquidity currently is and will be here
   - All of the above mentioned are end-user oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply too hard to use, too slow and too expensive for now
-- Exchange Union targets to have a decentralized orderbook propagation to avoid a SPOF
-  - All of the above provide access and orderbooks via a centralized solution or don’t touch orderbook information exchange between individuals
+- Exchange Union targets to have a decentralized order book propagation to avoid a SPOF
+  - All of the above provide access and order books via a centralized solution or don’t touch order book information exchange between individuals
 - Exchange Union uses payment channels for atomic swaps - they are instant
   - All of the above mentioned use on-chain swaps which are costly and take up to one hour to complete. Only Altcoin.io announced plans to ‘explore’ lightning.
 - Exchange Union supports multiple chains
@@ -373,20 +395,18 @@ Brainbot, the company behind the Raiden network, seems to be the only company al
 
 
 ## 5. Requirements Overview
-| Description   | Comments      | Solved in XU?  |
-| ------------- |:-------------:| -----|
-| Each tx must settle near real-time (real tx finality) | Network latency real-time | Yes |
-| Decentralized Swap | Swap assets trust-less without middle-man | Yes |
+| Description          | Comments      | Solved in XU?  |
+| -------------------- |:-------------:| -----|
+| Trustless Swap | Swap assets trustless without middle-man | Yes |
 | Trustless Transfer | Real token transfer, no IOUs | Yes |
-| Decentralized infrastructure | Each exchange runs own XUD | Yes |
+| Fully Decentralized Infrastructure | Each exchange runs XUD, order book decentralized, swap decentralized | Yes |
+| Instant TX finality | No second settlement phase, network latency real-time | Yes |
 | Incentivisation | Honest behavior=reward, Provide service=reward, Malicious behavior=punishment | Yes |
 | Confidential | Tx’s payment data visible for involved parties only | Yes |
 | Smart Contract or ‘Scriptless scripts’ support | Needed for smart collateral or unforeseen future purposes | Depends on chain |
-| XUC usage |  | Yes: Incentivisation + Fee |
-| User knows exchange rate & fee in advance | Defined metadata standards, pre-quote exchange rate to user | Ordersbooks are propagatedd, order will contain amount and exchange rate similar to submitting a trade request on a centralized cryptocurrency exchange. |
-| Any currency can be converted to any currency | multiple assets, path finding | Yes, all chains with payment channels are supported, path finding if no direct payment channel with target exchange exists |
-| Security fallback to public chain |  | Yes |
-| FIAT token support | | Yes |
-| Easy, decentralized, secure updates for exchanges | | Yes |
-| Simple value transfer from user a to user b (no swap) | Support of multiple transaction types with different characteristics (e.g. atomic, partial), requires unique ID for users (idea: civic) | No, later phases |
-
+| XUC usage | Incentivisation + Fee | Yes |
+| User knows exchange rate & fee in advance | Defined metadata standards, pre-quote exchange rate to user | Ordersbooks are propagated, order will contain amount and exchange rate similar to submitting a trade request on a centralized cryptocurrency exchange. |
+| Any currency can be converted to any currency | multiple assets, path finding if no direct pair exists | No, later phase |
+| FIAT token support | Support conversion from Exchange's FIAT to tokenized FIAT | No |
+| Simple value transfer from user a to user b (no swap) | Support of multiple transaction types with different characteristics (e.g. atomic, partial), requires unique ID for users (idea: civic) | No, later phase |
+| Decentralized, secure updates for exchanges | Automatic | No |
