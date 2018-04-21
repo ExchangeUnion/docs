@@ -10,22 +10,22 @@
   3.2. [Atomic Swaps](#32-atomic-swaps)  
   3.3. [Decentralized Order Book](#33-decentralized-order-book-dob)  
   3.4. [Security](#34-security)  
-  3.5. [Visualization: Architecture](#35-visualization:-architecture)  
+  3.5. [Visualization: Architecture](#35-visualization--architecture)  
   3.6. [Sample Trade](#36-sample-trade)  
-  3.7. [Fiat Tokenization](#37-fiat-tokenization-/-stablecoin)  
+  3.7. [Fiat Tokenization](#37-fiat-tokenization--stablecoin)  
     3.7.1. [The USDT Way](#371-the-usdt-way)  
     3.7.2. [The Bitshares Way](#372-the-bitshares-way)  
     3.7.3. [The MakerDAO Way](#373-the-makerdao-way)  
     3.7.4. [The Basis (Basecoin) Way](#374-the-basis-(Basecoin)-way)  
   3.8. [Exchange Earnings](#38-exchange-earnings)  
   3.9. [Incentivisation: The Role of XUC](#39-incentivisation---the-role-of-xuc)  
-  3.10. [Business Model: XUC](#310-business-model:-xuc)  
+  3.10. [Business Model: XUC](#310-business-model--xuc)  
 4. [How is XU different from](#4-how-is-xu-different-from-)  
   4.1. [Ripple/Stellar](#41-ripple-/-stellar)  
   4.2. [Blockstream's Liquid](#42-blockstreams-liquid)  
-  4.3. [Lightning/Raiden](#43-lightning-/-raiden)  
-  4.4. [Alphapoints Remarketer](#44-alphapoint's-remarketer)  
-  4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoin.io-/-etherdelta-/-airswap-/-0x)  
+  4.3. [Lightning/Raiden](#43-lightning--raiden)  
+  4.4. [Alphapoints Remarketer](#44-alphapoint-s-remarketer)  
+  4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoin.io--etherdelta--airswap--0x)  
   4.6. [RaidEX.io](#46-raidexio)  
 5. [Requirements](#5-requirements-overview)
 
@@ -162,7 +162,7 @@ As it is the case on regular digital asset exchanges, a maker and a taker should
 Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XUDs preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUDs only maintain relevant parts of the order book. XUDs constantly exchange order information and updates with connected peers.
 
 
-[XUD Order book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
+[XUD Order Book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
 =============================================================
 *`getOrders`*   
 get orders from the XUD orderbook, called by the exchange to display XU orders in it's UI
