@@ -161,6 +161,50 @@ As it is the case on regular digital asset exchanges, a maker and a taker should
 
 Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XUDs preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUDs only maintain relevant parts of the order book. XUDs constantly exchange order information and updates with connected peers.
 
+[XUD Order Book Data Structure](https://github.com/ExchangeUnion/xud/blob/master/lib/orderbook/)
+=============================================================
+
+```
+currencies {
+Id (string - the currency symbol)
+}
+```
+
+This table is automatically maintained by xud with currencies which have a well-synced wallet and open payment channels to minimum one other xud.
+
+```
+pairs {
+Id (string - `{baseCurrencyId}/{quoteCurrencyId}`)
+baseCurrencyId
+quoteCurrencyId
+swapProtocol ({LND, RAIDEN})
+}
+```
+
+This table is automatically maintained by xud with pairs which are swap-enabled via payment channels.
+
+```
+Orders {
+Id
+pairId
+peerId
+quantity (decimal)
+price (decimal)
+]
+```
+
+Table will maintain the open orders which are received by peer nodes (defined in Peers table in the P2P domain database). A peerID is null for the exchange's own orders, the quantity is positive for buy orders, negative for sell orders.
+
+```
+orderThresholds {
+Id
+pairId
+type({disable, peerIds[], minPrice, maxPrice, minQuantity})
+value
+}
+```
+
+This table defines filters for orders which are preferable to the exchange. For example filter out orders from a certain set of peers, or show only orders from a certain white-listed set of peers or filter out orders below a minimum quantity, which exchanges typically have defined individually for each pair.
 
 [XUD Order Book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
 =============================================================
