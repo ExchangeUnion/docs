@@ -199,12 +199,12 @@ Table will maintain the open orders which are received by peer nodes (defined in
 orderThresholds {
 Id
 pairId
-type({disable, peerIds[], minPrice, maxPrice, minQuantity})
+type({disable, peerId, minPrice, maxPrice, minQuantity})
 value
 }
 ```
 
-This table defines filters for orders which are preferable to the exchange. For example filter out orders from a certain set of peers, or show only orders from a certain white-listed set of peers or filter out orders below a minimum quantity, which exchanges typically have defined individually for each pair.
+This table defines filters for orders which are preferable to the exchange. For example filter out orders from certain peers or filter out orders below a minimum quantity, which exchanges typically have defined individually for each pair.
 
 [XUD Order Book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
 =============================================================
