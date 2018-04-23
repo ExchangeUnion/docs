@@ -233,6 +233,10 @@ The Lightning Network and the Raiden Network take care of security of funds on t
 -----------------------------------------------------
 ![Screenshot](images/Exchange%20Union%20Nodes.png "Exchange Union System")
 
+And an overview of XUD's components:
+
+![Screenshot](images/xud%20components.png "XUD components")
+
 
 3.6. Sample Trade
 -----------------
