@@ -10,7 +10,7 @@
   3.2. [Atomic Swaps](#32-atomic-swaps)  
   3.3. [Decentralized Order Book](#33-decentralized-order-book-dob)  
   3.4. [Security](#34-security)  
-  3.5. [Visualization: Architecture](#35-visualization--architecture)  
+  3.5. [Visualization: Architecture](#35-visualization-architecture)  
   3.6. [Sample Trade](#36-sample-trade)  
   3.7. [Fiat Tokenization](#37-fiat-tokenization--stablecoin)  
     3.7.1. [The USDT Way](#371-the-usdt-way)  
