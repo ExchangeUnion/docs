@@ -375,7 +375,7 @@ Exchange Union’s business model is based on XUC being useful and thus valuable
 
 Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper), slowly reducing the total supply to roughly 2 billion. A ‘transparency’ section on [the website](https://www.exchangeunion.com/) informs about every new XUC release and purpose. Smart contracts handle the burning.
 
-The goal is to transform XU into a platform, where new products plug into XU to swap digital assets. Exchange Union will be developing a set of new products on top of XU with entirely new business models.
+The goal is to transform XU into a platform, where new products plug into XU to swap digital assets. Exchange Union will be developing a set of new products on XU with entirely new business models.
 
 
 ## 4. How is XU different from ...
