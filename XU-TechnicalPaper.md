@@ -137,11 +137,11 @@ A description of how we realize above goals:
 
 1. Minimize latency of order updates
 
-For orders, the DOB protocol strictly follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, XUD requires a direct socket connection between two nodes on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional, payments can be routed through intermediary hops.
+For orders, the DOB protocol follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, XUD requires a direct socket connection between two nodes on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional, payments can be routed through intermediary hops.
 
 ![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "XUD DOB Full Mesh vs. Payment Channel Partial Mesh")
 
-Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase. Individuals running XUD can choose to receive & forward order book information from these super nodes. To become a super node, one has to provide a faster connection between two specific peers as a base requirement. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
+Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase. Individuals running XUD can choose to receive & forward order book information from these super nodes. To become a super node, one must provide a fast and reliable connection between peers. This can be achieved for example through a strategic location on a fiber connection, where peers wouldn't have direct access to and help to further scale and speed-up order book information exchange. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
 
 2. Single point of execution 
 
@@ -204,7 +204,7 @@ value
 }
 ```
 
-This table defines filters for orders which are preferable to the exchange. For example filter out orders from certain peers or filter out orders below a minimum quantity, which exchanges typically have defined individually for each pair.
+This table defines filters for a particular `pairID` which are preferable to the exchange. For example filter out orders from certain peers or filter out orders below a minimum quantity, which exchanges typically have defined individually for each pair. General blacklisting of `peerID` is defined in the `Peers` table (P2P domain).
 
 [XUD Order Book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
 =============================================================
@@ -354,7 +354,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 
 **Incentives for Exchanges**
 - As discussed in chapter 3.3, the main use of XUC is to incentivize liquidity providers, which in particular targets 'large' exchanges
-- In order to further increase interest of exchanges joining Exchange Union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Depending on the business model of the exchange (exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU as takers right away.
+- In order to further increase interest of exchanges joining Exchange Union, especially in the beginning, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdrop'). Depending on the business model of the exchange (exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU right away.
 - These XUC can only be used to pay for services on XU, like paying XUC to the maker. It cannot be sold on the market to ensure market stability.
 - If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. This is beneficial for exposure, since this might be the only way end-users learn about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. Similarly, with XUC, users can get access to new pairs and a better price. For this the XUD would have to check a particular users XUC balance. Exchanges can offer a BNB-like incentive model to get better prices to their users.
 
