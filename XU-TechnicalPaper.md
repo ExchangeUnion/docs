@@ -193,7 +193,7 @@ price (decimal)
 ]
 ```
 
-Table will maintain the open orders which are received by peer nodes (defined in Peers table in the P2P domain database). A peerID is null for the exchange's own orders, the quantity is positive for buy orders, negative for sell orders.
+Table will maintain the open orders which are received by peer nodes (defined in Peers table in the P2P domain database). A `peerID` is null for the exchange's own orders, the `quantity` is positive for buy orders, negative for sell orders.
 
 ```
 orderThresholds {
@@ -204,7 +204,7 @@ value
 }
 ```
 
-This table defines filters for a particular `pairID` which are preferable to the exchange. For example filter out orders from certain peers or filter out orders below a minimum quantity, which exchanges typically have defined individually for each pair. General blacklisting of `peerID` is defined in the `Peers` table (P2P domain).
+This table defines filters for a particular `pairID` which are preferable to the exchange. For example filter out orders from a specific `peerID` or filter out orders below a minimum `quantity`, which exchanges typically have defined individually for each pair. General blacklisting of `peerIDs` is defined in the Peers table in the P2P domain database.
 
 [XUD Order Book API](https://github.com/ExchangeUnion/xud/blob/master/lib/rpc/RpcMethods.js)
 =============================================================
