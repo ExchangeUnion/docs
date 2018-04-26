@@ -137,7 +137,7 @@ A description of how we realize above goals:
 
 1. Minimize latency of order updates
 
-For orders, the DOB protocol follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, XUD requires a direct socket connection between two nodes on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional, payments can be routed through intermediary hops.
+For orders, the DOB protocol follows the first come, first served principle, which remains fully compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, XUD requires a direct socket connection on Internet Protocol level without intermediary hop - a full mesh network. Direct payment channels are optional, payments can be routed through intermediary hops.
 
 ![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "XUD DOB Full Mesh vs. Payment Channel Partial Mesh")
 
