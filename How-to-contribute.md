@@ -1,22 +1,20 @@
-<h1> HOW TO CONTRIBUTE </h1>
+<h1> How To Contribute & Earn XUC </h1>
 
-Thank you for considering to help in building Exchange Union! We welcome any contributions no matter how big or small - from typos to bug fixes, you will be awarded with XUC (Exchange Union's token) after carefully analyzing every pull request. Github is our git version control service of choice, used to track issues, suggestions, feature request, documentations and is home to the source code which powers Exchange Union. 
+Yay! Kudos for being a part of Exchange Union & help building XUD, our node software! Any contributions are welcome no matter how big or small. From typos and bug fixes to entire modules - you will be awarded with XUC, our token.
 
-If you'd like to contribute to the Exchange Union, please fork our repository, push your commits or fixes and send a pull
-request for us to review and merge into the development branch. If, however, you wish to submit substaintial changes or features -
-We encourage you to first have a chat with us on our [Slack Channel](https://exchangeunion.slack.com/).
+Here is how it works:
+1. Grab a task from [here.](https://github.com/ExchangeUnion/xud/issues)
+2. Each task carries a range of XUC to be earned, like e.g. 50-100 XUC. The higher the reward, the more complex - grab a task which best fits your time at hand & skill set.
+3. Let everyone know via the comment field (!) and fork the repo to start workin on your task. 
+4. [Get in touch](https://gitter.im/exchangeunion/Lobby) for help on the way, especially for testing. Our automation is still in the works :/
+5. When you feel ready, submit a pull request  against the `development` branch with your <b>ether address (!)</b> in the comment section
+6. For non-trivial changes, expect some review rounds and quite some testing to take place before your changes get merged into master
+7. After a successful merge into master we'll send you your XUC. For now this is all manual work on our end, but pleeease develop a smart contract with github oracles to automate this whole process (propose a price tag!)
 
-We'll be happy to provide some early feedback and it will help to ensure that any proposed changes are in line with our development ethos.
-This feedback loop would help ensure that the whole process is smooth for you and review and merge process is quick and simple for us.
-Pull requests should be opened against the `development` branch. 
+Goes without saying that you can exchange XUC to other assets on [various exchanges](https://www.exchangeunion.com/xuc).
 
-We encourage you to create the PR as early as possible, this will let us and other open source developers know
-that you have picked-up and are working on the intended issue.  
+If you see something missing or want to develop another cool feature or bug fix which doesn't have an issue yet, open one and we'll review and give it a price tag asap! We don't recommend working on things without an issue on github.
 
-<h2> Remember </h2>
+<h2> Working on your first pull request?</h2>
 
-When submitting pull-request attach your <b>ether address</b> in the <b>commit message</b>. Once we have reviewed your request it will be scored which will determine the amount of XUC payout you will receive. We care about the open source community and want to do our part in encouraging more people to do open source work.
-
-<h2> Working on your first pull request? </h2>
-
-Check out [this how-to](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github/).
+Check out [this how-to!](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github/)
