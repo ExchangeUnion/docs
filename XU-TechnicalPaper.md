@@ -35,7 +35,7 @@
 ---------------
 Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges. It enables cross-exchange trading for new trading pairs, access to the best price, and increased liquidity. Read the initial [White Paper](https://api.exchangeunion.com/pdf/en/ExchangeUnion-WhitePaper.pdf) which describes the idea and its use cases.
 
-1.2. Project Intro
+1.2. Project Introduction
 ------------------
 This specification describes and summarizes commonly agreed technical requirements for Exchange Union and thus should be referred to as “the bible” ;). Exchange Union’s implementation is challenging and can only be achieved with support of a greater developer community. The decision was made to open-source all documentation and the entire code base and to prioritize building a developer community, while also engaging full-time open-source developers to contribute to the development effort. Strategic partnerships with relevant companies will be formed. The business model for funding development is based entirely on Exchange Union's XUC token, which is already in circulation and doesn’t require an ICO.
 
