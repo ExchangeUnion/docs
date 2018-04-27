@@ -1,2 +1,2 @@
 # Docs
-Technical paper, meetup & conference slides, explainer docs
+Technical paper, meetup & conference slides, explainer docs!
