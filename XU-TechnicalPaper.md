@@ -243,7 +243,7 @@ XUD enables two modes for signing an order:
 
 *Mode 1* is the default and signs all orders with the XUD's private key. This ensures that the `XUD_ID` carried in the order's invoice is the actual ID of the XUD sending the invoice. We decided to place the `XUD_ID` directly in the invoice description field for a faster processing, since this avoids a payment hash vs. `XUD_ID` lookup for each incoming new order. This mode prevents XUD's pretending to be someone else and knowing the actual issuer of an order is important for the incentive & punishing mechanism to work. This mode connects to all available peers and is suitable for exchanges located in jurisdictions without a strict legal framework for digital assets. 
 
-*Mode 2* is optional and additionally to everything *Mode 1* does, XUD encrypts orders with the public key of each white-listed peer. This mode is more resource intensive and requires maintaining a white-list of peers. It is suitable for exchanges located in jurisdictions with a strict legal framework to ensure trading is only enabled with users from licensed exchanges.
+*Mode 2* is optional and additionally to everything *Mode 1* does, XUD encrypts orders with the public key of each white-listed peer. This mode is more resource intensive and requires maintaining a white-list of peers. It is suitable for exchanges located in jurisdictions with a strict legal framework and ensures that order information can only be received and viewed by white-listed trading partners, e.g. other licensed exchanges.
 
 3.5. Visualization: Architecture
 -----------------------------------------------------
