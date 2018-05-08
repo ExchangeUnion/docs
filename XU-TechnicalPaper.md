@@ -229,6 +229,22 @@ placeOrder(LTC/ETC, 0, 10)
 -------------
 The Lightning Network and the Raiden Network take care of security of funds on the payment channel rails. This includes resolving disputes over balances on the underlying blockchain and disincentivizing malicious behavior by POS-style punishment (a dishonest party will lose all her funds to the honest party). It especially also includes security when routing payments through intermediary hops. Atomic Swaps bind two payments of a trade together, so that in no event one party can disappear after receiving the first part of the trade. Both payments in a trade have to complete successfully, for both payments to be valid and spendable. Exchange Union is secured against malicious order information in a similar POS-style punishment manner, to disincentivize market manipulation by sending out false order information.
 
+XUD's ID Model
+=============================================================
+
+During setup, a XUD automatically creates a public/private key pair (secp256k1 ECDSA) specifically for identification and order signing purposes, the `XUD_ID`. The public key represents one XUD's unique ID within Exchange Union. Exchanges can let others know what their XUD's public key is by making such available on their website. In this way, exchanges in jurisdictions which require licenses can create a white-list and only connect to other exchanges which fulfill the local jurisdiction's legal requirements. This is achieved by signing orders.
+
+XUD's Order Signing
+=============================================================
+
+XUD enables two modes for signing an order:
+1. Sign order to verify authenticity of public key
+2. Sign & encrypt order to verify authenticity and enforce white-list
+
+*Mode 1* is the default and signs all orders with the XUD's private key. This ensures that the `XUD_ID` carried in the order's invoice is the actual ID of the XUD sending the invoice. We decided to place the `XUD_ID` directly in the invoice description field for a faster processing, since this avoids a payment hash vs. `XUD_ID` lookup for each incoming new order. This mode prevents XUD's pretending to be someone else and knowing the actual issuer of an order is important for the incentive & punishing mechanism to work. This mode connects to all available peers and is suitable for exchanges located in jurisdictions without a strict legal framework for digital assets. 
+
+*Mode 2* is optional and additionally to everything *Mode 1* does, XUD encrypts orders with the public key of each white-listed peer. This mode is more resource intensive and requires maintaining a white-list of peers. It is suitable for exchanges located in jurisdictions with a strict legal framework to ensure trading is only enabled with users from licensed exchanges.
+
 3.5. Visualization: Architecture
 -----------------------------------------------------
 ![Screenshot](images/Exchange%20Union%20Nodes.png "Exchange Union System")
@@ -243,7 +259,7 @@ And an overview of XUD's components:
 This is the basic flow of a trade via XU:
 
 3.6.1. Assuming `Exchange A` is an Exchange Union member and it wants to offer a rare trading pair to its users, **BTC x UnicornCoin**. In order to successfully execute this trade, `Exchange A` should run a XUD which handles opening payment channels, running full nodes and matching trades. In our case, the XUD is configured to open payment channels and run full nodes on both, the Bitcoin and the UnicornCoin network. Opening payment channels requires depositing funds into a channel with a so-called ‘funding transaction’. The deposited BTC amount, let’s say 100 BTC represents the total trading volume which `Exchange A` can execute using BTC.
-
+W
 3.6.2. `Exchange A` has successfully opened a payment channel to minimum one other XUD on Bitcoin and on UnicornCoin and uses a socket connection to its direct peers to send a limit order. This order, which is similar to a regular buy or sell request submitted in a cryptocurrency exchange, includes the amount of requested UnicornCoin with a price in BTC. Let’s assume `Exchange A` sends an **order for selling 100 UnicornCoin** with the requested price of **1 UnicornCoin = 0.1 BTC**. This order is published to all connected peers using a mechanism similar to ‘invoice adding’ and ‘subscription’ in the Lightning client.
 
 3.6.3. XU members on UnicornCoin update their order books based on this new order.
