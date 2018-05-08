@@ -259,7 +259,7 @@ And an overview of XUD's components:
 This is the basic flow of a trade via XU:
 
 3.6.1. Assuming `Exchange A` is an Exchange Union member and it wants to offer a rare trading pair to its users, **BTC x UnicornCoin**. In order to successfully execute this trade, `Exchange A` should run a XUD which handles opening payment channels, running full nodes and matching trades. In our case, the XUD is configured to open payment channels and run full nodes on both, the Bitcoin and the UnicornCoin network. Opening payment channels requires depositing funds into a channel with a so-called ‘funding transaction’. The deposited BTC amount, let’s say 100 BTC represents the total trading volume which `Exchange A` can execute using BTC.
-W
+
 3.6.2. `Exchange A` has successfully opened a payment channel to minimum one other XUD on Bitcoin and on UnicornCoin and uses a socket connection to its direct peers to send a limit order. This order, which is similar to a regular buy or sell request submitted in a cryptocurrency exchange, includes the amount of requested UnicornCoin with a price in BTC. Let’s assume `Exchange A` sends an **order for selling 100 UnicornCoin** with the requested price of **1 UnicornCoin = 0.1 BTC**. This order is published to all connected peers using a mechanism similar to ‘invoice adding’ and ‘subscription’ in the Lightning client.
 
 3.6.3. XU members on UnicornCoin update their order books based on this new order.
