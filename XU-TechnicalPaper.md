@@ -232,7 +232,7 @@ The Lightning Network and the Raiden Network take care of security of funds on t
 XUD's ID Model
 =============================================================
 
-During setup, a XUD automatically creates a public/private key pair (secp256k1 ECDSA) specifically for identification and order signing purposes, the `XUD_ID`. The public key represents one XUD's unique ID within Exchange Union. Exchanges can let others know what their XUD's public key is by making such available on their website. In this way, exchanges in jurisdictions which require licenses can create a white-list and only connect to other exchanges which fulfill the local jurisdiction's legal requirements. This is achieved by signing orders.
+During setup, a XUD automatically creates a public/private key pair (`secp256k1 ECDSA`) for identification and order signing purposes, the `XUD_ID`. The private key is saved on disk and encrypted with a password. A reboot of XUD requires entering this password; generating new public/private key pairs is optional. The public key represents one XUD's unique ID within Exchange Union. Exchanges can let others know what their XUD's public key is by making such available on their website. In this way, exchanges in jurisdictions which require licenses can create a white-list and only connect to other exchanges which fulfill the local jurisdiction's legal requirements. This is achieved by signing orders.
 
 XUD's Order Signing
 =============================================================
