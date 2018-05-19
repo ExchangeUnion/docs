@@ -153,11 +153,15 @@ Makers are earning XUC, takers are paying for filling orders. Makers set a price
 
 4. Punish malicious behavior
 
-Market makers are required to stake a certain amount of XUC in a smart contract in order to be able to act as a market maker. This will be used to execute punishments, for example if a makers XUD creates HTLCs for a payment, but never releases the preimage to execute them and thus locks up funds of other exchanges.
+All XUD's are required to stake a certain amount of XUC in a Ethereum smart contract in order to be able to act as a maker or taker; since this can't be controlled, we don't distinguish here. For the PoC, the staking minimum is a flat 1000 XUC, in a later phase the amount of staked XUC will determine the overall volume a XUD can trade (denominated in XUC, fed by several price feeds). This staked XUC will be taken away as punishment in case of malicious behavior. It's not part of the PoC. 
+
+The procedure is as follows: in the setup process of XUD the XUC hot wallet is funded with 1000 XUC, which then deposits these into a smart contract, which is controlled by a set of watchtowers (X-of-X multisig). Watchtowers maintain a list which `XUD_IDs` staked XUC and XUDs can query a set of watchtowers for specific `XUD_IDs` to verify they indeed did stake the required XUC. 
+
+If a XUD in a maker role behaves maliciously, for example creates HTLCs for a payment, but never releases the preimage to execute them and thus locks up funds of taker(s), the payment channel is force-closed by the taker after X amount of blocks. Block times differ from chain to chain, we need something similar to one hour. Since the taker is broadcasting the force-close transaction, the maker will be given a grace period to veto this punishment via a cryptographic proof that the swap completed successfully - the revoke transaction. Watchtowers maintain full nodes of multiple chains and watch for confirmed force-closed transactions. If one is found, the staked XUC of the maker are transferred to another contract which burns them, if a successfully revoked transaction is found, the staked XUC of the taker are burned.
 
 5. Privacy between two trading parties (not part of PoC)
 
-As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange is currently being explored, but is not a priority for the PoC for now.
+As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange could be an option, but would require order forwarding and slow down things and is not a priority for the PoC for now.
 
 Also, there will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on an XUDs preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUDs only maintain relevant parts of the order book. XUDs constantly exchange order information and updates with connected peers.
 
@@ -232,7 +236,7 @@ The Lightning Network and the Raiden Network take care of security of funds on t
 XUD's ID Model
 =============================================================
 
-During setup, a XUD automatically creates a public/private key pair (`secp256k1 ECDSA`) for identification and order signing purposes, the `XUD_ID`. The private key is saved on disk and encrypted with a password. A reboot of XUD requires entering this password; generating new public/private key pairs is optional. The public key represents one XUD's unique ID within Exchange Union. Exchanges can let others know what their XUD's public key is by making such available on their website. In this way, exchanges in jurisdictions which require licenses can create a white-list and only connect to other exchanges which fulfill the local jurisdiction's legal requirements. This is achieved by signing orders.
+During setup, a XUD automatically creates a public/private key pair (using bitcoin's `secp256k1 ECDSA`) for identification and order signing purposes, the `XUD_ID`. The private key is saved on disk and encrypted with a password. A reboot of XUD requires entering this password; generating new public/private key pairs is optional. The public key represents one XUD's unique ID within Exchange Union. Exchanges can let others know what their XUD's public key is by making such available on their website. In this way, exchanges in jurisdictions which require licenses can create a white-list and only connect to other exchanges which fulfill the local jurisdiction's legal requirements. This is achieved by signing orders.
 
 XUD's Order Signing
 =============================================================
@@ -243,7 +247,7 @@ XUD enables two modes for signing an order:
 
 *Mode 1* is the default and signs all orders with the XUD's private key. This ensures that the `XUD_ID` carried in the order's invoice is the actual ID of the XUD sending the invoice. We decided to place the `XUD_ID` directly in the invoice description field for a faster processing, since this avoids a payment hash vs. `XUD_ID` lookup for each incoming new order. This mode prevents XUD's pretending to be someone else and knowing the actual issuer of an order is important for the incentive & punishing mechanism to work. This mode connects to all available peers and is suitable for exchanges located in jurisdictions without a strict legal framework for digital assets. 
 
-*Mode 2* is optional and additionally to everything *Mode 1* does, XUD encrypts orders with the public key of each white-listed peer. This mode is more resource intensive and requires maintaining a white-list of peers. It is suitable for exchanges located in jurisdictions with a strict legal framework and ensures that order information can only be received and viewed by white-listed trading partners, e.g. other licensed exchanges.
+*Mode 2* is optional and additionally to everything *Mode 1* does, XUD encrypts orders with the public key of each white-listed peer. This mode is more resource intensive and requires maintaining a white-list of peers. It is suitable for exchanges located in jurisdictions with a strict legal framework and ensures that order information can only be received and viewed by white-listed trading partners, e.g. other licensed exchanges. It is not part of the PoC.
 
 3.5. Visualization: Architecture
 -----------------------------------------------------
@@ -383,7 +387,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 - A user has X trading volume on Exchange Union, this user gets rewarded with XUC from his exchange platform
 - This is a program of each individual exchange
 
-*By default, each XUD opens a XUC payment channel to be able to pay makers, for order book relays and other services and also receive XUC payments for these services.*
+*By default, each XUD opens a XUC payment channel to be able to pay makers, for order book relays and other services and also receive XUC payments for these services. A missing XUC channel with a certain bi-directional volume results in a error message upon calling the `placeOrder(params)` API.*
 
 3.10. Business Model - XUC
 -------------------------
