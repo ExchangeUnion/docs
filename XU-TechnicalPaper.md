@@ -153,7 +153,7 @@ Makers are earning XUC, takers are paying for filling orders. Makers set a price
 
 4. Punish malicious behavior
 
-All XUD's are required to stake a certain amount of XUC in a Ethereum smart contract in order to be able to act as a maker or taker; since this can't be controlled, we don't distinguish here. For the PoC, the staking minimum is a flat 1000 XUC, in a later phase the amount of staked XUC will determine the overall volume a XUD can trade (denominated in XUC, fed by several price feeds). This staked XUC will be taken away as punishment in case of malicious behavior. It's not part of the PoC. 
+All XUD's are required to stake a certain amount of XUC in a Ethereum smart contract in order to be able to act as a maker or taker. For the PoC, the staking minimum is a flat 1000 XUC, in a later phase the amount of staked XUC will determine the overall volume a XUD can trade (denominated in XUC, fed by several price feeds). This staked XUC will be taken away as punishment in case of malicious behavior. It's not part of the PoC. 
 
 The XUD setup procedure is as follows: the XUC hot wallet is funded with 1000 XUC, which then deposits these into a smart contract, which is controlled by a set of watchtowers (X-of-X multisig). Watchtowers maintain a list which `XUD_IDs` staked XUC and XUDs can query a set of watchtowers for specific `XUD_IDs` to verify they indeed did stake the required XUC. 
 
