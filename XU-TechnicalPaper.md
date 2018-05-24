@@ -103,7 +103,7 @@ Since Ethereum includes all ERC20 tokens, Exchange Union supports the vast major
 
 3.3. Decentralized Order Book (DOB)
 --------------------------
-The DOB is a key task for XU and an unresolved problem on existing decentralized exchanges where, to the best of our knowledge, the order book part is realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe order book propagation and matching has to be decentralized to the best degree possible to sustain the robustness and censorship resistance of the network.
+The DOB is a key task for XU and an unresolved problem on existing decentralized exchanges where, to the best of our knowledge, the order book part is realized in a centralized way e.g. [1](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [2](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe order book propagation and matching has to be decentralized to the best degree possible to sustain the robustness and censorship resistance of the network. Nevertheless, decentralization always comes at a cost, in particular our protocol chooses latency over consistency based on the [PACELC theorem](https://en.wikipedia.org/wiki/PACELC_theorem).
 
 DOB's mainly face the following issues:
 
