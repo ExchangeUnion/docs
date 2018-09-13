@@ -39,6 +39,6 @@ All code is linted with [tslint](https://github.com/palantir/tslint) using a sli
 
 Make your code legible by using descriptive variable, function, and class names. For blocks of codes whose function is not readily apparent, add comments explaining what they do. If a pull request changes the interface to `xud` or introduces new functionality, update the README to describe these changes.
 
-Xud uses [TypeDoc](http://typedoc.org/guides/doccomments/) and any comments documenting specific classes, methods, properties should follow this convention.
+`xud` uses [TypeDoc](http://typedoc.org/guides/doccomments/) and any comments documenting specific classes, methods, properties should follow this convention.
 
 Commit messages should be concise and descriptive. For larger or more complex commits, add details of what has changed in the commit description.
