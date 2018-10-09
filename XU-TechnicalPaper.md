@@ -373,7 +373,7 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 -------------------------
 Exchange Union’s business model is based on XUC being useful and thus valuable. As discussed above, the main usage of XUC within XU is as fee payment from taker to maker, the liquidity provider. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem & thus demand grows. The original proposal for Exchange Union used sidechains where every transaction would burn a small amount of XUC as a way to combat spam. However, the concern about spam transactions are mitigated to good extent by using payment channels.
 
-Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper), slowly reducing the total supply to roughly 2 billion. A ‘transparency’ section on [the website](https://www.exchangeunion.com/) informs about every new XUC release and purpose. Smart contracts handle the burning.
+Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper), slowly reducing the total supply to roughly 2 billion. A ‘transparency’ section on [the website](https://www.exchangeunion.com/xuc) informs about every new XUC release and purpose. Smart contracts handle the burning.
 
 The goal is to transform XU into a platform, where new products plug into XU to swap digital assets. Exchange Union will be developing a set of new products on top of XU with entirely new business models.
 
