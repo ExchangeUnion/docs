@@ -26,8 +26,8 @@
   4.3. [Lightning/Raiden](#43-lightning--raiden)  
   4.4. [Alphapoints Remarketer](#44-alphapoints-remarketer)  
   4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoinio--etherdelta--airswap--0x--idex)  
-  4.6. [sparkswap](#46-sparkswap) 
-  4.7. [RaidEX.io](#47-raidexio) 
+  4.6. [sparkswap](#46-sparkswap)  
+  4.7. [RaidEX.io](#47-raidexio)  
 5. [Requirements](#5-requirements-overview)
 
 
