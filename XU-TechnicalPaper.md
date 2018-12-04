@@ -28,7 +28,6 @@
   4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoinio--etherdelta--airswap--0x--idex)  
   4.6. [sparkswap](#46-sparkswap)  
   4.7. [RaidEX.io](#47-raidexio)  
-5. [Requirements](#5-requirements-overview)
 
 
 ## 1. Executive Summary
