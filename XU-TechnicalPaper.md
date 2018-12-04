@@ -25,8 +25,9 @@
   4.2. [Blockstream's Liquid](#42-blockstreams-liquid)  
   4.3. [Lightning/Raiden](#43-lightning--raiden)  
   4.4. [Alphapoints Remarketer](#44-alphapoints-remarketer)  
-  4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoinio--etherdelta--airswap--0x)  
-  4.6. [RaidEX.io](#46-raidexio)  
+  4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoinio--etherdelta--airswap--0x--idex)  
+  4.6. [sparkswap](#46-sparkswap) 
+  4.7. [RaidEX.io](#47-raidexio) 
 5. [Requirements](#5-requirements-overview)
 
 
@@ -376,40 +377,29 @@ Flawed incentivisation is believed to be the main reason why other solutions for
 
 **Incentives for Exchanges**
 - As discussed in chapter 3.3, the main use of XUC is to incentivize makers (liquidity providers)
-- Makers can set a XUC price tag for their orders, which 
-- In order to further increase interest of exchanges joining Exchange Union, the idea is to allocate a certain amount of XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdropped') or managed by the exchange. Depending on the business model of the exchange. Either the exchange pays taker's XUC fee, or user directly), the advantage would be that all users can start using XU right away.
-- These XUC can only be used to pay for services on XU, like paying XUC to the maker. It cannot be sold on the market to ensure market stability.
-- If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. This is beneficial for exposure, since this might be the only way end-users learn about Exchange Union. Compare Binance’s BNB model here, which gives discount on fees for holders of BNB. Similarly, with XUC, users can get access to new pairs and a better price. For this the XUD would have to check a particular users XUC balance. Exchanges can offer a BNB-like incentive model to get better prices to their users.
+- Makers can set a XUC price tag for their orders, which is to be paid by takers to gain the right to fill their order. All this happens automatically in the atomic swap
+- In order to further increase interest of exchanges joining Exchange Union, the idea is to allocate XUC to new exchanges joining Exchange Union. These are to be distributed to an exchange's users ('airdropped') or managed by the exchange, depending on the business model of the exchange. Either the exchange pays maker's XUC fee, or user directly
+- If the exchange decides to let end-users earn and pay XUC for trades, *end-users have to hold XUC in order to use XU as a taker*. Compare Binance’s BNB model, which gives discount on fees for holders of BNB.
 
-
-Additionally, the different functionaries which are rewarded with XUC are as follows:
+Additionally, the different functionaries which are rewarded with XUC are:
 
 **Incentives for Developers**
-- Each pull-request to the [Exchange Union github](https://github.com/ExchangeUnion) gets peer reviewed and a score by each reviewer. XUC is paid to the contributor based on that score.
-- When the pull-request makes it into the master-branch, another XUC amount gets paid to the developer
+- Each pull-request to the [Exchange Union github](https://github.com/ExchangeUnion) gets peer reviewed and a score by each reviewer. XUC is paid to the contributor based on that score. In operation since 04/18.
 - Reviewers get rewarded
 - Testers get rewarded, test-net time gets rewarded
 
+**Incentives for Functionaries which provide services (not part of PoC)**
+- Order book relays by super nodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a super node which provides a faster connection, might pay for this service.
 
-
-**Incentives for Functionaries which provide services (running a XUD)**
-- Order book relays by super nodes will get awarded with XUC in a later stage. Peers choosing to obtain order information from a super node which provides a faster connection, will pay for this service.
-- Watchtower service gets rewarded with XUC: especially individuals in the future will be interested in this service - in order for payment channels to be secure, the main chain has to be watched for illicit transactions, as introduced in the beginning of chapter two. If someone is not sure to be able to be online in certain time intervals, this responsibility can be outsourced to someone else who charges a tiny fee for this service. 
-- **We support Lightning/Raiden adoption and growth** with above incentives also help to [solve the maintenance problem of such nodes](https://www.youtube.com/watch?v=dlJG4OHdJzs) (the exchange wants maintain the XU software anyways to be able to use it) 
-
-**Incentives for traders**
-- A user has X trading volume on Exchange Union, this user gets rewarded with XUC from his exchange platform
-- This is a program of each individual exchange
-
-*By default, each XUD opens a XUC payment channel to be able to pay makers, for order book relays and other services and also receive XUC payments for these services. A missing XUC channel with a certain bi-directional volume results in a error message upon calling the `placeOrder(params)` API.*
+**Incentives for traders (not part of XU)**
+- A user has X trading volume on Exchange Union: this user gets rewarded with XUC by exchange
+- This is a program of each exchange
 
 3.10. Business Model - XUC
 -------------------------
-Exchange Union’s business model is based on XUC being useful and thus valuable. As discussed above, the main usage of XUC within XU is as fee payment from taker to maker, the liquidity provider. XUC’s overall supply is fixed to 3 billion, which naturally makes it deflationary the more the XU ecosystem & thus demand grows. The original proposal for Exchange Union used sidechains where every transaction would burn a small amount of XUC as a way to combat spam. However, the concern about spam transactions are mitigated to good extent by using payment channels.
+Exchange Union’s business model is based on XUC. If XUC is useful and  being used within in Exchange Union, it's valuable. As discussed above, the main usage of XUC within XU is as fee payment from taker to maker, the liquidity provider. XUC’s overall supply is fixed to 3 billion, which makes it deflationary the more the XU ecosystem & demand grows.
 
-Nevertheless, with a burn-per-trade we will burn the 30% excess supply (Last ‘reserve’ part of the token allocation in the white paper), slowly reducing the total supply to roughly 2 billion. A ‘transparency’ section on [the website](https://www.exchangeunion.com/xuc) informs about every new XUC release and purpose. Smart contracts handle the burning.
-
-The goal is to transform XU into a platform, where new products plug into XU to swap digital assets. Exchange Union will be developing a set of new products on top of XU with entirely new business models.
+The goal is to transform XU into a platform, where new products plug into XU to swap digital assets. We will support a set of new products on top of XU with entirely new business models.
 
 
 ## 4. How is XU different from ...
@@ -418,34 +408,34 @@ The goal is to transform XU into a platform, where new products plug into XU to 
 4.1. [Ripple](https://ripple.com/) / [Stellar](https://www.stellar.org/)
 ----------------------------------------------------------------------
 - Exchange Union is trustless - always.
-  - Ripple/Stellar requires building up a trust network for exchanging IOU-based tokens, which exposes involved parties to counterparty risk. This would cause loss of funds when an exchange would go bankrupt or get hacked and thus is not acceptable.
-- Exchange Union always transfers the native underlying asset. If for instance bitcoin and ethereum get exchanged, real bitcoin and real ethereum and transferred between the two involved parties
-  - Ripple’s trustless approach uses XRP as intermediary, which proves to be risky in practice due to the lack of liquid XRP markets against all currencies.
+  - Ripple/Stellar requires building up a trust network for exchanging IOU-based tokens, which exposes involved parties to counterparty risk. This would cause loss of funds when an exchange would go bankrupt or get hacked and thus is not suitable for including unregulated exchanges.
+- Exchange Union always transfers the native underlying asset. If for instance bitcoin and ethereum get exchanged, actual bitcoin and actual ethereum are transferred between the two exchanges
+  - Ripple’s trustless approach uses XRP as intermediary, which proves to be risky in practice due to the lack of liquid XRP markets against other currencies
 - Exchange Union transacts value via payment channels between two parties only; transactions are are secured by the underlying blockchains, e.g. bitcoin, ethereum or litecoin, which are block-history-based
-  - Ripple/Stellar maintain balances in a Distributed Ledger, important is just the last commonly agreed ledger state, history doesn’t matter.
-- Different target users: Exchange Union targets digital asset exchanges, which especially includes small, unregulated and unlicensed exchanges. This is enabled by the trustless nature of the Exchange Union network: no requirements to build up a trust network or maintain list of untrusted parties
+  - Ripple/Stellar maintain balances in a Distributed Ledger, important is just the last commonly agreed ledger state
+- Different target users: Exchange Union targets digital asset exchanges, which especially includes small, unregulated and unlicensed exchanges. This is possible due to the trustless nature of the Exchange Union network: no requirements to build up a trust network or maintain list of untrusted parties
   - Ripple/Stellar target traditional banks; which sort-of know and trust each other
 
 
 4.2. [Blockstream’s Liquid](https://blockstream.com/liquid/)
 ------------------------------------------------------------
-- Exchange Union is a decentralized meta-exchange infrastructure, exchange of assets happens on Exchange Union
+- Exchange Union is a decentralized mexchange infrastructure, exchange of assets happens on Exchange Union
   - Liquid simply lets users transfer bitcoin from Exchange A to B
 - Exchange Union is (network-latency) instant
-  - Liquid is a sidechain with about 1 min, in future down to 10s block times. But never instant.
-- Exchange Union requires a XUD, software only
+  - Liquid is a sidechain with about 1 min block times, in future down to 10s block times. But never instant.
+- Exchange Union requires XUD, software only
   - Liquid requires special hardware
 - Exchange Union is completely open source and free to use
   - Liquid requires exchanges paying a monthly fee (as of 2016: 2500 USD)
 - Exchange Union automates a trade
   - Liquid asks users to handle of X, Q or H liquid addresses on both exchanges, needs verified accounts on both exchanges, need to manually trigger transactions
 - Exchange Union benefits traders & exchanges, see [chapter 2](https://github.com/ExchangeUnion/Docs/blob/master/XU-TechnicalPaper.md#2-product-description)
-  - Liquid benefits traders
+  - Liquid benefits traders only
 
 
 4.3. [Lightning](http://lightning.engineering/) / [Raiden](https://raiden.network/)
 -----------------------------------------------------------------------------------
-- Exchange Union builds on top of lightning & raiden, it’s using pure Lightning/Raiden with atomic swaps in the background and adds some features like order book propagation to build a fully functioning decentralized meta-exchange
+- Exchange Union *IS* Lightning & Raiden. It builds on top by using atomic swaps on Lightning & Raiden. It adds some features like order book propagation to build a fully functioning decentralized exchange.
 
 
 4.4. [Alphapoint’s Remarketer](https://www.alphapoint.com/remarketer.html)
@@ -453,42 +443,35 @@ The goal is to transform XU into a platform, where new products plug into XU to 
 - Exchange Union has the same goal of increasing liquidity for exchanges, but is fully decentralized, open-source & free to use.
   - Alphapoint is a centralized commercial remarketer, requires fees and onboarding
 - Exchanges in Exchange Union swap assets directly with each other
-  - Alphapoint's software does buy and sell on exchange's behalf on another exchange. It requires multiple accounts and manual maintenance of balances
+  - Alphapoint's software does buy and sell on exchange's behalf on another exchange. It requires multiple accounts and operational maintenance of balances on other exchanges.
 - Exchange Union's infrastructure abstracts from different blockchains and supports all chains with a payment channel implementation
   - Alphapoint is limited to supported exchanges and FIAT currencies (USD)
 
 
-4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [AirSwap](https://airswap.io/) / [0x](https://0xproject.com/)
+4.5. [Altcoin.io](https://www.altcoin.io/) / [Etherdelta](https://etherdelta.com) / [AirSwap](https://airswap.io/) / [0x](https://0xproject.com/) / [IDEX](https://idex.market/)
 ----------------------------------------------------------------------------------------------------------------
-- Exchange Union is a decentralized network of exchanges, targeting today’s centralized exchanges as ‘users’ because liquidity currently is and will be here
-  - All of the above mentioned are end-user oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply too hard to use, too slow and too expensive for now
+- Exchange Union is a decentralized network of exchanges, targeting centralized exchanges as stage one ‘users’
+  - All of the above mentioned are trader oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply illiquid, too hard to use and too slow (on-chain based)
 - Exchange Union targets to have a decentralized order book propagation to avoid a SPOF
-  - All of the above provide access and order books via a centralized solution or don’t touch order book information exchange between individuals
+  - All of the above provide access and order books via a centralized solution or don’t handle order book information exchange
 - Exchange Union uses payment channels for atomic swaps - they are instant
-  - All of the above mentioned use on-chain swaps which are costly and take up to one hour to complete. Only Altcoin.io announced plans to ‘explore’ lightning.
+  - All of the above mentioned use on-chain swaps which are costly and take up to one hour to complete. Only Altcoin.io announced plans to ‘explore’ lightning, but seems to have chosen [Plasma](https://blog.altcoin.io/plasma-dex-v1-launching-next-month-4cb5e5ea56f6) by now.
 - Exchange Union supports multiple chains
   - Etherdelta/0x are limited to Ethereum-based assets (ERC20), altcoin.io promises BTC/ETH, but is still not live.
 
-
-4.6. [RaidEX.io](https://www.raidex.io/)
+4.6. [sparkswap](https://sparkswap.com/)
 ----------------------------------------
-Brainbot, the company behind the Raiden network, seems to be the only company already working on a decentralized exchange based on payment channels. For now, it’s unclear if RaidEX will target users directly or Exchanges first, but it’s more likely to target individuals. Also, it will be limited to Ethereum-based assets on Raiden. Exchange Union will closely collaborate with brainbot.
+Is a relatively new, well received project offering atomic swaps on lightning
+- main difference are the target users institutional traders, hence the [ccxt](https://github.com/ccxt/) compatible API and really nice (!) CLI
+- centralized spark swap order book, revenue goes to sparkswap
+- a smaller technical difference lies in the details how atomic swaps were implemented (modified lightning invoices)
 
+4.7. [RaidEX.io](https://www.raidex.io/)
+----------------------------------------
+Brainbot, the company behind the Raiden network, also explores the idea of a decentralized exchange based on payment channels. For now, it’s unclear if RaidEX will target users directly or Exchanges first, but it’s more likely to target individuals. Also, it will likely be limited to Ethereum-based assets on Raiden.
 
+### Help us to improve!
 
-## 5. Requirements Overview
-| Description          | Comments      | Solved in XU?  |
-| -------------------- |:-------------:| -----|
-| Trustless Swap | Swap assets trustless without middle-man | Yes |
-| Trustless Transfer | Real token transfer, no IOUs | Yes |
-| Fully Decentralized Infrastructure | Each exchange runs XUD, order book decentralized, swap decentralized | Yes |
-| Instant TX finality | No second settlement phase, network latency real-time | Yes |
-| Incentivisation | Honest behavior=reward, Provide service=reward, Malicious behavior=punishment | Yes |
-| Confidential | Tx’s payment data visible for involved parties only | Yes |
-| Smart Contract or ‘Scriptless scripts’ support | Needed for smart collateral or unforeseen future purposes | Depends on chain |
-| XUC usage | Incentivisation + Fee | Yes |
-| User knows exchange rate & fee in advance | Defined metadata standards, pre-quote exchange rate to user | Ordersbooks are propagated, order will contain amount and exchange rate similar to submitting a trade request on a centralized cryptocurrency exchange. |
-| Any currency can be converted to any currency | multiple assets, path finding if no direct pair exists | No, later phase |
-| FIAT token support | Support conversion from Exchange's FIAT to tokenized FIAT | No |
-| Simple value transfer from user a to user b (no swap) | Support of multiple transaction types with different characteristics (e.g. atomic, partial), requires unique ID for users (idea: civic) | No, later phase |
-| Decentralized, secure XUD updates | Automatic | No |
+`xud` is in alpha stage, as well as this tech paper. Please help us to improve by [opening issues (or even better PRs)](https://github.com/ExchangeUnion/Docs/issues).
+
+Feel like talking? Chat with us on [Gitter](https://gitter.im/exchangeunion/lobby)!
