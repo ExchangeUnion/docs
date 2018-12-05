@@ -12,7 +12,7 @@
   3.4. [Security](#34-security)  
   3.5. [Visualization: Architecture](#35-visualization-architecture)  
   3.6. [Sample Trade](#36-sample-trade)  
-  3.7. [Fiat Tokenization](#37-fiat-tokenization--stablecoin)  
+  3.7. [Fiat Tokenization](#37-fiat-tokenization--stablecoins)  
     3.7.1. [The USDT Concept](#371-the-usdt-concept)  
     3.7.2. [The Bitshares Concept](#372the-bitshares-concept)  
     3.7.3. [The MakerDAO Concept](#373-the-makerdao-concept)  
