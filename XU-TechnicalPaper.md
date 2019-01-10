@@ -475,10 +475,10 @@ Brainbot, the company behind the Raiden network, also explores the idea of a dec
 4.8. [Waves](https://wavesplatform.com/)
 ----------------------------------------
 - DEX on it's own blockchain with a decently centralized validator model (PoS)
-- gateways, it's not clear what the security implications compared to locking into a real sidechain are
-- centralized match maker
-- mandatory waves token
-- fast, but not as fast as a payment channel
+- Gateways, it's not clear what the security implications compared to locking into a real sidechain are
+- Centralized match maker
+- Mandatory waves token
+- Fast, but not as fast as a payment channel
 
 ### Help us to improve!
 
