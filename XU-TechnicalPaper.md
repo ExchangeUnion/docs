@@ -28,6 +28,7 @@
   4.5. [Altcoin.io/Etherdelta/Airswap/0x](#45-altcoinio--etherdelta--airswap--0x--idex)  
   4.6. [sparkswap](#46-sparkswap)  
   4.7. [RaidEX.io](#47-raidexio)  
+  4.8. [Waves](#48-waves) 
 
 
 ## 1. Executive Summary
@@ -421,7 +422,7 @@ The goal is to transform XU into a platform, where new products plug into XU to 
 - Exchange Union is a decentralized mexchange infrastructure, exchange of assets happens on Exchange Union
   - Liquid simply lets users transfer bitcoin from Exchange A to B
 - Exchange Union is (network-latency) instant
-  - Liquid is a sidechain with about 1 min block times, in future down to 10s block times. But never instant.
+  - Liquid is a sidechain with about 1 min block times, in future down to 10s block times. But never as fast as a payment channel.
 - Exchange Union requires XUD, software only
   - Liquid requires special hardware
 - Exchange Union is completely open source and free to use
@@ -429,7 +430,7 @@ The goal is to transform XU into a platform, where new products plug into XU to 
 - Exchange Union automates a trade
   - Liquid asks users to handle of X, Q or H liquid addresses on both exchanges, needs verified accounts on both exchanges, need to manually trigger transactions
 - Exchange Union benefits traders & exchanges, see [chapter 2](https://github.com/ExchangeUnion/Docs/blob/master/XU-TechnicalPaper.md#2-product-description)
-  - Liquid benefits traders only
+  - Liquid benefits traders, benefit for exchanges is not clear.
 
 
 4.3. [Lightning](http://lightning.engineering/) / [Raiden](https://raiden.network/)
@@ -451,23 +452,33 @@ The goal is to transform XU into a platform, where new products plug into XU to 
 ----------------------------------------------------------------------------------------------------------------
 - Exchange Union is a decentralized network of exchanges, targeting centralized exchanges as stage one ‘users’
   - All of the above mentioned are trader oriented and are not believed to reach mass adoption and critical liquidity in the near future because they are simply illiquid, too hard to use and too slow (on-chain based)
-- Exchange Union targets to have a decentralized order book propagation to avoid a SPOF
+- Exchange Union uses decentralized order propagation to avoid a SPOF
   - All of the above provide access and order books via a centralized solution or don’t handle order book information exchange
-- Exchange Union uses payment channels for atomic swaps - they are instant
+- Exchange Union uses payment channels for atomic swaps
   - All of the above mentioned use on-chain swaps which are costly and take up to one hour to complete. Only Altcoin.io announced plans to ‘explore’ lightning, but seems to have chosen [Plasma](https://blog.altcoin.io/plasma-dex-v1-launching-next-month-4cb5e5ea56f6) by now.
 - Exchange Union supports multiple chains
-  - Etherdelta/0x are limited to Ethereum-based assets (ERC20), altcoin.io promises BTC/ETH, but is still not live.
+  - Etherdelta/0x are limited to Ethereum-based assets (ERC20), altcoin.io promises BTC/ETH, but is still not live
 
 4.6. [sparkswap](https://sparkswap.com/)
 ----------------------------------------
 Is a relatively new, well received project offering atomic swaps on lightning
-- main difference are the target users institutional traders, hence the [ccxt](https://github.com/ccxt/) compatible API and really nice (!) CLI
-- centralized spark swap order book, revenue goes to sparkswap
-- a smaller technical difference lies in the details how atomic swaps were implemented (modified lightning invoices)
+- Main difference are the target users - institutional traders
+- Hence the [ccxt](https://github.com/ccxt/) compatible API and really nice (!) CLI
+- Centralized spark swap order relayer, revenue goes to sparkswap
+- A smaller technical difference lies in the details how atomic swaps were implemented (modified lightning invoices)
+- Technology-wise close to Exchange Union
 
 4.7. [RaidEX.io](https://www.raidex.io/)
 ----------------------------------------
 Brainbot, the company behind the Raiden network, also explores the idea of a decentralized exchange based on payment channels. For now, it’s unclear if RaidEX will target users directly or Exchanges first, but it’s more likely to target individuals. Also, it will likely be limited to Ethereum-based assets on Raiden.
+
+4.8. [Waves](https://wavesplatform.com/)
+----------------------------------------
+- DEX on it's own blockchain with a decently centralized validator model (PoS)
+- gateways, it's not clear what the security implications compared to locking into a real sidechain are
+- centralized match maker
+- mandatory waves token
+- fast, but not as fast as a payment channel
 
 ### Help us to improve!
 
