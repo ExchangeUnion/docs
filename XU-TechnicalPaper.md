@@ -155,7 +155,7 @@ There is one single point of execution for each order: the taker. The taker deci
 * taker releases `r_preImage`
 * taker sends `swapCompleted` to maker
 
-Before the taker releases `pre_Image`, a swap can be cancelled gracefully. After the release of `r_preImage` a swap is considered completed.
+Before the taker releases `r_preImage`, a swap can be cancelled gracefully. After the release of `r_preImage` a swap is considered completed.
 
 XUD takes care that both sides have a payment channel path with sufficient volume for a specific order. Also, it is taken care, that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer.
 
