@@ -35,23 +35,23 @@
 
 1.1. The Vision
 ---------------
-Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network**, which enables **instant and trustless** trades between digital asset exchanges, as well as individual traders. It enables cross-exchange trading for increased liquidity, access to the best price and an additional revenue stream for liquidity providers.
+Exchange Union (XU) connects digital asset exchanges by forming **a decentralized network** which enables **instant and trustless** trades between digital asset exchanges as well as individual traders. It enables cross-exchange trading for increased liquidity, access to the best price and an additional revenue stream for liquidity providers.
 
 1.2. Project Intro
 ------------------
-The Exchange Union project is powered by [XUD](https://github.com/ExchangeUnion/xud/), short for **Exchange Union Daemon**, the  open source node software which is operated by exchanges (or traders) and comprises the network. This document describes the inner workings of XUD from a product & technical perspective and summarizes technical requirements. For an overview of idea, use case & benefits read the [White Paper](https://www.exchangeunion.com/static/files/ExchangeUnion-WhitePaper_en.pdf), for hands-on guides check our [Wiki](https://github.com/ExchangeUnion/xud/wiki) and for code-level documentation our [TypeDoc](https://exchangeunion.github.io/xud-typedoc/). Chat with us on [Gitter](https://gitter.im/exchangeunion/Lobby) and follow major event & development milestones on our [blog](https://blog.exchangeunion.com/).
+The Exchange Union project is powered by [xud](https://github.com/ExchangeUnion/xud/), short for **Exchange Union Daemon**, the  open source node software which is operated by exchanges (or traders) and comprises the network. This document describes the inner workings of `xud` from a product & technical perspective and summarizes technical requirements. For an overview of the project & use case read the [White Paper](https://www.exchangeunion.com/static/files/ExchangeUnion-WhitePaper_en.pdf), for hands-on guides check our [Wiki](https://github.com/ExchangeUnion/xud/wiki) and for code-level documentation our [TypeDoc](https://exchangeunion.github.io/xud-typedoc/). Chat with us on [Gitter](https://gitter.im/exchangeunion/Lobby) and follow major event & development milestones on our [blog](https://blog.exchangeunion.com/).
 
-XUD's code base and documentation is available under the [AGPL-3.0](https://github.com/ExchangeUnion/xud/blob/master/LICENSE) open-source license. The objective is to build a open-source developer community, while additionally employing full-time developers under the Exchange Union brand. Development is funded through an initial private sale of 2% of Exchange Union's XUC token, which is since in circulation. No ICO or further fundraising is planned.
+`xud`'s code base and documentation is available under the [AGPL-3.0](https://github.com/ExchangeUnion/xud/blob/master/LICENSE) open-source license. The objective is to build a open-source developer community, while additionally employing full-time developers under the Exchange Union brand. Development is funded through an initial private sale of 2% of Exchange Union's XUC token, which is since in circulation. No ICO or further fundraising is planned.
 
 
 ## 2. Product Description
-From a business perspective, Exchange Union can be described as a *decentralized meta-exchange*: target users are existing centralized exchanges, in the following 'exchanges' for short.
+From a business perspective, Exchange Union can be described as a *decentralized meta-exchange*: target users are existing centralized exchanges, hereafter 'exchanges' for short.
 
-From a technical perspective, XUD spins up an *instant [DEX](https://en.wikipedia.org/wiki/Decentralized_exchange)* which can be openly accessed and used by everyone. However, due to its technical complexity, it is not expected that XUD will see a widespread adoption by individuals in the short-term.
+From a technical perspective, `xud` spins up an *instant [DEX](https://en.wikipedia.org/wiki/Decentralized_exchange)* which can be openly accessed and used by everyone. However, due to its technical complexity, it is not expected that `xud` will see widespread adoption by individuals in the short-term.
 
 Simply put, there are two ways of how an individual can trade on the Exchange Union network:
-* Use a trusted exchange (which integrated XUD and handles the technical complexity of operation and custody of funds) *or*
-* Operate XUD directly (with full control of funds & trades, managing private keys & other technical aspects).
+* Use a trusted exchange (which integrated `xud` and handles the technical complexity of operation and custody of funds) *or*
+* Operate `xud` directly (with full control of funds & trades, managing private keys & other technical aspects).
 
 Currently, appropriate liquidity can only be found on exchanges and we believe the majority of traders will continue using these for convenience, delegating the technical complexity and operational overhead to an exchange operator. Furthermore, exchanges provide the necessary banking relationships and integrations that enable deposits and withdrawals of fiat currency. Retail & new traders in particular will rely on these fiat currency services and easy-to-use interfaces.
 
@@ -61,41 +61,41 @@ Advantages for traders:
 - Access to liquidity of combined order books of all participating exchanges
 - Access to new trading pairs
 - Access to the best price across all participating exchanges
-- All through one account on one exchange of the users choice
+- All through one account on one exchange of the user's choice
 
 The advantages for exchanges:
 - Access to larger user base, including individual traders in the network
 - Additional revenue stream from individual traders & traders of other exchanges, while keeping trading fee revenues on outgoing trades
 - Robust, decentralized, and censorship-resistant trading infrastructure
-- New product opportunities which use XUD: wallets, merchant services etc.
+- New product opportunities which use `xud`: wallets, merchant services etc.
 
-Using [atomic swaps](#32-atomic-swaps), XUD eliminates the need for trust between peers on the network. This allows any exchange and any trader to join the network and trade, while both sides can rest assured that their funds are safe throughout the whole cycle of a trade. Importantly, to achieve this, Exchange Union does not use an intermediary asset or debt representation of an asset ([IOU](https://www.investopedia.com/terms/i/iou.asp)). It uses the actual native underlying currency, like BTC or ETH, which only live on the bitcoin and ethereum blockchain respectively. Consequently, Exchange Union doesn't have its own blockchain. It connects native blockchains like bitcoin or ethereum on layer 2 via [payment channels](#31-payment-channels), atomic swaps and adds a p2p layer to exchange & match orders which we call [decentralized order book (DOB)](#33-decentralized-order-book-dob).
+Using [atomic swaps](#32-atomic-swaps), `xud` eliminates the need for trust between peers on the network. This allows any exchange and any trader to join the network and trade, while both sides can rest assured that their funds are safe throughout the whole cycle of a trade. Importantly, to achieve this, Exchange Union does not use an intermediary asset or debt representation of an asset ([IOU](https://www.investopedia.com/terms/i/iou.asp)). It uses the actual native underlying currency, like BTC or ETH, which only live on the bitcoin and ethereum blockchain respectively. Consequently, Exchange Union doesn't have its own blockchain. It connects native blockchains like bitcoin or ethereum on layer 2 via [payment channels](#31-payment-channels), atomic swaps and adds a p2p layer to exchange & match orders which we call [decentralized order book (DOB)](#33-decentralized-order-book-dob).
 
-A major design goal of XUD is, that no single point of failure (SPOF) can cause a shutdown of the network, eliminating critical attack vectors like DDOS and increasing censorship resistance. The main **difference from existing decentralized exchanges**, like [IDEX](https://idex.market/), [Etherdelta](https://etherdelta.com), [Airswap](https://airswap.io/) or relayers on [0x](https://0xproject.com) is, that **orders are matched decentralized** and **trades on Exchange Union settle instantly**. Instant settlement is achieved by using above mentioned payment channels, whereas decentralized exchanges today settle trades on-chain; which can take up to an hour or more. Also, costs for on-chain transactions can be high depending on the network  costly; transaction fees can be equivalent to several dollars at peak times which doesn't make it a reasonable method for smaller trades. Finally, XUD enables cross-chain trading, that means it is not limited to tokens of one specific chain. Most DEXes today are limited to ERC-20 tokens on ethereum, whereas XUD can expend any token or cryptocurrency supporting payment channels and [HTLCs](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts).
+A major design goal of `xud` is, that no single point of failure (SPOF) can cause a shutdown of the network, eliminating critical attack vectors like DDOS and increasing censorship resistance. The main **difference from existing decentralized exchanges**, like [IDEX](https://idex.market/), [Etherdelta](https://etherdelta.com), [Airswap](https://airswap.io/) or relayers on [0x](https://0xproject.com) is, that **orders are matched decentralized** and **trades on Exchange Union settle instantly**. Instant settlement is achieved by using above mentioned payment channels, whereas decentralized exchanges today settle trades on-chain; which can take up to an hour or more. Also, costs for on-chain transactions can be high depending on the network  costly; transaction fees can be equivalent to several dollars at peak times which doesn't make it a reasonable method for smaller trades. Finally, `xud` enables cross-chain trading, that means it is not limited to tokens of one specific chain. Most DEXes today are limited to ERC-20 tokens on ethereum, whereas `xud` can expend any token or cryptocurrency supporting payment channels and [HTLCs](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts).
 
 
 ## 3. Under the hood
 
-This chapter treats the technologies ‘payment channels’, ‘atomic swaps’ the basic functionality of the decentralized order book. XUD exposes a simple API designed for exchanges and, together with XUD nodes of other exchanges, forms the decentralized network connecting the exchanges. XUD is available as [installable software](https://github.com/ExchangeUnion/xud/wiki/Installation) and will additionally be provided in form of a docker container which packages all necessary things to operate XUD.
+This chapter treats the technologies ‘payment channels’, ‘atomic swaps’ the basic functionality of the decentralized order book. `xud` exposes a simple API designed for exchanges and, together with `xud` nodes of other exchanges, forms the decentralized network connecting the exchanges. `xud` is available as [installable software](https://github.com/ExchangeUnion/xud/wiki/Installation) and will additionally be provided in form of a docker container which packages all necessary things to operate `xud`.
 
 
 3.1. Payment Channels
 ---------------------
-The idea of payment channels is around for a while, even Satoshi already explored [*high-frequency transactions*](https://en.bitcoin.it/wiki/Payment_channels). Then, with bidirectional channels, the inception of today's **Lightning Network** by Joseph Poon and Tadge Dryja, payment channels became more widely known. In short, payment channels enable instant, off-chain transfer of a digital token or coin, like bitcoin, directly between *two* parties. Payment channels are opened and closed via one on-chain transaction. A payment channel uses unbroadcast, but signed and fully valid on-chain transactions, which are sent back and forth between the two parties to do transactions. Since these unbroadcast transactions are merely data packets which are send via the internet layer and don't need to be validated on a blockchain, transfers are as fast as the internet connection between the two parties.
+The idea of payment channels is around for a while, even Satoshi already explored [*high-frequency transactions*](https://en.bitcoin.it/wiki/Payment_channels). Then, with bidirectional channels, the inception of today's **Lightning Network** by [Joseph Poon and Tadge Dryja]((https://lightning.network/lightning-network-paper.pdf)), payment channels became more widely known. In short, payment channels enable instant, off-chain transfer of a digital token or coin, like bitcoin, directly between *two* parties. Payment channels are opened and closed via one on-chain transaction. A payment channel uses unbroadcast, but signed and fully valid on-chain transactions, which are sent back and forth between the two parties to do transactions. Since these unbroadcast transactions are merely data packets which are send via the internet layer and don't need to be validated on a blockchain, transfers are as fast as the internet connection between the two parties.
 
-Transactions are held on each side of the channel, in our case on the exchange’s XUD, representing the balance of each party. They use a multi-signature address as their input (the funding address) and point at two different addresses for their output, each controlled by one exchange. Setting up payment channels can be compared to transferring coins into a sidechain - coins have to be committed to a payment channel via a native on-chain transaction. This transaction 'locks' coins on the underlying chain and 'unlocks' them in the channel.
+Transactions are held on each side of the channel, representing the balance of each party. These use a multi-signature address as their input (the funding address) and point at two different addresses for their output, each controlled by one exchange. Setting up payment channels can be compared to depositing cash into a bank to make it usable via online banking. In the same way, coins are deposited into a payment channel via the funding transaction to be usable on the channel. Once the coins were deposited, these are not usable on the underlying blockchain.
 
-With this mechanism, payment channels are trustless. Trustless means one bitcoin in a payment channel is backed by one locked bitcoin on the blockchain and can be transferred between two parties securely, even though only the opening and closing transaction are included in the blockchain. Simplified, this is secure, because all transactions are valid on the underlying blockchain and can be broadcast by either party at any time. So both parties can rest assured to be in possession of the respective funds when receiving a transaction from the other party in a channel.
+With this mechanism, payment channels are trustless. Trustless means one bitcoin in a payment channel is pegged to one locked bitcoin on the blockchain and can be transferred between two parties securely, even though only the opening and closing transaction are included in the blockchain. This is secure because all transactions are valid on the underlying blockchain and can be broadcast by either party at any time. Both parties are in possession of their respective funds within the payment channel.
 
-Payment channels also allow secure and trustless *routing* of funds through intermediaries using a technology called [Hashed Timelock Contracts (HTLCs)](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts), which eliminate the need for a direct channel between everyone. The [Lightning White Paper](https://lightning.network/lightning-network-paper.pdf) describes this in detail. This is useful since usually a few payment channels to some other nodes are enough to reach the rest of the network. The payment channel layer of XUD is comprised by the feature-rich [LND](https://github.com/lightningnetwork/lnd/) implementation for payment channels on BTC & LTC and by the [raiden](https://github.com/raiden-network/raiden/) implementation for payment channels on ETH, including all ERC20 tokens. XUD will rely on improved [auto-pilot](https://github.com/lightningnetwork/lnd/tree/master/autopilot) features to manage channels and routing fees automatically. Exact amounts of routing fees are hard to quote in advance of a trade and since we expect these to be negligibly low in future, exchanges are meant to use their [revenue from Exchange Union](#39-incentivisation---the-role-of-xuc) to offset routing fees.
+Payment channels also allow secure and trustless *routing* of funds through intermediaries using a technology called [Hashed Timelock Contracts (HTLCs)](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts), which eliminate the need for a direct channel between everyone. The [Lightning White Paper](https://lightning.network/lightning-network-paper.pdf) describes this in detail. This is useful since usually a few payment channels to some other nodes are enough to reach the rest of the network. The payment channel layer of `xud` is comprised by the feature-rich [LND](https://github.com/lightningnetwork/lnd/) implementation for payment channels on BTC & LTC and by the [raiden](https://github.com/raiden-network/raiden/) implementation for payment channels on ETH, including all ERC20 tokens. `xud` will rely on improved [auto-pilot](https://github.com/lightningnetwork/lnd/tree/master/autopilot) features to manage channels and routing fees automatically. Exact amounts of routing fees are hard to quote in advance of a trade and since we expect these to be negligibly low in future, exchanges are meant to use their [revenue from Exchange Union](#39-incentivisation---the-role-of-xuc) to offset routing fees.
 
-Each participating exchange runs its own XUD instance, which opens payment channels on each chain it desires to enable trading for. This means, if for example an exchange wants to enable its users to trade bitcoin and litecoin through XUD, it has to open a payment channel on the litecoin blockchain & on the bitcoin blockchain to at least one other exchange in the union. Payment channels in XU are meant to be kept open long-term. Since routing is and will be relatively unreliable for larger amounts in the foreseeable future, the current design encourages larger, direct channels between exchanges. Currently, lnd's maximum channel size is temporarily limited to 0.16777216 BTC. This can be lifted using a so-called [wumbo](https://github.com/lightningnetwork/lightning-rfc/wiki/Lightning-Specification-1.1-Proposal-States)-bit. To achieve long-term scalability, even with routing, we will rely on multiple channels, which carry out partial transfers of one atomic payment as proposed in the [AMP protocol by Laolu and Conner](https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/000993.html).
+Each participating exchange runs its own `xud` instance, which opens payment channels on each chain it desires to enable trading for. For example, if an exchange wants to enable trading on bitcoin and litecoin through `xud`, it would need payment channels on both the litecoin and bitcoin blockchains. Payment channels in XU are meant to be kept open long-term. Since routing is and will be relatively unreliable for larger amounts in the foreseeable future, the current design encourages larger, direct channels between exchanges. Currently, lnd's maximum channel size is temporarily limited to 0.16777216 BTC. This can be lifted using a so-called [wumbo](https://github.com/lightningnetwork/lightning-rfc/wiki/Lightning-Specification-1.1-Proposal-States)-bit. To achieve long-term scalability, even with routing, we will take advantage of multiple channels, which carry out partial transfers of one atomic payment as proposed in the [AMP protocol by Laolu and Conner](https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-February/000993.html).
 
-In general, all BIP 199 compatible payment channels can be supported by XUD directly, other chains may implement HTLC swaps via smart contracts. The payment channel standard on bitcoin and litecoin is called the [lightning network](https://lightning.network/) and compatible implementations are maintained by the companies [ACINQ](https://github.com/ACINQ/eclair), [Lightning Labs](https://lightning.engineering/) and [Blockstream](https://blockstream.com/) which are all [intercompatible] by following the so-called [BOLT](https://github.com/lightningnetwork/lightning-rfc/blob/master/00-introduction.md) specifications. Ethereum’s most advanced payment channel technology is the ‘[Raiden Network](https://raiden.network/)’ and is mainly maintained by the company [Brainbot](http://www.brainbot.com/).
+In general, all BIP 199 compatible payment channels can be supported by `xud` directly, other chains may implement HTLC swaps via smart contracts. The payment channel standard on bitcoin and litecoin is called the [lightning network](https://lightning.network/) and compatible implementations are maintained by the companies [ACINQ](https://github.com/ACINQ/eclair), [Lightning Labs](https://lightning.engineering/) and [Blockstream](https://blockstream.com/) which are all [intercompatible] by following the so-called [BOLT](https://github.com/lightningnetwork/lightning-rfc/blob/master/00-introduction.md) specifications. Ethereum’s most advanced payment channel technology is the ‘[Raiden Network](https://raiden.network/)’ and is mainly maintained by the company [Brainbot](http://www.brainbot.com/).
 
-**XUD, using LND and Raiden, represents a sub-graph of the lightning & raiden network. It's a primary goal to remain fully compatible with the [lightning BOLT specifications (BOLT)](https://github.com/lightningnetwork/lightning-rfc/blob/master/00-introduction.md) and with the specifications of the raiden network.** XUD acts as a wrapper for the payment channel layer and encapsulates lightning and raiden daemons with as little modifications as possible.
+**`xud`, using LND and Raiden, represents a part of the lightning & raiden network. The primary goal is to remain fully compatible with the [lightning BOLT specifications (BOLT)](https://github.com/lightningnetwork/lightning-rfc/blob/master/00-introduction.md) and with the specifications of the raiden network.** `xud` acts as a wrapper for the payment channel layer and encapsulates lightning and raiden daemons with as little modifications as possible.
 
-Summary: XUD uses payment channels in combination with atomic swaps to instantly settle trades on the Exchange Union network. Check [this](https://github.com/ExchangeUnion/Docs/blob/master/2018-09-19%20Lightning%20Dev%20Meetup%20Ellis%20%26%20Bob.pdf) visual walk-through of a trade.
+Summary: `xud` uses payment channels in combination with atomic swaps to instantly settle trades on the Exchange Union network. Check [this](https://github.com/ExchangeUnion/Docs/blob/master/2018-09-19%20Lightning%20Dev%20Meetup%20Ellis%20%26%20Bob.pdf) visual walk-through of a trade.
 
 
 3.2. Atomic Swaps
@@ -114,7 +114,7 @@ Analogically, we distinguish between two types of participants in Exchange Union
 - The **Maker** (the liquidity provider) propagating an order to its peers because it couldn't find a match in current the order book. The order then joins a pool of unmatched orders on all connected peers. Usually in the form of a limit order.
 - The **Taker** (the liquidity consumer) issuing an order which immediately can be matched with an existing (maker) order in the order book. Usually in the form of a market order.
 
-There will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on preferences, e.g. only specific trading pairs or only from specific peers. Therefore, XUD only maintains relevant parts of the order book. XUD constantly exchanges order information and updates with connected peers.
+There will be no complete global order book as such, containing all orders for each and every trading pair. Instead, orders will be propagated based on preferences, e.g. only specific trading pairs or only from specific peers. Therefore, `xud` only maintains relevant parts of the order book. `xud` constantly exchanges order information and updates with connected peers.
 
 The DOB is a key task for XU and an unresolved issue on existing decentralized exchanges where, to the best of our knowledge, the order book is realized in a centralized way e.g. on [Etherdelta](https://github.com/etherdelta/etherdelta.github.io/blob/master/docs/API.md) or [0x relayers](https://github.com/0xProject/standard-relayer-api/blob/master/http/v0.md). We believe order propagation and matching has to be decentralized to the best degree possible to sustain the robustness and censorship resistance of the network. Nevertheless, decentralization always comes at a cost. Based on the [PACELC theorem](https://en.wikipedia.org/wiki/PACELC_theorem) our protocol chooses latency over consistency.
 
@@ -137,11 +137,11 @@ Goals of our DOB Protocol
 
 **1. Minimize latency of order updates**
 
-For orders, the DOB protocol follows the first come, first served principle, which remains compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, XUD requires a direct socket connection on Internet Protocol level without intermediary hops - a full mesh network. Further, not routing orders through other nodes prevents critical attacks like withholding, delaying or altering orders. Direct payment channels are recommended, but payments can also be routed through intermediary hops.
+For orders, the DOB protocol follows the first come, first served principle, which remains compatible with how order book systems of centralized exchanges work. To get the best achievable latency between two nodes which intend to receive order updates from each other, `xud` requires a direct socket connection on Internet Protocol level without intermediary hops - a full mesh network. Further, not routing orders through other nodes prevents critical attacks like withholding, delaying or altering orders. Direct payment channels are recommended, but payments can also be routed through intermediary hops.
 
-![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "XUD DOB Full Mesh vs. Payment Channel Partial Mesh")
+![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "xud DOB Full Mesh vs. Payment Channel Partial Mesh")
 
-Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase which are eligible to forward orders. Individuals running XUD can choose to receive & forward order book information from these super nodes. To become a super node, one must fullfil certain requirements, like e.g. a fast and reliable connection to peers. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
+Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase which are eligible to forward orders. Individuals running `xud` can choose to receive & forward order book information from these super nodes. To become a super node, one must fullfil certain requirements, like e.g. a fast and reliable connection to peers. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
 
 **2. Single point of execution**
 
@@ -157,7 +157,7 @@ There is one single point of execution for each order: the taker. The taker deci
 
 Before the taker releases `r_preImage`, a swap can be cancelled gracefully. After the release of `r_preImage` a swap is considered completed.
 
-XUD takes care that both sides have a payment channel path with sufficient volume for a specific order. Also, it is taken care, that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer.
+`xud` takes care that both sides have a payment channel path with sufficient volume for a specific order. Also, it is taken care, that an invoice can only be paid by the first one to successfully send a payment to an invoice issuer.
 
 Transferring order execution to a decentralized consensus (compare e.g. [loopring](https://github.com/Loopring/whitepaper/raw/master/en_whitepaper.pdf)), was considered and deemed not feasible for the following reasons:
 a) consensus is slow, too slow for an acceptable trading experience
@@ -172,18 +172,18 @@ Exchanges can either completely take over handling XUC fees and revenue for thei
 
 **4. Preventing malicious behavior**
 
-Every XUD is required to stake a certain amount of XUC in an ethereum smart contract in order to be able to act as a maker or taker. This staked XUC amount can be taken away as punishment in case of a low enough reputation score. Not part of the PoC. 
+Every `xud` is required to stake a certain amount of XUC in an ethereum smart contract in order to be able to act as a maker or taker. This staked XUC amount can be taken away as punishment in case of a low enough reputation score. Not part of the PoC. 
 
-XUD's ID is called `nodePubKey`. When depositing XUC into the smart contract, XUD will write it's `nodePubKey` into the data field of the deposit transaction. Since it is expected that almost every XUD will run an ethereum full node, XUD can verify that a new node staked the required amount directly at handshake. 
+`xud`'s ID is called `nodePubKey`. When depositing XUC into the smart contract, `xud` will write it's `nodePubKey` into the data field of the deposit transaction. Since it is expected that almost every `xud` will run an ethereum full node, `xud` can verify that a new node staked the required amount directly at handshake. 
 
 **5. Privacy between two trading parties**
 
 Not part of PoC. As it is the case on regular digital asset exchanges, a maker and a taker should have the option to remain anonymous to avoid biased behavior and in general to just preserve privacy. On payment channels this is taken care of by [onion routing](https://github.com/lightningnetwork/lightning-rfc/blob/master/04-onion-routing.md). A tor-hidden service for order book information exchange could be an option, but would require order forwarding and slow down things significantly. Further research pending.
 
-XUD Order Book Data Structure
+`xud` Order Book Data Structure
 =============================================================
 
-XUD stores orders and related information in a db, the full structure can be found [here](https://github.com/ExchangeUnion/xud/blob/master/lib/orderbook/). Two examples:
+`xud` stores orders and related information in a db, the full structure can be found [here](https://github.com/ExchangeUnion/xud/blob/master/lib/orderbook/). Two examples:
 
 ```
 pairs {
@@ -194,7 +194,7 @@ swapProtocol ({LND, RAIDEN})
 }
 ```
 
-This table is automatically maintained by xud with enabled currencies pairs which fullfil all requirements to be swap enabled.
+This table is automatically maintained by `xud` with enabled currencies pairs which fullfil all requirements to be swap enabled.
 
 ```
 Orders {
@@ -209,26 +209,26 @@ nodePubKey
 
 This table maintains the open orders which are received by peer nodes (defined in Peers table in the P2P domain database). A `peerID` is null for the exchange's `ownOrder`s, the `quantity` is positive for buy orders, negative for sell orders.
 
-[XUD's API](https://github.com/ExchangeUnion/xud/blob/master/docs/api.md)
+[`xud`'s API](https://github.com/ExchangeUnion/xud/blob/master/docs/api.md)
 =============================================================
 
-From a high-level perspective, XUD supports two modes: matching and nomatching mode. 
+From a high-level perspective, `xud` supports two modes: matching and nomatching mode. 
 
-Default is `matching` mode, which means that XUD acts as order book & matching engine for all orders on the exchange. An exchange chooses this mode if it is not live yet or comparably small since changes to the existing exchange system are required. An exchanage's `ownOrder`s need to be added to XUD's order book and it needs to listen to order events. For instance to display new incoming `peerOrder`s to users and update user account balances, e.g. after a successful swap. The advantage of this mode is, that it's more native to Exchange Union and requires less operational oversight from the exchange.
+Default is `matching` mode, which means that `xud` acts as order book & matching engine for all orders on the exchange. An exchange chooses this mode if it is not live yet or comparably small since changes to the existing exchange system are required. An exchanage's `ownOrder`s need to be added to `xud`'s order book and it needs to listen to order events. For instance to display new incoming `peerOrder`s to users and update user account balances, e.g. after a successful swap. The advantage of this mode is, that it's more native to Exchange Union and requires less operational oversight from the exchange.
 
-`nomatching` mode, which can be enabled via [xud.conf](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf), is designed for exchanges which want to continue using their own matching engine and require minimal changes to the system in general. Here, all order matching is handled by the exchange's existing matching engine. XUD mainly a) informs about new & removed orders from other peers and
+`nomatching` mode, which can be enabled via [xud.conf](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf), is designed for exchanges which want to continue using their own matching engine and require minimal changes to the system in general. Here, all order matching is handled by the exchange's existing matching engine. `xud` mainly a) informs about new & removed orders from other peers and
 b) executes swaps with peers when a match in the matching engine was found. The advantage of this mode is, that it is designed to require less adjustments, but is currently less tested and will need a decent amount of operational oversight.
 
 Both modes use a different set of API's, a guide can be found [here](https://github.com/ExchangeUnion/xud/wiki/Exchange-Guide#api-integration). Examples of some calls:
 
 *`SubscribeAddedOrders` / `SubscribeRemovedOrders`*
 
-informs about orders being added / removed from the XUD orderbook; used by the exchange to match orders (`nomatching` mode) and display XU orders in it's UI
+informs about orders being added / removed from the `xud` orderbook; used by the exchange to match orders (`nomatching` mode) and display XU orders in it's UI
 
 
 *`placeOrder`*   
 
-places an order in XUD, which will first attempt to get matched with existing orders (as taker order) and if no match could be found, propagated to connected peers (as maker order).
+places an order in `xud`, which will first attempt to get matched with existing orders (as taker order) and if no match could be found, propagated to connected peers (as maker order).
 ```
 Example: "I want to place a limit order of buying 10 LTC for 20 ETC."
 placeOrder(LTC/ETC, 20, 10)
@@ -242,47 +242,47 @@ placeOrder(LTC/ETC, 0, 10)
 -------------
 The Lightning Network and the Raiden Network take care of security on the payment channel layer. This includes resolving disputes over channel states on the underlying blockchain and disincentivizing malicious behavior by POS-style punishment (a dishonest party will lose all her funds to the honest party). It especially also includes security when routing payments through intermediary hops. We use atomic swaps to bind two payments of a trade together, so that one party cannot steal funds after receiving the first part of the trade. Both payments in a trade have to complete successfully to be valid and spendable. Exchange Union will be secured against malicious order information in a POS-style manner, to disincentivize market manipulation by sending out false order information. As mentioned above, this is not part of the PoC and will be fleshed out in a later stage.
 
-XUD's ID Model
+`xud`'s ID Model
 =============================================================
 
-During setup, XUD automatically creates a public/private key pair (using bitcoin's `secp256k1 ECDSA`) for identification and order signing purposes, the `nodePubKey`. The private key is saved on disk and encrypted with a password. The `nodePubKey` represents one XUD's unique ID within Exchange Union and is backed by a staked amount XUC as described above. Exchanges can let others know what their XUD's `nodePubKey` is by e.g. making such available on their website. XUD will support whitelisting specific `nodePubKey`s for trading. In this way, exchanges in strict jurisdictions can limit trading to exchanges which fulfill the local jurisdiction's legal requirements. To harden whitelists, XUD will support signing & encrypting orders to make sure the order was indeed placed by the authenticated party and not tempered with.
+During setup, `xud` automatically creates a public/private key pair (using bitcoin's `secp256k1 ECDSA`) for identification and order signing purposes, the `nodePubKey`. The private key is saved on disk and encrypted with a password. The `nodePubKey` represents one `xud`'s unique ID within Exchange Union and is backed by a staked amount XUC as described above. Exchanges can let others know what their `xud`'s `nodePubKey` is by e.g. making such available on their website. `xud` will support whitelisting specific `nodePubKey`s for trading. In this way, exchanges in strict jurisdictions can limit trading to exchanges which fulfill the local jurisdiction's legal requirements. To harden whitelists, `xud` will support signing & encrypting orders to make sure the order was indeed placed by the authenticated party and not tempered with.
 
-XUD's Order Signing
+`xud`'s Order Signing
 =============================================================
 
-XUD enables two modes for signing an order:
+`xud` enables two modes for signing an order:
 1. Sign order to verify authenticity of public key
 2. Sign & encrypt order to verify authenticity and add security against spoofing
 
-*Mode 1* is the default and signs all orders with the XUD's private key. This ensures that the `nodePubKey` in the order's invoice is the actual ID of the XUD sending the invoice. We decided to place the `nodePubKey` directly in the invoice description field for a faster processing, since this avoids a payment hash vs. `nodePubKey` lookup for each incoming new order on the receivers side. This prevents another XUD pretending to be someone else and knowing the actual issuer of an order is important for our reputation mechanism to work.
+*Mode 1* is the default and signs all orders with the `xud`'s private key. This ensures that the `nodePubKey` in the order's invoice is the actual ID of the `xud` sending the invoice. We decided to place the `nodePubKey` directly in the invoice description field for a faster processing, since this avoids a payment hash vs. `nodePubKey` lookup for each incoming new order on the receivers side. This prevents another `xud` pretending to be someone else and knowing the actual issuer of an order is important for our reputation mechanism to work.
 
-*Mode 2* is optional and additionally to everything *Mode 1* does, XUD encrypts orders with the public key of each peer. This mode is more resource intensive. Combined with a white-list, this mode is suitable for exchanges located in jurisdictions with a strict legal framework. It ensures that order information can only be received & filled by white-listed trading partners, e.g. other licensed exchanges in the same jurisdiction. It is not part of the PoC.
+*Mode 2* is optional and additionally to everything *Mode 1* does, `xud` encrypts orders with the public key of each peer. This mode is more resource intensive. Combined with a white-list, this mode is suitable for exchanges located in jurisdictions with a strict legal framework. It ensures that order information can only be received & filled by white-listed trading partners, e.g. other licensed exchanges in the same jurisdiction. It is not part of the PoC.
 
 3.5. Visualization: Architecture
 -----------------------------------------------------
 ![Screenshot](images/Exchange%20Union%20Nodes.png "Exchange Union System")
 
-And an overview of XUD's components:
+And an overview of `xud`'s components:
 
-![Screenshot](images/xud%20components.png "XUD components")
+![Screenshot](images/xud%20components.png "xud components")
 
 
 3.6. Sample Trade
 -----------------
 This is the basic flow of a trade via XU:
 
-3.6.1. Assuming `Exchange A` is part of Exchange Union and runs XUD. It offers a rare trading pair to its users: **UnicornCoin / BTC**. In order to offer this pair to users in the Exchange Union network, `Exchange A`'s XUD is configured to open payment channels and run full nodes on both, the bitcoin and the UnicornCoin chain. `Exchange A` funds XUD with e.g. 100 BTC. XUD then opens a payment channel with these deposited funds to `Exchange B`. The 100 BTC represent `Exchange A`'s & `Exchange B`s total BTC trading volume. `Exchange B` does the same with UnicornCoin.
+3.6.1. Assuming `Exchange A` is part of Exchange Union and runs `xud`. It offers a rare trading pair to its users: **UnicornCoin / BTC**. In order to offer this pair to users in the Exchange Union network, `Exchange A`'s `xud` is configured to open payment channels and run full nodes on both, the bitcoin and the UnicornCoin chain. `Exchange A` funds `xud` with e.g. 100 BTC. `xud` then opens a payment channel with these deposited funds to `Exchange B`. The 100 BTC represent `Exchange A`'s & `Exchange B`s total BTC trading volume. `Exchange B` does the same with UnicornCoin.
 
-3.6.2. `Exchange A`'s XUD has successfully opened a payment channel to `Exchange B`'s XUD on Bitcoin and on UnicornCoin. `Exchange A` now places an order in XUD, which sends this to `Exchange B`, using it's P2P socket connection. This order, which is similar to a regular buy or sell request submitted in a cryptocurrency exchange, includes the amount of requested UnicornCoin with a price in BTC. Let’s assume `Exchange A` sends a **limit order for selling 100 UnicornCoin** with the requested price of **1 UnicornCoin = 0.1 BTC**. This order is published to `Exchange B`, as well as all other connected peers.
+3.6.2. `Exchange A`'s `xud` has successfully opened a payment channel to `Exchange B`'s `xud` on Bitcoin and on UnicornCoin. `Exchange A` now places an order in `xud`, which sends this to `Exchange B`, using it's P2P socket connection. This order, which is similar to a regular buy or sell request submitted in a cryptocurrency exchange, includes the amount of requested UnicornCoin with a price in BTC. Let’s assume `Exchange A` sends a **limit order for selling 100 UnicornCoin** with the requested price of **1 UnicornCoin = 0.1 BTC**. This order is published to `Exchange B`, as well as all other connected peers.
 
-3.6.3. XUD's subscribed to UnicornCoin, update their order books with this new order.
+3.6.3. `xud`'s subscribed to UnicornCoin, update their order books with this new order.
 
-3.6.4. If `Exchange B` now wants to fill this 100 UnicornCoin order, it does so by placing a corresponding **buy 100 UnicornCoin for 0.1 BTC** order. Everthing after that is handled automatically. XUD takes care of confirming availability with `Exchange A` and executed a cross-chain atomic swap on the payment channels on Unicorn chain and the bitcoin chain it created before. `Exchange A` atomically receives **100 UnicornCoin** and `Exchange B` **10 BTC** on the respective payment channels.
+3.6.4. If `Exchange B` now wants to fill this 100 UnicornCoin order, it does so by placing a corresponding **buy 100 UnicornCoin for 0.1 BTC** order. Everthing after that is handled automatically. `xud` takes care of confirming availability with `Exchange A` and executed a cross-chain atomic swap on the payment channels on Unicorn chain and the bitcoin chain it created before. `Exchange A` atomically receives **100 UnicornCoin** and `Exchange B` **10 BTC** on the respective payment channels.
 
 Comments on specific failures:
-- If the order is filled by another, faster XUD: `Exchange A`'s XUD will tell `Exchange B` about this and XUD starts looking for the next best matching order. If none can be found, the order will get added to the order book and propagated to all peers as maker order.
-- `Exchange A` goes offline: trade times out and `Exchange B`'s XUD starts looking for the next best order. 
-- Payment channel exhausted: XUD maintains a configurable threshold on when to alert the exchange's system to redeposit funds into XUD.
+- If the order is filled by another, faster `xud`: `Exchange A`'s `xud` will tell `Exchange B` about this and `xud` starts looking for the next best matching order. If none can be found, the order will get added to the order book and propagated to all peers as maker order.
+- `Exchange A` goes offline: trade times out and `Exchange B`'s `xud` starts looking for the next best order. 
+- Payment channel exhausted: `xud` maintains a configurable threshold on when to alert the exchange's system to redeposit funds into `xud`.
 
 
 3.7. FIAT Tokenization / Stablecoins
@@ -355,7 +355,7 @@ A robust, price-stable cryptocurrency with an algorithmic (automatic) central ba
 ----------------------
 **Executive summary: worst-case, exchanges will earn the same fees as compared to not being connected to Exchange Union. In almost all cases revenues are increased.**
 
-How this is achieved: XUD enables the exchange to subtract the trading fee before the actual amount of a trade is swapped as taker, or add the trading fee before an order is sent to the network. Since exchanges are usually earning fees from both sides of a trade, maker & taker fee, XUD allows exchanges to charge the equivalent amount of maker+taker fee for each side of the trade. Naturally, both exchanges of a trade will want to do this. Consequently, every trade facilitated via Exchange Union enables two exchanges to earn the full maker & taker trading fee. This is how exchanges continue earning the same trading fees, even if all `ownOrder`s are filled via the Exchange Union network, the above described worst-case scenario. It also means, that in the long run earnings will go up for exchanges for every trade executed via XU, since fees are earned twice for every trade on Exchange Union.
+How this is achieved: `xud` enables the exchange to subtract the trading fee before the actual amount of a trade is swapped as taker, or add the trading fee before an order is sent to the network. Since exchanges are usually earning fees from both sides of a trade, maker & taker fee, `xud` allows exchanges to charge the equivalent amount of maker+taker fee for each side of the trade. Naturally, both exchanges of a trade will want to do this. Consequently, every trade facilitated via Exchange Union enables two exchanges to earn the full maker & taker trading fee. This is how exchanges continue earning the same trading fees, even if all `ownOrder`s are filled via the Exchange Union network, the above described worst-case scenario. It also means, that in the long run earnings will go up for exchanges for every trade executed via XU, since fees are earned twice for every trade on Exchange Union.
 
 How does this still benefit an trader on `ExchA`? Trades only get filled by `ExchB`, if
 
@@ -423,7 +423,7 @@ The goal is to transform XU into a platform, where new products plug into XU to 
   - Liquid simply lets users transfer bitcoin from Exchange A to B
 - Exchange Union is (network-latency) instant
   - Liquid is a sidechain with about 1 min block times, in future down to 10s block times. But never as fast as a payment channel.
-- Exchange Union requires XUD, software only
+- Exchange Union requires `xud`, software only
   - Liquid requires special hardware
 - Exchange Union is completely open source and free to use
   - Liquid requires exchanges paying a monthly fee (as of 2016: 2500 USD)
