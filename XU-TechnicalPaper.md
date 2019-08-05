@@ -81,7 +81,7 @@ This chapter treats the technologies ‘payment channels’, ‘atomic swaps’ 
 
 3.1. Payment Channels
 ---------------------
-The idea of payment channels is around for a while, even Satoshi already explored [*high-frequency transactions*](https://en.bitcoin.it/wiki/Payment_channels). Then, with bidirectional channels, the inception of today's **Lightning Network** by [Joseph Poon and Tadge Dryja]((https://lightning.network/lightning-network-paper.pdf)), payment channels became more widely known. In short, payment channels enable instant, off-chain transfer of a digital token or coin, like bitcoin, directly between *two* parties. Payment channels are opened and closed via one on-chain transaction. A payment channel uses unbroadcast, but signed and fully valid on-chain transactions, which are sent back and forth between the two parties to do transactions. Since these unbroadcast transactions are merely data packets which are send via the internet layer and don't need to be validated on a blockchain, transfers are as fast as the internet connection between the two parties.
+The idea of payment channels has been around for a while, even Satoshi already explored [*high-frequency transactions*](https://en.bitcoin.it/wiki/Payment_channels). Then, with bidirectional channels, the inception of today's **Lightning Network** by [Joseph Poon and Tadge Dryja]((https://lightning.network/lightning-network-paper.pdf)), payment channels became more widely known. In short, payment channels enable instant, off-chain transfer of a digital token or coin, like bitcoin, directly between *two* parties. Payment channels are opened and closed via one on-chain transaction. A payment channel uses unbroadcast, but signed and fully valid on-chain transactions, which are sent back and forth between the two parties to do transactions. Since these unbroadcast transactions are merely data packets which are send via the internet layer and don't need to be validated on a blockchain, transfers are as fast as the internet connection between the two parties.
 
 Transactions are held on each side of the channel, representing the balance of each party. These use a multi-signature address as their input (the funding address) and point at two different addresses for their output, each controlled by one exchange. Setting up payment channels can be compared to depositing cash into a bank to make it usable via online banking. In the same way, coins are deposited into a payment channel via the funding transaction to be usable on the channel. Once the coins were deposited, these are not usable on the underlying blockchain.
 
@@ -141,7 +141,7 @@ For orders, the DOB protocol follows the first come, first served principle, whi
 
 ![Screenshot](images/Full%20Mesh%20vs.%20Partial%20Mesh.png "xud DOB Full Mesh vs. Payment Channel Partial Mesh")
 
-Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase which are eligible to forward orders. Individuals running `xud` can choose to receive & forward order book information from these super nodes. To become a super node, one must fullfil certain requirements, like e.g. a fast and reliable connection to peers. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
+Obviously, direct socket connections between peers to exchange order book information can't scale infinitely. We are targeting to establish a relay network of 'super nodes' in a later phase which are eligible to forward orders. Individuals running `xud` can choose to receive & forward order book information from these super nodes. To become a super node, one must fulfill certain requirements, like e.g. a fast and reliable connection to peers. [Efficient congestion control mechanisms](https://github.com/google/bbr) to further optimize latency are currently being evaluated.
 
 **2. Single point of execution**
 
@@ -194,7 +194,7 @@ swapProtocol ({LND, RAIDEN})
 }
 ```
 
-This table is automatically maintained by `xud` with enabled currencies pairs which fullfil all requirements to be swap enabled.
+This table is automatically maintained by `xud` with enabled currencies pairs which fulfill all requirements to be swap enabled.
 
 ```
 Orders {
