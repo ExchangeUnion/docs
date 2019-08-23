@@ -100,7 +100,7 @@ Summary: `xud` uses payment channels in combination with atomic swaps to instant
 
 3.2. Atomic Swaps
 -----------------
-For each successful trade between two exchanges A & B on XU, e.g. LTC against BTC, there is a transfer of BTC on the BTC lightning network and LTC on the LTC lightning network in form of an atomic swap. This means, actual bitcoin flow from exchange A to exchange B on their bitcoin payment channel and actual litecoin from exchange B back to exchange A on their litecoin payment channel. This is considered the settlement of a trade and final. Atomic swaps use [HTLCs](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts) to bind these two transfers cryptographically and ensure the atomicity of a swap: either the swap completes in full, or nothing happens. [This document](https://github.com/ExchangeUnion/Docs/blob/master/2018-09-19%20Lightning%20Dev%20Meetup%20Ellis%20%26%20Bob.pdf) explains visually how atomic swaps are set up on Exchange Union. A manifestation of the first successful atomic swap between BTC and LTC on lightning by the Lightning Labs team can be found [here](https://blog.lightning.engineering/announcement/2017/11/16/ln-swap.html) and the second one by the Exchange Union team [here](https://blog.exchangeunion.com/product-update-4-atomic-swaps-on-lightning-diy-follow-our-swap-guide-185401a06a2d). Token swaps of ERC20 tokens on Raiden are described [here](https://raiden-network.readthedocs.io/en/stable/api_walkthrough.html#token-swaps) and were also [successfully tested by the Exchange Union team.](https://blog.exchangeunion.com/milestone-atomic-swap-of-erc20-tokens-on-the-Raiden-network-84b918b86fc4)
+For each trade between two exchanges A & B on XU, e.g. trading LTC against BTC, there is a transfer of BTC on the BTC lightning network and LTC on the LTC lightning network in form of an atomic swap. This means, actual bitcoin flow from exchange A to exchange B on their bitcoin payment channel and actual litecoin from exchange B back to exchange A on their litecoin payment channel. This is considered the settlement of a trade and final. Atomic swaps use [HTLCs](https://en.bitcoin.it/wiki/Hashed_Timelock_Contracts) to bind these two transfers cryptographically and ensure the atomicity of a swap: either the swap completes in full, or nothing happens. [This document](https://github.com/ExchangeUnion/Docs/blob/master/2018-09-19%20Lightning%20Dev%20Meetup%20Ellis%20%26%20Bob.pdf) explains visually how atomic swaps are set up on Exchange Union. A manifestation of the first successful atomic swap between BTC and LTC on lightning by the Lightning Labs team can be found [here](https://blog.lightning.engineering/announcement/2017/11/16/ln-swap.html) and the second one by the Exchange Union team [here](https://blog.exchangeunion.com/product-update-4-atomic-swaps-on-lightning-diy-follow-our-swap-guide-185401a06a2d). Token swaps of ERC20 tokens on Raiden are described [here](https://raiden-network.readthedocs.io/en/stable/api_walkthrough.html#token-swaps) and were also [successfully tested by the Exchange Union team.](https://blog.exchangeunion.com/milestone-atomic-swap-of-erc20-tokens-on-the-Raiden-network-84b918b86fc4)
 
 Since Raiden is designed for ERC20 tokens, Exchange Union will be able to support the vast majority of today’s token market. Other major chains are expected to start adopting lightning/Raiden-style payment channel technology in the mid-term. Options how to support some in the short term, e.g. via pegged [ERC20 wrappers](https://weth.io/), can be explored, but wouldn't be trustless.
 
@@ -132,7 +132,7 @@ There is no central point of execution (order matching) in Exchange Union's open
 
 Like any other decentralized system, Exchange Union's DOB faces DDoS attacks, in particular with false order information.
 
-Goals of our DOB Protocol
+Goals of the DOB Protocol
 =============================================================
 
 **1. Minimize latency of order updates**
@@ -242,12 +242,31 @@ placeOrder(LTC/ETC, 0, 10)
 -------------
 The Lightning Network and the Raiden Network take care of security on the payment channel layer. This includes resolving disputes over channel states on the underlying blockchain and disincentivizing malicious behavior by POS-style punishment (a dishonest party will lose all her funds to the honest party). It especially also includes security when routing payments through intermediary hops. We use atomic swaps to bind two payments of a trade together, so that one party cannot steal funds after receiving the first part of the trade. Both payments in a trade have to complete successfully to be valid and spendable. Exchange Union will be secured against malicious order information in a POS-style manner, to disincentivize market manipulation by sending out false order information. As mentioned above, this is not part of the PoC and will be fleshed out in a later stage.
 
-`xud`'s ID Model
+LockDuration
+=============================================================
+
+Let's take a look at the steps of a typical swap flow from a technical perspective, and how `lockDuration` plays an important role to guarantee security in a swap. `lockDuration` is the time (counted in blocks) after which a payment *expires* when it's not resolved by revealing the according preimage. As described in the swap protocol above, we have a taker, a maker and two payments. Payment "one" taker --> maker and payment "two" maker --> taker. The taker creates and controls the preimage. To make swaps secure, we have to ensure, that the `lockDuration` of payment one is significantly **longer** than the `lockDuration` of payment two, which means payment one expires a decent amount of time **later** than payment two. The maker can specify how much time has to lie between the expiries with the variable `lockBuffer`. This buffer is needed, to give the maker enough time to redeem payment one, after the taker redeemed payment two by revealing the preimage. The introduced `lockBuffer` prevents scenarios where the maker can't redeem payment one after experiencing a software malfunction or loss of connection after the taker successfully redeemed payment two. In our protocol, the default value for `lockBuffer` is an equivalent of one day.
+
+Let's take a look at what happens in detail after a match for a LTC/BTC swap was found:
+1. Taker (outbound BTC, inbound LTC) runs [`QueryRoutes`](https://github.com/ExchangeUnion/xud/pull/650) as a basic check to see if a BTC route to the maker exists.
+2. Maker (outbound LTC, inbound BTC) receives a `SwapRequestPacket` from the taker. 
+3. Maker sends [`acceptDeal`](https://github.com/ExchangeUnion/xud/blob/master/lib/swaps/Swaps.ts) if order is still available.
+4. Maker runs `QueryRoutes` for [LTC routes](https://github.com/ExchangeUnion/xud/blob/master/lib/swaps/Swaps.ts) to the taker. Purpose is two-fold: 1) see if a route exists and 2) get the `lockDuration` of an available route, which differs depending on required values of nodes along the route and number of hops. Let's assume `QueryRoutes` returns a route with a `lockDuration` of `2008` LTC blocks.
+5. Maker calculates [`blockConversionFactor`](https://github.com/ExchangeUnion/xud/blob/master/lib/swaps/Swaps.ts) based on the `makerCurrency` and `takerCurrency` clients' `lockDuration`. For BTC and LTC this would be `0.25`, meaning BTC blocks get mined 0.25x the speed of LTC blocks. This conversion factor is important to normalize blocktimes of different chains to hh:mm.
+6. Maker calculates the total [lockDuration](https://github.com/ExchangeUnion/xud/blob/master/lib/swaps/Swaps.ts) required for payment one by adding it's own `lockBuffer` to the `lockDuration` of the queried LTC route of payment two. `lockBuffer` by default is set to 1 day. Consequently, the total `lockDuration` for our example would be `144 + 2008 * 0.25= 646`
+7. Maker [creates an invoice](https://github.com/ExchangeUnion/xud/blob/master/lib/lndclient/LndClient.ts) to receive BTC with `lockDuration = 646` (called `CltvExpiry` in lightning terminology)
+8. Maker sends [SwapAcceptedPacket](https://github.com/ExchangeUnion/xud/blob/master/lib/swaps/Swaps.ts) with invoice to taker.
+9. Taker [creates an invoice](https://github.com/ExchangeUnion/xud/blob/master/lib/lndclient/LndClient.ts) to receive LTC. `LockDuration = 576`
+10. Taker pays BTC invoice via [taker.sendPayment](https://github.com/ExchangeUnion/xud/blob/master/lib/lndclient/LndClient.ts), setting `FinalCltvDelta` to `646`. 
+11. Maker pays LTC invoice using with a total lockDuration of `2008` LTC blocks via [maker.sendPayment](https://github.com/ExchangeUnion/xud/blob/master/lib/lndclient/LndClient.ts)
+12. Both redeem payments and send `swapSuccess` packet.
+
+ID Model
 =============================================================
 
 During setup, `xud` automatically creates a public/private key pair (using bitcoin's `secp256k1 ECDSA`) for identification and order signing purposes, the `nodePubKey`. The private key is saved on disk and encrypted with a password. The `nodePubKey` represents one `xud`'s unique ID within Exchange Union and is backed by a staked amount XUC as described above. Exchanges can let others know what their `xud`'s `nodePubKey` is by e.g. making such available on their website. `xud` will support whitelisting specific `nodePubKey`s for trading. In this way, exchanges in strict jurisdictions can limit trading to exchanges which fulfill the local jurisdiction's legal requirements. To harden whitelists, `xud` will support signing & encrypting orders to make sure the order was indeed placed by the authenticated party and not tempered with.
 
-`xud`'s Order Signing
+Order Signing
 =============================================================
 
 `xud` enables two modes for signing an order:
