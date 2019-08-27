@@ -3,7 +3,7 @@
 This guide describes how to setup `xud` with an existing exchange system and testing its trading functionalities with the `xud-simnet`.
 
 ## Disclaimer
-`xud` is in alpha stage and this guide aims to give exchange operators a "feel" of how things will work. `xud` in its current stage should not be connected to a production system or be configured for mainnet usage. The `xud-simnet` uses test coins at all times. We are working on an improved setup using docker, which will also be the preferred way to use `xud` for exchanges in production. We recommend integrating `xud` with a [demo exchange setup](https://github.com/ExchangeUnion/xud-exchange-integration-example) first, to get a look and feel for `xud`'s API before connecting `xud` to an existing exchange test environment.
+`xud` for exchanges is in alpha stage and this guide aims to give exchange operators a "feel" of how things will work. `xud` in its current stage should not be connected to a production system or be configured for mainnet usage. The `xud-simnet` uses test coins at all times. We are working on an improved setup using docker, which will also be the preferred way to use `xud` for exchanges in production. We recommend integrating `xud` with a [demo exchange setup](https://github.com/ExchangeUnion/xud-exchange-integration-example) first, to get a look and feel for `xud`'s API before connecting `xud` to an existing exchange test environment.
 
 ### XUD SimNet
 
