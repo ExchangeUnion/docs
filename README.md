@@ -9,20 +9,20 @@ The vision is to bring individuals and exchanges onto the same network and form 
 ![orderbook](images/orderbook.png)
 
 ## Features:
-* Unstoppable peer-to-peer trading.
-* Instant settlement.
 * No central point.
 * No middleman.
 * No KYC.
-* Support for individual traders and exchanges.
-* Market makers earn fees.
-* User has complete control over private keys.
-* Tor by default.
-* Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [raiden](https://github.com/raiden-network/raiden) clients.
+* Direct, peer-to-peer trading.
 * Decentralized order book to locally aggregate orders from the network.
 * Local matching engine to match new local orders with existing local and remote orders
 * Instant order settlement via atomic swaps with remote peers.
 * Peer-to-peer networking with and discovery of other nodes.
+* Support for individual traders and exchanges.
+* Market makers earn fees.
+* User has complete control over private keys.
+* One mnemonic for all assets.
+* [Tor](https://www.torproject.org/) by default.
+* Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [raiden](https://github.com/raiden-network/raiden) clients.
 * gRPC API to serve other applications, also accessible via the command-line interface `xucli`.
 
 ## API & Code Documentation
