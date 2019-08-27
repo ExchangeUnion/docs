@@ -6,7 +6,11 @@
 
 The vision is to bring individuals and exchanges onto the same network and form one, global liquidity pool. This gives users a choice to either trade directly on the DEX by running `xud`, managing private keys and software stack, *or* to conveniently trade via a trusted exchange. Exchanges participating in the network have access to the network's aggregated liquidity and can provide deeper order books and new trading pairs to their users.
 
-![orderbook](images/orderbook.png)
+-> [Get started as User, buying and selling crypto](user-guide.md) <-
+-> [Get started as Exchange, tapping into the network's liquidity](exchange-guide.md) <-
+-> [Get started as Developer, building applications on top of xud](developer-guide.mde) <-
+
+![orderbook](./images/orderbook.png)
 
 ## Features:
 * No central point.
@@ -14,10 +18,10 @@ The vision is to bring individuals and exchanges onto the same network and form 
 * No KYC.
 * Direct, peer-to-peer trading.
 * Decentralized order book to locally aggregate orders from the network.
-* Local matching engine to match new local orders with existing local and remote orders
+* Local matching engine to match new local orders with existing local and remote orders.
 * Instant order settlement via atomic swaps with remote peers.
 * Peer-to-peer networking with and discovery of other nodes.
-* Support for individual traders and exchanges.
+* Supports individual traders and exchanges.
 * Market makers earn fees.
 * User has complete control over private keys.
 * One mnemonic for all assets.
