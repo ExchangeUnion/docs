@@ -1,23 +1,25 @@
 # User Guide
 
-This page is intended to help users, who want to buy and sell cryptocurrency via `xud`. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended and easiest way to get up and running. It is available on different networks:
+This page is intended to help users, who want to buy and sell cryptocurrency via `xud`. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended and easiest way to get up and running.
 
-## Simnet
+## Networks
+
+### Simnet
 This is where you want to start to get a "look and feel". Private chains maintained by exchange union cloud instances, automatic opening of channels and allocation of coins & tokens, trading against bots. [Known issues 1](https://github.com/ExchangeUnion/xud-docker/issues/82) & [2](https://github.com/ExchangeUnion/xud-docker/issues/87) currently make it advisable to restart the setup after starting for the first time (`down`, `exit` `bash ~/xud.sh`).
 
 Status: `live` | Setup time: `~15 mins` | Recommended available disk space: `5 GB`
 
-## Testnet
+### Testnet
 bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here.
 
 Status: `live` | Setup time: `~5-10h` | Recommended available disk space: `120 GB`
 
-## Mainnet
+### Mainnet
 Real money - put your #reckless hat on.
 
 Status: `in development` | Setup time: `~1-3 days` | Recommended available disk space: `500 GB`
 
-## Regtest
+### Regtest
 Producing blocks locally, mainly for development
 
 Status: `not available`| Setup time: `fast` | Recommended available disk space: `1 GB`
@@ -131,7 +133,7 @@ rm -rf ~/xud.sh
 * [raiden config options](https://raiden-network.readthedocs.io/en/stable/config_file.html)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
 
-### Help us to improve!
+## Help us to improve!
 
 `xud` is in alpha stage, as well as this wiki. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
 

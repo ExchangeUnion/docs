@@ -10,7 +10,7 @@ The vision is to bring individuals and exchanges onto the same network and form 
 
 -> [Get started as **Exchange**](exchange-guide.md), tapping into the network's liquidity
 
--> [Get started as **Developer**](developer-guide.mde), building applications on top of xud
+-> [Get started as **Developer**](developer-guide.md), building applications on top of xud
 
 ![xud orderbook](/images/orderbook.png)
 
