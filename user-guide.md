@@ -4,27 +4,27 @@ This page is intended to help users, who want to buy and sell cryptocurrency via
 
 It is available on different networks:
 
-#### Simnet
+## Simnet
 This is where you want to start to get a "look and feel". Private chains maintained by exchange union cloud instances, automatic opening of channels and allocation of coins & tokens, trading against bots. [Known issues 1](https://github.com/ExchangeUnion/xud-docker/issues/82) & [2](https://github.com/ExchangeUnion/xud-docker/issues/87) currently make it advisable to restart the setup after starting for the first time (`down`, `exit` `bash ~/xud.sh`).
 
 Status: `live` | Setup time: `~15 mins` | Recommended available disk space: `5 GB`
 
-#### Testnet
+## Testnet
 bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here.
 
 Status: `live` | Setup time: `~5-10h` | Recommended available disk space: `120 GB`
 
-#### Mainnet
+## Mainnet
 Real money - put your #reckless hat on.
 
 Status: `in development` | Setup time: `~1-3 days` | Recommended available disk space: `500 GB`
 
-#### Regtest
+## Regtest
 Producing blocks locally, mainly for development
 
 Status: `not available`| Setup time: `fast` | Recommended available disk space: `1 GB`
 
-### Requirements
+## Requirements
 
 1. Linux, macOS or [Windows with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
 
@@ -47,7 +47,7 @@ $ docker run hello-world
 If step 5 fails [check these instructions](https://docs.docker.com/install/linux/linux-postinstall/). If you do not have docker installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
 
 
-### How to run
+## How to run
 
 Start the environment with
 ```bash
@@ -77,11 +77,11 @@ parity	Syncing 42.61% (2489756/5842588)
 raiden	Waiting for sync
 xud	Waiting for sync
 ```
-### Beware
+## Beware
 
 Raiden currently requires direct channels with trading partners to swap reliably. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 
-### Other useful things
+## Other useful things
 
 * We placed `xud` & `lnd` behind TOR on default, which does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
