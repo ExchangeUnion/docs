@@ -26,9 +26,9 @@ Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 1. Linux, macOS or [Windows with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
 
-2. 8GB RAM (we saw some weird container states with less on testnet and mainnet). The more, the better. GETH likes RAM. A lot.
+2. 8GB RAM (we saw some weird container states with less on testnet and mainnet). The more, the better. `geth` likes RAM. A lot.
 
-3. A SSD. We did not manage to make GETH catch up with the chain when running the container on a regular HDD.
+3. Run on a SSD. Based on painful experience: `geth` **cannot** catch up with the chain when running on a regular HDD. Read about it [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16).
 
 4. docker >= 18.09 & docker-compose >= 1.24. Check with `docker --version` & `docker-compose --version`. If you do not have these installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
 
