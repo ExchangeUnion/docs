@@ -1,6 +1,6 @@
 # Introduction
 
-[XUD](https://github.com/ExchangeUnion/xud), the Exchange Union Daemon, is the open-source node software powering [Exchange Union](https://www.exchangeunion.com/), a decentralized exchange (DEX) built on the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network.
+The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the open-source node software powering [Exchange Union](https://www.exchangeunion.com/), a decentralized exchange (DEX) built on the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network.
 
 `xud` brings individuals and exchanges onto the same network to form a single global liquidity pool. This gives users a choice to either trade directly on the DEX by running `xud`, managing private keys and software stack, *or* to conveniently trade via a trusted exchange. Exchanges benefit from access to the network's aggregated liquidity and can provide deeper order books and new trading pairs to their users.
 
