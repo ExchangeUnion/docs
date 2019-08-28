@@ -6,11 +6,11 @@
 
 The vision is to bring individuals and exchanges onto the same network and form one global liquidity pool. This gives users a choice to either trade directly on the DEX by running `xud`, managing private keys and software stack, *or* to conveniently trade via a trusted exchange. Exchanges benefit from access to the network's aggregated liquidity and can provide deeper order books and new trading pairs to their users.
 
--> [Get started as **User**](userguide.md), buying and selling crypto
+-> [Get started as **User**](User%20Guide.md), buying and selling crypto
 
--> [Get started as **Exchange**](exchange-guide.md), tapping into the network's liquidity
+-> [Get started as **Exchange**](Exchange%20Guide.md), tapping into the network's liquidity
 
--> [Get started as **Developer**](developer-guide.md), contributing & building on top of xud
+-> [Get started as **Developer**](Developer%20Guide.md), contributing & building on top of xud
 
 ![xud orderbook](/images/orderbook.png)
 
