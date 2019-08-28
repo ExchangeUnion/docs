@@ -1,4 +1,4 @@
-# ![XUD](images/xud-logo.png "XUD Logo") Documentation
+# ![XUD](/images/xud-logo.png) Documentation
 
 ## Introduction
 
