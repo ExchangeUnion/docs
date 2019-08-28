@@ -1,4 +1,4 @@
- # <img src="/images/xud-logo.png" alt="XUD" width="200"/> Documentation
+ # XUD Documentation
 
 ## Introduction
 
@@ -6,11 +6,11 @@ XUD, the Exchange Union Daemon, is the open-source node software powering [Excha
 
 The vision is to bring individuals and exchanges onto the same network and form one global liquidity pool. This gives users a choice to either trade directly on the DEX by running `xud`, managing private keys and software stack, *or* to conveniently trade via a trusted exchange. Exchanges benefit from access to the network's aggregated liquidity and can provide deeper order books and new trading pairs to their users.
 
--> [Get started as User, buying and selling crypto](user-guide.md) <-
+-> [Get started as **User**, buying and selling crypto](user-guide.md)
 
--> [Get started as Exchange, tapping into the network's liquidity](exchange-guide.md) <-
+-> [Get started as **Exchange**, tapping into the network's liquidity](exchange-guide.md)
 
--> [Get started as Developer, building applications on top of xud](developer-guide.mde) <-
+-> [Get started as **Developer**, building applications on top of xud](developer-guide.mde)
 
 ![xud orderbook](/images/orderbook.png)
 
