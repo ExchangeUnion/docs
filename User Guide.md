@@ -80,7 +80,6 @@ Please report issues/bugs by running `report` from within `xud ctl`.
 * Docker doesnt play nice with VPN's. We'll try to fix that in future, for the time being please disconnect VPNs running directly on your system.
 * We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
-
 ```bash
 #Simnet
 ltcctl --help

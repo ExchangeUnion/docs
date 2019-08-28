@@ -13,7 +13,7 @@ Follow [this guide](SimNet-Guide) to set up the XUD SimNet. Once the setup of `x
 
 ### API Integration
 
-`xud` uses [gRPC](https://grpc.io/). The latest overview of available calls with descriptions can be found in [this proto file](https://github.com/ExchangeUnion/xud/blob/master/proto/xudrpc.proto). Once the gRPC is more stable, we'll provide a nicer looking documentation.
+`xud` uses [gRPC](https://grpc.io/). An up-to-date overview of available calls with descriptions can be found [here](http://api.exchangeunion.com).
 
 From a high-level perspective, `xud` supports two modes: `matching` and `nomatching`
 
