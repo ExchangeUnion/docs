@@ -4,7 +4,7 @@ This page is intended to help developers who want to contribute or build on top 
 
 ## Contribution Guidelines
 
-Be sure to read the [Contribution Guidelines](CONTRIBUTE.md) for the repository before starting work or opening a Pull Request.
+Be sure to read the [Contribution Guidelines](Contribute.md) for the repository before starting work or opening a Pull Request.
 
 ## Recommended Development Environments
 
