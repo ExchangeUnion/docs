@@ -1,4 +1,4 @@
- # XUD Documentation
+# XUD Documentation
 
 ## Introduction
 
