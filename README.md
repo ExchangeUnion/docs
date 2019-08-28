@@ -35,7 +35,7 @@ We have the vision to bring individuals and exchanges onto the same network and 
 
 ## API & Code Documentation
 
-Read the API documentation [here](http://api.exchangeunion.com) and code documentation [here](http://typedoc.exchangeunion.com/).
+Find the API documentation [here](http://api.exchangeunion.com) and code documentation [here](http://typedoc.exchangeunion.com/).
 
 
 ## Support & Community

@@ -225,9 +225,3 @@ Currently the trading bots of xud1, 2 & 3 are configured to replace successfully
 For always up-to-date CLI commands, check `xucli --help`. 
 
 Restart the simnet environment with `xud-simnet-restart`. If you want to control the underlying `lnd` or `ltcd` clients, type `alias` to see aliases set by the `xud-simnet` scripts. to e.g. call `getinfo` for `lndbtc` this would be `lndbtc-lncli getinfo`.
-
-## Help us to improve!
-
-`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
-
-Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!

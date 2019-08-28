@@ -124,9 +124,3 @@ rm -rf ~/xud.sh
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
 * [raiden config options](https://raiden-network.readthedocs.io/en/stable/config_file.html)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
-
-## Help us to improve!
-
-`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
-
-Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!

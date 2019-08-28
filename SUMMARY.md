@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 
-## Getting Started
+## Start Trading
 * [User Guide](User%20Guide.md)
 
 ## Integration

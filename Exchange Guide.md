@@ -39,9 +39,3 @@ Default is `matching` mode, which means that `xud` acts as order book & matching
 * Peer discovery and auto-connecting to new peers is still experimental and only enabled gradually. In order to manually connect to a peer via CLI, use `connect [NodeURI]` where `NodeURI` is `pubkey@IP:Port`, e.g. `02b66438730d1fcdf4a4ae5d3d73e847a272f160fee2938e132b52cab0a0d9cfc6@xud1.test.exchangeunion.com:8885`.
 * The gRPC API is locally exposed on port 8886 by default.
 * `nomatching` mode introduces the problem of peer orders racing against local orders since most exchange's matching engines don't support the necessary `hold` mechanism. Several approaches are currently being evaluated and tested, follow the status [here](https://github.com/ExchangeUnion/xud/issues/587).
-
-## Help us to improve!
-
-`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
-
-Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!
