@@ -40,7 +40,7 @@ Read the API documentation [here](http://api.exchangeunion.com) and code documen
 
 ## Support & Community
 
-* [Contribute](CONTRIBUTE.md)
+* [Contribute](Contribute.md)
 * Questions and development-related discussions on [Discord](https://discord.gg/YgDhMSn)
 
 ## Help us to improve!
