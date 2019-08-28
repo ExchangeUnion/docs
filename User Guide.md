@@ -60,7 +60,7 @@ btc	Ready
 lndbtc	Ready
 ltc	Syncing 2.40% (26887/1116528)
 lndltc	Waiting for sync
-parity	Syncing 42.61% (2489756/5842588)
+geth	Syncing 42.61% (2489756/5842588)
 raiden	Waiting for sync
 xud	Waiting for sync
 ```
@@ -88,7 +88,7 @@ bitcoin-cli --help
 lndbtc-lncli --help
 litecoin-cli --help
 lndltc-lncli --help
-parity --help
+geth --help
 raiden --help
 xucli --help
 ```
@@ -100,7 +100,7 @@ Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc`, then run `so
 #Simnet
 logs ltcd/geth/lndbtc/lndltc/raiden/xud
 #Testnet/Mainnet
-logs bitcoind/litecoind/parity/lndbtc/lndltc/raiden/xud
+logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ```
 
 * Blockchain & wallet data is stored in
@@ -124,7 +124,7 @@ rm -rf ~/xud.sh
 ## References
 * [bitcoind config options](https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf)
 * [litecoind config options](https://litecoin.info/index.php/Litecoin.conf#litecoin.conf_Configuration_File)
-* [parity config options](https://wiki.parity.io/Configuring-Parity-Ethereum)
+* [geth config options](https://github.com/ethereum/go-ethereum/blob/master/README.md#configuration)
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
 * [raiden config options](https://raiden-network.readthedocs.io/en/stable/config_file.html)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
