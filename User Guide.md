@@ -73,9 +73,13 @@ xud	Waiting for sync
 
 Raiden currently requires direct channels with trading partners to swap reliably. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 
-## Other useful things
+## Report
 
-* Unfortunately docker doesnt play nice with VPN's. We'll fix that in future, for the time being please disconnect VPNs running directly on your system.
+Please report issues you encounter by running `report` from within `xud ctl`.
+
+## Tips 'n Tricks
+
+* Docker doesnt play nice with VPN's. We'll try to fix that in future, for the time being please disconnect VPNs running directly on your system.
 * We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
 ```bash
