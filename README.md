@@ -14,7 +14,7 @@ The vision is to bring individuals and exchanges onto the same network and form 
 
 ![xud orderbook](/images/orderbook.png)
 
-## Features:
+## Features
 * No central point or authority.
 * No middleman.
 * No KYC.
