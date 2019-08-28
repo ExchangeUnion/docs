@@ -1,30 +1,28 @@
-# User Guide
-
 This guide is written for users who want to buy and sell cryptocurrency via `xud`. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended and easiest way to get up and running.
 
-## Networks
+# Networks
 
-### Simnet
+## Simnet
 This is where you want to start. It's quick and gives you a "look and feel". Private chains maintained by Exchange Union cloud instances, we automatically open channels to you and allocate you some precious simnet tokens. Trade against our bots. Consider restarting the setup once after starting for the first time (`down`,  `exit`, `bash ~/xud.sh`, `1`).
 
-Status: `live` | Setup time: `~15 mins` | Recommended available disk space: `5 GB`
+Status: `live` | Setup time: `~15 mins` | Disk space: `5 GB`
 
-### Testnet
+## Testnet
 bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here.
 
-Status: `live` | Setup time: `~5-24h` | Recommended available disk space: `120 GB`
+Status: `live` | Setup time: `~5-24h` | Disk space: `120 GB`
 
-### Mainnet
-Real money - only with #reckless hat on.
+## Mainnet
+Real money - only with #reckless hat.
 
-Status: `live` (with very low limits) | Setup time: `~1-3 days` | Recommended available disk space: `500 GB`
+Status: `live` (with very low limits) | Setup time: `~1-3 days` | Disk space: `500 GB`
 
-### Regtest
+## Regtest
 Producing blocks locally, mainly for development
 
-Status: `not available`| Setup time: `fast` | Recommended available disk space: `1 GB`
+Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
-## Requirements
+# Requirements
 
 1. Linux, macOS or [Windows with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
 
@@ -37,7 +35,7 @@ Status: `not available`| Setup time: `fast` | Recommended available disk space: 
 5. current user can run docker (without sudo). Test with `docker run hello-world`. If this fails, [check these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
 
-## How to run
+# How to run
 
 Start the environment with
 ```bash
@@ -69,23 +67,23 @@ xud	Waiting for sync
 
 `xud ctl` takes [`xucli` commands](https://api.exchangeunion.com), like `getinfo`. Once everything is up and running, you can check existing orders of your connected peers with `orderbook` and issue an order, e.g. `sell 0.1 btc/dai 9998`. Check your `balance` before and after the swap to see it changing.
 
-## Beware
+# Beware
 
 Raiden currently requires direct channels with trading partners to swap reliably. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 
-## Report
+# Report
 
-Please report issues you encounter by running `report` from within `xud ctl`.
+Please report issues/bugs by running `report` from within `xud ctl`.
 
-## Tips 'n Tricks
+# Tips 'n Tricks
 
 * Docker doesnt play nice with VPN's. We'll try to fix that in future, for the time being please disconnect VPNs running directly on your system.
 * We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
+
 ```bash
 #Simnet
 ltcctl --help
-
 #Testnet/Mainnet
 bitcoin-cli --help
 lndbtc-lncli --help
@@ -95,6 +93,7 @@ parity --help
 raiden --help
 xucli --help
 ```
+
 * Permanently set xud alias to launch `xud ctl` from anywhere:
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc`, then run `source ~/.bashrc`.
 * To inspect logs (use `logs -f` if you want to follow the log live):
@@ -104,6 +103,7 @@ logs ltcd/geth/lndbtc/lndltc/raiden/xud
 #Testnet/Mainnet
 logs bitcoind/litecoind/parity/lndbtc/lndltc/raiden/xud
 ```
+
 * Blockchain & wallet data is stored in
 ```bash
 #Simnet
@@ -113,6 +113,7 @@ logs bitcoind/litecoind/parity/lndbtc/lndltc/raiden/xud
 #Mainnet
 ~/.xud-docker/mainnet/data
 ```
+
 * Shutdown environment & remove all data
 ```bash
 docker-compose down
@@ -121,7 +122,7 @@ rm -rf ~/.xud-docker/
 rm -rf ~/xud.sh
 ```
 
-### References
+## References
 * [bitcoind config options](https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf)
 * [litecoind config options](https://litecoin.info/index.php/Litecoin.conf#litecoin.conf_Configuration_File)
 * [parity config options](https://wiki.parity.io/Configuring-Parity-Ethereum)
