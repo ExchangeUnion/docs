@@ -2,7 +2,6 @@
 
 Yay! Kudos for being a part of Exchange Union & for helping to build the Exchange Union Daemon, our node software! Any contributions are welcome no matter how big or small. From typos and bug fixes to entire modules - you will be awarded with our token, XUC.
 
-
 ## Contribution Guidelines
 
 If you are new to contributing to open sources projects on GitHub, check out [this how-to](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github/).

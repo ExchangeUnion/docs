@@ -1,7 +1,7 @@
 # User Guide
 
-This page is intended to help users, who want to buy and sell cryptocurrency via `xud`. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended and easiest way to get up and running. It is available on different networks:
 
+This page is intended to help users, who want to buy and sell cryptocurrency via `xud`. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended and easiest way to get up and running. It is available on different networks:
 
 ## Simnet
 This is where you want to start to get a "look and feel". Private chains maintained by exchange union cloud instances, automatic opening of channels and allocation of coins & tokens, trading against bots. [Known issues 1](https://github.com/ExchangeUnion/xud-docker/issues/82) & [2](https://github.com/ExchangeUnion/xud-docker/issues/87) currently make it advisable to restart the setup after starting for the first time (`down`, `exit` `bash ~/xud.sh`).
