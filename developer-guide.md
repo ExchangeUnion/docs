@@ -48,3 +48,9 @@ With args:
 ```
 nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
 ```
+
+### Help us to improve!
+
+`xud` is in alpha stage, as well as this wiki. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
+
+Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!

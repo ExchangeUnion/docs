@@ -41,6 +41,6 @@ Default is `matching` mode, which means that `xud` acts as order book & matching
 
 ### Help us to improve!
 
-`xud` is in alpha stage, as well as this guide. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), the [simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
+`xud` is in alpha stage, as well as this wiki. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
 
-Feel like talking? Chat with us on [Gitter](https://gitter.im/exchangeunion/xud-testing)!
+Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!
