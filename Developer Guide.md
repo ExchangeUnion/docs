@@ -4,7 +4,7 @@ This page is intended to help developers who want to contribute or build on top 
 
 ## Contribution Guidelines
 
-Be sure to read the [Contribution Guidelines](https://github.com/ExchangeUnion/xud/blob/master/CONTRIBUTING.MD) for the repository before starting work or opening a Pull Request.
+Be sure to read the [Contribution Guidelines](CONTRIBUTE.md) for the repository before starting work or opening a Pull Request.
 
 ## Recommended Development Environments
 
@@ -49,8 +49,8 @@ With args:
 nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
 ```
 
-### Help us to improve!
+## Help us to improve!
 
-`xud` is in alpha stage, as well as this wiki. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
+`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
 
 Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!

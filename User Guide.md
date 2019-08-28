@@ -5,19 +5,19 @@ This guide is written for users who want to buy and sell cryptocurrency via `xud
 ## Networks
 
 ### Simnet
-This is where you want to start to get a "look and feel". Private chains maintained by exchange union cloud instances, automatic opening of channels and allocation of coins & tokens, trading against bots. [Known issues 1](https://github.com/ExchangeUnion/xud-docker/issues/82) & [2](https://github.com/ExchangeUnion/xud-docker/issues/87) currently make it advisable to restart the setup after starting for the first time (`down`, `exit` `bash ~/xud.sh`).
+This is where you want to start. It's quick and gives you a "look and feel". Private chains maintained by Exchange Union cloud instances, we automatically open channels to you and allocate you some precious simnet tokens. Trade against our bots. Consider restarting the setup once after starting for the first time (`down`,  `exit`, `bash ~/xud.sh`, `1`).
 
 Status: `live` | Setup time: `~15 mins` | Recommended available disk space: `5 GB`
 
 ### Testnet
 bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here.
 
-Status: `live` | Setup time: `~5-10h` | Recommended available disk space: `120 GB`
+Status: `live` | Setup time: `~5-24h` | Recommended available disk space: `120 GB`
 
 ### Mainnet
-Real money - put your #reckless hat on.
+Real money - only with #reckless hat on.
 
-Status: `in development` | Setup time: `~1-3 days` | Recommended available disk space: `500 GB`
+Status: `live` (with very low limits) | Setup time: `~1-3 days` | Recommended available disk space: `500 GB`
 
 ### Regtest
 Producing blocks locally, mainly for development
@@ -28,23 +28,13 @@ Status: `not available`| Setup time: `fast` | Recommended available disk space: 
 
 1. Linux, macOS or [Windows with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
 
-2. 8GB RAM (we saw some weird container states with less on testnet and mainnet)
+2. 8GB RAM (we saw some weird container states with less on testnet and mainnet). The more, the better. GETH likes RAM. A lot.
 
-3. docker >= 18.09
-```
-$ docker --version
-Docker version 18.09.6, build 481bc77
-```
-4. docker-compose >= 1.24
-```
-$ docker-compose --version
-docker-compose version 1.24.0, build 0aa59064
-```
-5. current user can run docker (without sudo)
-```
-$ docker run hello-world
-```
-If step 5 fails [check these instructions](https://docs.docker.com/install/linux/linux-postinstall/). If you do not have docker installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+3. A SSD. We did not manage to make GETH catch up with the chain when running the container on a regular HDD.
+
+4. docker >= 18.09 & docker-compose >= 1.24. Check with `docker --version` & `docker-compose --version`. If you do not have these installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+
+5. current user can run docker (without sudo). Test with `docker run hello-world`. If this fails, [check these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
 
 ## How to run
@@ -55,7 +45,7 @@ curl https://raw.githubusercontent.com/ExchangeUnion/xud-docker/master/xud.sh -o
 bash ~/xud.sh
  
 ```
-This guides you through a setup on first run, pulls all containers, starts syncing chains and opens
+This guides you through a setup on first run, pulls containers, starts syncing chains and opens
 ```
                            .___           __  .__   
           ___  _____ __  __| _/     _____/  |_|  |  
@@ -65,9 +55,8 @@ This guides you through a setup on first run, pulls all containers, starts synci
                 \/          \/         \/           
 --------------------------------------------------------------
 ```
-`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com), like `getinfo` or `orderbook`. Issue an order with e.g. `sell 0.1 btc/dai 9998`. You can see your `channelbalance` changing after a successful swap.
 
-The `status` command shows status of underlying clients, which is mainly useful to track the sync status on testnet/mainnet:
+The `status` command shows status of underlying clients, which is especially useful to track the sync status. If you are syncing full nodes on Testnet/Mainnet, this takes several hours or even days. All clients should show `Ready` before you continue.
 ```bash
 btc	Ready
 lndbtc	Ready
@@ -77,13 +66,17 @@ parity	Syncing 42.61% (2489756/5842588)
 raiden	Waiting for sync
 xud	Waiting for sync
 ```
+
+`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com), like `getinfo`. Once everything is up and running, you can check existing orders of your connected peers with `orderbook` and issue an order, e.g. `sell 0.1 btc/dai 9998`. Check your `balance` before and after the swap to see it changing.
+
 ## Beware
 
 Raiden currently requires direct channels with trading partners to swap reliably. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 
 ## Other useful things
 
-* We placed `xud` & `lnd` behind TOR on default, which does away with the need to open ports
+* Unfortunately docker doesnt play nice with VPN's. We'll fix that in future, for the time being please disconnect VPNs running directly on your system.
+* We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
 ```bash
 #Simnet
@@ -98,7 +91,6 @@ parity --help
 raiden --help
 xucli --help
 ```
-* Once everything is up and running, you can check existing orders of your connected peers with `xucli orderbook` and issue e.g. a buy order of 1 ltc with `buy 1 ltc/btc 0.01`.
 * Permanently set xud alias to launch `xud ctl` from anywhere:
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc`, then run `source ~/.bashrc`.
 * To inspect logs (use `logs -f` if you want to follow the log live):
@@ -135,6 +127,6 @@ rm -rf ~/xud.sh
 
 ## Help us to improve!
 
-`xud` is in alpha stage, as well as this wiki. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
+`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
 
 Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!

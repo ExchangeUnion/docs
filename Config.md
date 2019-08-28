@@ -1,0 +1,2 @@
+# Configuration
+An *optional* configuration file uses [TOML](https://github.com/toml-lang/toml) and by default should be saved at  `~/.xud/xud.conf` on Linux or `AppData\Local\Xud\xud.conf` on Windows. Run `xud` at least once for this folder to be created. The xud repository contains an up-to-date [`sample-xud.conf`](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf) which serves as template for creating `xud.conf`.

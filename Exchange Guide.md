@@ -40,8 +40,8 @@ Default is `matching` mode, which means that `xud` acts as order book & matching
 * The gRPC API is locally exposed on port 8886 by default.
 * `nomatching` mode introduces the problem of peer orders racing against local orders since most exchange's matching engines don't support the necessary `hold` mechanism. Several approaches are currently being evaluated and tested, follow the status [here](https://github.com/ExchangeUnion/xud/issues/587).
 
-### Help us to improve!
+## Help us to improve!
 
-`xud` is in alpha stage, as well as this wiki. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and this [wiki](https://github.com/ExchangeUnion/xud-wiki/issues).
+`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
 
 Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!

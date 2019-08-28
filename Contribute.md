@@ -42,3 +42,9 @@ Here's how it works:
 It goes without saying that you can exchange XUC to other assets on [various exchanges](https://www.exchangeunion.com/xuc).
 
 If you see something missing or want to develop another cool feature or bug fix which doesn't have an issue yet, open one and we'll review and give it a price tag asap! We don't recommend working on things without an issue on github.
+
+## Help us to improve!
+
+`xud` is in alpha stage, as well is this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues), [xud-simnet](https://github.com/ExchangeUnion/xud-simnet/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
+
+Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!
