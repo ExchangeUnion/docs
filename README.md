@@ -33,7 +33,7 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 
 ## API & Code Documentation
 
-Find the API documentation [here](http://api.exchangeunion.com) and code documentation [here](http://typedoc.exchangeunion.com/).
+Find the API documentation [here](https://api.exchangeunion.com) and code documentation [here](https://typedoc.exchangeunion.com/).
 
 
 ## Support & Community

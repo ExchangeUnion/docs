@@ -17,3 +17,7 @@
 ## Features
 * [CLI](CLI.md)
 * [Config](Config.md)
+
+## More Docs
+* [API Documentation](https://api.exchangeunion.com)
+* [Code Documentation]((https://typedoc.exchangeunion.com/))
