@@ -1,4 +1,4 @@
-We recommend to use the [xud-docker](https://github.com/ExchangeUnion/xud/wiki/Docker) setup to trade on the `xud-simnet`; it does not require installation of `xud` or any dependencies. For a native installation, installing various dependencies of underlying clients, follow the guide below.
+We recommend to use the [xud-docker](User%20Guide.md) setup to trade on the `xud-simnet`; it does not require installation of `xud` or any dependencies. For a native installation, installing various dependencies of underlying clients, follow the guide below.
 
 ## Goal
 
