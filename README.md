@@ -10,9 +10,9 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 
 -> [Get started as **Exchange**](Exchange%20Guide.md), tapping into the network's liquidity
 
--> [Get started as **Developer**](Developer%20Guide.md), contributing & building on top of xud
+-> [Get started as **Developer**](Developer%20Guide.md), contributing or building on top of `xud`
 
-![Trading via xud](/images/orderbook.png)
+![Trading via XUD](/images/orderbook.png)
 
 ## Features
 * No central point or authority.
