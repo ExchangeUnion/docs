@@ -20,4 +20,4 @@
 
 ## More Docs
 * [API Documentation](https://api.exchangeunion.com)
-* [Code Documentation]((https://typedoc.exchangeunion.com/))
+* [Code Documentation](https://typedoc.exchangeunion.com/)
