@@ -10,9 +10,10 @@
 
 ## Development
 * [Developer Guide](Developer%20Guide.md)
+* [Contribution Guide](Contribute.md)
 * [Native Installation](Native%20Installation.md)
 * [Native SimNet](Native%20SimNet.md)
-* [Contribute](Contribute.md)
+
 
 ## Features
 * [CLI](CLI.md)

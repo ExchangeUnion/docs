@@ -1,6 +1,6 @@
 # Contribute & Earn
 
-Yay! Thanks for helping us build `xud`! Any contributions are welcome no matter how big or small. From typos and bug fixes to entire modules - you will be awarded with our token, XUC.
+Yay! Thanks for helping us build `xud`! Any contributions are welcome no matter how big or small. From typos and bug fixes to entire modules ... and you will be financially awarded.
 
 ## Contribution Guidelines
 
@@ -32,13 +32,13 @@ Commit messages should be concise and descriptive. For larger or more complex co
 
 Here's how it works:
 1. Grab a task from [here](https://github.com/ExchangeUnion/xud/issues).
-2. Each task carries a range of XUC to be earned, e.g. 50-100 XUC. The more complex the task, the higher the reward - grab a task which best fits your available time & skill set.
+2. Each task carries a range of XUC to be earned, e.g. 50-100 XUC. The more complex the task, the higher the reward - grab a task which best fits your available time & skill set. If your task does not carry a XUC tag - [ask us](https://discord.gg/YgDhMSn) to add one.
 3. Leave a comment to let everyone know you'll be working on the task, and fork the repository to get started.
-4. [Get in touch](https://gitter.im/exchangeunion/Lobby) for help along the way, especially for testing. Unfortunately our automation is still a work in progress! :/
-5. When you feel ready, submit a pull request  against the `master` branch with your **ether address (!)** in the comment section.
-6. For non-trivial changes, expect several rounds of review and testing to take place before your changes get merged into the master branch.
-7. After a successful merge into the master branch we'll send the XUC reward to the ether address you provided in the comment section. For now this is all manual work on our end, but we would love for someone to propose a solution to automate this process (& propose a price tag)!
+4. [Get in touch](https://discord.gg/YgDhMSn) for help along the way.
+5. When you feel ready, submit a PR against the `master` branch with your **ether address (!)** in the comment section. To preserve your privacy, **do not re-use addresses**.
+6. For non-trivial changes, expect several rounds of review and testing to take place before your changes get merged into the master branch. Our simulation tests (which run on each travis build) should give pretty good initial feedback though.
+7. After a successful merge into the master branch we'll send the XUC reward to the ether address you provided in the comment section. This is manual work and happens on 15th every month.
 
 It goes without saying that you can exchange XUC to other assets on [various exchanges](https://www.exchangeunion.com/xuc).
 
-If you see something missing or want to develop another cool feature or bug fix which doesn't have an issue yet, open one and we'll review and give it a price tag asap! We don't recommend working on things without an issue on github.
+If you see something missing or want to develop another cool feature or bug fix which doesn't have an issue yet, open one and we'll review and give it a price tag if you ask nicely ;) ! We don't recommend working on things without a GitHub issue.
