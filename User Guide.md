@@ -76,7 +76,7 @@ Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
 
-* Docker might not play nicely with a VPN your are running on the same machine. If you see `Failed to launch simnet environment.` Try disconnecting the VPN.
+* Docker might not play nicely with a VPN your are running on the same machine. If you see `Failed to launch simnet environment`, try disconnecting the VPN.
 * We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
 ```bash
