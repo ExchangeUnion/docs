@@ -1,6 +1,6 @@
 # Contribute & Earn
 
-Yay! Thanks for helping us build `xud`! Any contributions are welcome no matter how big or small. From typos and bug fixes to entire modules ... and you will be financially awarded.
+Yay! Thanks for helping us build `xud`! Any contributions are welcome no matter how big or small. From typos and bug fixes to entire modules... and you will be financially awarded.
 
 ## Contribution Guidelines
 

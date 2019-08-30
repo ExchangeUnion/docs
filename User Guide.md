@@ -34,14 +34,13 @@ Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 5. Current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
-
 # How to run
 
 Start the environment with
 ```bash
 curl https://raw.githubusercontent.com/ExchangeUnion/xud-docker/master/xud.sh -o ~/xud.sh
 bash ~/xud.sh
- 
+
 ```
 This guides you through a setup on first run, pulls containers, starts syncing chains and opens
 ```
@@ -77,7 +76,7 @@ Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
 
-* Docker doesnt play nice with VPN's. We'll try to fix that in future, for the time being please disconnect VPNs running directly on your system.
+* Docker might not play nicely with a VPN your are running on the same machine. If you see `Failed to launch simnet environment.` Try disconnecting the VPN.
 * We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
 * `xud ctl` allows to use an underlying client's cli:
 ```bash

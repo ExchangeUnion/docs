@@ -14,7 +14,6 @@
 * [Native Installation](Native%20Installation.md)
 * [Native SimNet](Native%20SimNet.md)
 
-
 ## Features
 * [CLI](CLI.md)
 * [Config](Config.md)
