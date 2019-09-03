@@ -46,12 +46,12 @@ nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
 
 We recommend to connect the `xud` instance you are developing on with the `xud-simnet`. Combined with above restarting mechanism, this let's you instantly see how your changes behave in a real-world trading environment.
 
-1. Install xud-simnet by following [here](https://github.com/ExchangeUnion/xud/wiki/Docker)
-2. Exit from the opened session with `CTRL+C`
+1. Install the `xud-simnet` as described [here](https://docs.exchangeunion.com/v/gitbook/start-trading/user-guide)
+2. Exit from the opened `xud ctl` session by typing `exit`
 3. Stop `simnet_xud_1` docker image with `docker stop simnet-xud_1` command, we won't need it.
 4. Copy  `~/.xud-docker/simnet/data/lndltc` and `~/.xud-docker/simnet/data/lndbtc` into somewhere you can easily access (such as your home directory). 
 5. Ensure you own the copied folders. `chown -R <user>: <copied_path>/lndbtc|lndltc`
-6. Configure `xud` as below.
+6. Change `xud.conf` as below.
 ```
 [lnd.BTC]
 cltvdelta = 144
@@ -76,7 +76,7 @@ disable = false
 host = "localhost"
 port = 5002
 ```
-7. Now you can start `xud` since it'll be using the above configuration, it'll successfully connect to running docker instances.
+7. Now you can start `xud`. Since it's using above configuation, it connects to the running docker environment. Ready to test your changes on xud-simnet!
 
 ## References
 
