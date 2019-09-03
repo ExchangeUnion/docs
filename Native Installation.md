@@ -5,7 +5,7 @@ This page contains instructions for installing `xud` natively, without treating 
 ## Requirements
 
 Make sure to have the folloiwng installed:
-- [Node.js](https://nodejs.org/en/download/), v10.15.3 or higher
+- [Node.js](https://nodejs.org/en/download/), latest LTS or newer
 - [Python](https://www.python.org/), v2.7.16
 - [Go](https://golang.org/), v1.12 or higher
 

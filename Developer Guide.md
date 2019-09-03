@@ -18,9 +18,9 @@ The following development environments are known to be compatible with `xud` and
 
 Consider using the following plugins for working with `xud`.
 
-- [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)
+- [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 - [vscode-proto3](https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3)
-- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=coenraads.bracket-pair-colorizer)
+- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=coenraads.bracket-pair-colorizer) (definitely optional)
 
 #### Visual Studio Code Environment Config
 
@@ -46,7 +46,7 @@ nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
 
 We recommend to connect the `xud` instance you are developing on with the `xud-simnet`. Combined with above restarting mechanism, this let's you instantly see how your changes behave in a real-world trading environment.
 
-1. Install the `xud-simnet` as described [here](https://docs.exchangeunion.com/v/gitbook/start-trading/user-guide)
+1. Install the `xud-simnet` as described [here](https://docs.exchangeunion.com/start-trading/user-guide)
 2. Exit from the opened `xud ctl` session by typing `exit`
 3. Stop `simnet_xud_1` docker image with `docker stop simnet-xud_1` command, we won't need it.
 4. Copy  `~/.xud-docker/simnet/data/lndltc` and `~/.xud-docker/simnet/data/lndbtc` into somewhere you can easily access (such as your home directory). 

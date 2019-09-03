@@ -4,9 +4,9 @@ We recommend to use the [xud-docker](User%20Guide.md) setup to trade on the `xud
 
 This guide describes how to setup `xud` and connect to and trade on the XUD Simulation Network (`xud-simnet`). It should take about 15 minutes to complete all steps.
 
-`xud` is in alpha stage and the `xud-simnet` aims to give interested individuals an early 'look & feel' of how things will work lateron with a convenient, mostly automated setup. The `xud-simnet` uses magic simnet coins at all times.
+`xud` is in alpha stage and the `xud-simnet` aims to give interested individuals an early 'look & feel' of how things will work later on with a convenient, mostly automated setup. The `xud-simnet` uses magic simnet coins at all times.
 
-Once the setup of `xud-simnet` is completed, you will be able to query pending orders, place orders, and experiment with `xud`'s rich set of commands (`xucli --help`). When a match is found in the network, your orders will automatically be executed & settled instantly via an atomic swap. `xud-simnet` currently supports atomic swaps between BTC, LTC & ERC20 tokens. This guide will show how to install dependencies like `go` and how to use the `xud-simnet` to automatically setup bitcoin, litecoin & ethereum daemons, lightning daemons (LND) for bitcoin (BTC) and litecoin (LTC), raiden for ERC20 tokens, `xud` and finally connect to `xud-simnet`. This guide is written for Linux, macOS and Windows' [WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) and suitable for everyone that knows how to use a command line.
+Once the setup of `xud-simnet` is completed, you will be able to query pending orders, place orders, and experiment with `xud`'s rich set of commands (`xucli --help`). When a match is found in the network, your orders will automatically be executed & settled instantly via an atomic swap. `xud-simnet` currently supports atomic swaps between BTC, LTC & ERC20 tokens. This guide will show how to install dependencies like `go` and how to use the `xud-simnet` to automatically setup bitcoin, litecoin & ethereum daemons, lightning daemons (LND) for bitcoin (BTC) and litecoin (LTC), raiden for ERC20 tokens, `xud` and finally connect to `xud-simnet`. This guide is written for Linux & macOS and suitable for everyone that knows how to use a command line. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental.
 
 ## Describing the Setup
 
@@ -26,7 +26,7 @@ Once the setup of `xud-simnet` is completed, you will be able to query pending o
 
 Make sure you have the below programs installed:
 - [git](https://gist.github.com/derhuerst/1b15ff4652a867391f03#file-linux-md)
-- [make](https://www.cyberciti.biz/faq/debian-linux-install-gnu-gcc-compiler/)
+- make (`sudo apt-get install make`)
 - [node.js + npm](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (v10.x or higher)
 - python 3.7 or higher
 - go 1.12 or higher

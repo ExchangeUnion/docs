@@ -24,7 +24,7 @@ Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 # Requirements
 
-1. Linux, macOS or [Windows with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install).
+1. Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental.
 
 2. 8GB RAM (we saw some weird container states with less on testnet and mainnet). The more, the better. `geth` likes RAM. A lot.
 
@@ -76,8 +76,9 @@ Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
 
-* Docker might not play nicely with a VPN your are running on the same machine. If you see `Failed to launch simnet environment`, try disconnecting the VPN.
-* We placed `xud` & `lnd` behind TOR on default, which improves privacy and does away with the need to open ports
+* Docker might not play nicely with a VPN you are running on the same machine. If you see `Failed to launch simnet environment`, try disconnecting the VPN.
+* We placed `xud` & `lnd` behind TOR by default, which improves privacy and does away with the need to open ports
+* If you want to test pre-release builds, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing).
 * `xud ctl` allows to use an underlying client's cli:
 ```bash
 #Simnet
@@ -93,7 +94,7 @@ xucli --help
 ```
 
 * Permanently set xud alias to launch `xud ctl` from anywhere:
-Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc`, then run `source ~/.bashrc`.
+Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc` on Linux or `bash_profile` on Mac, then source the file.
 * To inspect logs (use `logs -f` if you want to follow the log live):
 ```bash
 #Simnet

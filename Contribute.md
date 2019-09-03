@@ -35,7 +35,7 @@ Here's how it works:
 2. Each task carries a range of XUC to be earned, e.g. 50-100 XUC. The more complex the task, the higher the reward - grab a task which best fits your available time & skill set. If your task does not carry a XUC tag - [ask us](https://discord.gg/YgDhMSn) to add one.
 3. Leave a comment to let everyone know you'll be working on the task, and fork the repository to get started.
 4. [Get in touch](https://discord.gg/YgDhMSn) for help along the way.
-5. When you feel ready, submit a PR against the `master` branch with your **ether address (!)** in the comment section. To preserve your privacy, **do not re-use addresses**.
+5. When you feel ready, submit a PR against the `master` branch. Send us your 0x adress via PM [here](https://discord.gg/YgDhMSn). To preserve your privacy, **do not re-use addresses**.
 6. For non-trivial changes, expect several rounds of review and testing to take place before your changes get merged into the master branch. Our simulation tests (which run on each travis build) should give pretty good initial feedback though.
 7. After a successful merge into the master branch we'll send the XUC reward to the ether address you provided in the comment section. This is manual work and happens on 15th every month.
 

@@ -22,7 +22,8 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 * Market makers earn fees.
 * Direct, peer-to-peer trading.
 * Order book aggregates orders from the network locally.
-* Orders get matched locally with peer orders.
+* Orders get matched locally with peer orders from the network.
+* Built-in arbitrage - get the best price.
 * Instant order settlement via atomic swaps on lightning/raiden.
 * User has complete control over private keys.
 * One mnemonic for all assets.
