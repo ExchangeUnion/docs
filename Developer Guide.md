@@ -52,7 +52,7 @@ We recommend to connect the `xud` instance you are developing on with the `xud-s
 4. Copy  `~/.xud-docker/simnet/data/lndltc` and `~/.xud-docker/simnet/data/lndbtc` into somewhere you can easily access (such as your home directory). 
 5. Ensure you own the copied folders. `chown -R <user>: <copied_path>/lndbtc|lndltc`
 6. Change `xud.conf` as below.
-```bash
+```
 [lnd.BTC]
 cltvdelta = 144
 disable = false
@@ -61,7 +61,6 @@ nomacaroons = false
 port = 10010
 certpath = "<copied_path>/lndbtc/tls.cert"
 macaroonpath = "<copied_path>/lndbtc/data/chain/bitcoin/simnet/admin.macaroon"
-
 [lnd.LTC]
 cltvdelta = 576
 disable = false
@@ -70,13 +69,11 @@ nomacaroons = false
 port = 20010
 certpath = "<copied_path>/lndltc/tls.cert"
 macaroonpath = "<copied_path>/lndltc/data/chain/litecoin/simnet/admin.macaroon"
-
 [raiden]
 disable = false
 host = "localhost"
 port = 5002
 ```
-
 7. Now you can start `xud`. Since it's using above configuation, it connects to the running docker environment. Ready to test your changes on xud-simnet!
 
 ## References
