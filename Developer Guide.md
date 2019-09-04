@@ -52,7 +52,7 @@ We recommend to connect the `xud` instance you are developing on with the `xud-s
 4. Copy  `~/.xud-docker/simnet/data/lndltc` and `~/.xud-docker/simnet/data/lndbtc` into somewhere you can easily access (such as your home directory). 
 5. Ensure you own the copied folders. `chown -R <user>: <copied_path>/lndbtc|lndltc`
 6. Change `xud.conf` as below.
-```
+```bash
 [lnd.BTC]
 cltvdelta = 144
 disable = false
