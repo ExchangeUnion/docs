@@ -76,6 +76,7 @@ disable = false
 host = "localhost"
 port = 5002
 ```
+
 7. Now you can start `xud`. Since it's using above configuation, it connects to the running docker environment. Ready to test your changes on xud-simnet!
 
 ## References
