@@ -6,7 +6,7 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 
 ## Get Started
 
--> [Get started as **User**](User%20Guide.md), buying and selling crypto
+-> [Get started as **User**](User%20Guide.md), buying and selling cryptocurrency
 
 -> [Get started as **Exchange**](Exchange%20Guide.md), tapping into the network's liquidity
 
