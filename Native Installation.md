@@ -46,3 +46,7 @@ Type=simple
 [Install]
 WantedBy=multi-user.target
 ```
+
+# Tips 'n Tricks
+
+* When installing natively on a Raspberry Pi you might see `Unexpected error during initialization`. [Here](https://github.com/ExchangeUnion/xud/issues/1199#issuecomment-527819108) the solution.
