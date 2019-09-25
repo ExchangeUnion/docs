@@ -24,11 +24,11 @@ Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 # Requirements
 
-1. Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental.
+1. Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly.
 
-2. 8GB RAM (we saw some weird container states with less on testnet and mainnet). The more, the better. `geth` likes RAM. A lot.
+2. 12GB RAM for testnet & mainnet (we saw some weird container states with less). `geth` likes RAM. A lot. If you have >=24GB RAM available, you can significantly shorten `geth`'s syncing time by increasing its `--cache=1024` flag for [testnet](https://github.com/ExchangeUnion/xud-docker/blob/master/xud-testnet/docker-compose.yml) or [mainnet](https://github.com/ExchangeUnion/xud-docker/blob/master/xud-mainnet/docker-compose.yml) to something larger.
 
-3. Run on a SSD. Based on painful experience: `geth` **cannot** catch up with the chain when running on a regular HDD. Read about it [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16).
+3. A SSD. Based on painful experience: `geth` **cannot** catch up with the chain when running on a regular HDD. Read about it [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16).
 
 4. `docker` >= 18.09 & `docker-compose` >= 1.24. Check with `docker --version` & `docker-compose --version`. If you do not have these installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
 
