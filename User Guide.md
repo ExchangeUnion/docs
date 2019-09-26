@@ -30,9 +30,9 @@ Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 3. A SSD. Based on painful experience: `geth` **cannot** catch up with the chain when running on a regular HDD. Read about it [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16).
 
-4. `docker` >= 18.09 & `docker-compose` >= 1.24. Check with `docker --version` & `docker-compose --version`. If you do not have these installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/).
+4. `docker` >= 18.09 & `docker-compose` >= 1.24. Check with `docker --version` & `docker-compose --version`. If you do not have these installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/). Current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
-5. Current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
+5. Python 2.7+ or 3+ (pre-installed on most systems, check with `python --version` )
 
 # How to run
 
