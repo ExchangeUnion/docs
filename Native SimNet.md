@@ -29,7 +29,7 @@ Make sure you have the below programs installed:
 - make (`sudo apt-get install make`)
 - [node.js + npm](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (v10.x or higher)
 - python 3.7 or higher
-- go 1.12 or higher
+- go 1.12 (1.13 does **not** work yet)
 - killall (`sudo apt-get install psmisc`)
 
 ### Installing Go
