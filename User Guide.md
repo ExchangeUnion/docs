@@ -3,24 +3,20 @@ This guide is written for users who want to buy and sell cryptocurrency via `xud
 # Networks
 
 ## Simnet
-This is where you want to start. It's quick and gives you a "look and feel". Private chains maintained by Exchange Union cloud instances, we automatically open channels to you and allocate you some precious simnet tokens. Trade against our bots. Consider restarting the setup once after starting for the first time (`down`,  `exit`, `bash ~/xud.sh`, `1`).
+Private chains which are maintained by us. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and play around with `xucli` commands. It’s easy: run one script, wait for about 10 minutes and you are ready to go. **You want to start with this!**
 
 Status: `live` | Setup time: `~15 mins` | Disk space: `5 GB`
 
 ## Testnet
-bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here.
+bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
 Status: `live` | Setup time: `~5-24h` | Disk space: `120 GB`
 
 ## Mainnet
 Real money - only with #reckless hat.
 
-Status: `live` (with very low limits) | Setup time: `~1-3 days` | Disk space: `500 GB`
+Status: `live` (with $10-per-trade limit) | Setup time: `~1-3 days` | Disk space: `500 GB`
 
-## Regtest
-Producing blocks locally, mainly for development
-
-Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 # Requirements
 
@@ -28,7 +24,7 @@ Status: `not available`| Setup time: `fast` | Disk space: `1 GB`
 
 2. 12GB RAM for testnet & mainnet (we saw some weird container states with less). `geth` likes RAM. A lot. If you have >=24GB RAM available, you can significantly shorten `geth`'s syncing time by increasing its `--cache=1024` flag for [testnet](https://github.com/ExchangeUnion/xud-docker/blob/master/xud-testnet/docker-compose.yml) or [mainnet](https://github.com/ExchangeUnion/xud-docker/blob/master/xud-mainnet/docker-compose.yml) to something larger.
 
-3. A SSD. Based on painful experience: `geth` **cannot** catch up with the chain when running on a regular HDD. Read about it [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16).
+3. A SSD for testnet & mainnet. Based on painful experience: `geth` **cannot** catch up with the chain when running on a regular HDD. Read about it [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16).
 
 4. `docker` >= 18.09 & `docker-compose` >= 1.24. Check with `docker --version` & `docker-compose --version`. If you do not have these installed yet, follow the official install instructions for [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If it fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
