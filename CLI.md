@@ -20,3 +20,5 @@ $ xucli buy 10 LTC/BTC 0.0079
 # Places a new limit order SELLING 2 LTC for the best market price
 $ xucli sell 5 LTC/BTC market
 ```
+
+By default, the CLI output is formatted and abbreviated. Append `-j` to any of the CLI calls to receive the full output in JSON format.
