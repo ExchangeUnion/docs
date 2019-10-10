@@ -98,7 +98,7 @@ logs ltcd/geth/lndbtc/lndltc/raiden/xud
 logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ```
 
-* Blockchain & wallet data is by default stored in `~/.xud-docker`:
+* Blockchain & wallet data is stored in `~/.xud-docker` by default:
 ```bash
 #Simnet
 ~/.xud-docker/simnet/data
@@ -110,7 +110,7 @@ logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 
 * Customize this directory with `--home-dir`, which you need to append every time you run `xud.sh`
 ```bash
-bash ~/xud.sh --home-dir /path/to/new/xud-docker/home
+bash ~/xud.sh --home-dir /path/to/your/xud-docker/home
 ```
 
 * Shutdown environment & remove all data
