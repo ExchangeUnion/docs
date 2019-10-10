@@ -36,7 +36,6 @@ Start the environment with
 ```bash
 curl https://raw.githubusercontent.com/ExchangeUnion/xud-docker/master/xud.sh -o ~/xud.sh
 bash ~/xud.sh
-
 ```
 This guides you through a setup on first run, pulls containers, starts syncing chains and opens
 ```
@@ -116,6 +115,14 @@ docker-compose down
 rm -rf ~/.xud-docker/
 rm -rf ~/xud.sh
 ```
+
+# Customization
+
+* Customize xud-docker home directory (default location is `~/.xud-docker`)
+```bash
+bash ~/xud.sh --home-dir /path/to/new/xud-docker/home
+```
+This will put all xud-docker related files into the new directory you specified.
 
 ## References
 * [bitcoind config options](https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf)
