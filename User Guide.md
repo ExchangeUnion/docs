@@ -108,9 +108,20 @@ logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ~/.xud-docker/mainnet/data
 ```
 
-* Customize this directory with `--home-dir`, which you need to append every time you run `xud.sh`
+* Customize this directory with `--home-dir`, which you need to append every time you run `xud.sh`:
 ```bash
 bash ~/xud.sh --home-dir /path/to/your/xud-docker/home
+```
+* You can also customize the directory of L1 clients with:
+```bash
+#bitcoind
+bash ~/xud.sh --bitcoind-dir  /path/to/your/bitcoind/dir
+#litecoind
+bash ~/xud.sh --litecoind-dir  /path/to/your/litecoind/dir
+#geth (all on SSD)
+bash ~/xud.sh --geth-dir  /path/to/your/geth/ssd/dir
+#geth split (chain-data on HDD)
+bash ~/xud.sh --geth-dir  /path/to/your/geth/ssd/dir --geth-chaindata-dir /path/to/your/geth/hdd/dir
 ```
 
 * Shutdown environment & remove all data
