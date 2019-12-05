@@ -1,6 +1,12 @@
-This guide is written for users who want to buy and sell cryptocurrency via `xud`. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended and easiest way to get up and running.
+This guide is written for individuals looking to buy and sell ("swap", "exchange", "trade") cryptocurrency.
 
-# Networks
+There are two ways to go about it:
+1. Use an [OpenDEX-enabled exchange](https://opendex.network/trade/exchanges). The recommended and by far the easiest way to get the job done. Benefit from an easy-to-use website, no-account and no-KYC policy and trade directly from your wallet. Lightning supported.
+2. Use `xud` to trade on OpenDEX directly. Not trivial and requires some command-line knowledge. Read further below.
+
+If you decided 2. is your way, the guide below is for you. It explains how to use [`xud-docker`](https://github.com/ExchangeUnion/xud-docker), the recommended way to setup a `xud` trading environment.
+
+# Supported Networks
 
 ## Simnet
 Private chains which are maintained by us. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and play around with `xucli` commands. It’s easy: run one script, wait for about 10 minutes and you are ready to go. **You want to start with this!**
@@ -15,7 +21,7 @@ Status: `live` | Setup time: `~5-24h` | Disk space: `120 GB`
 ## Mainnet
 Real money - only with #reckless hat.
 
-Status: `live` (with $10-per-trade limit) | Setup time: `~1-3 days` | Disk space: `500 GB`
+Status: `live` | Setup time: `~1-3 days` | Disk space: `700 GB`
 
 
 # Requirements
