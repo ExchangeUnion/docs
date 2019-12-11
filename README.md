@@ -1,32 +1,32 @@
 # Introduction
 
-The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference node implementation powering [OpenDEX](https://opendex.network), a decentralized exchange (DEX) built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network and liquidity pool.
+The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference node implementation powering [OpenDEX](https://opendex.network), a decentralized exchange (DEX) built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network.
 
-Traders use OpenDEX-enabled exchanges like [Boltz](https://boltz.exchange/) as gateways to trade on OpenDEX. These exchanges abstract away from the technological complexity of the DEX and offer a superior UX by enabling trading via a simple website. Exchanges use `xud` to hedge user trades on OpenDEX and lock in profits. Liquidity on OpenDEX is provided by market makers who use `xud` to take orders from external exchanges (like Binance) and offer these on OpenDEX adding a premium. Exchange Union provides SDK's for exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
+**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of the DEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades on OpenDEX in order to lock in profits. Liquidity on OpenDEX is provided by **market makers**, who use `xud` to take orders from external exchanges (e.g. Binance) and offer these on OpenDEX for a premium. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
 
 ## Get Started
 
--> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency anonymously and account-free
+-> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency anonymously
 
 -> [Get started as **Market Maker**](Market%20Maker%20Guide.md), providing liquidity from external exchanges making a profit
 
--> [Get started as **Exchange Operator**](), using the Boltz open-source white-label exchange platform to run your own exchange **(coming soon!)**
+-> [Get started as **Exchange Operator**](), using a open-source white-label exchange platform to run your own exchange **(coming soon!)**
 
 -> [Get started as **Developer**](Developer%20Guide.md), contributing or building on top of `xud`
 
 ![Trading via XUD](/images/orderbook.png)
 
 ## Incentives
-* Traders benefit from peer-to-peer trading without KYC and accounts.
+* Traders benefit from anonymous peer-to-peer trading without KYC and accounts.
 * Market makers make profits via arbitrage between external exchanges and OpenDEX.
 * Exchanges make profits via locking in trading fees by hedging trades on OpenDEX.
 
 ## Features
-* Supports individual traders, market makers and *and* exchanges
+* Supports individual traders, market makers and *and* exchanges.
 * Order book aggregates orders from the network locally.
 * Orders get matched locally with peer orders from the network.
-* Instant order settlement via atomic swaps on lightning/raiden.
-* Complete control over private keys.
+* Instant order settlement via atomic swaps on the lightning & raiden network.
+* Full control over assets.
 * One mnemonic for all assets.
 * [Tor](https://www.torproject.org/) by default.
 * Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [raiden](https://github.com/raiden-network/raiden) clients.
@@ -35,13 +35,15 @@ Traders use OpenDEX-enabled exchanges like [Boltz](https://boltz.exchange/) as g
 
 ## API & Code Documentation
 
-Find the API documentation [here](https://api.exchangeunion.com) and code documentation [here](https://typedoc.exchangeunion.com/).
+The daemon has been designed to be as developer friendly as possible in order to facilitate application development on top of `xud`.
+* [api.exchangeunion.com](https://api.exchangeunion.com): The automatically generated gRPC API documentation
+* [typedoc.exchangeunion.com](https://typedoc.exchangeunion.com/): The automatically generated code documentation
 
 
 ## Support & Community
 
-* [Contribute](Contribute.md)
-* Support, general questions and development-related discussions are welcome on our [Discord](https://discord.gg/YgDhMSn)
+* [Contribute](Contribute.md)!
+* Support, general questions and development-related discussions are welcome on our [Discord](https://discord.gg/YgDhMSn)!
 
 ## Help us to improve!
 

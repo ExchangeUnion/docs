@@ -1,6 +1,4 @@
-# Developer Guide
-
-This guide is intended to help developers who want to contribute to `xud`. Developers who want to build on top of `xud`, can check out the [API Documentation](https://api.exchangeunion.com).
+This guide is intended to help developers who want to contribute to `xud`. Developers who want to build on top of `xud`, are invited to check out the [API Documentation](https://api.exchangeunion.com).
 
 ## Contribution Guidelines
 
@@ -20,7 +18,7 @@ Consider using the following plugins for working with `xud`.
 
 - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 - [vscode-proto3](https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3)
-- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=coenraads.bracket-pair-colorizer) (definitely optional)
+- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=coenraads.bracket-pair-colorizer) (definitely optional ;)
 
 #### Visual Studio Code Environment Config
 
