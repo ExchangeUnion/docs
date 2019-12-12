@@ -1,5 +1,3 @@
-# xucli
-
 `xucli` is the command line interface that handles much of the basic interaction with a running `xud` instance. If `xud` is installed globally, it can be launched from any directory. In the recommended [xud-docker](User%20Guide.md) setup, it can be used from within the `xud ctl` shell.
 
 To get a list of up-to-date commands, run:

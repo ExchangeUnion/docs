@@ -3,10 +3,10 @@
 * [Introduction](README.md)
 
 ## Start Trading
-* [User Guide](User%20Guide.md)
+* [Trader Guide](User%20Guide.md)
 
-## Integration
-* [Exchange Guide](Exchange%20Guide.md)
+## Start Earning
+* [Market Maker Guide](Market%20Maker%20Guide.md)
 
 ## Development
 * [Developer Guide](Developer%20Guide.md)

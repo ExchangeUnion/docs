@@ -1,6 +1,4 @@
-# Developer Guide
-
-This guide is intended to help developers who want to contribute to `xud`. Developers who want to build on top of `xud`, can check out the [API Documentation](https://api.exchangeunion.com).
+This guide is intended to help developers who want to contribute to `xud`. Developers who want to build on top of `xud`, are invited to check out the [API Documentation](https://api.exchangeunion.com).
 
 ## Contribution Guidelines
 
