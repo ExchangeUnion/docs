@@ -6,7 +6,7 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 
 ## Get Started
 
--> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency anonymously
+-> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency anonymously and without counterparty risk
 
 -> [Get started as **Market Maker**](Market%20Maker%20Guide.md), providing liquidity from external exchanges making a profit
 
@@ -49,4 +49,4 @@ The daemon has been designed to be as developer friendly as possible in order to
 
 `xud` is in an early stage; just like this page. Please help us to improve by opening issues (or even better PRs) for [xud](https://github.com/ExchangeUnion/xud/issues), [xud-docker](https://github.com/ExchangeUnion/xud-docker/issues) and the [docs](https://github.com/ExchangeUnion/docs/issues).
 
-Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!
+Feel like talking? Chat with us on [Discord](https://discord.gg/YgDhMSn)!   
