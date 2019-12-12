@@ -18,7 +18,7 @@ Consider using the following plugins for working with `xud`.
 
 - [TSLint](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-tslint-plugin)
 - [vscode-proto3](https://marketplace.visualstudio.com/items?itemName=zxh404.vscode-proto3)
-- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=coenraads.bracket-pair-colorizer) (definitely optional ;)
+- [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=coenraads.bracket-pair-colorizer) (definitely optional)
 
 #### Visual Studio Code Environment Config
 

@@ -2,7 +2,7 @@
 
 The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference node implementation powering [OpenDEX](https://opendex.network), a decentralized exchange (DEX) built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network.
 
-**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of the DEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades on OpenDEX in order to lock in profits. Liquidity on OpenDEX is provided by **market makers**, who use `xud` to take orders from external exchanges (e.g. Binance) and offer these on OpenDEX for a premium. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
+**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of the DEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades on OpenDEX in order to lock in profits. **Market Makers** use `xud` to arbitrage with external exchanges (e.g. Binance) and provide liquidity on OpenDEX for a premium. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
 
 ## Get Started
 
@@ -22,7 +22,7 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 * Exchanges make profits via locking in trading fees by hedging trades on OpenDEX.
 
 ## Features
-* Supports individual traders, market makers and *and* exchanges.
+* Supports individual traders, market makers, and *and* exchanges.
 * Order book aggregates orders from the network locally.
 * Orders get matched locally with peer orders from the network.
 * Instant order settlement via atomic swaps on the lightning & raiden network.
