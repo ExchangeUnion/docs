@@ -3,7 +3,7 @@ This guide is written for individuals and entities looking to become a market ma
 # Supported Networks
 
 ## Simnet
-Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect monopoly-money-playground to see how things work and play around with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!**
+Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect play money playground to see how things work and play around with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!**
 
 Status: `live` | Setup time: `~15 mins` | Required disk space: `<1 GB`
 
