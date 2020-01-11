@@ -142,7 +142,7 @@ lndltc-lncli newaddress p2wkh #Send LTC to this address
 getinfo -j #Send WETH/DAI to your raiden address
 ```
 
-The next step will have an automated option in future, but currently is not trivial: choose xud nodes to open channels with. Ideally these are nodes you expect to trade with regularly. If you are unsure, you can open channels with our xud node hosted at xud1.exchangeunion.com, which is maintaining a good channel connectivity with other xud nodes in the OpenDEX Network. using the unified `openchannel` command: 
+The next step will have an automated option in future, but currently is not trivial: choose xud nodes to open channels with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open channels with our xud node hosted at xud1.exchangeunion.com, which is maintaining a good channel connectivity with other xud nodes in the OpenDEX Network. using the unified `openchannel` command: 
 ```
 openchannel 02529a91d073dda641565ef7affccf035905f3d8c88191bdea83a35f37ccce5d64 btc 0.1
 ```
