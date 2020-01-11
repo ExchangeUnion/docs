@@ -64,6 +64,8 @@ The following wallets were initialized: BTC, LTC, ERC20(ETH)
 ```
 Off-chain assets, which are assets you are holding in lightning and raiden channels for trading on OpenDEX, are secured in a separate backup. This backup is as important as the mnemonic phrase above. We highly recommend using a separate external drive, like a USB stick or NAS, in case something happens to your main drive. Because backups are constantly written to this drive, it needs to be connected to the device running `xud-docker` (can be a network drive).
 
+Alternatively, you could consider running run your environment's hard drive in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+
 After this, the setup pulls docker containers, starts syncing chains and opens
 
 ```
