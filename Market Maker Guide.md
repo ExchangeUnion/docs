@@ -10,12 +10,12 @@ Status: `live` | Setup time: `~15 mins` | Required disk space: `<1 GB`
 ## Testnet
 bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
-Status: `live` | Setup time: `5-24h` | Required disk space (when using full nodes): `120 GB`
+Status: `live` | Setup time: `5-24h` | Required disk space (if all full nodes): `200 GB`
 
 ## Mainnet
 Real money. Only with #reckless hat.
 
-Status: `live` | Setup time: `1-3 days` | Required disk space (when using full nodes): `700 GB`
+Status: `live` | Setup time: `1-3 days` | Required disk space (if all full nodes): `700 GB`
 
 
 # Requirements
