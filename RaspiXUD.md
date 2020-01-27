@@ -1,6 +1,6 @@
 # RaspiXUD
 
-This guide helps market makers to build their own xud-in-a-box based on a Raspberry Pi4. Two options are available:
+This guide is written for market makers & traders to build their own xud-in-a-box based on a Raspberry Pi4. Two options are available:
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light and cheap (~100 EUR), but is not fully trustless. Also, a Pi3 should suffice for this (not tested).
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires a SSD, but keeps the setup trustless.
 
@@ -32,7 +32,7 @@ sudo add-apt-repository \
    disco \
    stable"
 ```
-7. Add a new user `xud`:
+7. Add new user `xud`:
 
 ```
 ubuntu@ubuntu:~$ sudo adduser xud
@@ -61,32 +61,13 @@ ubuntu@ubuntu:~$ sudo su - xud
 xud@ubuntu:~$ docker run hello-world
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-    (arm64v8)
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
-
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
-
 ```
 9. Looking good! Add an alias to easily start xud by typing "xud": `sudo nano ~/.bash_aliases`, add the line `alias xud='bash ~/xud.sh'`, then CTRL+X, and save with Y, Enter, then run `source ~/.bashrc` to apply the alias.
 10. Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#basic-setup).
-11. For the full setup, the first thing to consider is to sync full-nodes on a more powerful machine to speed things up. If you decide to do so, connect your external SSD to this machine, format it to one large ext4 partition (e.g. with [GParted](https://gparted.org/)) and start xud with the `--home-dir` parameter pointing to the external SSD (docker needs to be installed and set up as above):
+11. For the full setup, the first thing to consider is syncing blockchains on a more powerful machine to speed things up. If you decide to do so, connect your external SSD to this machine, format it to one large ext4 partition (e.g. with [GParted](https://gparted.org/)) and start xud with the `--home-dir` parameter pointing to the external SSD (docker needs to be installed and set up as above):
 ```
 curl https://raw.githubusercontent.com/ExchangeUnion/xud-docker/master/xud.sh -o ~/xud.sh
-bash ~/xud.sh --home-dir /media/path/to/your/SSD
+bash ~/xud.sh --home-dir /media/T5
 ```
 12. Create a new xud environment and monitor the sync progress using the `status` command with `xud ctl`. Once you see bitcoind, litecoind and geth showing `Ready`, `down` the environment.
 13. Unmount & connect the SSD to your Pi. Run `ls -la /dev/ | grep sd`. This should list either `sda1` or `sdb1`. This is your SSD.
@@ -107,14 +88,14 @@ xud@ubuntu:/media/T5$ sudo dd if=/media/T5/deleteme.dat of=/dev/null bs=32M coun
 2147483648 bytes (2.1 GB, 2.0 GiB) copied, 15.5791 s, 138 MB/s
 xud@ubuntu:/media/T5$ sudo rm /media/T5/deleteme.dat
 ```
-17. Let's create the swap file on the SSD `sudo fallocate -l 28G /media/T5/swapfile`, mark it as swap file `sudo chmod 600 /media/T5/swapfile && sudo mkswap /media/T5/swapfile` and enable it `sudo swapon /media/T5/swapfile`. Let's verify it worked with
+17. Create the swap file on the SSD with `sudo fallocate -l 28G /media/T5/swapfile`, mark it as swap file with `sudo chmod 600 /media/T5/swapfile && sudo mkswap /media/T5/swapfile` and enable it with `sudo swapon /media/T5/swapfile`. Let's verify it worked using
 ```
 xud@ubuntu:/media/T5$ sudo swapon --show
 NAME               TYPE SIZE USED PRIO
 /media/T5/swapfile file  28G   0B   -2
 ```
-18. Let's set xud's home directory to the SSD with `sudo nano ~/.xud-docker/xud-docker.conf
+18. Permanently set xud's mainnet directory to the SSD with `sudo nano ~/.xud-docker/xud-docker.conf` adding
 ```
-home-dir=/media/T5/xud-docker
+mainnet-dir = "/media/T5/xud-docker"
 ```
-19. 
+19. **DONE!** Continue [here](Market%20Maker%20Guide.md#basic-setup).
