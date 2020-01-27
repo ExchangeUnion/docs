@@ -57,7 +57,7 @@ Re-enter password:
  9. good       10. thinking   11. we         12. encourage      
 13. hacking    14. and        15. attacking  16. of     
 17. xud        18. and        19. happily    20. pay  
-21. ransom     22. for        23. your       24. hack    
+21. ransom     22. for        23. your       24. work    
 -----------------------END XUD SEED----------------------
 
 The following wallets were initialized: BTC, LTC, ERC20(ETH)
@@ -78,28 +78,53 @@ After this, the setup pulls docker containers, starts syncing chains and opens
                 \/          \/         \/           
 ```
 
-Use the command `status` to check on the syncing status of underlying L1 clients. If you are freshly syncing full nodes on testnet/mainnet, this takes several hours or even days. All clients should show `Ready` before you continue.
+Use the command `status` to check on the syncing status of underlying L1 clients.
 
 ```
 mainnet > status
-┌───────────┬──────────────────────────────────────────┐
-│ SERVICE   │ STATUS                                   │
-├───────────┼──────────────────────────────────────────┤
-│ bitcoind  │ Syncing 16.44% (265079/1612188)          │
-├───────────┼──────────────────────────────────────────┤
-│ lndbtc    │ Waiting for sync                         │
-├───────────┼──────────────────────────────────────────┤
-│ litecoind │ Syncing 12.17% (156165/1283134)          │
-├───────────┼──────────────────────────────────────────┤
-│ lndltc    │ Waiting for sync                         │
-├───────────┼──────────────────────────────────────────┤
-│ geth      │ Syncing 10.43% (725386/6949168)          │
-├───────────┼──────────────────────────────────────────┤
-│ raiden    │ Waiting for sync                         │
-├───────────┼──────────────────────────────────────────┤
-│ xud       │ Waiting for sync                         │
-└───────────┴──────────────────────────────────────────┘
+┌───────────┬────────────────────────────────────────────────┐
+│ SERVICE   │ STATUS                                         │
+├───────────┼────────────────────────────────────────────────┤
+│ bitcoind  │ Syncing 0.00% (0/436000)                       │
+├───────────┼────────────────────────────────────────────────┤
+│ litecoind │ Syncing 0.00% (0/324000)                       │
+├───────────┼────────────────────────────────────────────────┤
+│ geth      │ Syncing 0.00% (55/9140561)                     │
+├───────────┼────────────────────────────────────────────────┤
+│ lndbtc    │ Waiting for sync                               │
+├───────────┼────────────────────────────────────────────────┤
+│ lndltc    │ Waiting for sync                               │
+├───────────┼────────────────────────────────────────────────┤
+│ raiden    │ Container running                              │
+├───────────┼────────────────────────────────────────────────┤
+│ xud       │ Waiting for sync                               │
+└───────────┴────────────────────────────────────────────────┘
 ```
+
+After a while you should see all three full-nodes syncing nicely:
+
+```
+mainnet > status
+┌───────────┬────────────────────────────────────────────────┐
+│ SERVICE   │ STATUS                                         │
+├───────────┼────────────────────────────────────────────────┤
+│ bitcoind  │ Syncing 43.06% (262348/609123)                 │
+├───────────┼────────────────────────────────────────────────┤
+│ litecoind │ Syncing 35.94% (631593/1757002)                │
+├───────────┼────────────────────────────────────────────────┤
+│ geth      │ Syncing 10.16% (929072/9140623)                │
+├───────────┼────────────────────────────────────────────────┤
+│ lndbtc    │ Waiting for sync                               │
+├───────────┼────────────────────────────────────────────────┤
+│ lndltc    │ Waiting for sync                               │
+├───────────┼────────────────────────────────────────────────┤
+│ raiden    │ Container running                              │
+├───────────┼────────────────────────────────────────────────┤
+│ xud       │ Waiting for sync                               │
+└───────────┴────────────────────────────────────────────────┘
+```
+It starts fast (blocks were kinda empty in the beginning of the timechain, and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12-24h, whereas geth will need about 3 full days.
+
 
 `xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. `getinfo`. Run `help` to get an always up-to-date list of commands. Once everything is synced and ready, you can see other xud nodes on the network via `listpeers`. Append `-j` to any command to get JSON instead of the formatted output.
 
@@ -270,3 +295,8 @@ rm -rf /custom/mainnet/dir
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
 * [raiden config options](https://raiden-network.readthedocs.io/en/stable/config_file.html)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
+
+
+TODO:
+[bitcoind]
+neutrino=false
