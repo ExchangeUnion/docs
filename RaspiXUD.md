@@ -2,6 +2,8 @@
 
 This guide is written for market makers & traders to build their own xud-in-a-box with a Raspberry Pi in order to run it 24/7.
 
+![RaspiXUD](images/RaspiXUD.jpeg)
+
 Two options are available:
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light and cheap (~100 EUR), but is not fully trustless. A Pi3 works fine for this.
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires a SSD, but keeps the setup trustless. You'll need a Pi4 with 4GB of RAM.
@@ -16,8 +18,8 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 * [64GB MicroSD card](https://www.amazon.de/dp/B07G3GMRYF/): 19,99 €
   * A performant microSD card is important; the wrong place to save some bucks.
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
-* [A USB Stick for backups](https://www.amazon.es/dp/B00TPG6P22): 3,99 €
-   * Any >512MB USB Stick will do.
+* [16GB USB stick for backups](https://www.amazon.es/PNY-FD16GATT4-EF-Memoria-color-negro/dp/B00TPG6P22/): 3,99 €
+   * Any 1GB USB stick or larger will do.
    * A NAS/Samba share works too.
 * [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1): 185 €
   * **For full setup only!**
