@@ -1,5 +1,3 @@
-# Introduction
-
 The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference node implementation powering [OpenDEX](https://opendex.network), a decentralized exchange (DEX) built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network and liquidity pool.
 
 **Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of OpenDEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades on OpenDEX in order to lock in profits. **Market Makers** use `xud` to arbitrage with external exchanges (e.g. Binance) and provide liquidity on OpenDEX for a premium. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.

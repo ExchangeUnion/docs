@@ -1,6 +1,4 @@
-# RaspiXUD
-
-This guide is written for market makers & traders to build their own xud-in-a-box with a Raspberry Pi in order to run it 24/7.
+This guide is written for market makers & traders to build their own xud-in-a-box with a Raspberry Pi.
 
 ![RaspiXUD](images/RaspiXUD.jpeg)
 
@@ -14,7 +12,7 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 * [Pi4 (4GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1100-raspberry-pi-4-modelo-b-4gb-765756931182.html): 59,95 €
 * [Pi4 Power Supply](https://www.tiendatec.es/raspberry-pi/raspberry-pi-alimentacion/1093-alimentador-oficial-raspberry-pi-4-usb-c-5v-3a-15w-negro-644824914886.html): 8,95 €
 * [Pi4 Cooling Case](https://www.tiendatec.es/raspberry-pi/cajas/1110-caja-cofre-alta-disipacion-con-dos-ventiladores-para-raspberry-pi-4-8472496015950.html): 15,95 €
-  * You'll need this, the Pi4 is a hottie (and fans are super silent).
+  * You'll need this, the Pi4 is a hottie (no worries, fans are very silent).
 * [64GB MicroSD card](https://www.amazon.de/dp/B07G3GMRYF/): 19,99 €
   * A performant microSD card is important; the wrong place to save some bucks.
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
@@ -99,7 +97,7 @@ xud@ubuntu:~$ df -h
 # make sure xud can use it without sudo privileges
 xud@ubuntu:~$ sudo chown xud:xud /media/USB
 ```
-11. Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#basic-setup).
+11. Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
 
 ## Pi Full Setup
 
@@ -159,12 +157,5 @@ xud@ubuntu:~$ sudo swapon --show
 NAME               TYPE SIZE USED PRIO
 /media/SSD/swapfile file  28G   0B   -2
 ```
-15. Permanently set `xud`'s mainnet directory to the SSD
-```bash
-xud@ubuntu:~$ mkdir ~/.xud-docker
-xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
-# add the line
-mainnet-dir = "/media/SSD"
-# CTRL+S, CTRL+X.
-```
-16. **DONE!** Continue [here](Market%20Maker%20Guide.md#basic-setup).
+
+15. **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).

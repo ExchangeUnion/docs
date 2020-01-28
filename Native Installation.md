@@ -1,5 +1,3 @@
-# Native Installation for Development
-
 This page contains instructions for installing `xud` natively, without treating setup of dependencies like `bitcoind` or `lnd`. It is mainly geared towards developers. For all other users, we recommend our streamlined setup via [xud-docker](User%20Guide.md).
 
 ## Requirements

@@ -1,32 +1,65 @@
-This guide is written for individuals and entities looking to become a market maker on OpenDEX.
+This guide is written for individuals and entities looking to run xud and become a market maker on OpenDEX. Occasional traders can use this guide to run xud to trade on OpenDEX.
 
-# Supported Networks
+# Prerequisites
 
-## Simnet
-Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect play money playground to see how things work and play around with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!**
+## Two Modes
+1. **Light Setup**, using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light, but is not fully trustless.
+2. **Full Setup**, using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and a SSD, but keeps the setup trustless.
 
-Status: `live` | Setup time: `~15 mins` | Required disk space: `<1 GB`
+## Three Networks
 
-## Testnet
-bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
+1. **Simnet**. Status: `live` | Setup time: `~15 mins` | Required disk space: `<1 GB`
 
-Status: `live` | Setup time: `5-24h` | Required disk space (if all full nodes): `200 GB`
+    Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect play money playground to see how things work and play around with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
-## Mainnet
-Real money. Only with #reckless hat.
+2. **Testnet**. Status: `live` | Setup time (full): `5-24h` | Required disk space (full): `200 GB`
 
-Status: `live` | Setup time: `1-3 days` | Required disk space (if all full nodes): `700 GB`
+    bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
+
+3. **Mainnet**. Status: `live` | Setup time (full): `1-3 days` | Required disk space (full): `700 GB`
+    
+    The real deal. Only with #reckless hat.
 
 
-# Requirements
+## Software
 
-1. Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guides was tested on ubuntu 18.04.
+* Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guides was written using ubuntu 18.04.
 
-2. Hardware with minimum 12GB RAM and a SSD for testnet/mainnet if you want to avoid using [infura](https://infura.io/). The more, the better - `geth` likes RAM. A lot. If you have >=24GB RAM available, you can significantly shorten `geth`'s syncing time by increasing its `--cache=1024` to something larger. Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to a stable internet connection. The hardware requirements for this box differ: if you are ok connecting to [infura](https://infura.io/), or some other external geth node, a Pi4 is enough. If you want to run all full nodes yourself, a device with 16GB RAM + a 1TB SSD does the job. You can also opt for a small SSD (32GB) for `geth`s application data and store all chain data on a HDD; all other clients can run on a regular HDD. See [Tips 'n tricks](https://docs.exchangeunion.com/start-trading/user-guide#tips-n-tricks) below on how to split `geth`'s data between an HDD and SSD. Read about the root cause [here](https://medium.com/blockchain-studio/ethereum-client-geth-v1-9-0-released-whats-new-2b3de043ee16). Hardware guide **coming soon**!
+* Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
-3. `docker` >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
+## Hardware
+* Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. We recommend building your own xud-in-a-box with a Raspberry Pi following the [RaspiXUD guide](RaspiXUD.md).
+* If you are using a different device (take the [RaspiXUD guide](RaspiXUD.md) as reference) or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`) devices, which should cover most of the devices. We recommend >=16GB RAM and a SSD for the full setup, 4GB RAM and HDD for the light setup.
 
-# Basic Setup
+# The Setup
+
+From here we assume that your environment is ready with docker installed and backup drive connected.
+
+## Preparation Full Setup *(Temporary)*
+
+```bash
+xud@ubuntu:~$ mkdir ~/.xud-docker
+xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
+# add this line to permanently set `xud`'s mainnet directory to the SSD
+mainnet-dir = "/media/SSD"
+# CTRL+S, CTRL+X.
+```
+## Preparation Light Setup *(Temporary)*
+
+```bash
+xud@ubuntu:~$ mkdir ~/.xud-docker/mainnet/
+xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
+# add these lines to set LNDBTC to use the Neutrino light client
+[bitcoind]
+neutrino=true
+# add these lines for raiden to use your infura account instead of a local geth node:
+infura = true
+infura-project-id = "abc"
+infura-project-secret = "xyz"
+# CTRL+S, CTRL+X.
+```
+
+## Basic Setup
 
 Start the environment with
 
@@ -34,7 +67,7 @@ Start the environment with
 curl https://raw.githubusercontent.com/ExchangeUnion/xud-docker/master/xud.sh -o ~/xud.sh
 bash ~/xud.sh
 ```
-The setup will ask you to choose the network (Simnet, Testnet, Mainnet).
+The setup will ask you to choose the network.
 ```
 1) Simnet
 2) Testnet
@@ -43,7 +76,14 @@ Please choose the network: 3
 🚀 Launching mainnet environment
 🌍 Checking for updates ...
 ```
-Then guides you through some basic setup, like setting your password to encrypt your environment's private keys and writing down your mnemonic phrase, which serves as backup for your xud node key and wallets (your on-chain assets). **Keep it somewhere safe!**
+Then you will be guided through some basics like
+```
+Do you want to generate a new XUD SEED or restore an existing one?
+1. New
+2. Existing
+Please choose: 1
+```
+When creating a new XUD SEED, the setup asks you to set a password to encrypt your environment's private keys and to write down your mnemonic phrase. This serves as backup for your xud node key and wallets (your on-chain assets). This is your last resort in case something happens to your device. **Keep it somewhere safe!**
 
 ```
 You are creating an xud node key and underlying wallets. All will be secured by a single password provided below.
@@ -63,11 +103,17 @@ Re-enter password:
 The following wallets were initialized: BTC, LTC, ERC20(ETH)
 ```
 
-Off-chain assets, which are assets you are holding in lightning and raiden channels for trading on OpenDEX, are secured in a separate backup. This backup is as important as the mnemonic phrase above. We highly recommend using a separate external drive, like a USB stick or NAS, in case something happens to your main drive. Because backups are constantly written to this drive, it needs to be connected to the device running `xud-docker` (can be a network drive). We enabled an experimental version of off-chain asset backups, which requires you to either specify the backup directory as parameter `bash xud.sh --backup-dir /media/hdd/xud-backup` or as `backup-dir = "/media/hdd/xud-backup"` in `mainnet.conf`, proper integration into the setup flow is [in the works](https://github.com/ExchangeUnion/xud-docker/issues/245).
+Then you'll be asked to enter the path to your backup drive, e.g. a previously mounted USB drive:
+```
+Please enter a path to a destination where to store a backup of your environment. It includes everything, but NOT your wallet balance which is secured by your XUD SEED. The path should be an external drive, like a USB or network drive, which is permanently available on your device since backups are written constantly.
 
-Alternatively, you could consider running run your environment's hard drive in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+Enter path to backup location: /media/USB/
+Checking... OK.
+```
 
-After this, the setup pulls docker containers, starts syncing chains and opens
+The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Apply with a restart of the environment (`down`, `xud`). Alternatively, you can consider running your environment's hard drive in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+
+After this, the setup pulls containers, starts syncing and opens
 
 ```
                            .___           __  .__   
@@ -78,7 +124,7 @@ After this, the setup pulls docker containers, starts syncing chains and opens
                 \/          \/         \/           
 ```
 
-Use the command `status` to check on the syncing status of underlying L1 clients.
+Use the `status` command to check on the syncing status
 
 ```
 mainnet > status
@@ -101,7 +147,7 @@ mainnet > status
 └───────────┴────────────────────────────────────────────────┘
 ```
 
-After a while you should see all three full-nodes syncing nicely:
+After a while you should see all three full-nodes syncing nicely
 
 ```
 mainnet > status
@@ -123,10 +169,30 @@ mainnet > status
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
 ```
-It starts fast (blocks were kinda empty in the beginning of the timechain, and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12-24h, whereas geth will need about 3 full days.
+The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing well within 12h, whereas geth will need about 3 full days. The light setup should be ready within 4-5h (there is no working light mode for LTC yet).
+```
+mainnet > status
+┌───────────┬────────────────────────────────────────────────┐
+│ SERVICE   │ STATUS                                         │
+├───────────┼────────────────────────────────────────────────┤
+│ bitcoind  │ Ready (Connected to Neutrino)                  │
+├───────────┼────────────────────────────────────────────────┤
+│ litecoind │ Ready                                          │
+├───────────┼────────────────────────────────────────────────┤
+│ geth      │ Ready (Connected to external)                  │
+├───────────┼────────────────────────────────────────────────┤
+│ lndbtc    │ Ready                                          │
+├───────────┼────────────────────────────────────────────────┤
+│ lndltc    │ Ready                                          │
+├───────────┼────────────────────────────────────────────────┤
+│ raiden    │ Ready                                          │
+├───────────┼────────────────────────────────────────────────┤
+│ xud       │ Ready                                          │
+└───────────┴────────────────────────────────────────────────┘
+```
 
-
-`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. `getinfo`. Run `help` to get an always up-to-date list of commands. Once everything is synced and ready, you can see other xud nodes on the network via `listpeers`. Append `-j` to any command to get JSON instead of the formatted output.
+## Basic Usage
+`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. See other xud nodes on the network via `listpeers`. Append `-j` to any command to get JSON instead of the formatted output.
 
 ```
 mainnet > listpeers -j
@@ -152,7 +218,7 @@ mainnet > listpeers -j
         "BTC/DAI",
         "LTC/DAI"
       ],
-      "xudVersion": "1.0.0-mainnet",
+      "xudVersion": "1.0.0-beta",
       "secondsConnected": 100,
       "raidenAddress": "0xe802431257a1d9366BD5747F0F52bAd25A6C3092"
     }
@@ -168,13 +234,13 @@ lndltc-lncli newaddress p2wkh #Send LTC to this address
 getinfo -j #Send WETH/DAI to your raiden address
 ```
 
-The next step will have an automated option in future, but currently is not trivial: choose xud nodes to open channels with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open channels with our xud node hosted at xud1.exchangeunion.com, which is maintaining a good channel connectivity with other xud nodes in the OpenDEX Network. using the unified `openchannel` command: 
+The next step will have an automated option in future, but currently is not trivial: choose xud nodes to open channels with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open channels with our xud node hosted at xud1.exchangeunion.com, which is maintaining a good channel connectivity with other xud nodes in the OpenDEX Network.
+
 ```
 openchannel 02529a91d073dda641565ef7affccf035905f3d8c88191bdea83a35f37ccce5d64 btc 0.1
 ```
-We are maintaining a good channel connectivity with other OpenDEX nodes for xud1.
 
-Check on existing orders in the network with `orderbook`. Issue an order, e.g. `sell 0.1 btc/dai 9998` to sell 0.1 btc for 7171 DAI. Settlement of your order shouldn't take longer than a couple of seconds. Use `getbalance` to observe your balance before and after the swap and see it changing.
+Check existing orders in the network with the command `orderbook`.
 
 ```
 mainnet > orderbook
@@ -189,52 +255,69 @@ Trading pair: BTC/DAI
 ├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
 │ 1                 │ 7171.1937         │ 7172.9757         │ 0.1               │
 ├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
-│                   │                   │ 7316.0663         │ 1                 │
+│ 0.1               │ 7171.083          │ 7316.0663         │ 1                 │
 ├───────────────────┼───────────────────┼───────────────────┼───────────────────┤
-│                   │                   │ 7316.44           │ 0.22393946        │
+│ 0.1               │ 7170.899          │ 7316.44           │ 0.22393946        │
 └───────────────────┴───────────────────┴───────────────────┴───────────────────┘
+```
+
+Use `getbalance` to check your balance *before* the swap.
+
+```
 mainnet > getbalance
 
 Balance:
 ┌──────────┬───────────────┬────────────────────────────┬───────────────────────────────┐
 │ Currency │ Total Balance │ Channel Balance (Tradable) │ Wallet Balance (Not Tradable) │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ BTC      │ 126.10944853  │ 12.5                       │ 113.60944853                  │
+│ BTC      │ 16.10944853   │ 12.5                       │ 3.60944853                    │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ DAI      │ 50000         │ 50000                      │ 0                             │
+│ DAI      │ 5000          │ 5000                       │ 0                             │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ LTC      │ 13500.0980005 │ 1125                       │ 12375.0980005                 │
-├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ WETH     │ 500           │ 500                        │ 0                             │
-└──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
-mainnet > sell 0.1 btc/dai 7171
-swapped 0.1 BTC with peer order ca24fe00-1c1e-11ea-8b1b-3b2ec0335696
-mainnet > getbalance
-
-Balance:
-┌──────────┬───────────────┬────────────────────────────┬───────────────────────────────┐
-│ Currency │ Total Balance │ Channel Balance (Tradable) │ Wallet Balance (Not Tradable) │
-├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ BTC      │ 126.00944842  │ 12.39999989                │ 113.60944853                  │
-├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ DAI      │ 50717.156     │ 50717.156                  │ 0                             │
-├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ LTC      │ 13500.0980005 │ 1125                       │ 12375.0980005                 │
+│ LTC      │ 21            │ 11                         │ 10                            │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ WETH     │ 500           │ 500                        │ 0                             │
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-# Beware
+Issue an order, e.g. `sell 0.1 btc/dai 7171` to sell 0.1 btc for a price of 7171 DAI per BTC. Settlement of your order shouldn't take longer than a couple of seconds. 
 
-Raiden currently requires direct channels with trading partners. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
+```
+mainnet > sell 0.1 btc/dai 7171
+swapped 0.1 BTC with peer order ca24fe00-1c1e-11ea-8b1b-3b2ec0335696
+```
+
+Use `getbalance` to check your balance *after* the swap. You are now owning 0.1 BTC less and 717 Dai more.
+
+```
+mainnet > getbalance
+
+Balance:
+┌──────────┬───────────────┬────────────────────────────┬───────────────────────────────┐
+│ Currency │ Total Balance │ Channel Balance (Tradable) │ Wallet Balance (Not Tradable) │
+├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
+│ BTC      │ 16.00944842   │ 12.39999989                │ 3.60944853                    │
+├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
+│ DAI      │ 5717          │ 5717                       │ 0                             │
+├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
+│ LTC      │ 21            │ 11                         │ 10                            │
+├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
+│ WETH     │ 500           │ 500                        │ 0                             │
+└──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
+```
+
+## Market Maker Setup
+
+**Coming soon!**
+
+
 
 # Report Issues
 
 Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
-
+* Raiden currently requires direct channels with trading partners. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 * Permanently set the alias `xud` to launch `xud ctl` from anywhere:
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc` or `~/.bash_aliases` on Linux and `bash_profile` on Mac, then `source` the file.
 * `xud ctl` allows to use an L1/L2 client's cli:
@@ -257,11 +340,11 @@ logs ltcd/geth/lndbtc/lndltc/raiden/xud
 #Testnet/Mainnet
 logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ```
-* Blockchain & wallet data is stored in the fixed home directory `~/.xud-docker` by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
+* The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
 * External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
 
 ```bash
-#To connect to an external bitcoin core node in your local network set the values
+# connect to an external bitcoin core node in your local network
 [bitcoind]
 external = true
 rpc-host = "192.168.1.42"
@@ -270,14 +353,16 @@ rpc-user = "user"
 rpc-password = "pass"
 zmqpubrawblock = "192.168.1.42:28332"
 zmqpubrawtx = "192.168.1.42:28333"
-
-#To place geth's chain data onto a HDD set the value
+```
+* If you only have a small SSD available, you can split geth's data
+```bash
+# place geth's chain data onto a HDD
 [geth]
 ancient-chaindata-dir = "/media/hdd/geth/chaindata"
 ```
 * You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`.
 * A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment.
-* Shutdown the environment with `down`.
+* Shutdown the environment with `down`. Restart with `down`, then run `bash ~/xud.sh` again.
 * Remove all data with
 ```bash
 # Use with caution: this step removes all `xud` blockchain and wallet data from your system. If you have channels open without backup or lost your seed mnemonic, you are risking to loose funds.
@@ -295,8 +380,3 @@ rm -rf /custom/mainnet/dir
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
 * [raiden config options](https://raiden-network.readthedocs.io/en/stable/config_file.html)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
-
-
-TODO:
-[bitcoind]
-neutrino=false
