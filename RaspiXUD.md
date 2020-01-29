@@ -6,7 +6,7 @@ Two options are available:
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light and cheap (~100 EUR), but is not fully trustless. A Pi3 works fine for this.
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires an SSD, but keeps the setup trustless. You'll need a Pi4 with 4GB of RAM.
 
-If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can swith to the full setup any time.
+If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can switch to the full setup any time.
 
 ## Reference Shopping List (Spain)
 * [Pi4 (4GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1100-raspberry-pi-4-modelo-b-4gb-765756931182.html): 59,95 €
