@@ -27,7 +27,7 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 
 1. [Download Ubuntu 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) on your computer.
 2. Insert the microSD card into your computer and follow the [flash instructions](https://ubuntu.com/download/iot/installation-media).
-3. *Optional:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure wifi for the Pi for a headless setup.
+3. *Optional:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure Wifi for a headless setup.
 ```bash
 # on your computer, cd to the mounted microSD card partition "writable" and copy the wifi sample file. If you can't see any partition called "writable", then you are probably running something other than linux and need to figure out how to mount an ext4 filesystem.
 sudo cp ./usr/share/doc/netplan/examples/wireless.yaml ./etc/netplan/
@@ -53,7 +53,7 @@ network:
 4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply to fire it up. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
-7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64`). At the time of writing, ubuntu eoan was still not supported in the official docker repos, hence run this to add the repository instead:
+7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate`, run this to add the repository instead and continue with the installation:
 ```
 sudo add-apt-repository \
    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
@@ -114,7 +114,7 @@ xud@ubuntu:~$ sudo nano /etc/fstab
 /dev/sda1 /media/USB ext4 defaults 0 2
 # CTRL+S, CTRL+X. Then mount it
 xud@ubuntu:~$ sudo mkdir /media/USB
-xud@ubuntu:~$ mount -a
+xud@ubuntu:~$ sudo mount -a
 # check if mounting worked
 xud@ubuntu:~$ df -h
 # make sure xud can use it without sudo privileges

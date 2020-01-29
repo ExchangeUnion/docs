@@ -35,15 +35,6 @@ This guide is written for individuals and entities looking to run xud and become
 
 From here we assume that your environment is ready with docker installed and backup drive connected.
 
-## Preparation Full Setup *(Temporary)*
-
-```bash
-xud@ubuntu:~$ mkdir ~/.xud-docker
-xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
-# add this line to permanently set `xud`'s mainnet directory to the SSD
-mainnet-dir = "/media/SSD"
-# CTRL+S, CTRL+X.
-```
 ## Preparation Light Setup *(Temporary)*
 
 ```bash
@@ -53,9 +44,20 @@ xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 [bitcoind]
 neutrino=true
 # add these lines for raiden to use your infura account instead of a local geth node:
+[geth]
 infura = true
 infura-project-id = "abc"
 infura-project-secret = "xyz"
+# CTRL+S, CTRL+X.
+```
+
+## Preparation Full Setup *(Temporary)*
+
+```bash
+xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
+xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
+# add this line to permanently set `xud`'s mainnet directory to the SSD
+mainnet-dir = "/media/SSD"
 # CTRL+S, CTRL+X.
 ```
 
@@ -169,17 +171,17 @@ mainnet > status
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
 ```
-The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing well within 12h, whereas geth will need about 3 full days. The light setup should be ready within 4-5h (there is no working light mode for LTC yet).
+The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. The light setup should be ready within 2-3h (there is no working light mode for LTC yet). A Pi4 needs about twice that long.
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
 │ SERVICE   │ STATUS                                         │
 ├───────────┼────────────────────────────────────────────────┤
-│ bitcoind  │ Ready (Connected to Neutrino)                  │
+│ bitcoind  │ Ready (Connected to neutrino)                  │
 ├───────────┼────────────────────────────────────────────────┤
-│ litecoind │ Ready                                          │
+│ litecoind │ Ready (Connected to external)                  │
 ├───────────┼────────────────────────────────────────────────┤
-│ geth      │ Ready (Connected to external)                  │
+│ geth      │ Ready (Connected to infura)                    │
 ├───────────┼────────────────────────────────────────────────┤
 │ lndbtc    │ Ready                                          │
 ├───────────┼────────────────────────────────────────────────┤
@@ -191,7 +193,6 @@ mainnet > status
 └───────────┴────────────────────────────────────────────────┘
 ```
 
-## Basic Usage
 `xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. See other xud nodes on the network via `listpeers`. Append `-j` to any command to get JSON instead of the formatted output.
 
 ```
@@ -226,7 +227,9 @@ mainnet > listpeers -j
 }
 ```
 
-Deposit some coins 
+## Your First Trade
+
+On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo`). On Testnet/Mainnet, start with deposit some coins 
 
 ```bash
 lndbtc-lncli newaddress p2wkh #Send BTC to this address
@@ -309,8 +312,6 @@ Balance:
 ## Market Maker Setup
 
 **Coming soon!**
-
-
 
 # Report Issues
 
