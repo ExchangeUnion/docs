@@ -27,17 +27,40 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 
 1. [Download Ubuntu 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) on your computer.
 2. Insert the microSD card into your computer and follow the [flash instructions](https://ubuntu.com/download/iot/installation-media).
-3. Insert the microSD card into your Pi, connect it to your router and power to fire it up. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too. 
-4. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
-5. Update ubuntu via `sudo apt update && sudo apt upgrade`
-6. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64`). At the time of writing, ubuntu eoan was still not supported in the official docker repos, hence run this to add the repository instead:
+3. *Optional step:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure wifi for the Pi for a headless setup.
+```bash
+# on your computer, cd to the mounted microSD card partition "writable" and copy the wifi sample file
+sudo cp ./usr/share/doc/netplan/examples/wireless.yaml ./etc/netplan/
+# open the file to edit
+sudo nano ./etc/netplan/wireless.yaml
+# strip down the file to the bare minmum for the Pi to get an IP automatically assigned by your router
+network:
+  version: 2
+  wifis:
+    wlan0:
+      dhcp4: yes
+      dhcp6: no
+      access-points:
+        "<YOUR WIFI SSID>":
+          password: "<YOUR WIFI PASSWORD>"
+# if you can't access your router to read out your Pi's IP, configure a static IP as per sample file
+      addresses: [192.168.0.21/24]
+      gateway4: 192.168.0.1
+      nameservers:
+        addresses: [192.168.0.1, 8.8.8.8]
+# CTRL+S, CTRL+X.
+```
+4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply to fire it up. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
+5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
+6. Update ubuntu via `sudo apt update && sudo apt upgrade`
+7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64`). At the time of writing, ubuntu eoan was still not supported in the official docker repos, hence run this to add the repository instead:
 ```
 sudo add-apt-repository \
    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
    disco \
    stable"
 ```
-7. Add new user `xud`:
+8. Add new user `xud`:
 
 ```bash
 ubuntu@ubuntu:~$ sudo adduser xud
@@ -59,7 +82,7 @@ Enter the new value, or press ENTER for the default
 
 Is the information correct? [Y/n] ubuntu@ubuntu:~$ Y
 ```
-8. Add the `xud` user to the sudo group (advanced users can skip this and use another user to run sudo commands), the docker group and test if docker is working:
+9. Add the `xud` user to the sudo group (advanced users can skip this and use another user to run sudo commands), the docker group and test if docker is working:
 ```bash
 ubuntu@ubuntu:~$ sudo usermod -aG sudo xud
 ubuntu@ubuntu:~$ sudo usermod -aG docker xud
@@ -69,7 +92,7 @@ xud@ubuntu:~$ docker run hello-world
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ```
-9. Looking good! Add an alias to easily start `xud` by typing "xud":
+10. Looking good! Add an alias to easily start `xud` by typing "xud":
 ```bash
 xud@ubuntu:~$ sudo nano ~/.bash_aliases
 # add the line
@@ -77,7 +100,7 @@ alias xud='bash ~/xud.sh'
 # CTRL+S, CTRL+X. Then run
 xud@ubuntu:~$ source ~/.bashrc
 ```
-10. Connect an ext4-formatted USB stick to your Pi. It is very important to do this (given you do not want to loose money)!
+11. Connect an ext4-formatted USB stick to your Pi. It is very important to do this (given you do not want to loose money)!
 ```bash
 # check the USB stick's path with
 xud@ubuntu:~$ ls -la /dev/ | grep sd
@@ -97,11 +120,11 @@ xud@ubuntu:~$ df -h
 # make sure xud can use it without sudo privileges
 xud@ubuntu:~$ sudo chown xud:xud /media/USB
 ```
-11. Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
+12. Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
 
 ## Pi Full Setup
 
-12. Connect the ext4-formatted SSD (one large partition) to your Pi4.
+13. Connect the ext4-formatted SSD (one large partition) to your Pi4.
 ```bash
 # let's check the SSD's path
 xud@ubuntu:~$ ls -la /dev/ | grep sd
@@ -123,7 +146,7 @@ xud@ubuntu:~$ df -h
 # make sure xud can use it without sudo privileges
 xud@ubuntu:~$ sudo chown xud:xud /media/SSD
 ```
-13. Let's do a quick performance test of the SSD. If you are close to these values, you are good to go, whereas <50MB/s (write/read) would be too slow.
+14. Let's do a quick performance test of the SSD. If you are close to these values, you are good to go, whereas <50MB/s (write/read) would be too slow.
 ```bash
 xud@ubuntu:~$ sudo dd if=/dev/zero  of=/media/SSD/deleteme.dat bs=32M count=64 oflag=direct
 64+0 records in
@@ -135,7 +158,7 @@ xud@ubuntu:~$ sudo dd if=/media/SSD/deleteme.dat of=/dev/null bs=32M count=64 if
 2147483648 bytes (2.1 GB, 2.0 GiB) copied, 15.5791 s, 138 MB/s
 xud@ubuntu:~$ sudo rm /media/SSD/deleteme.dat
 ```
-14. Geth needs loads of RAM when syncing, so we will need to create a swap file (overflow RAM) of 12GB or larger on the external SSD.
+15. Geth needs loads of RAM when syncing, so we will need to create a swap file (overflow RAM) of 12GB or larger on the external SSD.
 ```bash
 # create a swap file on the SSD, we recommend a size of 28GB
 xud@ubuntu:~$ sudo fallocate -l 28G /media/SSD/swapfile
@@ -157,5 +180,4 @@ xud@ubuntu:~$ sudo swapon --show
 NAME               TYPE SIZE USED PRIO
 /media/SSD/swapfile file  28G   0B   -2
 ```
-
-15. **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
+16. **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
