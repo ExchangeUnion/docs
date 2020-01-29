@@ -38,7 +38,7 @@ From here we assume that your environment is ready with docker installed and bac
 ## Preparation Light Setup *(Temporary)*
 
 ```bash
-xud@ubuntu:~$ mkdir ~/.xud-docker/mainnet/
+xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 # add these lines to set LNDBTC to use the Neutrino light client
 [bitcoind]
