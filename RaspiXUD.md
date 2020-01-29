@@ -27,9 +27,9 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 
 1. [Download Ubuntu 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) on your computer.
 2. Insert the microSD card into your computer and follow the [flash instructions](https://ubuntu.com/download/iot/installation-media).
-3. *Optional step:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure wifi for the Pi for a headless setup.
+3. *Optional:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure wifi for the Pi for a headless setup.
 ```bash
-# on your computer, cd to the mounted microSD card partition "writable" and copy the wifi sample file
+# on your computer, cd to the mounted microSD card partition "writable" and copy the wifi sample file. If you can't see any partition called "writable", then you are probably running something other than linux and need to figure out how to mount an ext4 filesystem.
 sudo cp ./usr/share/doc/netplan/examples/wireless.yaml ./etc/netplan/
 # open the file to edit
 sudo nano ./etc/netplan/wireless.yaml
