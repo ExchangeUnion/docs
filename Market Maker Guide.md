@@ -4,7 +4,7 @@ This guide is written for individuals and entities looking to run xud and become
 
 ## Two Modes
 1. **Light Setup**, using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light, but is not fully trustless.
-2. **Full Setup**, using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and a SSD, but keeps the setup trustless.
+2. **Full Setup**, using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
 
 ## Three Networks
 
@@ -29,7 +29,7 @@ This guide is written for individuals and entities looking to run xud and become
 
 ## Hardware
 * Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. We recommend building your own xud-in-a-box with a Raspberry Pi following the [RaspiXUD guide](RaspiXUD.md).
-* If you are using a different device (take the [RaspiXUD guide](RaspiXUD.md) as reference) or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`) devices, which should cover most of the devices. We recommend >=16GB RAM and a SSD for the full setup, 4GB RAM and HDD for the light setup.
+* If you are using a different device (take the [RaspiXUD guide](RaspiXUD.md) as reference) or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`) devices, which should cover most of the devices. We recommend >=16GB RAM and an SSD for the full setup, 4GB RAM and HDD for the light setup.
 
 # The Setup
 
