@@ -160,8 +160,8 @@ xud@ubuntu:~$ sudo rm /media/SSD/deleteme.dat
 ```
 15. Geth needs loads of RAM when syncing, so we will need to create a swap file (overflow RAM) of 12GB or larger on the external SSD.
 ```bash
-# create a swap file on the SSD, we recommend a size of 28GB
-xud@ubuntu:~$ sudo fallocate -l 28G /media/SSD/swapfile
+# create a swap file on the SSD, we recommend a size of 8GB
+xud@ubuntu:~$ sudo fallocate -l 8G /media/SSD/swapfile
 # mark it as swap file
 xud@ubuntu:~$ sudo chmod 600 /media/SSD/swapfile && sudo mkswap /media/SSD/swapfile
 # enable it
@@ -173,11 +173,11 @@ xud@ubuntu:~$ sudo nano /etc/fstab
 # # CTRL+S, CTRL+X. Let's verify it's working & reboot
 xud@ubuntu:~$ sudo swapon --show
 NAME               TYPE SIZE USED PRIO
-/media/SSD/swapfile file  28G   0B   -2
+/media/SSD/swapfile file  8G   0B   -2
 xud@ubuntu:~$ sudo reboot
 # after reboot, let's check if the swapfile is still active
 xud@ubuntu:~$ sudo swapon --show
 NAME               TYPE SIZE USED PRIO
-/media/SSD/swapfile file  28G   0B   -2
+/media/SSD/swapfile file  8G   0B   -2
 ```
 16. **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
