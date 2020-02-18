@@ -15,7 +15,7 @@ $ xucli connect 025fbfe0e92bf0e5e64500ed542d51f4f9d59111a2d3fa142e90567ec417c4a6
 # Places a new limit order BUYING 10 LTC for a price of 0.0079 BTC per LTC
 $ xucli buy 10 LTC/BTC 0.0079
 
-# Places a new limit order SELLING 2 LTC for the best market price
+# Places a new limit order SELLING 5 LTC for the best market price
 $ xucli sell 5 LTC/BTC market
 ```
 
