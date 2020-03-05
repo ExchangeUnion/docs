@@ -2,23 +2,20 @@ We recommend to use the [xud-docker](User%20Guide.md) setup to trade on the `xud
 
 ## Goal
 
-This guide describes how to setup `xud` and connect to and trade on the XUD Simulation Network (`xud-simnet`). It should take about 15 minutes to complete all steps.
+This guide describes how to setup `xud` and connect to and trade on the XUD Simulation Network (`xud-simnet`). It should take about 10 minutes to complete all steps.
 
-`xud` is in alpha stage and the `xud-simnet` aims to give interested individuals an early 'look & feel' of how things will work later on with a convenient, mostly automated setup. The `xud-simnet` uses magic simnet coins at all times.
+`xud` is in beta stage and the `xud-simnet` aims to give a 'look & feel' of how things are working with a convenient, automated setup. The `xud-simnet` uses magic simnet coins at all times, no risk of loosing your precious bitcoin if something should go wrong.
 
-Once the setup of `xud-simnet` is completed, you will be able to query pending orders, place orders, and experiment with `xud`'s rich set of commands (`xucli --help`). When a match is found in the network, your orders will automatically be executed & settled instantly via an atomic swap. `xud-simnet` currently supports atomic swaps between BTC, LTC & ERC20 tokens. This guide will show how to install dependencies like `go` and how to use the `xud-simnet` to automatically setup bitcoin, litecoin & ethereum daemons, lightning daemons (LND) for bitcoin (BTC) and litecoin (LTC), raiden for ERC20 tokens, `xud` and finally connect to `xud-simnet`. This guide is written for Linux & macOS and suitable for everyone that knows how to use a command line. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental.
+Once the setup of `xud-simnet` is completed, you will be able to query the orderbook, place orders, and experiment with `xud`'s rich set of commands (`xucli --help`). When a match is found in the network, your orders will automatically be executed & settled instantly via an atomic swap. `xud-simnet` currently supports atomic swaps between BTC, LTC & ERC20 tokens. This guide will show how to install dependencies like `go` and how to use the `xud-simnet` to set up blightning daemons (LND) for bitcoin (BTC) and litecoin (LTC), raiden for ERC20 tokens and `xud` and to connect to `xud-simnet`. This guide is written for Linux & macOS and suitable for everyone that knows how to use a command line. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental.
 
 ## Describing the Setup
 
-`xud-simnet` spins up several components on your machine which together provide support for exchanging order information and executing atomic swaps between BTC and LTC on the lightning network. It will setup the following components:
+`xud-simnet` spins up several components on your machine which together provide support for exchanging order information and executing atomic swaps between BTC,LTC & ERC20 tokens on the lightning network & raiden network. It will setup the following components:
 
-- `neutrino` - light node, connecting to our remote btcd instance (which is mining the bitcoin simnet chain)
-- `ltcd` - local full node, connected to the litecoin simnet chain
-- `geth` - connecting to our remote geth instance (which is mining the ethereum simnet chain)
-- `lndbtc` - payment channel implementation for the bitcoin network
-- `lndltc` - payment channel implementation for the litecoin network
-- `raiden` - payment channel implementation for the ethereum network
-- `xud` - Exchange Union's decentralized exchange layer, managing orders and clients above
+- `lndbtc` - payment channel implementation for the bitcoin network, connecting to our remote btcd instance (which is mining the bitcoin simnet chain) via neutrino
+- `lndltc` - payment channel implementation for the litecoin network, connecting to our remote ltcd instance (which is mining the litecoin simnet chain) via neutrino
+- `raiden` - payment channel implementation for the ethereum network, connecting to our remote geth instance (which is mining the ethereum simnet chain)
+- `xud` - Exchange Union's OpenDEX node, managing orders and clients above
 
 ## Installation 
 
@@ -27,9 +24,9 @@ Once the setup of `xud-simnet` is completed, you will be able to query pending o
 Make sure you have the below programs installed:
 - [git](https://gist.github.com/derhuerst/1b15ff4652a867391f03#file-linux-md)
 - make (`sudo apt-get install make`)
-- [node.js + npm](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (v10.x or higher)
+- [node.js + npm](https://github.com/nodesource/distributions/blob/master/README.md#debinstall) (v12.x or higher)
 - python 3.7 or higher
-- go 1.12 (1.13 does **not** work yet)
+- go 1.13 or higher
 - killall (`sudo apt-get install psmisc`)
 
 ### Installing Go
@@ -37,13 +34,13 @@ Make sure you have the below programs installed:
 If Go is not yet installed on your system, use the following command to install it:
 
 ```
-sudo apt-get install golang-1.12-go
+sudo apt-get install golang-1.13-go
 ```
 
-If go 1.12 is not included in your package manager, follow the official [install instructions](https://golang.org/doc/install) or add a repository which contains it, e.g. [this one for Ubuntu](https://github.com/golang/go/wiki/Ubuntu). Note, that `golang-1.12-go` puts binaries in `/usr/lib/go-1.10/bin`. If you want them on your PATH, you need to make that change yourself. Alternatively, you can create a softlink with
+If go is not included in your package manager, follow the official [install instructions](https://golang.org/doc/install) or add a repository which contains it, e.g. [this one for Ubuntu](https://github.com/golang/go/wiki/Ubuntu). Note, that `golang-1.13-go` puts binaries in `/usr/lib/go-1.13/bin`. If you want them on your PATH, you need to make that change yourself. Alternatively, you can create a softlink with
 
 ```
-sudo ln -s /usr/lib/go-1.12/bin/go /usr/local/bin/go 
+sudo ln -s /usr/lib/go-1.13/bin/go /usr/local/bin/go 
 ```
 
 ### Repository Checkout
@@ -52,14 +49,13 @@ sudo ln -s /usr/lib/go-1.12/bin/go /usr/local/bin/go
 git clone https://github.com/ExchangeUnion/xud-simnet.git ~/xud-simnet
 ```
 
-This should create the `xud-simnet` directory in your home directory.
+This clones the `xud-simnet` directory into your home directory.
 
 ### Setup ~/.bashrc
 
-To enable access to the scripts please update and source your `.bashrc`:
+To enable access to the scripts from anywhere run
 
 ```
-source ~/.bashrc
 source ~/xud-simnet/setup.bash
 ```
 
@@ -90,7 +86,7 @@ You can start all components with
 xud-simnet-start
 ```
 
-Since `neutrino` & `ltcd` need to sync the blocks of the simnet when started for the first time, it could take some minutes until you see `Ready!`. As long as you see the process advancing in the terminal, we'd ask you to be patient and keep the process running.
+Since `neutrino` needs to sync the blocks of the simnet when started for the first time, it could take some minutes until you see `Ready!`. As long as you see the process advancing in the terminal, we'd ask you to be patient and keep the process running.
 
 ### Stopping
 
@@ -111,68 +107,76 @@ xucli getinfo
 and you should see something similar to
 
 ```
-{
-  "version": "1.0.0-testnet.1",
-  "nodePubKey": "02c8f6f1c2c761b6b61c7cdbf598793a3d0ba73c1ed702498eb51764667567d6c3",
-  "urisList": [],
-  "numPeers": 3,
-  "numPairs": 2,
-  "orders": {
-    "peer": 40,
-    "own": 0
-  },
-  "lndMap": [
-    [
-      "BTC",
-      {
-        "error": "",
-        "channels": {
-          "active": 1,
-          "inactive": 0,
-          "pending": 0
-        },
-        "chainsList": [
-          {
-            "chain": "bitcoin",
-            "network": "simnet"
-          }
-        ],
-        "blockheight": 4916,
-        "urisList": [],
-        "version": "0.7.1-beta commit=v0.7.1-beta",
-        "alias": "BTC@K-Yoga"
-      }
-    ],
-    [
-      "LTC",
-      {
-        "error": "",
-        "channels": {
-          "active": 1,
-          "inactive": 0,
-          "pending": 0
-        },
-        "chainsList": [
-          {
-            "chain": "litecoin",
-            "network": "simnet"
-          }
-        ],
-        "blockheight": 8931,
-        "urisList": [],
-        "version": "0.7.1-beta commit=v0.7.1-beta",
-        "alias": "LTC@K-Yoga"
-      }
-    ]
-  ],
-  "raiden": {
-    "error": "",
-    "address": "0x08D21Ca7E9E306b484A4015984C99eB50e4Cc247",
-    "channels": 2,
-    "version": ""
-  }
-}
+General XUD Info
+┌───────────────┬────────────────────────────────────────────────────────────────────┐
+│ Status        │ Ready                                                              │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Alias         │                                                                    │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Node Key      │ 03fe7f3b78cb5cba37d8c60318f612361bcb1a85d09498a5b46ea0f4ac399902ed │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Address       │                                                                    │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Network       │ simnet                                                             │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Version       │ 1.0.0-beta.1-da08b2a                                               │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Peers         │ 1                                                                  │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Pairs         │ 4                                                                  │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Own orders    │ 0                                                                  │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Peer orders   │ 3                                                                  │
+├───────────────┼────────────────────────────────────────────────────────────────────┤
+│ Pending swaps │ []                                                                 │
+└───────────────┴────────────────────────────────────────────────────────────────────┘ 
 
+
+Raiden info:
+┌──────────┬────────────────────────────────────────────┐
+│ Status   │ raiden has no active channels              │
+├──────────┼────────────────────────────────────────────┤
+│ Version  │ 0.100.5a1.dev162-2217bcb                   │
+├──────────┼────────────────────────────────────────────┤
+│ Address  │ 0xE63eff732aA623300EAe509D1ADF9436295B543c │
+├──────────┼────────────────────────────────────────────┤
+│ Channels │ Active: 2 | Pending: 0 | Closed: 0         │
+├──────────┼────────────────────────────────────────────┤
+│ Network  │ raiden simnet                              │
+└──────────┴────────────────────────────────────────────┘ 
+
+
+LND-BTC Info:
+┌──────────┬────────────────────────────────────┐
+│ Status   │ Ready                              │
+├──────────┼────────────────────────────────────┤
+│ Version  │ 0.9.1-beta commit=v0.9.1-beta      │
+├──────────┼────────────────────────────────────┤
+│ Address  │                                    │
+├──────────┼────────────────────────────────────┤
+│ Alias    │ BTC@K-Yoga                         │
+├──────────┼────────────────────────────────────┤
+│ Channels │ Active: 1 | Pending: 0 | Closed: 0 │
+├──────────┼────────────────────────────────────┤
+│ Network  │ bitcoin simnet                     │
+└──────────┴────────────────────────────────────┘ 
+
+
+LND-LTC Info:
+┌──────────┬────────────────────────────────────┐
+│ Status   │ Ready                              │
+├──────────┼────────────────────────────────────┤
+│ Version  │ 0.9.0-beta commit=v0.9.0-beta      │
+├──────────┼────────────────────────────────────┤
+│ Address  │                                    │
+├──────────┼────────────────────────────────────┤
+│ Alias    │ LTC@K-Yoga                         │
+├──────────┼────────────────────────────────────┤
+│ Channels │ Active: 1 | Pending: 0 | Closed: 0 │
+├──────────┼────────────────────────────────────┤
+│ Network  │ litecoin simnet                    │
+└──────────┴────────────────────────────────────┘ 
 ```
 
 with one active channel for `lndbtc`, `lndltc` & raiden. If so, you are finally ready to rumble. Let's do some trades!
@@ -216,7 +220,7 @@ which should result in
 swapped 0.5 LTC with peer order c0de48a0-0b90-11e9-97c6-95f0014144a4
 ```
 
-Currently the trading bots of xud1, 2 & 3 are configured to replace successfully orders when the quantity was completely filled. `xud-simnet` features larger BTC and LTC lightning channels to support real-world order sizes.
+Currently the trading bots of xud1 is configured to replace successfully orders when the quantity was completely filled. `xud-simnet` features larger BTC and LTC lightning channels to support real-world order sizes.
 
 ### Updates & useful commands
 
