@@ -53,7 +53,7 @@ This clones the `xud-simnet` directory into your home directory.
 
 ### Setup ~/.bashrc
 
-To enable access to the scripts from anywhere run
+To enable access to the scripts from anywhere run:
 
 ```
 source ~/xud-simnet/setup.bash
