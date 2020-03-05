@@ -194,12 +194,6 @@ The output of connected peers should contain
 ```
 "address": "xud1.simnet.exchangeunion.com:8885",
 "nodePubKey": "02b66438730d1fcdf4a4ae5d3d73e847a272f160fee2938e132b52cab0a0d9cfc6",
-
-"address": "xud2.simnet.exchangeunion.com:8885",
-"nodePubKey": "028599d05b18c0c3f8028915a17d603416f7276c822b6b2d20e71a3502bd0f9e0a"
-
-"address": "xud3.simnet.exchangeunion.com:8885",
-"nodePubKey": "03fd337659e99e628d0487e4f87acf93e353db06f754dccc402f2de1b857a319d0"
 ```
 
 You already received existing orders from the network. You can view these with
@@ -208,7 +202,7 @@ You already received existing orders from the network. You can view these with
 xucli orderbook
 ```
 
-Let's execute a test order to trigger a match and execution via atomic swap by e.g. buying 0.5 litecoin with 0.0079 bitcoin
+Let's execute a test order to trigger a match and execution via atomic swap by e.g. buying 0.5 litecoin for a price of 0.0079 bitcoin per litecoin
 
 ```
 xucli buy 0.5 LTC/BTC 0.0079
