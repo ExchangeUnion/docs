@@ -6,7 +6,7 @@ Two options are available:
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/).
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
 
-If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can switch to the full setup any time.
+If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can switch to the full setup at any time.
 
 ## Reference Shopping List (Spain)
 * [Pi4 (4GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1100-raspberry-pi-4-modelo-b-4gb-765756931182.html): 59,95 €
