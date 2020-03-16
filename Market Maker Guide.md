@@ -178,11 +178,11 @@ mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
 │ SERVICE   │ STATUS                                         │
 ├───────────┼────────────────────────────────────────────────┤
-│ bitcoind  │ Ready (Connected to neutrino)                  │
+│ bitcoind  │ Ready (Connected to Neutrino)                  │
 ├───────────┼────────────────────────────────────────────────┤
 │ litecoind │ Ready (Connected to external)                  │
 ├───────────┼────────────────────────────────────────────────┤
-│ geth      │ Ready (Connected to infura)                    │
+│ geth      │ Ready (Connected to Infura)                    │
 ├───────────┼────────────────────────────────────────────────┤
 │ lndbtc    │ Ready                                          │
 ├───────────┼────────────────────────────────────────────────┤
