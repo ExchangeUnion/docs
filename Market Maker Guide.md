@@ -1,22 +1,23 @@
-This guide is written for individuals and entities looking to run xud and become a market maker on OpenDEX. Occasional traders can use this guide to run xud to trade on OpenDEX.
+This guide is written for individuals and entities looking to run xud in order to become a market maker on OpenDEX. Traders can use this guide to run xud to trade on OpenDEX directly without involvement of any third party.
 
 # Prerequisites
 
 ## Two Modes
-1. **Light Setup**, using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light, but is not fully trustless.
-2. **Full Setup**, using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
+
+1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/).
+2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
 
 ## Three Networks
 
 1. **Simnet**. Status: `live` | Setup time: `~15 mins` | Required disk space: `<1 GB`
 
-    Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect play money playground to see how things work and play around with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
+    Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. Status: `live` | Setup time (full): `5-24h` | Required disk space (full): `200 GB`
+2. **Testnet**. Status: `live` | Setup time (full setup): `5-24h` | Required disk space (full setup): `200 GB`
 
     bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
-3. **Mainnet**. Status: `live` | Setup time (full): `1-3 days` | Required disk space (full): `700 GB`
+3. **Mainnet**. Status: `live` | Setup time (full setup): `1-3 days` | Required disk space (full setup): `700 GB`
     
     The real deal. Only with #reckless hat.
 
@@ -28,14 +29,14 @@ This guide is written for individuals and entities looking to run xud and become
 * Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
 ## Hardware
-* Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. We recommend building your own xud-in-a-box with a Raspberry Pi following the [RaspiXUD guide](RaspiXUD.md).
-* If you are using a different device (take the [RaspiXUD guide](RaspiXUD.md) as reference) or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`) devices, which should cover most of the devices. We recommend >=16GB RAM and an SSD for the full setup, 4GB RAM and HDD for the light setup.
+* Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. Our [RaspiXUD guide](RaspiXUD.md) includes a shopping list and walks you through setting up  a Raspberry Pi3/4.
+* If you are using a different device or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`/`armv8`) devices, which should cover most. We recommend >=16GB RAM and an SSD for the full setup. Our `arm64` docker images include a special tweak to make the full setup possible on the Pi4 with 4GB of RAM.
 
 # The Setup
 
-From here we assume that your environment is ready with docker installed and backup drive connected.
+From here we assume that your device is running, with docker installed and backup drive connected.
 
-## Preparation Light Setup *(Temporary)*
+## Preparation Light Setup
 
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
@@ -45,13 +46,13 @@ xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 neutrino=true
 # add these lines for raiden to use your infura account instead of a local geth node:
 [geth]
-infura = true
+external = true
 infura-project-id = "abc"
 infura-project-secret = "xyz"
 # CTRL+S, CTRL+X.
 ```
 
-## Preparation Full Setup *(Temporary)*
+## Preparation Full Setup
 
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
@@ -96,10 +97,10 @@ Re-enter password:
 ----------------------BEGIN XUD SEED---------------------
  1. you         2. won't       3. find        4. money      
  5. in          6. this        7. seed        8. but    
- 9. good       10. thinking   11. we         12. encourage      
-13. hacking    14. and        15. attacking  16. of     
-17. xud        18. and        19. happily    20. pay  
-21. ransom     22. for        23. your       24. work    
+ 9. good       10. thinking   11. if         12. you      
+13. are        14. interested 15. in         16. getting     
+17. rewarded   18. for        19. testing    20. xud's  
+21. security   22. hit        23. us         24. up   
 -----------------------END XUD SEED----------------------
 
 The following wallets were initialized: BTC, LTC, ERC20(ETH)
@@ -107,7 +108,7 @@ The following wallets were initialized: BTC, LTC, ERC20(ETH)
 
 Then you'll be asked to enter the path to your backup drive, e.g. a previously mounted USB drive:
 ```
-Please enter a path to a destination where to store a backup of your environment. It includes everything, but NOT your wallet balance which is secured by your XUD SEED. The path should be an external drive, like a USB or network drive, which is permanently available on your device since backups are written constantly.
+Please enter a path to a destination where to store a backup of your environment. It includes everything, but NOT your on-chain wallet balance which is secured by your XUD SEED. The path should be an external drive, like a USB or network drive, which is permanently available on your device since backups are written constantly.
 
 Enter path to backup location: /media/USB/
 Checking... OK.
