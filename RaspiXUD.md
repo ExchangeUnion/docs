@@ -1,8 +1,9 @@
 This guide is written for market makers & traders to turn a Raspberry Pi into an always-on xud node.
 
-![RaspiXUD setup, plants are optional](images/RaspiXUD.jpeg)
+![RaspiXUD setup (plants are optional)](images/RaspiXUD.jpeg)
 
 Two options are available:
+
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/).
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
 
