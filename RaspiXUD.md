@@ -16,10 +16,10 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 * [64GB MicroSD card](https://www.amazon.es/dp/B07G3GMRYF/): 20 €
   * A performant microSD card is important; not the right place to save some bucks.
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
-* [USB stick for backups](https://www.amazon.es/PNY-FD16GATT4-EF-Memoria-color-negro/dp/B00TPG6P22/): 3,99 €
+* [USB stick for backups](https://www.amazon.es/dp/B00TPG6P22/): 3,99 €
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.
-* [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1): 190 €
+* [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/): 190 €
   * **For full setup only!**
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
 
