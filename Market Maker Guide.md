@@ -41,8 +41,10 @@ From here we assume that your device is running, with docker installed and backu
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
-# add these lines to set LNDBTC to use the Neutrino light client
+# add these lines to set LNDBTC and LNDLTC to use the Neutrino light client
 [bitcoind]
+neutrino=true
+[litecoind]
 neutrino=true
 # add these lines for raiden to use your infura account instead of a local geth node:
 [geth]
@@ -172,7 +174,7 @@ mainnet > status
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
 ```
-The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. The light setup should be ready within 2-3h (there is no working light mode for LTC yet). A Pi4 needs about twice that long.
+The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. The light setup should be ready within one hour. A Pi4 needs about twice that long.
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
@@ -180,7 +182,7 @@ mainnet > status
 ├───────────┼────────────────────────────────────────────────┤
 │ bitcoind  │ Ready (Connected to Neutrino)                  │
 ├───────────┼────────────────────────────────────────────────┤
-│ litecoind │ Ready (Connected to external)                  │
+│ litecoind │ Ready (Connected to Neutrino)                  │
 ├───────────┼────────────────────────────────────────────────┤
 │ geth      │ Ready (Connected to Infura)                    │
 ├───────────┼────────────────────────────────────────────────┤
