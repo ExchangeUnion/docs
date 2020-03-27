@@ -355,7 +355,7 @@ rpc-password = "pass"
 zmqpubrawblock = "192.168.1.42:28332"
 zmqpubrawtx = "192.168.1.42:28333"
 ```
-* If you only have a small SSD available, you can split geth's data. Only a small part needs to be located on a fast SSD:
+* If you only have a small SSD available, you can split geth's data. Only a small part needs to be located on the fast SSD:
 ```bash
 # place geth's chain data onto a HDD
 [geth]
