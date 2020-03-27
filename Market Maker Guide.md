@@ -29,12 +29,13 @@ This guide is written for individuals and entities looking to run xud in order t
 * Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
 ## Hardware
-* Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. Our [RaspiXUD guide](RaspiXUD.md) includes a shopping list and walks you through setting up  a Raspberry Pi3/4.
-* If you are using a different device or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`/`armv8`) devices, which should cover most. We recommend >=16GB RAM and an SSD for the full setup. Our `arm64` docker images include a special tweak to make the full setup possible on the Pi4 with 4GB of RAM.
+Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router.
+* Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up  a Raspberry Pi3/4.
+* If you are using a different device or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices. We recommend >=16GB RAM and an SSD for the full setup. Our `arm64` docker images include a special tweak to make the full setup possible on devices like the Pi4 with only 4GB of RAM.
 
 # The Setup
 
-From here we assume that your device is running, with docker installed and backup drive connected.
+From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
 
 ## Preparation Light Setup
 
@@ -43,12 +44,12 @@ xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 # add these lines to set LNDBTC and LNDLTC to use the Neutrino light client
 [bitcoind]
-neutrino=true
+mode = "neutrino"
 [litecoind]
-neutrino=true
+mode = "neutrino"
 # add these lines for raiden to use your infura account instead of a local geth node:
 [geth]
-external = true
+mode = "infura"
 infura-project-id = "abc"
 infura-project-secret = "xyz"
 # CTRL+S, CTRL+X.
@@ -64,7 +65,7 @@ mainnet-dir = "/media/SSD"
 # CTRL+S, CTRL+X.
 ```
 
-## Basic Setup
+## Let's Roll
 
 Start the environment with
 
@@ -72,7 +73,7 @@ Start the environment with
 curl https://raw.githubusercontent.com/ExchangeUnion/xud-docker/master/xud.sh -o ~/xud.sh
 bash ~/xud.sh
 ```
-The setup will ask you to choose the network.
+The setup will ask you to choose the network:
 ```
 1) Simnet
 2) Testnet
@@ -81,7 +82,7 @@ Please choose the network: 3
 🚀 Launching mainnet environment
 🌍 Checking for updates ...
 ```
-Then you will be guided through some basics like
+Then you will be guided through some basics:
 ```
 Do you want to generate a new XUD SEED or restore an existing one?
 1. New
@@ -116,9 +117,9 @@ Enter path to backup location: /media/USB/
 Checking... OK.
 ```
 
-The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Apply with a restart of the environment (`down`, `xud`). Alternatively, you can consider running your environment's hard drive in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Apply changes by re-entering `xud ctl` (`exit`, `xud`). Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
 
-After this, the setup pulls containers, starts syncing and opens
+After this, the setup pulls containers, starts syncing and opens:
 
 ```
                            .___           __  .__   
@@ -129,7 +130,7 @@ After this, the setup pulls containers, starts syncing and opens
                 \/          \/         \/           
 ```
 
-Use the `status` command to check on the syncing status
+Use the `status` command to check on the syncing progress:
 
 ```
 mainnet > status
@@ -152,7 +153,7 @@ mainnet > status
 └───────────┴────────────────────────────────────────────────┘
 ```
 
-After a while you should see all three full-nodes syncing nicely
+After a while you should see all three full-nodes syncing nicely:
 
 ```
 mainnet > status
@@ -174,7 +175,9 @@ mainnet > status
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
 ```
-The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. The light setup should be ready within one hour. A Pi4 needs about twice that long.
+The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. A Pi4 needs about twice that long.
+
+The light setup should be ready within one hour:
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
@@ -196,7 +199,7 @@ mainnet > status
 └───────────┴────────────────────────────────────────────────┘
 ```
 
-`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. See other xud nodes on the network via `listpeers`. Append `-j` to any command to get JSON instead of the formatted output.
+`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. Append `-j` to any command to get JSON instead of the formatted output, e.g. using `listpeers` to see other xud nodes on the network:
 
 ```
 mainnet > listpeers -j
@@ -232,7 +235,7 @@ mainnet > listpeers -j
 
 ## Your First Trade
 
-On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo`). On Testnet/Mainnet, start with deposit some coins 
+On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo` and `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
 
 ```bash
 lndbtc-lncli newaddress p2wkh #Send BTC to this address
@@ -240,16 +243,16 @@ lndltc-lncli newaddress p2wkh #Send LTC to this address
 getinfo -j #Send WETH/DAI to your raiden address
 ```
 
-The next step will have an automated option in future, but currently is not trivial: choose xud nodes to open channels with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open channels with our xud node hosted at xud1.exchangeunion.com, which is maintaining a good channel connectivity with other xud nodes in the OpenDEX Network.
+The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. Opening a 0.1 btc channel would look like:
 
 ```
 openchannel 02529a91d073dda641565ef7affccf035905f3d8c88191bdea83a35f37ccce5d64 btc 0.1
 ```
 
-Check existing orders in the network with the command `orderbook`.
+Check existing orders in the network with the command `orderbook` for all enabled trading pairs or with `orderbook btc/dai` for BTC/DAI only:
 
 ```
-mainnet > orderbook
+mainnet > orderbook btc/dai
 
 Trading pair: BTC/DAI
 ┌───────────────────────────────────────┬───────────────────────────────────────┐
@@ -276,7 +279,7 @@ Balance:
 ┌──────────┬───────────────┬────────────────────────────┬───────────────────────────────┐
 │ Currency │ Total Balance │ Channel Balance (Tradable) │ Wallet Balance (Not Tradable) │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ BTC      │ 16.10944853   │ 12.5                       │ 3.60944853                    │
+│ BTC      │ 6.10944853    │ 2.5                        │ 3.60944853                    │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ DAI      │ 5000          │ 5000                       │ 0                             │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
@@ -286,7 +289,7 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-Issue an order, e.g. `sell 0.1 btc/dai 7171` to sell 0.1 btc for a price of 7171 DAI per BTC. Settlement of your order shouldn't take longer than a couple of seconds. 
+Issue a regular limit order with e.g. `sell 0.1 btc/dai 7171` to sell 0.1 btc for a price of 7171 DAI per BTC. Settlement of your order shouldn't take longer than a couple of seconds. 
 
 ```
 mainnet > sell 0.1 btc/dai 7171
@@ -302,7 +305,7 @@ Balance:
 ┌──────────┬───────────────┬────────────────────────────┬───────────────────────────────┐
 │ Currency │ Total Balance │ Channel Balance (Tradable) │ Wallet Balance (Not Tradable) │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ BTC      │ 16.00944842   │ 12.39999989                │ 3.60944853                    │
+│ BTC      │ 6.00944842    │ 2.39999989                 │ 3.60944853                    │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ DAI      │ 5717          │ 5717                       │ 0                             │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
@@ -326,22 +329,16 @@ Please report issues/bugs by running `report` from within `xud ctl`.
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc` or `~/.bash_aliases` on Linux and `bash_profile` on Mac, then `source` the file.
 * `xud ctl` allows to use an L1/L2 client's cli:
 ```bash
-#Simnet
-ltcctl --help
-#Testnet/Mainnet
 bitcoin-cli --help
-lndbtc-lncli --help
 litecoin-cli --help
-lndltc-lncli --help
 geth --help
+lndbtc-lncli --help
+lndltc-lncli --help
 raiden --help
 xucli --help
 ```
-* To inspect logs (use `logs -f` if you want to tail the log live):
+* To inspect logs:
 ```bash
-#Simnet
-logs ltcd/geth/lndbtc/lndltc/raiden/xud
-#Testnet/Mainnet
 logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ```
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
@@ -358,7 +355,7 @@ rpc-password = "pass"
 zmqpubrawblock = "192.168.1.42:28332"
 zmqpubrawtx = "192.168.1.42:28333"
 ```
-* If you only have a small SSD available, you can split geth's data
+* If you only have a small SSD available, you can split geth's data. Only a small part needs to be located on a fast SSD:
 ```bash
 # place geth's chain data onto a HDD
 [geth]
@@ -374,7 +371,7 @@ sudo rm -rf ~/.xud-docker
 rm -rf ~/xud.sh
 rm -rf /custom/mainnet/dir
 ```
-* `xud-docker` only uses official xud releases for mainnet. Simnet/Testnet are updated frequently. If you want to run a specific xud branch or master, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing). For mainnet, we recommend to run the latest [official release](https://github.com/ExchangeUnion/xud/releases/) only. #craefulgang
+* `xud-docker` only uses official xud releases for mainnet. Simnet/Testnet are updated frequently. If you want to run a specific xud branch or master, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing). For mainnet, we strongly recommend to run the latest [official release](https://github.com/ExchangeUnion/xud/releases/) only. #craefulgang
 * Docker might not play nicely with a VPN you are running on the same machine. If you see `Failed to launch environment`, try disconnecting the VPN.
 
 ## References
