@@ -1,12 +1,12 @@
-The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference node implementation powering [OpenDEX](https://opendex.network), a decentralized exchange (DEX) built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network and liquidity pool.
+The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference implementation powering [OpenDEX](https://opendex.network), a decentralized exchange built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global liquidity pool.
 
-**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of OpenDEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades on OpenDEX in order to lock in profits. **Market Makers** use `xud` to arbitrage with external exchanges (e.g. Binance) and provide liquidity on OpenDEX for a premium. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
+**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of OpenDEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades using the liquidity on OpenDEX. **Market Makers** use `xud` to offer liqudidity on OpenDEX with a premium leveraging arbitrage to external exchanges like Binance. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
 
 ## Get Started
 
 -> [Get started as **Market Maker**](Market%20Maker%20Guide.md), providing liquidity from external exchanges making a profit
 
--> [Get started as **Exchange Operator**](), using a open-source white-label exchange platform to run your own exchange **(coming soon!)**
+-> [Get started as **Exchange Operator**](), running a open-source exchange platform with integrated liquidity **(coming soon!)**
 
 -> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency preserving your privacy & without counterparty risk
 
