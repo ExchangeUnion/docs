@@ -1,4 +1,4 @@
-This guide is intended to help developers who want to contribute to `xud`. Developers who want to build on top of `xud`, are invited to check out the [API Documentation](https://api.exchangeunion.com).
+This guide is intended to help developers who want to contribute to `xud`. Developers who want to build on top of `xud`, should check out the [API Documentation](https://api.exchangeunion.com).
 
 ## Contribution Guidelines
 
@@ -34,7 +34,7 @@ Auto restart on every file change under `dist` folder with `nodemon`:
 nodemon --watch dist -e js bin/xud
 ```
 
-With args:
+With some sample args disabling lndbtc/lndltc:
 
 ```
 nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
@@ -44,35 +44,58 @@ nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
 
 We recommend to connect the `xud` instance you are developing on with the `xud-simnet`. Combined with above restarting mechanism, this let's you instantly see how your changes behave in a real-world trading environment.
 
-1. Install the `xud-simnet` as described [here](https://docs.exchangeunion.com/start-trading/user-guide)
-2. Exit from the opened `xud ctl` session by typing `exit`
-3. Stop `simnet_xud_1` docker image with `docker stop simnet-xud_1` command, we won't need it.
-4. Copy  `~/.xud-docker/simnet/data/lndltc` and `~/.xud-docker/simnet/data/lndbtc` into somewhere you can easily access (such as your home directory). 
-5. Ensure you own the copied folders. `chown -R <user>: <copied_path>/lndbtc|lndltc`
-6. Change `xud.conf` as below.
+1. Create the following directory and config file to expose relevant ports for your `xud` to connect to: 
+```bash
+xud@ubuntu:~$ mkdir -p ~/.xud-docker/simnet/
+xud@ubuntu:~$ nano ~/.xud-docker/simnet/simnet.conf
+# add these lines to set LNDBTC and LNDLTC to use the Neutrino light client
+[lndbtc]
+expose-ports = ["30009:10009"]
+[lndltc]
+expose-ports = ["31009:10009"]
+[raiden]
+expose-ports = ["25001:5001"]
+# CTRL+S, CTRL+X.
+```
+2. Start the `xud-simnet` with default settings as described [here](Market%20Maker%20Guide.md).
+3. Once `xud-simnet` is up and running, exit from the opened `xud ctl` session by typing `exit` or open a second terminal.
+4. Stop the xud container with `docker stop simnet_xud_1`.
+4. Copy the simnet lndbtc & lndltc folders into some path that you can easily access. E.g. into your home directory:
+```
+sudo cp -R ~/.xud-docker/simnet/data/lndbtc ~/
+sudo cp -R ~/.xud-docker/simnet/data/lndltc ~/
+```
+5. Ensure that you own the copied folders:
+```
+sudo chown -R <youruser> ~/lndbtc
+sudo chown -R <youruser> ~/lndltc
+```
+6. Create/change `xud.conf` in `~/.xud` to contain the following:
 ```
 [lnd.BTC]
-cltvdelta = 144
+cltvdelta = 40
 disable = false
 host = "localhost"
 nomacaroons = false
-port = 10010
-certpath = "<copied_path>/lndbtc/tls.cert"
-macaroonpath = "<copied_path>/lndbtc/data/chain/bitcoin/simnet/admin.macaroon"
+port = 30009
+certpath = "/home/kilrau/lndbtc/tls.cert"
+macaroonpath = "/home/kilrau/lndbtc/data/chain/bitcoin/simnet/admin.macaroon"
+
 [lnd.LTC]
 cltvdelta = 576
 disable = false
 host = "localhost"
 nomacaroons = false
-port = 20010
-certpath = "<copied_path>/lndltc/tls.cert"
-macaroonpath = "<copied_path>/lndltc/data/chain/litecoin/simnet/admin.macaroon"
+port = 31009
+certpath = "/home/kilrau/lndltc/tls.cert"
+macaroonpath = "/home/kilrau/lndltc/data/chain/litecoin/simnet/admin.macaroon"
+
 [raiden]
 disable = false
 host = "localhost"
-port = 5002
+port = 25001
 ```
-7. Now you can start `xud`. Since it's using above configuation, it connects to the running docker environment. Ready to test your changes on xud-simnet!
+8. Now you can start your local `xud` instance and it should connect to the running `xud-simnet` docker environment. You can check that everything works with `~/xud/bin$ ./xucli -p 28886 getinfo`. Ready to test your changes on `xud-simnet`!
 
 ## References
 
