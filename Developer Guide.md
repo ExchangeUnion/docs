@@ -78,8 +78,8 @@ disable = false
 host = "localhost"
 nomacaroons = false
 port = 30009
-certpath = "/home/kilrau/lndbtc/tls.cert"
-macaroonpath = "/home/kilrau/lndbtc/data/chain/bitcoin/simnet/admin.macaroon"
+certpath = "/home/<youruser>/lndbtc/tls.cert"
+macaroonpath = "/home/<youruser>/lndbtc/data/chain/bitcoin/simnet/admin.macaroon"
 
 [lnd.LTC]
 cltvdelta = 576
@@ -87,8 +87,8 @@ disable = false
 host = "localhost"
 nomacaroons = false
 port = 31009
-certpath = "/home/kilrau/lndltc/tls.cert"
-macaroonpath = "/home/kilrau/lndltc/data/chain/litecoin/simnet/admin.macaroon"
+certpath = "/home/<youruser>/lndltc/tls.cert"
+macaroonpath = "/home/<youruser>/lndltc/data/chain/litecoin/simnet/admin.macaroon"
 
 [raiden]
 disable = false
