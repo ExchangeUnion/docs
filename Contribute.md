@@ -29,6 +29,7 @@ Commit messages should be concise and descriptive. For larger or more complex co
 ## Earning Rewards
 
 Here's how it works:
+
 1. Grab a task from [here](https://github.com/ExchangeUnion/xud/issues).
 2. Each task carries a range of XUC to be earned, e.g. 50-100 XUC. The more complex the task, the higher the reward - grab a task which best fits your available time & skill set. If your task does not carry a XUC tag - [ask us](https://discord.gg/YgDhMSn) to add one.
 3. Leave a comment to let everyone know you'll be working on the task, and fork the repository to get started.
