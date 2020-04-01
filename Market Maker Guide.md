@@ -9,7 +9,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Three Networks
 
-1. **Simnet**. Status: `live` | Setup time: `~15 mins` | Required disk space: `<1 GB`
+1. **Simnet**. Status: `under maintenance` | Setup time: `~15 mins` | Required disk space: `<1 GB`
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
