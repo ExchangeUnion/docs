@@ -2,6 +2,7 @@ An *optional* configuration file uses [TOML](https://github.com/toml-lang/toml) 
 
 ## Precedence
 The precedence order in which configuration option values are applied is as follows (high to low):
+
 1. Option given on the command line
 2. Option read from the config file
 3. Option default value (as seen in the output of `xud --help`)
