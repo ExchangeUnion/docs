@@ -93,7 +93,6 @@ disable = false
 host = "localhost"
 port = 25001
 ```
-
 8. Now you can start your local `xud` instance and it should connect to the running `xud-simnet` docker environment. You can check that everything works with `~/xud/bin$ ./xucli -p 28886 getinfo`. Ready to test your changes on `xud-simnet`!
 
 ## References
