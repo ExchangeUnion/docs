@@ -42,7 +42,7 @@ nodemon --watch dist -e js bin/xud --lndbtc.disable=true --lndltc.disable=true
 
 ### Connect `xud` to the `xud-simnet`
 
-We recommend to connect the `xud` instance you are developing on with the `xud-simnet`. Combined with above restarting mechanism, this let's you instantly see how your changes behave in a real-world trading environment.
+We recommend to connect the `xud` instance you are developing on with the `xud-simnet`. Combined with above restarting mechanism, this lets you instantly see how your changes behave in a real-world trading environment.
 
 1. Create the following directory and config file to expose relevant ports for your `xud` to connect to: 
 ```bash
