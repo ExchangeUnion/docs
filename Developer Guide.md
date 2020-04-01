@@ -71,7 +71,8 @@ sudo chown -R <youruser> ~/lndbtc
 sudo chown -R <youruser> ~/lndltc
 ```
 6. Create/change `xud.conf` in `~/.xud` to contain the following:
-```bash
+
+```toml
 [lnd.BTC]
 cltvdelta = 40
 disable = false
