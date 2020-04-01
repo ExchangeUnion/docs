@@ -71,7 +71,7 @@ sudo chown -R <youruser> ~/lndbtc
 sudo chown -R <youruser> ~/lndltc
 ```
 6. Create/change `xud.conf` in `~/.xud` to contain the following:
-```
+```bash
 [lnd.BTC]
 cltvdelta = 40
 disable = false
@@ -80,7 +80,6 @@ nomacaroons = false
 port = 30009
 certpath = "/home/<youruser>/lndbtc/tls.cert"
 macaroonpath = "/home/<youruser>/lndbtc/data/chain/bitcoin/simnet/admin.macaroon"
-
 [lnd.LTC]
 cltvdelta = 576
 disable = false
@@ -89,7 +88,6 @@ nomacaroons = false
 port = 31009
 certpath = "/home/<youruser>/lndltc/tls.cert"
 macaroonpath = "/home/<youruser>/lndltc/data/chain/litecoin/simnet/admin.macaroon"
-
 [raiden]
 disable = false
 host = "localhost"
