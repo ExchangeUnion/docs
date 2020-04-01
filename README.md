@@ -1,6 +1,6 @@
-The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference implementation powering [OpenDEX](https://opendex.network), a decentralized exchange built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global liquidity pool.
+The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference implementation powering [OpenDEX](https://opendex.network), a decentralized exchange built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network and liquidity pool.
 
-**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and abstract away from the technological complexity of OpenDEX and offer a superior UX by enabling trading via a simple website. **Exchanges** use `xud` to hedge user trades using the liquidity on OpenDEX. **Market Makers** use `xud` to offer liqudidity on OpenDEX with a premium leveraging arbitrage to external exchanges like Binance. Exchange Union provides SDK's for both, exchanges to automate hedging with `xud` and for market makers to connect to external exchanges and automate the arbitrage trades.
+**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are hosted on a server by an exchange operator. Under the hood, these exchanges interact with the OpenDEX network and abstract all the complexity that comes with it into a nice user interface for end-users. **Exchanges** use `xud` to hedge user trades using the liquidity on OpenDEX. **Market Makers** use `xud` to offer liquidity on OpenDEX with a premium leveraging arbitrage to external exchanges, like Binance. Exchange Union provides tools that help decrease the friction for both sides of the marketplace. Exchanges can use the `hedgy`-tool to automate the hedging with `xud` and market makers can use `arby`, another tool that helps them leverage arbitrage opportunities between OpenDEX and external exchanges.
 
 ## Get Started
 
@@ -15,7 +15,7 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 ![Trading via XUD](/images/orderbook.png)
 
 ## Incentives
-* Traders benefit from anonymous peer-to-peer trading without KYC and accounts.
+* Traders benefit from instant & anonymous peer-to-peer trading without KYC and accounts.
 * Market makers make profits via arbitrage between external exchanges and OpenDEX.
 * Exchanges make profits via locking in trading fees by hedging trades on OpenDEX.
 
