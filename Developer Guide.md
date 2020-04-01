@@ -60,19 +60,18 @@ expose-ports = ["25001:5001"]
 2. Start the `xud-simnet` with default settings as described [here](Market%20Maker%20Guide.md).
 3. Once `xud-simnet` is up and running, exit from the opened `xud ctl` session by typing `exit` or open a second terminal.
 4. Stop the xud container with `docker stop simnet_xud_1`.
-4. Copy the simnet lndbtc & lndltc folders into some path that you can easily access. E.g. into your home directory:
+5. Copy the simnet lndbtc & lndltc folders into some path that you can easily access. E.g. into your home directory:
 ```
 sudo cp -R ~/.xud-docker/simnet/data/lndbtc ~/
 sudo cp -R ~/.xud-docker/simnet/data/lndltc ~/
 ```
-5. Ensure that you own the copied folders:
+6. Ensure that you own the copied folders:
 ```
 sudo chown -R <youruser> ~/lndbtc
 sudo chown -R <youruser> ~/lndltc
 ```
-6. Create/change `xud.conf` in `~/.xud` to contain the following:
-
-```toml
+7. Create/change `xud.conf` in `~/.xud` to contain the following:
+```bash
 [lnd.BTC]
 cltvdelta = 40
 disable = false
