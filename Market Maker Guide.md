@@ -177,7 +177,7 @@ mainnet > status
 ```
 The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. A Pi4 needs about twice that long.
 
-The light setup should be ready within 15-20 Minutes:
+The light setup should be ready within 15-20 minutes:
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
