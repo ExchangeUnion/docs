@@ -54,7 +54,7 @@ network:
 4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
-7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate`, run this to set up the repository instead:
+7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate`, in step 4 of the instructions, run this instead:
 ```
 sudo add-apt-repository \
    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
