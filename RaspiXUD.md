@@ -55,14 +55,13 @@ network:
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
 7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate` in step 4 of the Docker instructions, run this instead:
-```
+```bash
 sudo add-apt-repository \
    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
    disco \
    stable"
 ```
 8. Add new user `xud`:
-
 ```bash
 ubuntu@ubuntu:~$ sudo adduser xud
 Adding user `xud' ...
