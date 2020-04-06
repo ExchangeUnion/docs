@@ -9,29 +9,33 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Three Networks
 
-1. **Simnet**. Status: `under maintenance` | Setup time: `~15 mins` | Required disk space: `<1 GB`
+1. **Simnet**. Status: `under maintenance` | Setup time: `15 mins` | Required disk space: `1 GB`
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. Status: `live` | Setup time (full setup): `5-24h` | Required disk space (full setup): `200 GB`
+2. **Testnet**. Status: `live` | Setup time (light/full): `15 mins` / `5-24h` | Required disk space (light/full): `1 GB` / `200 GB`
 
     bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
-3. **Mainnet**. Status: `live` | Setup time (full setup): `1-3 days` | Required disk space (full setup): `700 GB`
+3. **Mainnet**. Status: `live` | Setup time (light/full): `15 mins` / `1-3 days` | Required disk space (light/full): `1 GB` / `700 GB`
     
     The real deal. Only with #reckless hat.
 
+
+## Hardware
+Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configuration, like port forwardings, is necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
+* Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4 for running `xud`.
+* If you are using a different device or a cloud VPS:
+  * We support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
+  * We recommend 4 cores & >=16GB RAM for the full setup's initial sync. If you are using a VPS, you can switch to 2 cores & 8GB after initial sync. The light setup runs on devices with 1 core & 2 GB of RAM, even less after initial sync.
+  * The full setup requires a SSD for geth being able to sync. For disk space requirements, see section above. No SSD necessary for the light setup, a regular HDD or SD card is just fine.
+  * Our `arm64` docker images include a special tweak for geth to make the full setup possible on `arm64` devices, like the Pi4, with only 4GB of RAM.
 
 ## Software
 
 * Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guides was written using ubuntu 18.04.
 
 * Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
-
-## Hardware
-Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router.
-* Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up  a Raspberry Pi3/4.
-* If you are using a different device or a cloud VPS: We support `x64` (also called `amd64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices. We recommend >=16GB RAM and an SSD for the full setup. Our `arm64` docker images include a special tweak to make the full setup possible on devices like the Pi4 with only 4GB of RAM.
 
 # The Setup
 
