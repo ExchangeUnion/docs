@@ -349,7 +349,6 @@ logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ```
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
 * External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
-
 ```bash
 # connect to an external bitcoin core node in your local network
 [bitcoind]
