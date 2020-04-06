@@ -9,29 +9,29 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Three Networks
 
-1. **Simnet**. `Status: maintenance | Mode: light | CPUs: 2 | RAM: 2 GB | Disk: 1 GB | Time: 15 mins`
+1. **Simnet**. `Status: maintenance | Mode: light | Required CPUs: 2 , RAM: 2 GB , Disk: 1 GB , Time: 15 mins`
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. `Status: live | Mode: light/full | CPUs: 2/4 | RAM: 2/16 GB | 1/200 GB | Time: 15 mins/5-24h`
+2. **Testnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
 
     bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
-3. **Mainnet**. `Status: live | Mode: light/full | CPUs: 2/4 | RAM: 2/16 GB | 1/700 GB | Time: 15 mins/24-72h`
+3. **Mainnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/700 GB , Time: 15 mins/24-72h`
     
     The real deal. Only with #reckless hat.
 
 
 ## Hardware
 Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
-* The **default** box: our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **75€-285€**
-* The **pro** box: our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful mini pc. Costs: **350€-450€**
+* **Standard**: our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **75€-285€**
+* **Pro**: our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful mini pc. Costs: **350€-450€**
 * If you are using a different device or a cloud VPS:
-  * Check the hardware requirements for the different networks above
+  * Check the hardware requirements for the different networks and modes above
+  * The full setup requires a SSD for geth being able to sync. For the light setup, a regular HDD/SD card is fine.
   * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 8 GB RAM after initial sync.
-  * The full setup requires a SSD for geth being able to sync. No SSD necessary for the light setup, a regular HDD or SD card will do.
   * We support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
-  * Our `arm64` docker images include a special tweak for geth to make the full setup possible on `arm64` devices, like the Pi4, with only 4GB of RAM.
+  * Our `arm64` docker images include a special tweak for geth to make the full setup possible on `arm64` devices with only 4GB of RAM, like the Pi4.
 
 ## Software
 
