@@ -4,8 +4,8 @@ This guide is written for market makers & traders to turn a Raspberry Pi into an
 
 Two options are available:
 
-1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/).
-2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
+1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/). **Supported by all Pi3/4 models.**
+2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless. **Supported only by the Pi4 4GB.**
 
 If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can switch to the full setup at any time.
 
@@ -13,15 +13,15 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 * [Pi4 (4GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1100-raspberry-pi-4-modelo-b-4gb-765756931182.html): 59,95 €
 * [Pi4 Power Supply](https://www.tiendatec.es/raspberry-pi/raspberry-pi-alimentacion/1093-alimentador-oficial-raspberry-pi-4-usb-c-5v-3a-15w-negro-644824914886.html): 8,95 €
 * [Pi4 Cooling Case](https://www.tiendatec.es/raspberry-pi/cajas/1110-caja-cofre-alta-disipacion-con-dos-ventiladores-para-raspberry-pi-4-8472496015950.html): 15,95 €
-  * You'll need this, the Pi4 is a hottie (no worries, fans are very silent).
+  * You'll need this, the Pi4 is a hottie.
 * [64GB MicroSD card](https://www.amazon.es/dp/B07G3GMRYF/): 20 €
   * A performant microSD card is important; not the right place to save some bucks.
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
 * [USB stick for backups](https://www.amazon.es/dp/B00TPG6P22/): 3,99 €
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.
-* [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/): 190 €
-  * **For full setup only!**
+* [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/): 175 €
+  * **For full setup only, not needed for light setup!**
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
 
 ## Pi Basic Setup
@@ -54,7 +54,7 @@ network:
 4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
-7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate` in step 4 of the Docker instructions, run this instead:
+7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate` in step 4 of the docker instructions, run this instead:
 ```bash
 sudo add-apt-repository \
    "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
@@ -79,7 +79,6 @@ Enter the new value, or press ENTER for the default
 	Work Phone []: 
 	Home Phone []: 
 	Other []: 
-
 Is the information correct? [Y/n] ubuntu@ubuntu:~$ Y
 ```
 9. Add the `xud` user to the sudo group (advanced users can skip this and use another user to run sudo commands), the docker group and test if docker is working:
@@ -120,11 +119,37 @@ xud@ubuntu:~$ df -h
 # make sure xud can use it
 xud@ubuntu:~$ sudo chown xud:xud /media/USB
 ```
-12. Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
+From here the light and full setup require different settings. Continue choosing one.
+
+## Pi Light Setup
+
+Important: to make sure we don't run out of RAM, we create a swap file (overflow RAM) of 2GB on the internal sd card:
+```bash
+# create the swap file
+xud@ubuntu:~$ sudo fallocate -l 2G /home/xud/swapfile
+# mark it as swap file
+xud@ubuntu:~$ sudo chmod 600 /home/xud/swapfile && sudo mkswap /home/xud/swapfile
+# enable it
+xud@ubuntu:~$ sudo swapon /home/xud/swapfile
+# set it to automount via fstab
+xud@ubuntu:~$ sudo nano /etc/fstab
+# add the line
+/home/xud/swapfile none swap sw 0 0
+# # CTRL+S, CTRL+X. Let's verify it's working & reboot
+xud@ubuntu:~$ sudo swapon --show
+NAME               TYPE SIZE USED PRIO
+/home/xud/swapfile file  2G   0B   -2
+xud@ubuntu:~$ sudo reboot
+# after reboot, let's check if the swapfile is still active
+xud@ubuntu:~$ sudo swapon --show
+NAME               TYPE SIZE USED PRIO
+/home/xud/swapfile file  2G   0B   -2
+```
+Light setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
 
 ## Pi Full Setup
 
-13. Connect the SSD to your Pi4 and set it up:
+Connect the SSD to your Pi4 and set it up:
 ```bash
 # let's check the SSD's path
 xud@ubuntu:~$ ls -la /dev/ | grep sd
@@ -146,7 +171,7 @@ xud@ubuntu:~$ df -h
 # make sure xud can use it without sudo privileges
 xud@ubuntu:~$ sudo chown xud:xud /media/SSD
 ```
-14. Let's do a quick performance test of the SSD. If you are close to these values, you are good to go, whereas <50MB/s (write/read) would be too slow:
+Let's do a quick performance test of the SSD. If you are close to these values, you are good to go, whereas <50MB/s (write/read) would be too slow:
 ```bash
 xud@ubuntu:~$ sudo dd if=/dev/zero  of=/media/SSD/deleteme.dat bs=32M count=64 oflag=direct
 64+0 records in
@@ -158,7 +183,7 @@ xud@ubuntu:~$ sudo dd if=/media/SSD/deleteme.dat of=/dev/null bs=32M count=64 if
 2147483648 bytes (2.1 GB, 2.0 GiB) copied, 15.5791 s, 138 MB/s
 xud@ubuntu:~$ sudo rm /media/SSD/deleteme.dat
 ```
-15. Geth needs loads of RAM when syncing, so we need to create a swap file (overflow RAM) of 8GB on the external SSD:
+Important: geth needs loads of RAM when syncing, so we need to create a swap file (overflow RAM) of 8GB on the external SSD:
 ```bash
 # create a swap file on the SSD, we recommend a size of 8GB
 xud@ubuntu:~$ sudo fallocate -l 8G /media/SSD/swapfile
@@ -180,4 +205,4 @@ xud@ubuntu:~$ sudo swapon --show
 NAME               TYPE SIZE USED PRIO
 /media/SSD/swapfile file  8G   0B   -2
 ```
-16. Full setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
+Full setup - **DONE!** Continue [here](Market%20Maker%20Guide.md#the-setup).
