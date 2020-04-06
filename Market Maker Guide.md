@@ -9,15 +9,15 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Three Networks
 
-1. **Simnet**. Status: `under maintenance` | Mode: `light` | CPUs: `2`, RAM: `2 GB`, disk space: `1 GB`, time: `15 mins`
+1. **Simnet**. `Status: maintenance | Mode: light | CPUs: 2 | RAM: 2 GB | Disk: 1 GB | Time: 15 mins`
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. Status: `live` | Mode: `light/full` | CPUs: `2/4`, RAM: `2/16 GB`, `1/200 GB`, time: `15 mins/5-24h`
+2. **Testnet**. `Status: live | Mode: light/full | CPUs: 2/4 | RAM: 2/16 GB | 1/200 GB | Time: 15 mins/5-24h`
 
     bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
-3. **Mainnet**. Status: `live` | Mode: `light/full` | CPUs: `2/4`, RAM: `2/16 GB`, `1/700 GB`, time: `15 mins/24-72h`
+3. **Mainnet**. `Status: live | Mode: light/full | CPUs: 2/4 | RAM: 2/16 GB | 1/700 GB | Time: 15 mins/24-72h`
     
     The real deal. Only with #reckless hat.
 
