@@ -1,4 +1,4 @@
-This guide is written for professional market makers & traders to build an always-on xud node with a powerful mini pc.
+This guide is written for professional market makers & traders to build an always-on xud node with a powerful Mini PC.
 
 ![BeastXUD setup (plants are optional)](images/BeastXUD.jpg)
 
@@ -31,7 +31,7 @@ Two options are available:
 
 1. [Download Ubuntu Server](https://ubuntu.com/download/server) onto your computer. Any other linux distribution supporting docker is also fine.
 2. Insert a USB Stick into your computer and [create the a bootable USB Stick](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-ubuntu) with the ubuntu image you just downloaded.
-3. Open your mini pc, plug in RAM & drives, close it, connect it to your router via ethernet cable and to a power supply. Connect a screen via HDMI, a USB keyboard, the created bootable USB Stick, fire the mini pc up and follow the the inital setup instructions.
+3. Open your Mini PC, plug in RAM & drives, close it, connect it to your router via ethernet cable and to a power supply. Connect a screen via HDMI, a USB keyboard, the created bootable USB Stick, fire the Mini PC up and follow the the inital setup instructions.
 4. Update ubuntu via `sudo apt update && sudo apt upgrade`
 5. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate` in step 4 of the docker instructions, run this instead:
 ```bash
