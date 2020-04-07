@@ -9,27 +9,29 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Three Networks
 
-1. **Simnet**. Status: `under maintenance` | Setup time: `15 mins` | Required disk space: `1 GB`
+1. **Simnet**. `Status: maintenance | Mode: light | Required CPUs: 2 , RAM: 2 GB , Disk: 1 GB , Time: 15 mins`
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, wait for about 15 minutes and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. Status: `live` | Setup time (light/full): `15 mins` / `5-24h` | Required disk space (light/full): `1 GB` / `200 GB`
+2. **Testnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
 
-    bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). Quite a bit of manual work to be done here. If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
+    bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
-3. **Mainnet**. Status: `live` | Setup time (light/full): `15 mins` / `1-3 days` | Required disk space (light/full): `1 GB` / `700 GB`
+3. **Mainnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/700 GB , Time: 15 mins/24-72h`
     
     The real deal. Only with #reckless hat.
 
 
 ## Hardware
-Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configuration, like port forwardings, is necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
-* Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4 for running `xud`.
-* If you are using a different device or a cloud VPS:
+Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
+* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-285€**
+* **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful mini pc. Costs: **200€-500€**
+* **Custom**: If you are using a different device or a cloud VPS:
+  * Check the hardware requirements for the different networks and modes above
+  * The full setup requires a SSD for geth being able to sync. For the light setup, a regular HDD/SD card is fine.
+  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 8 GB RAM after initial sync.
   * We support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
-  * We recommend 4 cores & >=16GB RAM for the full setup's initial sync. If you are using a VPS, you can switch to 2 cores & 8GB after initial sync. The light setup runs on devices with 1 core & 2 GB of RAM, even less after initial sync.
-  * The full setup requires a SSD for geth being able to sync. For disk space requirements, see section above. No SSD necessary for the light setup, a regular HDD or SD card is just fine.
-  * Our `arm64` docker images include a special tweak for geth to make the full setup possible on `arm64` devices, like the Pi4, with only 4GB of RAM.
+  * Our `arm64` docker images include a special tweak for geth to make the full setup possible on `arm64` devices with only 4GB of RAM, like the Pi4.
 
 ## Software
 
@@ -319,7 +321,7 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-## Market Maker Setup
+## Connect to Exchange (for Market Makers) 
 
 **Coming soon!**
 
@@ -347,7 +349,6 @@ logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
 ```
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
 * External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
-
 ```bash
 # connect to an external bitcoin core node in your local network
 [bitcoind]

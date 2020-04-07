@@ -8,6 +8,7 @@
 ## Start Earning
 * [Market Maker Guide](Market%20Maker%20Guide.md)
 * [RaspiXUD Guide](RaspiXUD.md)
+* [BeastXUD Guide](BeastXUD.md)
 
 ## Development
 * [Developer Guide](Developer%20Guide.md)
