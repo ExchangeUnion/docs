@@ -72,7 +72,7 @@ alias xud='bash ~/xud.sh'
 # CTRL+S, CTRL+X. Then run
 xud@ubuntu:~$ source ~/.bashrc
 ```
-9. Connect the USB stick to your Pi and set it up. It is very important to do this for a mainnet setup (given you do not want to loose money)!
+9. Connect the USB stick to your machine and set it up. It is very important to do this for a mainnet setup (given you do not want to loose money)!
 ```bash
 # check the USB stick's path with
 xud@ubuntu:~$ ls -la /dev/ | grep sd
