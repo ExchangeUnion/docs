@@ -17,7 +17,7 @@ Two options are available:
 
 ## Full Reference Shopping List (Europe): 500 €
 * [GIGABYTE GB-BLCE-4105 BRIX](https://www.computeruniverse.net/en/gigabyte-gb-blce-4105-brix): 148,99 €
-  * Alternative: [ODYSSEY - X86J4105864](https://www.seeedstudio.com/ODYSSEY-X86J4105800-p-4445.html), same platform but needs needs separate case+power
+  * Alternative: [ODYSSEY - X86J4105864](https://www.seeedstudio.com/ODYSSEY-X86J4105800-p-4445.html), same platform but needs separate case+power
   * Alternative: [ODROID-H2](https://www.hardkernel.com/shop/odroid-h2/), same platform but sold out since ages and needs separate case+power
 * [32 GB RAM](https://www.computeruniverse.net/en/kingston-hyperx-impact-32gb-ddr4-so-dimm-ram-2): 140 €
   * Alternative: [List of compatible RAM](https://wiki.odroid.com/odroid-h2/hardware/ram)
