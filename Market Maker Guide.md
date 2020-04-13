@@ -331,7 +331,7 @@ Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
 * If you are syncing the full setup and `geth` is **stuck at 99.99%** syncing status and can't catch up to 100% within 24 hours after reaching 99.99%, you are likely running geth on a HDD or any other drive that is too slow for geth to catch up with the chain. The only advise we have here is: switch to a faster SSD (best 150 MB/s or higher)
-* If you only have a small SSD available, you can place your entire setup on a HDD, except of a small part of geth's data, which needs to be located on a fast SSD. Copy the sample config file via e.g. `cp sample-mainnet.conf mainnet.conf` and uncomment/edit the following two options:
+* If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp sample-mainnet.conf mainnet.conf`, then edit the following two options in `mainnet.conf`:
 ```bash
 [geth]
 # internal SSD
@@ -368,19 +368,6 @@ xucli --help
 * To inspect logs:
 ```bash
 logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
-```
-* The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
-* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
-```bash
-# connect to an external bitcoin core node in your local network
-[bitcoind]
-external = true
-rpc-host = "192.168.1.42"
-rpc-port = "8332"
-rpc-user = "user"
-rpc-password = "pass"
-zmqpubrawblock = "192.168.1.42:28332"
-zmqpubrawtx = "192.168.1.42:28333"
 ```
 * You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`.
 * A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment.
