@@ -330,7 +330,7 @@ Balance:
 Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
-* If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are likely running geth on a HDD or another drive that is simply too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, the only advise we have here is: switch to a faster SSD.
+* If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are likely running geth on a drive that is simply too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, you can either switch to a faster SSD or combine bitcoind and litecoind with infura instead of a local geth.
 * If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp sample-mainnet.conf mainnet.conf`, then edit the following two options in `mainnet.conf`:
 ```bash
 [geth]
