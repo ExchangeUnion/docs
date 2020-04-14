@@ -181,7 +181,7 @@ xud@ubuntu:~$ df -h
 # make sure xud can use it without sudo privileges
 xud@ubuntu:~$ sudo chown xud:xud /media/SSD
 ```
-Let's do a quick performance test of the SSD. If you are close to these values, you are good to go, whereas <100MB/s (read/write) would be too slow:
+Let's do a quick performance test of the SSD. If you are close to these values, you are good to go, whereas <100 MB/s would be too slow:
 ```bash
 xud@ubuntu:~$ sudo dd if=/dev/zero  of=/media/SSD/deleteme.dat bs=32M count=64 oflag=direct
 64+0 records in
