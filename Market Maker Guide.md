@@ -25,17 +25,16 @@ This guide is written for individuals and entities looking to run xud in order t
 ## Hardware
 Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
 * **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-285€**
-* **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful mini pc. Costs: **200€-500€**
+* **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful Mini PC. Costs: **200€-500€**
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above
   * The full setup requires a SSD for geth being able to sync. For the light setup, a regular HDD/SD card is fine.
-  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 8 GB RAM after initial sync.
+  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 4 GB RAM after initial sync, given you use the default `cache = 256` for geth. If you run testnet & mainnet at the same time 2 cores & 8 GB RAM.
   * We support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
-  * Our `arm64` docker images include a special tweak for geth to make the full setup possible on `arm64` devices with only 4GB of RAM, like the Pi4.
 
 ## Software
 
-* Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guides was written using ubuntu 18.04.
+* Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guide was written using ubuntu 18.04.
 
 * Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
@@ -330,6 +329,28 @@ Balance:
 Please report issues/bugs by running `report` from within `xud ctl`.
 
 # Tips 'n Tricks
+* If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are likely running geth on a drive that is simply too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, you can either switch to a faster SSD or combine bitcoind and litecoind with infura instead of a local geth.
+* If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp sample-mainnet.conf mainnet.conf`, then edit the following two options in `mainnet.conf`:
+```bash
+[geth]
+# internal SSD
+dir = "/home/<user>/.xud-docker/mainnet/geth"
+# external HDD
+ancient-chaindata-dir = "/media/HDD/xud/03-Mainnet/data/geth"
+```
+* The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
+* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
+```bash
+# connect to an external bitcoin core node in your local network
+[bitcoind]
+external = true
+rpc-host = "192.168.1.42"
+rpc-port = "8332"
+rpc-user = "user"
+rpc-password = "pass"
+zmqpubrawblock = "192.168.1.42:28332"
+zmqpubrawtx = "192.168.1.42:28333"
+```
 * Raiden currently requires direct channels with trading partners. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 * Permanently set the alias `xud` to launch `xud ctl` from anywhere:
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc` or `~/.bash_aliases` on Linux and `bash_profile` on Mac, then `source` the file.
@@ -346,25 +367,6 @@ xucli --help
 * To inspect logs:
 ```bash
 logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
-```
-* The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
-* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
-```bash
-# connect to an external bitcoin core node in your local network
-[bitcoind]
-external = true
-rpc-host = "192.168.1.42"
-rpc-port = "8332"
-rpc-user = "user"
-rpc-password = "pass"
-zmqpubrawblock = "192.168.1.42:28332"
-zmqpubrawtx = "192.168.1.42:28333"
-```
-* If you only have a small SSD available, you can split geth's data. Only a small part needs to be located on the fast SSD:
-```bash
-# place geth's chain data onto a HDD
-[geth]
-ancient-chaindata-dir = "/media/hdd/geth/chaindata"
 ```
 * You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`.
 * A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment.
