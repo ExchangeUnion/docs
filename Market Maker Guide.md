@@ -29,7 +29,7 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above
   * The full setup requires a SSD for geth being able to sync. For the light setup, a regular HDD/SD card is fine.
-  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 4 GB RAM after initial sync, given you use the default `dbcache = 256` for geth.
+  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 4 GB RAM after initial sync, given you use the default `cache = 256` for geth. If you run testnet & mainnet at the same time 2 cores & 8 GB RAM.
   * We support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
 
 ## Software
