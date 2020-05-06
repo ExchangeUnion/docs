@@ -9,7 +9,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Three Networks
 
-1. **Simnet**. `Status: maintenance | Mode: light | Required CPUs: 2 , RAM: 2 GB , Disk: 1 GB , Time: 15 mins`
+1. **Simnet**. `Status: live | Mode: light | Required CPUs: 2 , RAM: 2 GB , Disk: 1 GB , Time: 15 mins`
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, create the environment wait for about 15 minutes for your balance (`getbalance`) and you are ready to go. **You want to start with this!** 
 
