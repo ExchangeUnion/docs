@@ -6,16 +6,16 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 
 -> [Get started as **Market Maker**](Market%20Maker%20Guide.md), providing liquidity by arbitraging with external exchanges making a profit
 
--> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency preserving your privacy & without counterparty risk
+-> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency preserving privacy & without counterparty risk
 
 -> [Get started as **Developer**](Developer%20Guide.md), contributing or building on top of `xud`
 
 -> [Get started as **Exchange Operator**](), running a open-source exchange platform with integrated liquidity **(coming soon!)**
 
-![Trading via XUD](/images/orderbook.png)
+![xud orderbook](/images/orderbook.png)
 
 ## Incentives
-* Traders benefit from account-free, anonymous & secure peer-to-peer trading on [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges)
+* Traders benefit from anonymous & secure peer-to-peer trading on [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges)
 * Market makers make profits by arbitraging between external exchanges and OpenDEX.
 * Exchanges secure profits by locking in trading fees through hedging trades on OpenDEX.
 
@@ -27,7 +27,7 @@ The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the
 * Full control over funds at all times.
 * One mnemonic for all assets.
 * [Tor](https://www.torproject.org/) by default.
-* Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [connext](https://connext.network/).
+* Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [connext](https://github.com/connext/rest-api-client).
 * Peer-to-peer discovery of other OpenDEX nodes.
 * gRPC API to serve other applications, also accessible via the command-line interface `xucli`.
 
