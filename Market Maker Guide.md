@@ -52,7 +52,7 @@ xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 mode = "neutrino"
 [litecoind]
 mode = "neutrino"
-# add these lines for raiden to use your infura account instead of a local geth node:
+# add these lines for connext to use your infura account instead of a local geth node:
 [geth]
 mode = "infura"
 infura-project-id = "abc"
@@ -152,7 +152,7 @@ mainnet > status
 ├───────────┼────────────────────────────────────────────────┤
 │ lndltc    │ Waiting for sync                               │
 ├───────────┼────────────────────────────────────────────────┤
-│ raiden    │ Container running                              │
+│ connext   │ Waiting for sync                               │
 ├───────────┼────────────────────────────────────────────────┤
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
@@ -175,7 +175,7 @@ mainnet > status
 ├───────────┼────────────────────────────────────────────────┤
 │ lndltc    │ Waiting for sync                               │
 ├───────────┼────────────────────────────────────────────────┤
-│ raiden    │ Container running                              │
+│ connext   │ Waiting for sync                               │
 ├───────────┼────────────────────────────────────────────────┤
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
@@ -198,7 +198,7 @@ mainnet > status
 ├───────────┼────────────────────────────────────────────────┤
 │ lndltc    │ Ready                                          │
 ├───────────┼────────────────────────────────────────────────┤
-│ raiden    │ Ready                                          │
+│ connext   │ Ready                                          │
 ├───────────┼────────────────────────────────────────────────┤
 │ xud       │ Ready                                          │
 └───────────┴────────────────────────────────────────────────┘
@@ -226,13 +226,13 @@ mainnet > listpeers -j
       "inbound": false,
       "pairsList": [
         "LTC/BTC",
-        "WETH/BTC",
+        "ETH/BTC",
         "BTC/DAI",
         "LTC/DAI"
       ],
       "xudVersion": "1.0.0-beta",
       "secondsConnected": 100,
-      "raidenAddress": "0xe802431257a1d9366BD5747F0F52bAd25A6C3092"
+      "connextAddress": "0xe802431257a1d9366BD5747F0F52bAd25A6C3092"
     }
   ]
 }
@@ -245,7 +245,7 @@ On Simnet simply wait for about 15 minutes and you'll have channels and are read
 ```bash
 lndbtc-lncli newaddress p2wkh #Send BTC to this address
 lndltc-lncli newaddress p2wkh #Send LTC to this address
-getinfo -j #Send WETH/DAI to your raiden address
+getinfo -j #Send ETH/ETH-ERC20 Tokens to your connext address
 ```
 
 The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. Opening a 0.1 btc channel would look like:
@@ -290,7 +290,7 @@ Balance:
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ LTC      │ 21            │ 11                         │ 10                            │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ WETH     │ 500           │ 500                        │ 0                             │
+│ ETH      │ 500           │ 500                        │ 0                             │
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
@@ -316,7 +316,7 @@ Balance:
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ LTC      │ 21            │ 11                         │ 10                            │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ WETH     │ 500           │ 500                        │ 0                             │
+│ ETH      │ 500           │ 500                        │ 0                             │
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
@@ -351,7 +351,6 @@ rpc-password = "pass"
 zmqpubrawblock = "192.168.1.42:28332"
 zmqpubrawtx = "192.168.1.42:28333"
 ```
-* Raiden currently requires direct channels with trading partners. We have a temporary check in place, that discards raiden-related orders (all pairs which include WETH, DAI...), if `xud` can't find a direct channel to the trading partner. You can switch this check off by setting `raidenDirectChannelChecks=false` in your `xud.conf`. Before you do that, read [this explainer of the issue](https://github.com/ExchangeUnion/xud/issues/1068).
 * Permanently set the alias `xud` to launch `xud ctl` from anywhere:
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc` or `~/.bash_aliases` on Linux and `bash_profile` on Mac, then `source` the file.
 * `xud ctl` allows to use an L1/L2 client's cli:
@@ -361,12 +360,12 @@ litecoin-cli --help
 geth --help
 lndbtc-lncli --help
 lndltc-lncli --help
-raiden --help
+connext --help
 xucli --help
 ```
 * To inspect logs:
 ```bash
-logs bitcoind/litecoind/geth/lndbtc/lndltc/raiden/xud
+logs bitcoind/litecoind/geth/lndbtc/lndltc/connext/xud
 ```
 * You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`.
 * A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment.
@@ -386,5 +385,5 @@ rm -rf /custom/mainnet/dir
 * [litecoind config options](https://litecoin.info/index.php/Litecoin.conf#litecoin.conf_Configuration_File)
 * [geth config options](https://github.com/ethereum/go-ethereum/blob/master/README.md#configuration)
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
-* [raiden config options](https://raiden-network.readthedocs.io/en/stable/config_file.html)
+* [connext config options](https://docs.connext.network/en/latest/userDocumentation/clientInstantiation.html#client-options)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
