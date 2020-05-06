@@ -64,7 +64,7 @@ network:
 4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
-7. Install docker by running `sudo apt install docker.io` (if you are not using Ubuntu 20.04 LTS, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository").
+7. Install docker by running `sudo apt install docker.io`. If you are not using Ubuntu 20.04 LTS, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/ and select `arm64` in step 4 of "Set up the repository".
 8. Add new user `xud`:
 ```bash
 ubuntu@ubuntu:~$ sudo adduser xud
@@ -127,7 +127,7 @@ From here the light and full setup require different settings. Continue choosing
 
 ## Pi Light Setup
 
-Important: to make sure we don't run out of RAM, we create a swap file (overflow RAM) of 2GB on the internal sd card:
+If you are using a Pi model with 2GB of RAM or more, you can straigt continue [here](Market%20Maker%20Guide.md#the-setup). If you are using a Pi model with <2GB of RAM, we will have to catch a temporary RAM spike when creating the xud environment by creating a swap file (overflow RAM) of 2GB on the internal sd card:
 ```bash
 # create the swap file
 xud@ubuntu:~$ sudo fallocate -l 2G /home/xud/swapfile
