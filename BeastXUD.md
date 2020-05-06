@@ -29,7 +29,7 @@ Two options are available:
 
 ## Setup
 
-1. [Download Ubuntu Server](https://ubuntu.com/download/server) onto your computer. Any other linux distribution supporting docker is also fine.
+1. [Download Ubuntu Server 20.04 LTS](https://ubuntu.com/download/server) onto your computer. Any other linux distribution supporting docker is also fine. This guide was written assuming `Ubuntu Server 20.04 LTS`.
 2. Insert a USB Stick into your computer and [create the a bootable USB Stick](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-ubuntu) with the ubuntu image you just downloaded.
 3. Open your Mini PC, plug in RAM & drives, close it, connect it to your router via ethernet cable and to a power supply. Connect a screen via HDMI, a USB keyboard, the created bootable USB Stick, fire the Mini PC up and follow the the inital setup instructions.
 4. Update ubuntu via `sudo apt update && sudo apt upgrade`
