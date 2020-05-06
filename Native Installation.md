@@ -26,7 +26,7 @@ sudo npm install xud -g --unsafe-perm
 
 ## Daemonize `xud`
 
-If you want to daemonize `xud` so it starts on boot without needing its own terminal, you can do this using `systemd`. The following sample `systemd` configuration was tested on Ubuntu 18.04:
+If you want to daemonize `xud` so it starts on boot without needing its own terminal, you can do this using `systemd`. The following sample `systemd` configuration was tested on Ubuntu 20.04:
 
 ```bash
 [Unit]
