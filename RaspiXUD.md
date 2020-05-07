@@ -127,7 +127,7 @@ From here the light and full setup require different settings. Continue choosing
 
 ## Pi Light Setup
 
-If you are using a Pi model with 2GB of RAM or more, you can straigt continue [here](Market%20Maker%20Guide.md#the-setup). If you are using a Pi model with <2GB of RAM, we will have to catch a temporary RAM spike when creating the xud environment by creating a swap file (overflow RAM) of 2GB on the internal sd card:
+If you are using a Pi model with 2GB of RAM or more, you can continue [here](Market%20Maker%20Guide.md#the-setup). If you are using a Pi model with <2GB of RAM, we will have to catch a temporary RAM spike when creating the xud environment by creating a swap file (overflow RAM) of 2GB on the internal sd card:
 ```bash
 # create the swap file
 xud@ubuntu:~$ sudo fallocate -l 2G /home/xud/swapfile
