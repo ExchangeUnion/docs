@@ -33,7 +33,7 @@ Two options are available:
 2. Insert a USB Stick into your computer and [create the a bootable USB Stick](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-ubuntu) with the ubuntu image you just downloaded.
 3. Open your Mini PC, plug in RAM & drives, close it, connect it to your router via ethernet cable and to a power supply. Connect a screen via HDMI, a USB keyboard, the created bootable USB Stick, fire the Mini PC up and follow the the inital setup instructions.
 4. Update ubuntu via `sudo apt update && sudo apt upgrade`
-5. Install docker by running `sudo apt install docker.io`. If you are not using Ubuntu 20.04 LTS, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
+5. If you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. Otherwise if you are using any version besides Ubuntu 20.04, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) to install docker.
 6. Add new user `xud`:
 ```bash
 ubuntu@ubuntu:~$ sudo adduser xud

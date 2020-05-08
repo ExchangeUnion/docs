@@ -36,7 +36,7 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 * Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guide was written assuming Ubuntu 20.04 LTS.
 
-* Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet, follow the official [install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
+* Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. Otherwise if you are using any version besides Ubuntu 20.04, follow the [official install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
 
 # The Setup
 

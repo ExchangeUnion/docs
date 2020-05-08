@@ -64,7 +64,7 @@ network:
 4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
-7. Install docker by running `sudo apt install docker.io`. If you are not using Ubuntu 20.04 LTS, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) and select `arm64` in step 4 of "Set up the repository".
+7. If you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. Otherwise if you are using any version besides Ubuntu 20.04, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository") to install docker.
 8. Add new user `xud`:
 ```bash
 ubuntu@ubuntu:~$ sudo adduser xud
