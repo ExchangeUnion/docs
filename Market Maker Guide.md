@@ -360,7 +360,6 @@ litecoin-cli --help
 geth --help
 lndbtc-lncli --help
 lndltc-lncli --help
-connext --help
 xucli --help
 ```
 * To inspect logs:
