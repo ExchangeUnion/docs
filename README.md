@@ -1,33 +1,33 @@
-The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference implementation powering [OpenDEX](https://opendex.network), a decentralized exchange built on top of the [Lightning](https://lightning.network/) and [Raiden](https://raiden.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network and liquidity pool.
+The Exchange Union Daemon ([`xud`](https://github.com/ExchangeUnion/xud)) is the reference implementation powering [OpenDEX](https://opendex.network), a decentralized exchange built on top of the [Lightning](https://lightning.network/) and [Connext](https://connext.network/) network. `xud` brings individual traders, market makers and exchanges onto OpenDEX to form a single global trading network and liquidity pool.
 
-**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. These exchanges are usually non-custodial and are operated by different entities. Under the hood, they interact with the OpenDEX network and abstract the complexity that comes with it into a nice user interface for traders. **Exchanges** use `xud` to hedge user trades using the liquidity on OpenDEX in order to lock in profits. **Market Makers** use `xud` to offer liquidity on OpenDEX leveraging arbitrage to external exchanges, like Binance. Exchange Union provides tools that help decrease the friction for both sides of the marketplace. Exchanges use `hedgy`, a tool to automate the hedging with `xud` and market makers use `arby`, a tool that automates leveraging arbitrage opportunities between OpenDEX and external exchanges.
+**Traders** use [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges) as gateways to trade on OpenDEX. Under the hood, they interact with the OpenDEX network and abstract the complexity that comes with it into a nice user interface for traders. These exchanges are centralized, but usually self-custodial, meaning traders stay in control of their funds at all times. **Exchanges** are creating *demand* by using `xud` to hedge end-user trades on OpenDEX to lock in profits. **Market Makers** are creating *supply*, the liquidity on OpenDEX, by leveraging arbitrage to external exchanges (e.g. Binance). Exchange Union provides tools that decreases the friction for both sides, all integrated with `xud`.
 
 ## Get Started
 
--> [Get started as **Market Maker**](Market%20Maker%20Guide.md), providing liquidity from external exchanges making a profit
+-> [Get started as **Market Maker**](Market%20Maker%20Guide.md), providing liquidity by arbitraging with external exchanges making a profit
 
--> [Get started as **Exchange Operator**](), running a open-source exchange platform with integrated liquidity **(coming soon!)**
-
--> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency preserving your privacy & without counterparty risk
+-> [Get started as **Trader**](User%20Guide.md), buying and selling cryptocurrency preserving privacy & without counterparty risk
 
 -> [Get started as **Developer**](Developer%20Guide.md), contributing or building on top of `xud`
 
-![Trading via XUD](/images/orderbook.png)
+-> [Get started as **Exchange Operator**](), running a open-source exchange platform with integrated liquidity **(coming soon!)**
+
+![xud orderbook](/images/orderbook.png)
 
 ## Incentives
-* Traders benefit from instant & anonymous peer-to-peer trading without KYC and accounts.
-* Market makers make profits via arbitrage between external exchanges and OpenDEX.
-* Exchanges make profits via locking in trading fees by hedging trades on OpenDEX.
+* Traders benefit from anonymous & secure peer-to-peer trading on [OpenDEX-enabled exchanges](https://opendex.network/trade/exchanges)
+* Market makers make profits by arbitraging between external exchanges and OpenDEX.
+* Exchanges secure profits by locking in trading fees through hedging trades on OpenDEX.
 
 ## Features
-* Supports individual traders, market makers, *and* exchanges.
+* Supports traders, market makers, *and* exchanges.
 * Order book aggregates orders from the network locally.
 * Orders get matched locally with peer orders from the network.
-* Instant order settlement via atomic swaps on the lightning & raiden network.
-* Full control over assets.
+* Instant order settlement via atomic swaps on the lightning & connext network.
+* Full control over funds at all times.
 * One mnemonic for all assets.
 * [Tor](https://www.torproject.org/) by default.
-* Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [raiden](https://github.com/raiden-network/raiden) clients.
+* Integration and simplified control of [lnd](https://github.com/lightningnetwork/lnd) and [connext](https://github.com/connext/rest-api-client).
 * Peer-to-peer discovery of other OpenDEX nodes.
 * gRPC API to serve other applications, also accessible via the command-line interface `xucli`.
 

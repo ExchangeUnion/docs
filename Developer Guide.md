@@ -53,8 +53,8 @@ xud@ubuntu:~$ nano ~/.xud-docker/simnet/simnet.conf
 expose-ports = ["30009:10009"]
 [lndltc]
 expose-ports = ["31009:10009"]
-[raiden]
-expose-ports = ["25001:5001"]
+[connext]
+expose-ports = ["25040:5040"]
 # CTRL+S, CTRL+X.
 ```
 2. Start the `xud-simnet` with default settings as described [here](Market%20Maker%20Guide.md).
@@ -88,10 +88,10 @@ nomacaroons = false
 port = 31009
 certpath = "/home/<youruser>/lndltc/tls.cert"
 macaroonpath = "/home/<youruser>/lndltc/data/chain/litecoin/simnet/admin.macaroon"
-[raiden]
+[connext]
 disable = false
 host = "localhost"
-port = 25001
+port = 25040
 ```
 8. Now you can start your local `xud` instance and it should connect to the running `xud-simnet` docker environment. You can check that everything works with `~/xud/bin$ ./xucli -p 28886 getinfo`. Ready to test your changes on `xud-simnet`!
 

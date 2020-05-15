@@ -36,7 +36,7 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 
 ## Pi Basic Setup
 
-1. [Download Ubuntu 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) on your computer. Any other 64-bit (also called `arm64`, `aarch64`, `armv8`) linux os for the Pi is fine. 32-bit (`armv7`) is currently **not** supported.
+1. [Download Ubuntu 20.04 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) onto your computer. Any other 64-bit (also called `arm64`, `aarch64`, `armv8`) linux os for the Pi is fine. 32-bit (`armv7`) is currently **not** supported. This guide was written assuming `Ubuntu 20.04 LTS`.
 2. Insert the microSD card into your computer and follow the [flash instructions](https://ubuntu.com/download/iot/installation-media).
 3. *Optional:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure Wifi for a headless setup.
 ```bash
@@ -64,13 +64,7 @@ network:
 4. Insert the microSD card into your Pi, connect it to your router via ethernet cable and to a power supply. Connecting a screen via HDMI and a USB keyboard makes life easier, but checking the assigned IP in your router and SSHing in from your computer works too.
 5. Follow the inital setup instructions. Default user + password is `ubuntu`. You will be asked to change the password on first login.
 6. Update ubuntu via `sudo apt update && sudo apt upgrade`
-7. Install docker following the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository"). At the time of writing, ubuntu 19.10 was still not supported in the official docker repos. If you see an error along the lines `'docker-ce' has no installation candidate` in step 4 of the docker instructions, run this instead:
-```bash
-sudo add-apt-repository \
-   "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
-   disco \
-   stable"
-```
+7. If you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. Otherwise if you are using any version besides Ubuntu 20.04, follow the [official instructions](https://docs.docker.com/install/linux/docker-ce/ubuntu/) (select `arm64` in step 4 of "Set up the repository") to install docker.
 8. Add new user `xud`:
 ```bash
 ubuntu@ubuntu:~$ sudo adduser xud
@@ -133,7 +127,7 @@ From here the light and full setup require different settings. Continue choosing
 
 ## Pi Light Setup
 
-Important: to make sure we don't run out of RAM, we create a swap file (overflow RAM) of 2GB on the internal sd card:
+If you are using a Pi model with 2GB of RAM or more, you can continue [here](Market%20Maker%20Guide.md#the-setup). If you are using a Pi model with <2GB of RAM, we will have to catch a temporary RAM spike when creating the xud environment by creating a swap file (overflow RAM) of 2GB on the internal sd card:
 ```bash
 # create the swap file
 xud@ubuntu:~$ sudo fallocate -l 2G /home/xud/swapfile
