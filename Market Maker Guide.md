@@ -15,7 +15,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 2. **Testnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
 
-    bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
+    bitcoin testnet 3, litecoin testnet 4, ethereum rinkeby. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.rinkeby.io/) or [2](https://testnet.help/en/ethfaucet/rinkeby). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
 3. **Mainnet**. `Status: maintenance | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/700 GB , Time: 15 mins/24-72h`
     
@@ -71,9 +71,9 @@ Please choose the network: 3
 ```
 Then you will be guided through some basics:
 ```
-Do you want to generate a new XUD SEED or restore an existing one?
-1. New
-2. Existing
+Do you want to create a new xud environment or restore an existing one?
+1) Create New
+2) Restore Existing
 Please choose: 1
 ```
 When creating a new XUD SEED, the setup asks you to set a password to encrypt your environment's private keys and to write down your mnemonic phrase. This serves as backup for your xud node key and wallets (your on-chain assets). This is your last resort in case something happens to your device. **Keep it somewhere safe!**
@@ -224,15 +224,15 @@ mainnet > listpeers -j
 On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo` and `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
 
 ```bash
-lndbtc-lncli newaddress p2wkh #Send BTC to this address
-lndltc-lncli newaddress p2wkh #Send LTC to this address
-getinfo -j #Send ETH/ETH-ERC20 Tokens to your connext address
+walletdeposit btc #Send BTC to this address
+walletdeposit ltc #Send LTC to this address
+walletdeposit eth #Send ETH/ETH-ERC20 tokens to this address
 ```
 
-The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. Opening a 0.1 btc channel would look like:
+The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. You can get its alias via `listpeers` and opening a 0.1 btc channel would look like this, whereas `CheeseMonkey` is the node's alias:
 
 ```
-openchannel 02529a91d073dda641565ef7affccf035905f3d8c88191bdea83a35f37ccce5d64 btc 0.1
+openchannel BTC 0.1 CheeseMonkey
 ```
 
 Check existing orders in the network with the command `orderbook` for all enabled trading pairs or with `orderbook btc/dai` for BTC/DAI only:
@@ -365,5 +365,5 @@ rm -rf /custom/mainnet/dir
 * [litecoind config options](https://litecoin.info/index.php/Litecoin.conf#litecoin.conf_Configuration_File)
 * [geth config options](https://github.com/ethereum/go-ethereum/blob/master/README.md#configuration)
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
-* [connext config options](https://docs.connext.network/en/latest/userDocumentation/clientInstantiation.html#client-options)
+* [connext config options](https://docs.connext.network/en/latest/quickstart/clientInstantiation.html#client-options)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
