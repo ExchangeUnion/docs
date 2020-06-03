@@ -36,7 +36,7 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 
 ## Pi Basic Setup
 
-1. [Download Ubuntu 20.04 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) onto your computer. Any other 64-bit (also called `arm64`, `aarch64`, `armv8`) linux os for the Pi is fine. System like [Raspberry Pi OS](https://www.raspberrypi.org/downloads/raspberry-pi-os/) which are still 32-bit (`armv7`) are **not** supported. This guide was written assuming `Ubuntu 20.04 LTS`.
+1. [Download Ubuntu 20.04 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) onto your computer. Any other 64-bit (also called `arm64`, `aarch64`, `armv8`) linux os for the Pi is fine. Systems like [Raspberry Pi OS](https://www.raspberrypi.org/downloads/raspberry-pi-os/), which are still based on the 32-bit (`armv7`) architecture, are **not** supported. This guide was written assuming `Ubuntu 20.04 LTS`.
 2. Insert the microSD card into your computer and follow the [flash instructions](https://ubuntu.com/download/iot/installation-media).
 3. *Optional:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure Wifi for a headless setup.
 ```bash
