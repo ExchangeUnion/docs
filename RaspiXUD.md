@@ -4,8 +4,8 @@ This guide is written for market makers & traders to turn a Raspberry Pi into an
 
 Two options are available:
 
-1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/). **Supported by all Pi3/4 models.**
-2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless. **Supported only by the Pi4 4GB.**
+1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and a random open eth provider or optionally [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust these full nodes delivering correct chain data to a certain extent. **Supported by all Pi3/4 models.**
+2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless. **Supported only by the Pi4 models with 4GB RAM or more.**
 
 If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can switch to the full setup at any time.
 
