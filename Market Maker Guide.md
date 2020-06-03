@@ -42,13 +42,22 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
 
-## Preparation Full Setup (skip this when using the default light setup)
+## Sample Config Full Setup (skip this when using the default light setup)
 
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
 xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
-# add this line to permanently set `xud`'s mainnet directory to the SSD
-mainnet-dir = "/media/SSD"
+# add this line to permanently set `xud`'s mainnet directory to the SSD (geth needs to run on a SSD)
+mainnet-dir = "/media/SSD/xud-mainnet"
+# CTRL+S, CTRL+X.
+xud@ubuntu:~$ nano /media/SSD/xud-mainnet/mainnet.conf
+# add these lines to sync full nodes for bitcoin, litecoin & ethereum
+[bitcoind]
+mode = "native"
+[litecoind]
+mode = "native"
+[geth]
+mode = "native"
 # CTRL+S, CTRL+X.
 ```
 
