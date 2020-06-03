@@ -24,7 +24,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Hardware
 Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
-* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-285€**
+* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-308€**
 * **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful Mini PC. Costs: **200€-500€**
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above

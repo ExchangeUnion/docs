@@ -7,7 +7,7 @@ Two options are available:
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and a random open eth provider or optionally [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust these full nodes delivering correct chain data to a certain extent. **Supported by all Pi3/4 models.**
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless. **Supported only by the Pi4 models with 4GB RAM or more.**
 
-If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4GB, you can switch to the full setup at any time.
+If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4/8GB, you can switch to the full setup at any time.
 
 ## Light Reference Shopping List (Spain): 70 €
 * [Pi3 B+](https://www.tiendatec.es/raspberry-pi/placas-base/752-raspberry-pi-3-modelo-b-plus-713179640259.html): 42,95 €
@@ -19,8 +19,8 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.
 
-## Full Reference Shopping List (Spain): 285 €
-* [Pi4 (4GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1100-raspberry-pi-4-modelo-b-4gb-765756931182.html): 59,95 €
+## Full Reference Shopping List (Spain): 308 €
+* [Pi4 (8GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1231-raspberry-pi-4-modelo-b-8gb-765756931199.html): 82,95 €
 * [Pi4 Power Supply](https://www.tiendatec.es/raspberry-pi/raspberry-pi-alimentacion/1093-alimentador-oficial-raspberry-pi-4-usb-c-5v-3a-15w-negro-644824914886.html): 8,95 €
 * [Pi4 Cooling Case](https://www.tiendatec.es/raspberry-pi/cajas/1110-caja-cofre-alta-disipacion-con-dos-ventiladores-para-raspberry-pi-4-8472496015950.html): 15,95 €
   * Needed! The Pi4 is a hottie.
@@ -36,7 +36,7 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 
 ## Pi Basic Setup
 
-1. [Download Ubuntu 20.04 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) onto your computer. Any other 64-bit (also called `arm64`, `aarch64`, `armv8`) linux os for the Pi is fine. 32-bit (`armv7`) is currently **not** supported. This guide was written assuming `Ubuntu 20.04 LTS`.
+1. [Download Ubuntu 20.04 64-bit for the Pi](https://ubuntu.com/download/raspberry-pi) onto your computer. Any other 64-bit (also called `arm64`, `aarch64`, `armv8`) linux os for the Pi is fine. System like [Raspberry Pi OS](https://www.raspberrypi.org/downloads/raspberry-pi-os/) which are still 32-bit (`armv7`) are **not** supported. This guide was written assuming `Ubuntu 20.04 LTS`.
 2. Insert the microSD card into your computer and follow the [flash instructions](https://ubuntu.com/download/iot/installation-media).
 3. *Optional:* If you don't have a screen, usb keyboard and even an ethernet cable available, you can pre-configure Wifi for a headless setup.
 ```bash
