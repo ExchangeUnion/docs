@@ -15,7 +15,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 2. **Testnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
 
-    bitcoin testnet 3, litecoin testnet 4, ethereum rinkeby. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.rinkeby.io/) or [2](https://testnet.help/en/ethfaucet/rinkeby). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
+    bitcoin testnet 3, litecoin testnet 4, ethereum rinkeby. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://testnet.help/en/ltcfaucet/testnet), [t-ETH 1](https://faucet.rinkeby.io/) or [2](https://testnet.help/en/ethfaucet/rinkeby). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
 3. **Mainnet**. `Status: maintenance | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/700 GB , Time: 15 mins/24-72h`
     
