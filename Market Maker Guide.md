@@ -42,7 +42,7 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
 
-## Preparation Full Setup (NOT needed for default light setup)
+## Preparation Full Setup (skip this when using the default light setup)
 
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
@@ -185,7 +185,7 @@ mainnet > status
 Bitcoind/Litecoind should finish syncing within 12h, geth in about 72h on powerful hardware. A Pi4 needs about twice that long.
 
 
-`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. Append `-j` to any command to get JSON instead of the formatted output, e.g. using `listpeers` to see other xud nodes on the network:
+`xud ctl` takes `xucli` commands without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. Append `-j` to any command to get JSON instead of the formatted output, e.g. using `listpeers` to see other xud nodes on the network:
 
 ```
 mainnet > listpeers -j
