@@ -13,7 +13,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, create the environment, wait for about 15 minutes for your balance (`getbalance`) and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. `Status: maintenance | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
+2. **Testnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
 
     bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
@@ -41,6 +41,16 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 # The Setup
 
 From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
+
+## Preparation Full Setup (NOT needed for default light setup)
+
+```bash
+xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
+xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
+# add this line to permanently set `xud`'s mainnet directory to the SSD
+mainnet-dir = "/media/SSD"
+# CTRL+S, CTRL+X.
+```
 
 ## Let's Roll
 
@@ -167,7 +177,7 @@ mainnet > status
 ├───────────┼────────────────────────────────────────────────┤
 │ lndltc    │ Waiting for sync                               │
 ├───────────┼────────────────────────────────────────────────┤
-│ connext   │ Waiting for sync                               │
+│ connext   │ Ready                                          │
 ├───────────┼────────────────────────────────────────────────┤
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
