@@ -42,34 +42,6 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
 
-## Preparation Light Setup
-
-```bash
-xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
-xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
-# add these lines to set LNDBTC and LNDLTC to use the Neutrino light client
-[bitcoind]
-mode = "neutrino"
-[litecoind]
-mode = "neutrino"
-# add these lines for connext to use your infura account instead of a local geth node:
-[geth]
-mode = "infura"
-infura-project-id = "abc"
-infura-project-secret = "xyz"
-# CTRL+S, CTRL+X.
-```
-
-## Preparation Full Setup
-
-```bash
-xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
-xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
-# add this line to permanently set `xud`'s mainnet directory to the SSD
-mainnet-dir = "/media/SSD"
-# CTRL+S, CTRL+X.
-```
-
 ## Let's Roll
 
 Start the environment with
@@ -122,7 +94,7 @@ Enter path to backup location: /media/USB/
 Checking... OK.
 ```
 
-The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Apply changes by re-entering `xud ctl` (`exit`, `xud`). Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
 
 After this, the setup pulls containers, starts syncing and opens:
 
@@ -135,7 +107,28 @@ After this, the setup pulls containers, starts syncing and opens:
                 \/          \/         \/           
 ```
 
-Use the `status` command to check on the syncing progress:
+Use the `status` command to check on the syncing progress. The default light setup should be ready within 15-20 minutes:
+```
+mainnet > status
+┌───────────┬────────────────────────────────────────────────┐
+│ SERVICE   │ STATUS                                         │
+├───────────┼────────────────────────────────────────────────┤
+│ bitcoind  │ Ready (light mode)                             │
+├───────────┼────────────────────────────────────────────────┤
+│ litecoind │ Ready (light mode)                             │
+├───────────┼────────────────────────────────────────────────┤
+│ geth      │ Ready (light mode)                             │
+├───────────┼────────────────────────────────────────────────┤
+│ lndbtc    │ Syncing                                        │
+├───────────┼────────────────────────────────────────────────┤
+│ lndltc    │ Syncing                                        │
+├───────────┼────────────────────────────────────────────────┤
+│ connext   │ Ready                                          │
+├───────────┼────────────────────────────────────────────────┤
+│ xud       │ Waiting for lndbtc, lndltc                     │
+└───────────┴────────────────────────────────────────────────┘
+```
+If you configured the full setup via config file or cli parameters, the sync will start fast and gets slower towards the end. You might see 0.00% progress for several minutes first.
 
 ```
 mainnet > status
@@ -158,8 +151,7 @@ mainnet > status
 └───────────┴────────────────────────────────────────────────┘
 ```
 
-After a while you should see all three full-nodes syncing nicely:
-
+After a while you should see all three full-nodes syncing nicely.
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
@@ -180,29 +172,8 @@ mainnet > status
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
 ```
-The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. A Pi4 needs about twice that long.
+Bitcoind/Litecoind should finish syncing within 12h, geth in about 72h on powerful hardware. A Pi4 needs about twice that long.
 
-The light setup should be ready within 15-20 minutes:
-```
-mainnet > status
-┌───────────┬────────────────────────────────────────────────┐
-│ SERVICE   │ STATUS                                         │
-├───────────┼────────────────────────────────────────────────┤
-│ bitcoind  │ Ready (Connected to Neutrino)                  │
-├───────────┼────────────────────────────────────────────────┤
-│ litecoind │ Ready (Connected to Neutrino)                  │
-├───────────┼────────────────────────────────────────────────┤
-│ geth      │ Ready (Connected to Infura)                    │
-├───────────┼────────────────────────────────────────────────┤
-│ lndbtc    │ Ready                                          │
-├───────────┼────────────────────────────────────────────────┤
-│ lndltc    │ Ready                                          │
-├───────────┼────────────────────────────────────────────────┤
-│ connext   │ Ready                                          │
-├───────────┼────────────────────────────────────────────────┤
-│ xud       │ Ready                                          │
-└───────────┴────────────────────────────────────────────────┘
-```
 
 `xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. Append `-j` to any command to get JSON instead of the formatted output, e.g. using `listpeers` to see other xud nodes on the network:
 
