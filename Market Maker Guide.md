@@ -4,7 +4,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Two Modes
 
-1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust entities like [Infura](https://infura.io/).
+1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and a random open eth provider or optionally [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust these full nodes delivering correct chain data to a certain extent.
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
 
 ## Three Networks
@@ -13,9 +13,9 @@ This guide is written for individuals and entities looking to run xud in order t
 
     Private chains which are maintained by Exchange Union. We’ll automatically open channels to you and push over some coins, you’ll be trading against our bots and anyone else running simnet. It’s the perfect playground to see how things work and get familiar with `xucli` commands. It’s easy: run the launch script, create the environment, wait for about 15 minutes for your balance (`getbalance`) and you are ready to go. **You want to start with this!** 
 
-2. **Testnet**. `Status: maintenance | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
+2. **Testnet**. `Status: live | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/200 GB , Time: 15 mins/5-24h`
 
-    bitcoin testnet 3, litecoin testnet 4, ethereum ropsten. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://faucet.xblau.com/), [t-ETH 1](https://faucet.ropsten.be/) & [2](https://faucet.metamask.io/). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
+    bitcoin testnet 3, litecoin testnet 4, ethereum rinkeby. Faucets: [t-BTC](https://coinfaucet.eu/en/btc-testnet/), [t-LTC](https://testnet.help/en/ltcfaucet/testnet), [t-ETH 1](https://faucet.rinkeby.io/) or [2](https://testnet.help/en/ethfaucet/rinkeby). If you need help or some channels with testnet coins, hit us up on [Discord](https://discord.gg/YgDhMSn)!
 
 3. **Mainnet**. `Status: maintenance | Mode: light/full | Required CPUs: 2/4 , RAM: 2/16 GB , Disk: 1/700 GB , Time: 15 mins/24-72h`
     
@@ -24,7 +24,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Hardware
 Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
-* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-285€**
+* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-308€**
 * **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful Mini PC. Costs: **200€-500€**
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above
@@ -42,31 +42,22 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
 
-## Preparation Light Setup
-
-```bash
-xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
-xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
-# add these lines to set LNDBTC and LNDLTC to use the Neutrino light client
-[bitcoind]
-mode = "neutrino"
-[litecoind]
-mode = "neutrino"
-# add these lines for connext to use your infura account instead of a local geth node:
-[geth]
-mode = "infura"
-infura-project-id = "abc"
-infura-project-secret = "xyz"
-# CTRL+S, CTRL+X.
-```
-
-## Preparation Full Setup
+## Sample Config Full Setup (skip this when using the default light setup)
 
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
 xud@ubuntu:~$ nano ~/.xud-docker/xud-docker.conf
-# add this line to permanently set `xud`'s mainnet directory to the SSD
-mainnet-dir = "/media/SSD"
+# add this line to permanently set `xud`'s mainnet directory to the SSD (geth needs to run on a SSD)
+mainnet-dir = "/media/SSD/xud-mainnet"
+# CTRL+S, CTRL+X.
+xud@ubuntu:~$ nano /media/SSD/xud-mainnet/mainnet.conf
+# add these lines to sync full nodes for bitcoin, litecoin & ethereum
+[bitcoind]
+mode = "native"
+[litecoind]
+mode = "native"
+[geth]
+mode = "native"
 # CTRL+S, CTRL+X.
 ```
 
@@ -89,9 +80,9 @@ Please choose the network: 3
 ```
 Then you will be guided through some basics:
 ```
-Do you want to generate a new XUD SEED or restore an existing one?
-1. New
-2. Existing
+Do you want to create a new xud environment or restore an existing one?
+1) Create New
+2) Restore Existing
 Please choose: 1
 ```
 When creating a new XUD SEED, the setup asks you to set a password to encrypt your environment's private keys and to write down your mnemonic phrase. This serves as backup for your xud node key and wallets (your on-chain assets). This is your last resort in case something happens to your device. **Keep it somewhere safe!**
@@ -122,7 +113,7 @@ Enter path to backup location: /media/USB/
 Checking... OK.
 ```
 
-The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Apply changes by re-entering `xud ctl` (`exit`, `xud`). Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
 
 After this, the setup pulls containers, starts syncing and opens:
 
@@ -135,7 +126,28 @@ After this, the setup pulls containers, starts syncing and opens:
                 \/          \/         \/           
 ```
 
-Use the `status` command to check on the syncing progress:
+Use the `status` command to check on the syncing progress. The default light setup should be ready within 15-20 minutes:
+```
+mainnet > status
+┌───────────┬────────────────────────────────────────────────┐
+│ SERVICE   │ STATUS                                         │
+├───────────┼────────────────────────────────────────────────┤
+│ bitcoind  │ Ready (light mode)                             │
+├───────────┼────────────────────────────────────────────────┤
+│ litecoind │ Ready (light mode)                             │
+├───────────┼────────────────────────────────────────────────┤
+│ geth      │ Ready (light mode)                             │
+├───────────┼────────────────────────────────────────────────┤
+│ lndbtc    │ Syncing                                        │
+├───────────┼────────────────────────────────────────────────┤
+│ lndltc    │ Syncing                                        │
+├───────────┼────────────────────────────────────────────────┤
+│ connext   │ Ready                                          │
+├───────────┼────────────────────────────────────────────────┤
+│ xud       │ Waiting for lndbtc, lndltc                     │
+└───────────┴────────────────────────────────────────────────┘
+```
+If you configured the full setup via config file or cli parameters, the sync will start fast and gets slower towards the end. You might see 0.00% progress for several minutes first.
 
 ```
 mainnet > status
@@ -158,8 +170,7 @@ mainnet > status
 └───────────┴────────────────────────────────────────────────┘
 ```
 
-After a while you should see all three full-nodes syncing nicely:
-
+After a while you should see all three full-nodes syncing nicely.
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
@@ -175,36 +186,15 @@ mainnet > status
 ├───────────┼────────────────────────────────────────────────┤
 │ lndltc    │ Waiting for sync                               │
 ├───────────┼────────────────────────────────────────────────┤
-│ connext   │ Waiting for sync                               │
+│ connext   │ Ready                                          │
 ├───────────┼────────────────────────────────────────────────┤
 │ xud       │ Waiting for sync                               │
 └───────────┴────────────────────────────────────────────────┘
 ```
-The full setup starts syncing fast and gets slower towards the end. Bitcoind/Litecoind should finish syncing within 12h, whereas geth will need about 3 full days. A Pi4 needs about twice that long.
+Bitcoind/Litecoind should finish syncing within 12h, geth in about 72h on powerful hardware. A Pi4 needs about twice that long.
 
-The light setup should be ready within 15-20 minutes:
-```
-mainnet > status
-┌───────────┬────────────────────────────────────────────────┐
-│ SERVICE   │ STATUS                                         │
-├───────────┼────────────────────────────────────────────────┤
-│ bitcoind  │ Ready (Connected to Neutrino)                  │
-├───────────┼────────────────────────────────────────────────┤
-│ litecoind │ Ready (Connected to Neutrino)                  │
-├───────────┼────────────────────────────────────────────────┤
-│ geth      │ Ready (Connected to Infura)                    │
-├───────────┼────────────────────────────────────────────────┤
-│ lndbtc    │ Ready                                          │
-├───────────┼────────────────────────────────────────────────┤
-│ lndltc    │ Ready                                          │
-├───────────┼────────────────────────────────────────────────┤
-│ connext   │ Ready                                          │
-├───────────┼────────────────────────────────────────────────┤
-│ xud       │ Ready                                          │
-└───────────┴────────────────────────────────────────────────┘
-```
 
-`xud ctl` takes [`xucli` commands](https://api.exchangeunion.com) without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. Append `-j` to any command to get JSON instead of the formatted output, e.g. using `listpeers` to see other xud nodes on the network:
+`xud ctl` takes `xucli` commands without the need to prepend `xucli`, e.g. simply type `getinfo` to get basic information about your xud node. Run `help` to get an always up-to-date list of commands. Append `-j` to any command to get JSON instead of the formatted output, e.g. using `listpeers` to see other xud nodes on the network:
 
 ```
 mainnet > listpeers -j
@@ -243,15 +233,15 @@ mainnet > listpeers -j
 On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo` and `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
 
 ```bash
-lndbtc-lncli newaddress p2wkh #Send BTC to this address
-lndltc-lncli newaddress p2wkh #Send LTC to this address
-getinfo -j #Send ETH/ETH-ERC20 Tokens to your connext address
+walletdeposit btc #Send BTC to this address
+walletdeposit ltc #Send LTC to this address
+walletdeposit eth #Send ETH/ETH-ERC20 tokens to this address
 ```
 
-The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. Opening a 0.1 btc channel would look like:
+The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. You can get its alias via `listpeers` and opening a 0.1 btc channel would look like this, whereas `CheeseMonkey` is the node's alias:
 
 ```
-openchannel 02529a91d073dda641565ef7affccf035905f3d8c88191bdea83a35f37ccce5d64 btc 0.1
+openchannel BTC 0.1 CheeseMonkey
 ```
 
 Check existing orders in the network with the command `orderbook` for all enabled trading pairs or with `orderbook btc/dai` for BTC/DAI only:
@@ -384,5 +374,5 @@ rm -rf /custom/mainnet/dir
 * [litecoind config options](https://litecoin.info/index.php/Litecoin.conf#litecoin.conf_Configuration_File)
 * [geth config options](https://github.com/ethereum/go-ethereum/blob/master/README.md#configuration)
 * [lnd config options](https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf)
-* [connext config options](https://docs.connext.network/en/latest/userDocumentation/clientInstantiation.html#client-options)
+* [connext config options](https://docs.connext.network/en/latest/quickstart/clientInstantiation.html#client-options)
 * [xud config options](https://github.com/ExchangeUnion/xud/blob/master/sample-xud.conf)
