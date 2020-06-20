@@ -17,11 +17,11 @@ Two options are available:
 
 ## Full Reference Shopping List (Europe): 500 €
 * [GIGABYTE GB-BLCE-4105 BRIX](https://www.computeruniverse.net/en/gigabyte-gb-blce-4105-brix): 148,99 €
-  * Alternative: [ODYSSEY - X86J4105864](https://www.seeedstudio.com/ODYSSEY-X86J4105800-p-4445.html), same platform but needs separate case+power
-  * Alternative: [ODROID-H2](https://www.hardkernel.com/shop/odroid-h2/), same platform but sold out since ages and needs separate case+power
+  * Alternative: [ODROID H2+](https://www.hardkernel.com/shop/odroid-h2plus/) - same platform, better specs (NVME), needs separate case + power supply, out of stock at times
 * [32 GB RAM](https://www.computeruniverse.net/en/kingston-hyperx-impact-32gb-ddr4-so-dimm-ram-2): 140 €
   * Alternative: [List of compatible RAM](https://wiki.odroid.com/odroid-h2/hardware/ram)
 * [2TB SSD](https://www.computeruniverse.net/en/sandisk-ssd-plus-25-2tb): 210 €
+  * Alternative: [1 TB M.2 SSD NVME](https://www.computeruniverse.net/en/gigabyte-ssd-nvme-m2-2280-1tb) - for Odroid H2+
   * Alternative: [240GB M.2 SSD](https://www.computeruniverse.net/en/wd-green-ssd-m2-2280-240gb) + [2TB HDD](https://www.computeruniverse.net/en/seagate-firecuda-compute-st2000lx001-sshd-2tb): 120 €
 * [USB stick for backups](https://www.amazon.es/dp/B00TPG6P22/): 3,99 €
    * Any >1GB USB stick will do.
