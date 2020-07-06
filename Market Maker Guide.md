@@ -228,7 +228,7 @@ mainnet > listpeers -j
 
 ## Your First Trade
 
-On Simnet simply wait for about 15 minutes and you should see channels with balance (check with `getinfo` / `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
+On Simnet simply wait for about 15 minutes and you should see channels with balance (check with `getbalance`). On Testnet/Mainnet, start by depositing some funds into your xud node: 
 
 ```bash
 deposit btc #Send BTC to this address
