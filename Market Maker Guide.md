@@ -228,7 +228,7 @@ mainnet > listpeers -j
 
 ## Your First Trade
 
-On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo` / `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
+On Simnet simply wait for about 15 minutes and you should see channels with balance (check with `getinfo` / `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
 
 ```bash
 deposit btc #Send BTC to this address
@@ -236,7 +236,7 @@ deposit ltc #Send LTC to this address
 walletdeposit eth #Send ETH to this address
 ```
 
-For ETH, currently one still needs to trigger a manual channel creation in a second step:
+For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing:
 ```
 openchannel ETH 0.1
 ```
