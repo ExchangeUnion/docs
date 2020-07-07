@@ -236,7 +236,7 @@ deposit ltc #Send LTC to this address
 walletdeposit eth #Send ETH to this address
 ```
 
-For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing:
+The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you. For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing:
 ```
 openchannel ETH 0.1
 ```
