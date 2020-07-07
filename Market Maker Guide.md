@@ -42,7 +42,7 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above.
 
-## Sample Config Full Setup (skip this when using the default light setup)
+## Sample Config Full Setup (skip this step when using the default light setup)
 
 ```bash
 xud@ubuntu:~$ mkdir -p ~/.xud-docker/mainnet/
@@ -126,7 +126,7 @@ After this, the setup pulls containers, starts syncing and opens:
                 \/          \/         \/           
 ```
 
-Use the `status` command to check on the syncing progress. The default light setup should be ready within 15-20 minutes:
+Use the `status` command to check on the syncing progress. The default light setup should be ready within 15-30 minutes:
 ```
 mainnet > status
 ┌───────────┬────────────────────────────────────────────────┐
@@ -147,7 +147,7 @@ mainnet > status
 │ xud       │ Waiting for lndbtc, lndltc                     │
 └───────────┴────────────────────────────────────────────────┘
 ```
-If you configured the full setup via config file or cli parameters, the sync will start fast and gets slower towards the end. You might see 0.00% progress for several minutes first.
+If you configured the full setup via config file or cli parameters, the sync will start fast and get slower towards the end. You might see 0.00% progress for several minutes at first.
 
 ```
 mainnet > status
@@ -217,10 +217,8 @@ mainnet > listpeers -j
       "pairsList": [
         "LTC/BTC",
         "ETH/BTC",
-        "BTC/DAI",
-        "LTC/DAI"
       ],
-      "xudVersion": "1.0.0-beta",
+      "xudVersion": "1.0.0-beta.5",
       "secondsConnected": 100,
       "connextAddress": "0xe802431257a1d9366BD5747F0F52bAd25A6C3092"
     }
@@ -230,26 +228,25 @@ mainnet > listpeers -j
 
 ## Your First Trade
 
-On Simnet simply wait for about 15 minutes and you'll have channels and are read to go (check with `getinfo` and `getbalance`). On Testnet/Mainnet, start by deposit some coins: 
+On Simnet simply wait for about 15 minutes and you should see channels with balance (check with `getbalance`). On Testnet/Mainnet, start by depositing some funds into your xud node: 
 
 ```bash
-walletdeposit btc #Send BTC to this address
-walletdeposit ltc #Send LTC to this address
-walletdeposit eth #Send ETH/ETH-ERC20 tokens to this address
+deposit btc #Send BTC to this address
+deposit ltc #Send LTC to this address
+walletdeposit eth #Send ETH to this address
 ```
 
-The next step will have an automated option in future, but currently is not trivial: choose a xud node to open a channel with. Ideally, these are nodes you expect to trade with regularly. If you are unsure, you can open a channel with our xud node available at xud1.exchangeunion.com. You can get its alias via `listpeers` and opening a 0.1 btc channel would look like this, whereas `CheeseMonkey` is the node's alias:
+The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you. For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing:
+```
+openchannel ETH 0.1
+```
+
+Check existing orders in the network with the command `orderbook` for all enabled trading pairs or with `orderbook btc/usdt` for BTC/USDT only:
 
 ```
-openchannel BTC 0.1 CheeseMonkey
-```
+mainnet > orderbook btc/usdt
 
-Check existing orders in the network with the command `orderbook` for all enabled trading pairs or with `orderbook btc/dai` for BTC/DAI only:
-
-```
-mainnet > orderbook btc/dai
-
-Trading pair: BTC/DAI
+Trading pair: BTC/USDT
 ┌───────────────────────────────────────┬───────────────────────────────────────┐
 │ Buy                                   │ Sell                                  │
 ├───────────────────┬───────────────────┼───────────────────┬───────────────────┤
@@ -276,7 +273,7 @@ Balance:
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ BTC      │ 6.10944853    │ 2.5                        │ 3.60944853                    │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ DAI      │ 5000          │ 5000                       │ 0                             │
+│ USDT     │ 5000          │ 5000                       │ 0                             │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ LTC      │ 21            │ 11                         │ 10                            │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
@@ -284,14 +281,14 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-Issue a regular limit order with e.g. `sell 0.1 btc/dai 7171` to sell 0.1 btc for a price of 7171 DAI per BTC. Settlement of your order shouldn't take longer than a couple of seconds. 
+Issue a regular limit order with e.g. `sell 0.1 btc/usdt 7171` to sell 0.1 btc for a price of 7171 USDT per BTC. Settlement of your order shouldn't take longer than a couple of seconds. 
 
 ```
-mainnet > sell 0.1 btc/dai 7171
+mainnet > sell 0.1 btc/usdt 7171
 swapped 0.1 BTC with peer order ca24fe00-1c1e-11ea-8b1b-3b2ec0335696
 ```
 
-Use `getbalance` to check your balance *after* the swap. You are now owning 0.1 BTC less and 717 Dai more.
+Use `getbalance` to check your balance *after* the swap. You are now owning 0.1 BTC less and 717 USDT more.
 
 ```
 mainnet > getbalance
@@ -302,7 +299,7 @@ Balance:
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ BTC      │ 6.00944842    │ 2.39999989                 │ 3.60944853                    │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
-│ DAI      │ 5717          │ 5717                       │ 0                             │
+│ USDT     │ 5717          │ 5717                       │ 0                             │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
 │ LTC      │ 21            │ 11                         │ 10                            │
 ├──────────┼───────────────┼────────────────────────────┼───────────────────────────────┤
