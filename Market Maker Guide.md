@@ -307,7 +307,7 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-## Connect to Binance
+## Connect Arby
 
 In this final step we are connecting your setup to your Binance account via a tool called "arby". This transfers orders from Binance into OpenDEX adding a premium, creating an arbitrage revenue stream for you as market maker. When orders are filled on OpenDEX side, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance. To activate arby, exit from `xud ctl` by typing `exit` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment, then edit the following options in `mainnet.conf`:
 ```bash
