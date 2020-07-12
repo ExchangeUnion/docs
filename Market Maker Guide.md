@@ -307,17 +307,31 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-## Connect to Exchange (for Market Makers) 
+## Connect your environment to Binance
 
-**Coming soon!**
+In this final step we are connecting your xud environment to an existing Binance account via a tool called "arby", in order to "transfer" orders from Binance into OpenDEX, adding a premium and creating an arbitrage revenue stream for you as market maker. Arby takes care of executing a counter trade on Binance once your order on OpenDEX gets filled, locking in profits. You will need funds for at least one supported asset on Binance. To activate arby, exit from `xud ctl` by typing `exit` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment, then edit the following options in `mainnet.conf`:
+```bash
+xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
+# in the section [arby], this option needs to be set to true to allow arby to execute Binance orders on your behalf
+live-cex="true"
+# log into your binance account and obtain your api key and secret
+binance-api-key = "your api key"
+binance-api-secret = "your api secret"
+# this is the percentage you'd like to add on top of your orders, 3% in this example
+margin = "0.03"
+# enable arby
+disabled = false
+# CTRL+S, CTRL+X.
+```
+You can see completed trades in `xud ctl` with the command `tradehistory` and follow actions taken by arby with `logs arby`.
 
 # Report Issues
 
-Please report issues/bugs by running `report` from within `xud ctl`.
+Please report issues/bugs by running `report` from within `xud ctl` or join our dedicated "market-maker-help" channel on [Discord](https://discord.gg/YgDhMSn).
 
 # Tips 'n Tricks
 * If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are likely running geth on a drive that is simply too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, you can either switch to a faster SSD or combine bitcoind and litecoind with infura instead of a local geth.
-* If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp sample-mainnet.conf mainnet.conf`, then edit the following two options in `mainnet.conf`:
+* If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf`, then edit the following two options in `mainnet.conf`:
 ```bash
 [geth]
 # internal SSD
@@ -326,7 +340,7 @@ dir = "/home/<user>/.xud-docker/mainnet/geth"
 ancient-chaindata-dir = "/media/HDD/xud/03-Mainnet/data/geth"
 ```
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
-* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
+* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf`, then edit `mainnet.conf`:
 ```bash
 # connect to an external bitcoin core node in your local network
 [bitcoind]
