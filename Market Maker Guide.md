@@ -307,14 +307,14 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-## Connect your environment to Binance
+## Connect to Binance
 
-In this final step we are connecting your xud environment to an existing Binance account via a tool called "arby", in order to "transfer" orders from Binance into OpenDEX, adding a premium and creating an arbitrage revenue stream for you as market maker. Arby takes care of executing a counter trade on Binance once your order on OpenDEX gets filled, locking in profits. You will need funds for at least one supported asset on Binance. To activate arby, exit from `xud ctl` by typing `exit` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment, then edit the following options in `mainnet.conf`:
+In this final step we are connecting your setup to your Binance account via a tool called "arby". This transfers orders from Binance into OpenDEX adding a premium, creating an arbitrage revenue stream for you as market maker. When orders are filled on OpenDEX side, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance. To activate arby, exit from `xud ctl` by typing `exit` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment, then edit the following options in `mainnet.conf`:
 ```bash
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 # in the section [arby], this option needs to be set to true to allow arby to execute Binance orders on your behalf
 live-cex="true"
-# log into your binance account and obtain your api key and secret
+# login your Binance account to obtain your api key and secret
 binance-api-key = "your api key"
 binance-api-secret = "your api secret"
 # this is the percentage you'd like to add on top of your orders, 3% in this example
