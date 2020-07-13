@@ -323,7 +323,7 @@ margin = "0.03"
 disabled = false
 # CTRL+S, CTRL+X.
 ```
-Re-enter xud-ctl (`bash ~/xud.sh`) and accept the update prompt to add arby. You can see completed trades in `xud ctl` with the command `tradehistory` and follow actions taken by arby with `logs arby`.
+Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can see completed trades in `xud ctl` with the command `tradehistory` and follow actions taken by arby with `logs arby`.
 
 # Report Issues
 
