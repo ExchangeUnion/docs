@@ -228,7 +228,7 @@ mainnet > listpeers -j
 
 ## Your First Trade
 
-On Simnet simply wait for about 15 minutes and you should see channels with balance (check with `getbalance`). On Testnet/Mainnet, start by depositing some funds into your xud node: 
+On Simnet simply wait for about 10 minutes and you should see channels with active balance (check with `getbalance`). On Testnet/Mainnet, start by depositing some funds into your xud node: 
 
 ```bash
 deposit btc #Send BTC to this address
@@ -236,12 +236,13 @@ deposit ltc #Send LTC to this address
 walletdeposit eth #Send ETH to this address
 ```
 
-The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you. For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing:
+The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you, if you don't have a channel yet. This can take several minutes to complete and we'd kindly ask you to wait patiently for your funds to appear in the `getbalance` overview. If you want to follow what is happening under the hood, you can do so by typing `logs boltz`. For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing funds was successful:
+
 ```
 openchannel ETH 0.1
 ```
 
-Check existing orders in the network with the command `orderbook` for all enabled trading pairs or with `orderbook btc/usdt` for BTC/USDT only:
+Check existing orders for all activated pairs with the command `orderbook`. Use `orderbook btc/usdt` to show the order book for BTC/USDT only:
 
 ```
 mainnet > orderbook btc/usdt
@@ -281,7 +282,7 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-Issue a regular limit order with e.g. `sell 0.1 btc/usdt 7171` to sell 0.1 btc for a price of 7171 USDT per BTC. Settlement of your order shouldn't take longer than a couple of seconds. 
+Issue a regular limit order with e.g. `sell 0.1 btc/usdt 7171` to sell 0.1 btc for a price of 7171 USDT per BTC. If you order was matched, settlement shouldn't take longer than a couple of seconds. 
 
 ```
 mainnet > sell 0.1 btc/usdt 7171
@@ -307,17 +308,31 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-## Connect to Exchange (for Market Makers) 
+## Connect Arby
 
-**Coming soon!**
+In this final step we are connecting your xud setup to your Binance account via a tool called "arby". This enables transfer of orders from Binance into OpenDEX adding a premium, which creates an arbitrage opportunity and revenue stream for you as market maker. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits for you. You will need funds for at least one supported asset on Binance, e.g. BTC. To activate arby, exit from `xud ctl` by typing `exit` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
+```bash
+xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
+# in the section [arby], this option needs to be set to true to allow arby to execute Binance orders on your behalf
+live-cex="true"
+# login your Binance account to obtain your api key and secret
+binance-api-key = "your api key"
+binance-api-secret = "your api secret"
+# this is the percentage you'd like to add on top of your orders, 3% in this example
+margin = "0.03"
+# enable arby
+disabled = false
+# CTRL+S, CTRL+X.
+```
+Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can see completed trades in `xud ctl` with the command `tradehistory` and follow actions taken by arby with `logs arby`.
 
 # Report Issues
 
-Please report issues/bugs by running `report` from within `xud ctl`.
+Please report issues/bugs by running `report` from within `xud ctl` or join our dedicated "market-maker-help" channel on [Discord](https://discord.gg/YgDhMSn).
 
 # Tips 'n Tricks
 * If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are likely running geth on a drive that is simply too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, you can either switch to a faster SSD or combine bitcoind and litecoind with infura instead of a local geth.
-* If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp sample-mainnet.conf mainnet.conf`, then edit the following two options in `mainnet.conf`:
+* If you only have a small SSD available, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD. To do so, create the config file, e.g. in the mainnet directory located on the HDD with `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf`, then edit the following two options in `mainnet.conf`:
 ```bash
 [geth]
 # internal SSD
@@ -326,7 +341,7 @@ dir = "/home/<user>/.xud-docker/mainnet/geth"
 ancient-chaindata-dir = "/media/HDD/xud/03-Mainnet/data/geth"
 ```
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `xud-docker.conf`. For temporarily using another directory, you can also use parameters, e.g. `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
-* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp sample-mainnet.conf mainnet.conf`, then edit `mainnet.conf`.
+* External full-nodes (including infura) can be configured in a network specific config file. Create the config file, e.g. in the mainnet directory with `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf`, then edit `mainnet.conf`:
 ```bash
 # connect to an external bitcoin core node in your local network
 [bitcoind]
@@ -351,20 +366,20 @@ xucli --help
 ```
 * To inspect logs:
 ```bash
-logs bitcoind/litecoind/geth/lndbtc/lndltc/connext/xud
+logs bitcoind/litecoind/geth/lndbtc/lndltc/connext/boltz/arby/xud
 ```
-* You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`.
-* A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment.
-* Shutdown the environment with `down`. Restart with `down`, then run `bash ~/xud.sh` again.
+* You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`; the environment will stay up.
+* A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment with your password.
+* Permanently stop the environment by typing `down` in `xud ctl`. A restart can be achieved with `down` first and then running `bash ~/xud.sh` again.
 * Remove all data with
 ```bash
-# Use with caution: this step removes all `xud` blockchain and wallet data from your system. If you have channels open without backup or lost your seed mnemonic, you are risking to loose funds.
+# Use with caution: this step removes all `xud` blockchain and wallet data from your system. If you have channels open without backup or lost your seed mnemonic, you are at risk loosing funds.
 sudo rm -rf ~/.xud-docker
 rm -rf ~/xud.sh
 rm -rf /custom/mainnet/dir
 ```
-* `xud-docker` only uses official xud releases for mainnet. Simnet/Testnet are updated frequently. If you want to run a specific xud branch or master, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing). For mainnet, we strongly recommend to run the latest [official release](https://github.com/ExchangeUnion/xud/releases/) only. #craefulgang
-* Docker might not play nicely with a VPN you are running on the same machine. If you see `Failed to launch environment`, try disconnecting the VPN.
+* `xud-docker` only uses official xud releases for mainnet. Simnet/Testnet are running latest xud master and are updated frequently. If you want to run a specific xud branch or master, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing). For mainnet, we strongly recommend to run the latest [official release](https://github.com/ExchangeUnion/xud/releases/) only. #craefulgang
+* Docker *might* not play nicely with a VPN you are running on the same machine. If you see `Failed to launch environment`, try disconnecting the VPN.
 
 ## References
 * [bitcoind config options](https://github.com/bitcoin/bitcoin/blob/master/share/examples/bitcoin.conf)
