@@ -237,6 +237,7 @@ walletdeposit eth #Send ETH to this address
 ```
 
 The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you, if you don't have a channel yet. This can take several minutes to complete and we'd kindly ask you to wait patiently for your funds to appear in the `getbalance` overview. If you want to follow what is happening under the hood, you can do so by typing `logs boltz`. For ETH, currently one still needs to trigger a manual channel creation in a second step after depositing funds was successful:
+
 ```
 openchannel ETH 0.1
 ```
