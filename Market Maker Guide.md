@@ -274,7 +274,7 @@ Balance:
 └──────────┴───────────────┴────────────────────────────┴───────────────────────────────┘
 ```
 
-Issue a regular limit order with e.g. `sell 0.1 btc/usdt 7171` to sell 0.1 btc for a price of 7171 USDT per BTC. If you order was matched, settlement shouldn't take longer than a couple of seconds. 
+Issue a regular limit order with e.g. `sell 0.1 btc/usdt 7171` to sell 0.1 btc for a price of 7171 USDT per BTC. If your order was matched, settlement shouldn't take longer than a couple of seconds. 
 
 ```
 mainnet > sell 0.1 btc/usdt 7171
@@ -358,7 +358,7 @@ zmqpubrawblock = "192.168.1.42:28332"
 zmqpubrawtx = "192.168.1.42:28333"
 ```
 * Sample config of your external bitcoind/litecoind to work with the defaults in the `<network>.conf` file:
-```
+```bash
 -rpcuser=xu
 -rpcpassword=xu
 -rpcport=18332
