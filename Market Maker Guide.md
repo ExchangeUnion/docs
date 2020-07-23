@@ -229,7 +229,6 @@ walletdeposit eth #Send ETH to this address
 ```
 
 The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you, if you don't have a channel yet. This can take several minutes to complete and we'd kindly ask you to wait patiently for your funds to appear in the `getbalance` overview. If you want to follow what is happening under the hood, you can do so by typing `logs boltz`. For ETH, currently one still needs to trigger a manual channel creation in a second step after funds were deposited:
-
 ```
 openchannel ETH 13.37
 ```
@@ -275,7 +274,6 @@ Balance:
 ```
 
 Issue a regular limit order with e.g. `sell 0.1 btc/usdt 7171` to sell 0.1 btc for a price of 7171 USDT per BTC. If your order was matched, settlement shouldn't take longer than a couple of seconds. 
-
 ```
 mainnet > sell 0.1 btc/usdt 7171
 swapped 0.1 BTC with peer order ca24fe00-1c1e-11ea-8b1b-3b2ec0335696
@@ -316,6 +314,7 @@ margin = "0.03"
 disabled = false
 # CTRL+S, CTRL+X.
 ```
+
 Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can see arby's orders via `listorders`, completed trades via `tradehistory` and can follow actions taken by arby with `logs arby`.
 
 # Report Issues
