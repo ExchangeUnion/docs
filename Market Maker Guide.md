@@ -4,7 +4,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Two Modes
 
-1. **Default: Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and a random open eth provider. This keeps the setup light-weight & cheap, but requires somewhat trusting these full nodes to deliver correct chain data.
+1. **Default: Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and a random open eth provider. This keeps the setup light-weight & cheap, but requires these full nodes to deliver correct chain data.
 2. **Optional: Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more time and resources, but keeps the setup trustless.
 
 ## Three Networks
