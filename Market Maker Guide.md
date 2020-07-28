@@ -1,4 +1,4 @@
-This guide is written for individuals and entities looking to run xud in order to become a market maker on OpenDEX. Traders can use this guide to run xud to trade on OpenDEX directly without involvement of any third party.
+This guide is written for individuals and entities looking to run xud as a market maker on OpenDEX. Traders can use this guide to run xud to trade on OpenDEX directly without involvement of any third party.
 
 # Prerequisites
 
@@ -24,7 +24,7 @@ This guide is written for individuals and entities looking to run xud in order t
 
 ## Hardware
 Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
-* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-308€**
+* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-300€**
 * **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful Mini PC. Costs: **200€-500€**
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above
@@ -34,13 +34,13 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 ## Software
 
-* Linux or macOS. [Windows WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install) support is currently experimental and not tested regularly. This guide was written assuming Ubuntu 20.04 LTS.
+Docker. That's it.
 
-* Docker >= 18.09. Check with `docker --version`. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. Otherwise if you are using any version besides Ubuntu 20.04, follow the official [docker install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker commands (without adding `sudo`). Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/).
+Version >= 18.09 on Linux or Windows 10 [with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Docker on macOS is currently not tested regularly. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. If you are using any version besides Ubuntu 20.04, follow the official [docker install instructions](https://docs.docker.com/get-docker/). Also make sure that the current user can run docker commands. Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/engine/install/linux-postinstall/). This guide was written assuming Ubuntu 20.04 LTS.
 
 # The Setup
 
-From here we assume that your device is running, with docker installed and backup drive connected. Check the guides in the hardware section above if your device is not ready yet.
+From here we assume that your device is running with docker set up. Check the guides in the hardware section above if your device is not ready yet.
 
 ## Let's Roll
 
