@@ -36,7 +36,7 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 
 Docker. That's it.
 
-Version >= 18.09 on Linux or Windows 10 [with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/wsl2-install). Docker on macOS is currently not tested regularly. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. If you are using any version besides Ubuntu 20.04, follow the official [docker install instructions](https://docs.docker.com/install/). Also make sure that the current user can run docker commands. Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/install/linux/linux-postinstall/). This guide was written assuming Ubuntu 20.04 LTS.
+Version >= 18.09 on Linux or Windows 10 [with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Docker on macOS is currently not tested regularly. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. If you are using any version besides Ubuntu 20.04, follow the official [docker install instructions](https://docs.docker.com/get-docker/). Also make sure that the current user can run docker commands. Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/engine/install/linux-postinstall/). This guide was written assuming Ubuntu 20.04 LTS.
 
 # The Setup
 
