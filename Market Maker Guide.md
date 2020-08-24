@@ -353,7 +353,7 @@ mode = "native"
 [bitcoind]
 mode = "external"
 rpc-host = "192.168.1.42"
-rpc-port = "8332"82f422f6a358f738c587b90eb138971337935281
+rpc-port = "8332"
 rpc-user = "user"
 rpc-password = "pass"
 zmqpubrawblock = "192.168.1.42:28332"
