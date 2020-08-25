@@ -1,4 +1,4 @@
-This guide is written for individuals and entities looking to run xud as a market maker on OpenDEX. Traders can use this guide to run xud to trade on OpenDEX directly without involvement of any third party.
+This guide is written for anyone looking to run xud as a market maker on OpenDEX and earn via arbitrage. Traders may use this guide to run xud and access liquidity on OpenDEX.
 
 # Prerequisites
 
@@ -29,14 +29,14 @@ Since market makers should be online 24/7 and we are ushering in a post-cloud er
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above
   * The full setup requires a SSD for geth being able to sync. For the light setup, a regular HDD/SD card is fine.
-  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 4 GB RAM after initial sync, given you use the default `cache = 256` for geth. If you run testnet & mainnet at the same time 2 cores & 8 GB RAM.
-  * We support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
+  * If you are using a VPS for testnet or mainnet, you can switch to 2 cores & 4 GB RAM after initial sync, given you use default settings.
+  * We currently support `amd64` (also called `x86`/`x64`) and `arm64` (also called `aarch64`/`armv8`), which should cover most devices and services.
 
 ## Software
 
 Docker. That's it.
 
-Version >= 18.09 on Linux or Windows 10 [with WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Docker on macOS is currently not tested regularly. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. If you are using any version besides Ubuntu 20.04, follow the official [docker install instructions](https://docs.docker.com/get-docker/). Also make sure that the current user can run docker commands. Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/engine/install/linux-postinstall/). This guide was written assuming Ubuntu 20.04 LTS.
+Version >= 18.09 on Linux or Windows 10 [using WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Docker on macOS is currently not tested regularly. If you do not have docker installed yet and you are using Ubuntu 20.04 LTS, install docker by running `sudo apt install docker.io`. If you are using any version besides Ubuntu 20.04, follow the official [docker install instructions](https://docs.docker.com/get-docker/). Also make sure that the current user can run docker commands. Test with `docker run hello-world`. If this fails, [follow these instructions](https://docs.docker.com/engine/install/linux-postinstall/). This guide was written assuming Ubuntu 20.04 LTS.
 
 # The Setup
 
@@ -107,7 +107,7 @@ Checking... OK.
 
 The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
 
-After this the setup opens:
+Then the setup might restart clients and ask you to enter your password once more before it opens:
 
 ```
                            .___           __  .__   
@@ -233,7 +233,7 @@ The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange).
 openchannel ETH 13.37
 ```
 
-Check existing orders for all activated pairs with the command `orderbook`. Use `orderbook btc/usdt` to show the order book for BTC/USDT only:
+Check existing orders for all activated pairs with the command `orderbook`. It might take several seconds to see orders after xud was started due to the decentralized nature of the order exchange. Use `orderbook btc/usdt` to show the order book for BTC/USDT only:
 
 ```
 mainnet > orderbook btc/usdt
@@ -300,11 +300,14 @@ Balance:
 
 ## Connect Arby
 
-In this final step we are connecting your xud setup to your Binance account via a tool called "arby". This enables "transfer" of orders from Binance into OpenDEX and creates an arbitrage revenue stream for you as market maker by adding a premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits for you. You will need funds for at least one supported asset on Binance, e.g. BTC for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
+In this final step we are connecting your xud setup to your Binance account via a tool called "arby". This enables "transfer" of orders from Binance into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the Binance price adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance, e.g. BTC for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
 ```bash
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
-# in the section [arby], this option needs to be set to true to allow arby to execute Binance orders on your behalf
+# this option needs to be set to true to allow arby to execute Binance orders on your behalf, needed for arby to function
 live-cex="true"
+# the trading pair to activate arby for; currently one pair per arby instance only
+base-asset = "BTC"
+quote-asset = "USDT"
 # log into your Binance account to obtain your api key and secret
 binance-api-key = "your api key"
 binance-api-secret = "your api secret"
@@ -319,12 +322,12 @@ Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can se
 
 # Report Issues
 
-Please report issues/bugs by running `report` from within `xud ctl` or join our dedicated "market-maker-help" channel on [Discord](https://discord.gg/YgDhMSn).
+Please give us feedback and report bugs by running `report` from within `xud ctl` or join our dedicated "market-maker-help" channel on [Discord](https://discord.gg/YgDhMSn)!
 
 # Tips 'n Tricks
-* If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are probably running geth on a drive that is too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, you can either switch to a faster SSD or use infura instead of a local geth.
+* An overview of all available commands within `xud ctl` can be printed by typing `help` in `xud ctl`. It allows to use client's cli (e.g. `lncli`), check client status, logs and many more.
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a global xud-docker config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `dir`.
-* All config options are also available as cli parameters, e.g. to use another directory, you can also use `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
+* All config options can temporary be set via cli parameters; run `bash xud.sh --help` to get an overview of all available parameters. To e.g. use another directory for your mainnet environment, you can run `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
 * To permanently change options on a network level, create a network-specific config file with the latest options, e.g. for mainnet with `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf`, then edit `mainnet.conf`.
 * If you only have a small SSD available (<300GB) for a full setup, you can place your entire setup on a HDD, except for a small part of geth's data, which needs to be located on a fast SSD:
 ```bash
@@ -366,27 +369,14 @@ zmqpubrawtx = "192.168.1.42:28333"
 -zmqpubrawblock=tcp://0.0.0.0:38332
 -zmqpubrawtx=tcp://0.0.0.0:38333
 ```
-
 * Permanently set the alias `xud` to launch `xud ctl` from anywhere:
 Add the line `alias xud="bash ~/xud.sh"` to the end of `~/.bashrc` or `~/.bash_aliases` on Linux and `bash_profile` on Mac, then `source` the file.
-* `xud ctl` allows to use an L1/L2 client's cli:
-```bash
-bitcoin-cli --help
-litecoin-cli --help
-geth --help
-lndbtc-lncli --help
-lndltc-lncli --help
-xucli --help
-```
-* To inspect logs from within `xud ctl`:
-```bash
-logs bitcoind/litecoind/geth/lndbtc/lndltc/connext/boltz/arby/xud
-```
 * You can `exit` from `xud ctl` any time and re-enter with `bash ~/xud.sh`; the environment will stay up.
 * A reboot of your host machine does **not** restart your `xud-docker` environment by default. You will need to run `bash ~/xud.sh` and `unlock` your environment with your password.
 * Permanently stop the environment by typing `down` in `xud ctl`. A restart can be achieved with `down` first and then running `bash ~/xud.sh` again.
-* `xud-docker` only uses offical xud releases for mainnet. Simnet/Testnet are running the `latest` xud master and are updated frequently. If you want to run a specific xud branch or master, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing). For mainnet, we strongly recommend to run the latest [official release](https://github.com/ExchangeUnion/xud/releases/) only. #craefulgang
-* Docker *might* not play nicely with a VPN you are running on the same machine. If you see `Failed to launch environment`, try disconnecting the VPN.
+* `xud-docker` only uses offical xud releases for mainnet. Simnet/Testnet are running the `latest` xud master and are updated frequently. If you want to run a specific xud branch or master, follow [these instructions](https://github.com/ExchangeUnion/xud-docker/#developing).
+* If you are syncing the full setup, and `geth` shows sync status **99.99%** for longer than 72h, you are probably running geth on a drive that is too slow for geth to catch up with the chain. In this case, `down` the environment and run a performance test of the disk as desribed [here](RaspiXUD.md#pi-full-setup). If results are below the 100 MB/s mark, you can either switch to a faster SSD or use infura instead of a local geth.
+* Docker *might* not play nicely with a VPN you are running on the host machine. If you see `Failed to launch environment`, try disconnecting the VPN.
 * If you decide to remove xud-docker from your machine, run the following commands:
 ```bash
 # Use with caution: this step removes all `xud` blockchain and wallet data from your system. If you have channels open without backup or lost your seed mnemonic, you are at risk loosing funds.
