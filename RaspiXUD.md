@@ -9,8 +9,8 @@ Two options are available:
 
 If you are not sure, we recommend to start with the light setup. If you opt for the Pi4 4/8GB, you can switch to the full setup at any time.
 
-## Light Reference Shopping List (Spain): 70 €
-* [Pi3 B+](https://www.tiendatec.es/raspberry-pi/placas-base/752-raspberry-pi-3-modelo-b-plus-713179640259.html): 42,95 €
+## Light Reference Shopping List (Spain): ~65 €
+* [Pi3 B+](https://www.tiendatec.es/raspberry-pi/placas-base/752-raspberry-pi-3-modelo-b-plus-713179640259.html): 39,95 €
 * [Pi3 B+ Power Supply](https://www.tiendatec.es/raspberry-pi/raspberry-pi-alimentacion/974-fuente-alimentacion-5v-3a-micro-usb-con-interruptor-raspberry-pi-3-8472496015080.html): 6,65 €
 * [32GB MicroSD card](https://www.amazon.es/dp/B06XYHN68L/): 15 €
   * A performant microSD card is important; not the right place to save some bucks.
@@ -19,10 +19,10 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.
 
-## Full Reference Shopping List (Spain): 308 €
+## Full Reference Shopping List (Spain): ~290 €
 * [Pi4 (8GB)](https://www.tiendatec.es/raspberry-pi/placas-base/1231-raspberry-pi-4-modelo-b-8gb-765756931199.html): 82,95 €
 * [Pi4 Power Supply](https://www.tiendatec.es/raspberry-pi/raspberry-pi-alimentacion/1093-alimentador-oficial-raspberry-pi-4-usb-c-5v-3a-15w-negro-644824914886.html): 8,95 €
-* [Pi4 Cooling Case](https://www.tiendatec.es/raspberry-pi/cajas/1110-caja-cofre-alta-disipacion-con-dos-ventiladores-para-raspberry-pi-4-8472496015950.html): 15,95 €
+* [Pi4 Cooling Case](https://www.tiendatec.es/raspberry-pi/cajas/1110-caja-cofre-alta-disipacion-con-dos-ventiladores-para-raspberry-pi-4-8472496015950.html): 14,95 €
   * Needed! The Pi4 is a hottie.
 * [32GB MicroSD card](https://www.amazon.es/dp/B06XYHN68L/): 15 €
   * A performant microSD card is important; not the right place to save some bucks.
@@ -30,7 +30,7 @@ If you are not sure, we recommend to start with the light setup. If you opt for 
 * [USB stick for backups](https://www.amazon.es/dp/B00TPG6P22/): 3,99 €
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.
-* [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/): 180 €
+* [1TB external SSD](https://www.amazon.es/gp/product/B074M774TW/): 165 €
   * **For full setup only, not needed for light setup!**
   * For more options, check [this storage benchmark list](https://jamesachambers.com/raspberry-pi-storage-benchmarks/).
 
