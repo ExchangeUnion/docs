@@ -7,22 +7,22 @@ Two options are available:
 1. **Light setup** using [Neutrino](https://github.com/lightninglabs/neutrino) and a random open eth provider or optionally [Infura](https://infura.io/). This keeps the setup light-weight & cheap, but requires to trust these full nodes delivering correct chain data to a certain extent.
 2. **Full setup** using [bitcoind](https://github.com/bitcoin/bitcoin/), [litecoind](https://github.com/litecoin-project/litecoin) and [geth](https://github.com/ethereum/go-ethereum). Requires more resources and an SSD, but keeps the setup trustless.
 
-## Light Reference Shopping List (Europe): 200 €
-* [GIGABYTE GB-BLCE-4105 BRIX](https://www.computeruniverse.net/en/gigabyte-gb-blce-4105-brix): 148,99 €
-* [4 GB RAM](https://www.computeruniverse.net/en/crucial-4gb-ddr4-so-dimm-ct4g4sfs824a-2400mhz-ram): 20 €
-* [120GB M.2 SSD](https://www.computeruniverse.net/en/wd-green-ssd-m2-2280-120gb): 28 €
+## Light Reference Shopping List (Europe): ~180 €
+* [GIGABYTE GB-BLCE-4105 BRIX](https://www.computeruniverse.net/en/gigabyte-gb-blce-4105-brix): 138 €
+* [4 GB RAM](https://www.computeruniverse.net/en/crucial-4gb-ddr4-so-dimm-ct4g4sfs824a-2400mhz-ram): 15 €
+* [120GB M.2 SSD](https://www.computeruniverse.net/en/wd-green-ssd-m2-2280-120gb): 20 €
 * [USB stick for backups](https://www.amazon.es/dp/B00TPG6P22/): 3,99 €
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.
 
-## Full Reference Shopping List (Europe): 500 €
-* [GIGABYTE GB-BLCE-4105 BRIX](https://www.computeruniverse.net/en/gigabyte-gb-blce-4105-brix): 148,99 €
-  * Alternative: [ODROID H2+](https://www.hardkernel.com/shop/odroid-h2plus/) - same platform, better specs (NVME), needs separate case + power supply, out of stock at times
-* [32 GB RAM](https://www.computeruniverse.net/en/kingston-hyperx-impact-32gb-ddr4-so-dimm-ram-2): 140 €
+## Full Reference Shopping List (Europe): ~465 €
+* [GIGABYTE GB-BLCE-4105 BRIX](https://www.computeruniverse.net/en/gigabyte-gb-blce-4105-brix): 138 €
+  * Alternative: [ODROID H2+](https://www.hardkernel.com/shop/odroid-h2plus/) - same platform, features NVME, needs separate case, power supply and wifi dongle, out of stock at times
+* [32 GB RAM](https://www.computeruniverse.net/en/kingston-hyperx-impact-32gb-ddr4-so-dimm-ram-2): 127 €
   * Alternative: [List of compatible RAM](https://wiki.odroid.com/odroid-h2/hardware/ram)
-* [2TB SSD](https://www.computeruniverse.net/en/sandisk-ssd-plus-25-2tb): 210 €
+* [2TB SSD](https://www.computeruniverse.net/en/sandisk-ssd-plus-25-2tb): 193 €
   * Alternative: [1 TB M.2 SSD NVME](https://www.computeruniverse.net/en/gigabyte-ssd-nvme-m2-2280-1tb) - for Odroid H2+
-  * Alternative: [240GB M.2 SSD](https://www.computeruniverse.net/en/wd-green-ssd-m2-2280-240gb) + [2TB HDD](https://www.computeruniverse.net/en/seagate-firecuda-compute-st2000lx001-sshd-2tb): 120 €
+  * Alternative: [240GB M.2 SSD](https://www.computeruniverse.net/en/wd-green-ssd-m2-2280-240gb) + [2TB HDD](https://www.computeruniverse.net/en/seagate-firecuda-compute-st2000lx001-sshd-2tb)
 * [USB stick for backups](https://www.amazon.es/dp/B00TPG6P22/): 3,99 €
    * Any >1GB USB stick will do.
    * A NAS/Samba share works too.

@@ -24,8 +24,8 @@ This guide is written for anyone looking to run xud as a market maker on OpenDEX
 
 ## Hardware
 Since market makers should be online 24/7 and we are ushering in a post-cloud era, we recommend setting up a power-efficient linux box connected to your router. No special configurations, like port forwardings, are necessary. Running your xud setup in the cloud is obviously possible, just not something we encourage to do.
-* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **70€-300€**
-* **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful Mini PC. Costs: **200€-500€**
+* **Standard**: Our [RaspiXUD guide](RaspiXUD.md) walks you through setting up a Raspberry Pi3/4. Costs: **65€-290€**
+* **Pro**: Our [BeastXUD guide](BeastXUD.md) walks you through setting up a powerful Mini PC. Costs: **180€-465€**
 * **Custom**: If you are using a different device or a cloud VPS:
   * Check the hardware requirements for the different networks and modes above
   * The full setup requires a SSD for geth being able to sync. For the light setup, a regular HDD/SD card is fine.
@@ -325,6 +325,7 @@ Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can se
 Please give us feedback and report bugs by running `report` from within `xud ctl` or join our dedicated "market-maker-help" channel on [Discord](https://discord.gg/YgDhMSn)!
 
 # Tips 'n Tricks
+* No need to open/forward ports
 * An overview of all available commands within `xud ctl` can be printed by typing `help` in `xud ctl`. It allows to use client's cli (e.g. `lncli`), check client status, logs and many more.
 * The xud-docker setup uses the fixed home directory `~/.xud-docker` where blockchain & wallet data is stored in by default. Customize the wallet & chain data directory by creating a global xud-docker config file with `cp ~/.xud-docker/sample-xud-docker.conf ~/.xud-docker/xud-docker.conf`, then edit `dir`.
 * All config options can temporary be set via cli parameters; run `bash xud.sh --help` to get an overview of all available parameters. To e.g. use another directory for your mainnet environment, you can run `bash xud.sh --mainnet-dir /path/to/temp/mainnet/dir`.
