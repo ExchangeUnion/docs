@@ -300,7 +300,7 @@ Balance:
 
 ## Connect Arby
 
-In this final step we are connecting your xud setup to your Binance account via a tool called "arby". This enables "transfer" of orders from Binance into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the Binance price adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance, e.g. BTC for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
+In this final step we are connecting your xud setup to your Binance account via a tool called ["arby"](https://github.com/ExchangeUnion/market-maker-tools). This enables "transfer" of orders from Binance into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the Binance price adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance (e.g. BTC) for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
 ```bash
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 # this option needs to be set to true to allow arby to execute Binance orders on your behalf, needed for arby to function
@@ -319,6 +319,8 @@ disabled = false
 ```
 
 Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can see arby's orders via `listorders`, completed trades via `tradehistory` and can follow actions taken by arby with `logs arby`.
+
+Check the official [README](https://github.com/ExchangeUnion/market-maker-tools/blob/master/README.md) to learn more about how arby works.
 
 # Report Issues
 
