@@ -105,7 +105,7 @@ Enter path to backup location: /media/USB/
 Checking... OK.
 ```
 
-The entered backup drive location is persistet as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
+The entered backup drive location is persisted as `backup-dir = "/media/USB/"` in `mainnet.conf` and can be changed any time. Alternatively, you can consider running your environment on two hard drives in [RAID 1](https://en.wikipedia.org/wiki/Standard_RAID_levels#RAID_1) to protect against data loss.
 
 Then the setup might restart clients and ask you to enter your password once more before it opens:
 
@@ -225,7 +225,7 @@ On Simnet simply wait for about 10 minutes and you should see channels with acti
 ```bash
 deposit btc #Send BTC to this address
 deposit ltc #Send LTC to this address
-walletdeposit eth #Send ETH to this address
+deposit eth #Send ETH to this address
 ```
 
 The deposit command for BTC & LTC is powered by [Boltz](https://boltz.exchange). Boltz will automatically open a balanced lightning channel to you, if you don't have a channel yet. This can take several minutes to complete and we'd kindly ask you to wait patiently for your funds to appear in the `getbalance` overview. If you want to follow what is happening under the hood, you can do so by typing `logs boltz`. For ETH, currently one still needs to trigger a manual channel creation in a second step after funds were deposited:
@@ -300,7 +300,7 @@ Balance:
 
 ## Connect Arby
 
-In this final step we are connecting your xud setup to your Binance account via a tool called "arby". This enables "transfer" of orders from Binance into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the Binance price adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance, e.g. BTC for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
+In this final step we are connecting your xud setup to your Binance account via a tool called ["arby"](https://github.com/ExchangeUnion/market-maker-tools). This enables "transfer" of orders from Binance into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the Binance price adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on Binance to lock in profits. You will need funds for at least one supported asset on Binance (e.g. BTC) for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
 ```bash
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
 # this option needs to be set to true to allow arby to execute Binance orders on your behalf, needed for arby to function
@@ -319,6 +319,8 @@ disabled = false
 ```
 
 Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. You can see arby's orders via `listorders`, completed trades via `tradehistory` and can follow actions taken by arby with `logs arby`.
+
+Check the official [README](https://github.com/ExchangeUnion/market-maker-tools/blob/master/README.md) to learn more about how arby works.
 
 # Report Issues
 
