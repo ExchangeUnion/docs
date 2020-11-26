@@ -69,7 +69,7 @@ KillSignal=SIGINT
 
 # Connext
 
-TODO: install (waiting for vector)
+Follow the [docs](https://github.com/connext/vector#quick-start).
 
 ## Daemonize `connext`
 
