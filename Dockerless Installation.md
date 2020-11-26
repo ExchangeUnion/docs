@@ -32,7 +32,7 @@ If you are on an architecture that is *not* `amd64`, you'll have to remove `grpc
 
 If you want to daemonize `xud`, so that it starts on boot without needing its own terminal, you can do this using `systemd`:
 
-```
+```toml
 [Unit]
 Description=XUD
 
@@ -53,7 +53,8 @@ Follow the [lnd installation guide](https://github.com/lightningnetwork/lnd/blob
 ## Daemonize `lnd`
 
 If you want to daemonize `xud`, so that it starts on boot without needing its own terminal, you can do this using `systemd`:
-```
+
+```toml
 [Unit]
 Description=LND
 
@@ -74,7 +75,7 @@ TODO: install (waiting for vector)
 
 If you want to daemonize `connext`, so that it starts on boot without needing its own terminal, you can do this using `systemd`:
 
-```
+```toml
 [Unit]
 Description=Connext
 
@@ -94,25 +95,18 @@ KillSignal=SIGINT
 
 # Tor
 
-TODO: install
-
-## Daemonize `tor`
-
-TODO
+You can install tor via `sudo apt install tor` on most linux distros nowadays, just make sure [the version is fairly recent](https://github.com/torproject/tor/releases). If not, consult the [tor installation guides](https://2019.www.torproject.org/docs/installguide.html.en). Run `tor --version` to verify the tor process is running.
 
 
 # Putting it all together
 
 Create the following `xud.conf` in `/home/xud/.xud`:
-```json
+```toml
 mainnet = true
 
 [p2p]
 tor = true
 torport = 9050
-
-[raiden]
-disable = true
 
 [connext]
 disable = false
@@ -123,7 +117,7 @@ webhookport = 8887
 
 [lnd.BTC]
 disable = false
-host = "10.0.1.14"
+host = "localhost"
 certpath = "/home/xud/.lnd/tls.cert"
 macaroonpath = "/home/xud/.lnd/admin.macaroon"
 
@@ -131,8 +125,11 @@ macaroonpath = "/home/xud/.lnd/admin.macaroon"
 disable = true
 ```
 
-For convenience, consider adding `alias xucli='/home/xud/xud/bin/xucli -p 8886'` to the xud user's `.bashrc` and source it.
+For convenience, consider adding `alias xucli='/home/xud/xud/bin/xucli -p 8886'` to the xud user's `.bashrc` and source it. Then restart `xud` once (e.g. with `systemctl restart xud`) and try running `xucli getinfo`, which should return with an overview of xud's, as well as lnd's and connext status.
+
+Ping us in the help channel of our [Discord server](https://discord.gg/YgDhMSn) for support.
 
 # Tips 'n Tricks
 
-* When installing on a Raspberry Pi you might see `Unexpected error during initialization`. [Here](https://github.com/ExchangeUnion/xud/issues/1199#issuecomment-527819108) the solution. If you see an `install error` when installing via `npm i`, try `npm install --production`. 
+* When installing on a Raspberry Pi you might see `Unexpected error during initialization`. [Here](https://github.com/ExchangeUnion/xud/issues/1199#issuecomment-527819108) the solution.
+* If you see an `install error` when installing via `npm install`, try `npm install --production` & `npm install -g typescript`.
