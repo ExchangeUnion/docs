@@ -95,8 +95,7 @@ KillSignal=SIGINT
 
 # Tor
 
-You can install tor via `sudo apt install tor` on most linux distros nowadays, just make sure [the version is fairly recent](https://github.com/torproject/tor/releases). If not, consult the [tor installation guides](https://2019.www.torproject.org/docs/installguide.html.en). Run `tor --version` to verify the tor process is running.
-
+You can install tor via `sudo apt install tor` on most linux distros nowadays, just make sure [the version is fairly recent](https://github.com/torproject/tor/releases). If not, consult the [tor installation guides](https://2019.www.torproject.org/docs/installguide.html.en). Run `systemctl status tor` or `ps aux | grep tor` to verify the tor process is running.
 
 # Putting it all together
 
@@ -132,4 +131,4 @@ Ping us in the help channel of our [Discord server](https://discord.gg/YgDhMSn) 
 # Tips 'n Tricks
 
 * When installing on a Raspberry Pi you might see `Unexpected error during initialization`. [Here](https://github.com/ExchangeUnion/xud/issues/1199#issuecomment-527819108) the solution.
-* If you see an `install error` when installing via `npm install`, try `npm install --production` & `npm install -g typescript`.
+* If you see an `install error` when installing via `npm install`, try `npm install --production` & `npm install typescript`.
