@@ -3,7 +3,7 @@ This page contains instructions to natively install `xud` and its minimal depend
 # Requirements
 
 Make sure to have the following installed:
-- [Node.js](https://nodejs.org/en/download/), active LTS (we recommend [installing via nvm](https://nodejs.org/en/download/package-manager/))
+- [Node.js](https://nodejs.org/en/download/), active LTS (we recommend [installing via nvm](https://nodejs.org/en/download/package-manager/#nvm))
 - [Go](https://golang.org/), v1.14 or higher
 - a user called `xud`
 
