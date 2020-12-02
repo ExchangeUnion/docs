@@ -3,7 +3,7 @@ This page contains instructions to natively install `xud` and its minimal depend
 # Requirements
 
 Make sure to have the following installed:
-- [Node.js](https://nodejs.org/en/download/), active LTS (we recommend [installing via package manager](https://nodejs.org/en/download/package-manager/), in particular `nvm` is great)
+- [Node.js](https://nodejs.org/en/download/), active LTS (we recommend [installing via nvm](https://nodejs.org/en/download/package-manager/))
 - [Go](https://golang.org/), v1.14 or higher
 - a user called `xud`
 
@@ -52,7 +52,7 @@ Follow the [lnd installation guide](https://github.com/lightningnetwork/lnd/blob
 
 ## Daemonize `lnd`
 
-If you want to daemonize `xud`, so that it starts on boot without needing its own terminal, you can do this using `systemd`:
+If you want to daemonize `lnd`, so that it starts on boot without needing its own terminal, you can do this using `systemd`:
 
 ```toml
 [Unit]
@@ -69,7 +69,7 @@ KillSignal=SIGINT
 
 # Connext
 
-Follow the [docs](https://github.com/connext/vector#quick-start).
+Follow the [docs](https://github.com/connext/vector#quick-start), you want the **`node`: vector node + database** stack.
 
 ## Daemonize `connext`
 
