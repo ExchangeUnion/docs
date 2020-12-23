@@ -300,11 +300,11 @@ Balance:
 
 ## Connect Arby
 
-In this final step we are connecting your xud setup to your CEX (Centralized EXchage) account via a market maker bot called ["arby"](https://github.com/ExchangeUnion/market-maker-bot). Arby enables "transfer" of orders from the CEX into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the CEX price, adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on the CEX to lock in profits.At the time of writing, arby supports connecting to Binance and Kraken, but more exchanges will be added over time - check the [FAQs](https://github.com/ExchangeUnion/market-maker-bot#faq) for an up-to-date list. We'll use Binance in this example. You will need funds for at least one supported asset on Binance (e.g. BTC) for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
+In this final step we are connecting your xud setup to your CEX (Centralized EXchage) account via a market maker bot called ["arby"](https://github.com/ExchangeUnion/market-maker-bot). Arby enables "transfer" of orders from the CEX into OpenDEX and creates an arbitrage revenue stream for you as market maker. Arby issues orders on OpenDEX based on the CEX price, adding a `margin` as premium. When orders are filled on OpenDEX, arby takes care of executing a counter trade on the CEX to lock in profits. At the time of writing, arby supports connecting to [Binance](https://www.binance.com) and [Kraken](https://www.kraken.com/), but more exchanges will be added over time; check arby's [FAQ](https://github.com/ExchangeUnion/market-maker-bot#faq) for an up-to-date list. We'll use Binance as example in the following. You will need funds for at least one supported asset on Binance (e.g. BTC) for arby to start issuing orders. To activate arby, `exit` from `xud ctl` and run `cp ~/.xud-docker/mainnet/sample-mainnet.conf ~/.xud-docker/mainnet/mainnet.conf` to create a config file for your environment. Then edit the following options in `mainnet.conf`:
 ```bash
 xud@ubuntu:~$ nano ~/.xud-docker/mainnet/mainnet.conf
-# this option needs to be set to true to allow arby to execute Binance orders on your behalf, needed for arby to function
-live-cex="true"
+# this option needs to be set to false to allow arby to execute Binance orders on your behalf, crucially needed for arby to function
+test-mode="false"
 # the trading pair to activate arby for; currently arby can only handle one pair
 base-asset = "BTC"
 quote-asset = "USDT"
@@ -324,6 +324,7 @@ disabled = false
 Re-enter xud-ctl (`bash ~/xud.sh`) and accept the prompt to add arby. After a minute you should see arby's automatically issued orders based on your Binance and xud balance via `listorders`. Completed OpenDEX trades are listed in `tradehistory`. You can follow actions taken by arby with `logs arby`.
 
 Check the official [README](https://github.com/ExchangeUnion/market-maker-bot/blob/master/README.md) to learn more about how arby works.
+
 
 # Report Issues
 
