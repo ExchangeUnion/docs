@@ -308,6 +308,8 @@ live-cex="true"
 # the trading pair to activate arby for; currently arby can only handle one pair
 base-asset = "BTC"
 quote-asset = "USDT"
+#cex-base-asset = "" # optional - only needs to be specified if centralized exchange base asset is different from base-asset, e.g. USD instead of USDT
+#cex-quote-asset = "" # optional - only needs to be specified if centralized exchange quote asset is different from quote-asset, e.g. USD instead of USDT
 # log into your Binance account to obtain your api key and secret
 cex = "binance"
 cex-api-key = "your api key"
