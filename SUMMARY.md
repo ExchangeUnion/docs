@@ -20,5 +20,6 @@
 * [Config](Config.md)
 
 ## More Docs
+* [Close Shop Guide](Close%20Shop%20Guide.md)
 * [API Documentation](https://api.exchangeunion.com)
 * [Code Documentation](https://typedoc.exchangeunion.com/)
